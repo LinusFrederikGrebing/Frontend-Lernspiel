@@ -9,21 +9,17 @@
         >        
         <v-text-field class="pr-4" label="x" v-model="gridX"></v-text-field>
         </v-col>
-        <v-col
-          cols="6"
-          md="6"
-        >
+        <v-col cols="6" md="6">
           <v-text-field label="y"></v-text-field>
         </v-col>
       </v-row> 
   </v-container>
   <v-container>
-      <v-row no-gutters v-for="n in 2" :key="n">
-        <template v-for="x in gridX">
+      <v-row no-gutters v-for="y in 10" :key="y">
+        <template v-for="x in 10" :key="x">
           <v-col >
-            <v-card>
-              
-              {{x}}
+            <v-card :id= "'x'+x+'y'+y">
+              {{( x+ "," +y)}}
             </v-card>
           </v-col>
         </template>
@@ -34,10 +30,11 @@
 </template>
 
 <script>
-
 export default {
   name: 'GameGrid',
-  props:{codeToRun: String},
+  props:{
+    codeToRun: String
+  },
   data: () => ({
     gridShit: [],
     gridX: 6,
@@ -98,6 +95,9 @@ export default {
 </script>
 <style scoped>
 .redCard{
+  background-color: red;
+}
+#x1y1{
   background-color: red;
 }
 </style>
