@@ -6,11 +6,14 @@
         <v-container class="grey lighten-5">
           <v-row no-gutters>
             <v-col cols="12" sm="6" md="8">
-              <GameGrid :codeToRun="myFunction" />
+              <GameGrid :codeToRun="myFunction"  @error="logError"/>
             </v-col>
             <v-col cols="6" md="4">
-              <TemplateGrid />
-              <CodeInput @RunCode="wieAuchImmer" />
+              <TemplateGrid/>
+              <CodeInput @RunCode="wieAuchImmer" :error="error"/>
+              <VueTypedJs :strings="['First text', 'Second Text']">
+                <h1 class="typing"></h1>
+              </VueTypedJs>
             </v-col>
           </v-row>
         </v-container>
@@ -37,17 +40,20 @@ export default {
 
   data: () => ({
     myFunction: null,
+    error: null,
   }),
   methods: {
     wieAuchImmer(item) {
       this.myFunction = item;
-      console.log(this.myFunction);
     },
+    logError(error){
+      this.error = error;
+    }
   },
 };
 </script>
 <style>
-.bg-color{
-  background-color: rgba(237,237,237, 1);
+.bg-color {
+  background-color: rgba(237, 237, 237, 1);
 }
 </style>

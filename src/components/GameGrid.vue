@@ -1,26 +1,91 @@
 <template>
   <div>
-    <v-container class="container">
+    <v-container 
+    class="container">
       <v-row no-gutters v-for="y in 10" :key="y">
-        <v-col no-gutters v-for="x in 10" :key="x">
-          <v-card :id="'x' + x + 'y' + y">
-            {{ "" }}
-          </v-card>
-        </v-col>
+        <v-col no-gutters v-for="x in 10" :key="x"><transition
+            appear
+            @before-enter="beforeEnter"
+            @enter="enter"
+          >
+          
+          <v-card
+          elevation="4"
+          :id="'x' + x + 'y' + y"></v-card>
+           
+        
+           </transition>
+        </v-col> 
       </v-row>
-    </v-container>
+
+ </v-container>
   </div>
 </template>
 
 <script>
+import gsap from 'gsap'
+
 export default {
   name: "GameGrid",
   props: {
     codeToRun: String,
   },
+  data: () => {
+      return {
+         errorMessage: null,
+      };
+    },
   watch: {
     codeToRun() {
-      this.paint();
+
+      if(this.codeToRun.includes("paint(") && !this.codeToRun.includes("for")){
+        const first = this.codeToRun.match(/\d+/g)?.[0];
+        const second = this.codeToRun.match(/\d+/g)?.[1];
+        if(!second || !first){
+          this.errorMessage="Es wurde keine zwei Koordinaten gefunden"
+        }else if(first && second){
+          this.paint(first, second);
+          this.errorMessage="Keine Fehlermeldung!";
+        }
+      }else{
+        this.paintLoop(this.codeToRun)
+      }
+    },
+
+    errorMessage(){
+      this.$emit("error", this.errorMessage)
+    }
+  },
+  methods:{
+    paintLoop(code){
+      eval(code.replace(/^"(.*)"$/, '$1'));
+    },
+
+    beforeEnter(el) {
+      el.style.opacity = "0";
+      el.style.transform = "translateX(-100px)";
+    },
+    paint(first, second){
+      let element = document.getElementById('x' + first + 'y' + second)
+          element.classList.add("painted")
+    },
+    enter(el) {
+     
+      gsap.fromTo(
+    el,
+    {
+      scale: 0.1,
+      y: 0
+    },
+    {
+      duration: 5.5,
+      scale: 1,
+      y: 40,
+      x: 0,
+        opacity: 1,
+      ease: "bounce.out"
+    }
+  );
     },
   },
   mounted() {
@@ -28,21 +93,19 @@ export default {
 };
 </script>
 <style scoped>
-.painted {
-  background-color: red;
-}
+
 .v-card {
   width: 4vw;
   height: 4vw;
+  
 }
+.painted {
+    background-color: rgba(128,186,36, 1);
+  }
 .v-col {
   flex-basis: 0;
   flex-grow: 0;
   /* max-width: 100%; */
-}
-
-#x1y1 {
-  background-color: red;
 }
 
 .container {
