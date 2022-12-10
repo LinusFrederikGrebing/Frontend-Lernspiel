@@ -37,30 +37,22 @@ export default {
     },
   watch: {
     codeToRun() {
-
-      if(this.codeToRun.includes("paint(") && !this.codeToRun.includes("for")){
+      try{
+        eval(this.codeToRun);
+        this.errorMessage="Keine Fehlermeldung!";
+      }catch{
         const first = this.codeToRun.match(/\d+/g)?.[0];
         const second = this.codeToRun.match(/\d+/g)?.[1];
         if(!second || !first){
           this.errorMessage="Es wurde keine zwei Koordinaten gefunden"
-        }else if(first && second){
-          this.paint(first, second);
-          this.errorMessage="Keine Fehlermeldung!";
         }
-      }else{
-        this.paintLoop(this.codeToRun)
       }
     },
-
     errorMessage(){
       this.$emit("error", this.errorMessage)
     }
   },
   methods:{
-    paintLoop(code){
-      eval(code.replace(/^"(.*)"$/, '$1'));
-    },
-
     beforeEnter(el) {
       el.style.opacity = "0";
       el.style.transform = "translateX(-100px)";
