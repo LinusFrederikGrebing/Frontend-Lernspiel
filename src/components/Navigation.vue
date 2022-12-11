@@ -22,7 +22,7 @@
             <div class="sidebar-links">
               <small class="my-8">Menu</small>
               <hr class="divider" />
-              <small class="my-8">Level 1</small>
+              <small class="my-8">{{"Level" + currentLevelId}}</small>
               <hr class="divider" />
               <div class="links">
                 <a
@@ -52,6 +52,11 @@
   <script>
   export default {
     name: "SideBar",
+    props:{currentLevelId: {
+      Type: Number,
+      default: 1, 
+      },
+    },
     data: () => {
       return {
         drawer: true,
@@ -66,6 +71,11 @@
         ],
       };
     },
+   watch:{
+    currentLevel(){
+      console.log(this.currentLevelId)
+    }
+   }
   };
   </script>
 

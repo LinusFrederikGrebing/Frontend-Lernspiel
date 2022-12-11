@@ -1,7 +1,7 @@
 <template>
   <v-app class="bg-color">
     <v-main>
-      <SideBar />
+      <SideBar :currentLevelId="currentLevelId"/>
       <div>
         <div class="text-center">
           <v-dialog v-model="dialog" width="500">
@@ -19,7 +19,7 @@
 
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" text @click="dialog = false; ">
+                <v-btn color="primary" text @click="dialog = false; nextLevel(currentLevelId)">
                   Next level
                 </v-btn>
               </v-card-actions>
@@ -36,7 +36,7 @@
               />
             </v-col>
             <v-col cols="6" md="4">
-              <TemplateGrid />
+              <TemplateGrid :currentLevel="currentLevel"/>
               <CodeInput @RunCode="wieAuchImmer" :error="error" />
               <VueTypedJs :strings="['First text', 'Second Text']">
                 <h1 class="typing"></h1>
@@ -54,6 +54,7 @@ import SideBar from "./components/Navigation.vue";
 import CodeInput from "./components/CodeInput.vue";
 import GameGrid from "./components/GameGrid.vue";
 import TemplateGrid from "./components/TemplateGrid.vue";
+import levels from "../data/levels.json"
 
 export default {
   name: "App",
@@ -69,6 +70,9 @@ export default {
     myFunction: null,
     error: null,
     dialog: false,
+    levels: [],
+    currentLevel: null,
+    currentLevelId: null
   }),
   methods: {
     wieAuchImmer(item) {
@@ -77,7 +81,16 @@ export default {
     logError(error) {
       this.error = error;
     },
+    nextLevel(indexNextLevel){
+      this.currentLevel = this.levels[indexNextLevel]
+      this.currentLevelId = this.currentLevel.id;
+    }
   },
+  mounted(){
+    this.levels = Object.values(Object.values(levels)[0]);
+    this.currentLevel = this.levels[0];
+    this.currentLevelId = this.currentLevel.id;
+  }
 };
 </script>
 <style>

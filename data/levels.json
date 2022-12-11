@@ -2,7 +2,12 @@
     "levels": [
       {
         "id":"1",
-        "patternFunction":"this.paint(1,1);",
+        "patternCode":"this.paint(1,1);",
+        "completed": "false"
+      },
+      {
+        "id":"2",
+        "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false"
       }
     ]

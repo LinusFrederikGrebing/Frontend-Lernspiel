@@ -30,44 +30,27 @@ export default {
   name: "GameGrid",
   props: {
     codeToRun: String,
+    currentLevel: Object,
   },
-  data: () => ({}),
+  data: () => ({
+   
+  }),
   methods: {
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
       element.classList.add("painted");
     },
-    paintTemplate() {
-      for (let i = 0; i <= 9; i++) {
-        this.paint(i, 1);
-        this.paint(1, i);
-        this.paint(8, i);
-        this.paint(i, 8);
-      }
-      /*
-      for(let i = 2; i<=3; i++){
-        for(let j = 2; j<=3; j++){
-          let element = document.getElementById('vx' + i + 'vy' + j)
-          element.classList.add("painted")
-          element = document.getElementById('vx' + (i+6) + 'vy' + (j))
-          element.classList.add("painted")
-       }
-    }
-      for(let i = 2; i<=9; i++){
-        for(let j = 8; j<9; j++){
-          let element = document.getElementById('vx' + i + 'vy' + j)
-          element.classList.add("painted")
-       }
-      }*/
-    },
   },
   mounted() {
-    this.paintTemplate();
+    
   },
   watch: {
     codeToRun() {
       this.paint();
     },
+    currentLevel(){
+      eval(this.currentLevel.patternCode)
+    }
   },
 };
 </script>
