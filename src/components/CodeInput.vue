@@ -38,7 +38,10 @@ props: {error: String},
       element.classList.add("painted");
     },
     checkResult() {
+      console.log("checkResult")
       let allElements = document.getElementsByClassName("painted");
+      this.levelElements=[];
+      this.paintedElements=[];
       for (let i = 0; i < allElements.length; i++) {
         if (allElements[i].id.includes("v")) {
           this.levelElements.push(allElements[i].id.replace(/\D/g, ""));
@@ -46,8 +49,12 @@ props: {error: String},
           this.paintedElements.push(allElements[i].id.replace(/\D/g, ""));
         }
       }
+      console.log(this.levelElements)
+      console.log(this.paintedElements)
       if (this.areEqual(this.levelElements, this.paintedElements)) {
-       this.$emit('success');
+        this.levelElements=[];
+        this.paintedElements=[];
+        this.$emit('success');
       }
     },
     areEqual(array1, array2) {
