@@ -22,7 +22,7 @@
             <div class="sidebar-links">
               <small class="my-8">Menu</small>
               <hr class="divider" />
-              <small class="my-8">{{"Level" + currentLevelId}}</small>
+              <small class="my-8">{{"Level " + currentLevelId}}</small>
               <hr class="divider" />
               <div class="links">
                 <a

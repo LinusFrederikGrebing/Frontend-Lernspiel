@@ -15,7 +15,7 @@
             </v-container>
           </v-col>
           <v-col cols="col-2" md="2">
-            <v-btn icon color="green">
+            <v-btn icon color="green" @click="resetPaintedFields">
               <v-icon>mdi-cached</v-icon>
             </v-btn>
           </v-col>
@@ -29,25 +29,22 @@
 export default {
   name: "GameGrid",
   props: {
-    codeToRun: String,
     currentLevel: Object,
   },
-  data: () => ({
-   
-  }),
   methods: {
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
       element.classList.add("painted");
     },
-  },
-  mounted() {
-    
+    resetPaintedFields(){
+      Array.from(document.querySelectorAll('.painted')).forEach((el) => {
+        if(!el.id.includes("v")){
+          el.classList.remove('painted');
+        }
+      }) 
+    },
   },
   watch: {
-    codeToRun() {
-      this.paint();
-    },
     currentLevel(){
       eval(this.currentLevel.patternCode)
     }
