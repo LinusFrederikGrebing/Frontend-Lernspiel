@@ -7,7 +7,7 @@
             <v-container class="mx-auto">
               <v-row no-gutters v-for="y in 10" :key="y">
                 <v-col no-gutters v-for="x in 10" :key="x">
-                  <v-card :id="'vx' + x + 'vy' + y">
+                  <v-card :id="'vx' + (x-1) + 'vy' + (y-1)">
                     {{ "" }}
                   </v-card>
                 </v-col>
@@ -31,10 +31,20 @@ export default {
   props: {
     codeToRun: String,
   },
-  data: () => ({
-  }),
+  data: () => ({}),
   methods: {
-    paintTemplate(){
+    paint(first, second) {
+      let element = document.getElementById("vx" + first + "vy" + second);
+      element.classList.add("painted");
+    },
+    paintTemplate() {
+      for (let i = 0; i <= 9; i++) {
+        this.paint(i, 1);
+        this.paint(1, i);
+        this.paint(8, i);
+        this.paint(i, 8);
+      }
+      /*
       for(let i = 2; i<=3; i++){
         for(let j = 2; j<=3; j++){
           let element = document.getElementById('vx' + i + 'vy' + j)
@@ -43,16 +53,16 @@ export default {
           element.classList.add("painted")
        }
     }
-    for(let i = 2; i<=9; i++){
+      for(let i = 2; i<=9; i++){
         for(let j = 8; j<9; j++){
           let element = document.getElementById('vx' + i + 'vy' + j)
           element.classList.add("painted")
        }
-    }
-    }
+      }*/
+    },
   },
-  mounted(){
-    this.paintTemplate()
+  mounted() {
+    this.paintTemplate();
   },
   watch: {
     codeToRun() {
@@ -67,7 +77,7 @@ export default {
   height: 1.5vw;
 }
 .painted {
-  background-color: rgba(128,186,36, 1);
+  background-color: rgba(128, 186, 36, 1);
 }
 .v-col {
   flex-basis: 0;

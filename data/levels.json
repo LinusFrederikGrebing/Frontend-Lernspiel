@@ -1,0 +1,9 @@
+{
+    "levels": [
+      {
+        "id":"1",
+        "patternFunction":"this.paint(1,1);",
+        "completed": "false"
+      }
+    ]
+}
