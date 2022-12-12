@@ -2,7 +2,7 @@
   <v-app class="bg-color">
     <v-main>
       <SideBar :currentLevelId="currentLevelId" @lvlSelection="levelSelect=true"/>
-      <div>
+      <div v-if="!levelSelect">
         <div class="text-center">
           <v-dialog v-model="dialog" width="500">
             <v-card>
@@ -29,8 +29,7 @@
         <v-container class="grey lighten-5">
           <v-row no-gutters>
             <v-col cols="12" sm="6" md="8">
-              <GameGrid v-if="!levelSelect"/>
-              <LevelSelection v-else @closeLevelSelect="levelSelect=false"/>
+              <GameGrid />
             </v-col>
             <v-col cols="6" md="4">
               <TemplateGrid :currentLevel="currentLevel"/>
@@ -42,6 +41,7 @@
           </v-row>
         </v-container>
       </div>
+      <LevelSelection v-else :levels="levels" @closeLevelSelect="levelSelect=false"/>
     </v-main>
   </v-app>
 </template>
