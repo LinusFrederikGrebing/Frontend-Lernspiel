@@ -1,7 +1,7 @@
 <template>
   <v-app class="bg-color">
     <v-main>
-      <SideBar :currentLevelId="currentLevelId"/>
+      <SideBar :currentLevelId="currentLevelId" @lvlSelection="levelSelect=true"/>
       <div>
         <div class="text-center">
           <v-dialog v-model="dialog" width="500">
@@ -29,7 +29,8 @@
         <v-container class="grey lighten-5">
           <v-row no-gutters>
             <v-col cols="12" sm="6" md="8">
-              <GameGrid/>
+              <GameGrid v-if="!levelSelect"/>
+              <LevelSelection v-else @closeLevelSelect="levelSelect=false"/>
             </v-col>
             <v-col cols="6" md="4">
               <TemplateGrid :currentLevel="currentLevel"/>
@@ -51,6 +52,7 @@ import CodeInput from "./components/CodeInput.vue";
 import GameGrid from "./components/GameGrid.vue";
 import TemplateGrid from "./components/TemplateGrid.vue";
 import levels from "../data/levels.json"
+import LevelSelection from "./components/LevelSelect.vue";
 
 export default {
   name: "App",
@@ -60,6 +62,7 @@ export default {
     GameGrid,
     CodeInput,
     TemplateGrid,
+    LevelSelection
   },
 
   data: () => ({
@@ -68,7 +71,8 @@ export default {
     dialog: false,
     levels: [],
     currentLevel: null,
-    currentLevelId: null
+    currentLevelId: null,
+    levelSelect:false,
   }),
   methods: {
     wieAuchImmer(item) {

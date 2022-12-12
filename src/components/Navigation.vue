@@ -36,7 +36,7 @@
                   >
   
                   <v-slide-x-transition mode="in-out" leave-absolute>
-                    <div class="link-title" v-show="menuCompact.hidden">
+                    <div class="link-title" v-show="menuCompact.hidden" @click="setLink(link)">
                       {{ link.title }}
                     </div>
                   </v-slide-x-transition>
@@ -64,12 +64,19 @@
           hidden: true,
         },
         menuLinks: [
-          { path: "#", title: "Level-Auswahl", icon: "home" },
+          { title: "Level-Auswahl", icon: "home" },
           { path: "#", title: "Tutorial", icon: "information-variant" },
           { path: "#", title: "Hilfen", icon: "email" },
           { path: "#", title: "Back to Homepage", icon: "logout-variant" },
         ],
       };
+    },
+    methods:{
+      setLink(link){
+        if(link.title=== "Level-Auswahl"){
+          this.$emit('lvlSelection')
+        }
+      }
     },
    watch:{
     currentLevel(){
