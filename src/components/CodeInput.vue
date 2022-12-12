@@ -5,7 +5,7 @@
     
     <CodeEditor v-if="editorActive" height="30vh" width="25vw" v-model="codeToRun" @click="checkIfCodeFilled"></CodeEditor>
    
-    <v-textarea v-if="consoleActive" v-model="errorMessage" :class="errorMessage === 'Keine Fehlermeldung!' ? 'consoleArea greenText' : 'consoleArea redText'"></v-textarea>
+    <v-textarea v-if="consoleActive" v-model="errorMessage" :class="['consoleArea',{'redText' : errorMessage !== 'Keine Fehlermeldung!'},{'greenText' : errorMessage === 'Keine Fehlermeldung!'}]"></v-textarea>
     <div> 
       <v-btn color="warning" depressed elevation="2" outlined> Validate </v-btn>
       <v-btn color="success" depressed elevation="2" outlined @click="runfunction"> Finished </v-btn>
@@ -68,8 +68,11 @@ props: {error: String},
       }
     },
     runfunction() {
+      let code = this.codeToRun;
+      let funcPos = code.search("paint")
+      let evalCode = [code.slice(0,funcPos),"this.",(code.slice(funcPos))].join('');
       try {
-        eval(this.codeToRun);
+        eval(evalCode);
         this.errorMessage = "Keine Fehlermeldung!";
         this.checkResult();
       } catch {
