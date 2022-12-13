@@ -2,7 +2,7 @@
   <div>
     <v-container fluid>
       <v-row justify="space-around" >
-        <v-col cols="5" v-for="level in levels" :key="level.id">
+        <v-col cols="5" v-for="level in accessibleLevels" :key="level.id" >
           <v-card @click="this.$emit('closeLevelSelect')">
             <v-img
               src="https://picsum.photos/510/300?random"
@@ -20,6 +20,9 @@
 export default {
   name: "LevelSelect",
   props:{levels: Array},
+  data: () => ({
+    accessibleLevels: []
+  }),
   methods: {
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
@@ -34,7 +37,14 @@ export default {
     },
   },
  mounted(){
-    console.log(this.levels)
+    this.levels.forEach((level)=>{
+      if(level.completed === true){
+        this.accessibleLevels.push(level)
+      }
+    })
+    let lastLevel = this.accessibleLevels[this.accessibleLevels.length-1];
+    this.accessibleLevels.push(this.levels[this.levels.findIndex(nextLvl => nextLvl.id === lastLevel.id)+1]);
+    console.log(this.accessibleLevels)
  }
 };
 </script>

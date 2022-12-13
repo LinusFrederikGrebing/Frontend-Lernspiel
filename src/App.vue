@@ -33,7 +33,7 @@
             </v-col>
             <v-col cols="6" md="4">
               <TemplateGrid :currentLevel="currentLevel"/>
-              <CodeInput @success="dialog = true"/>
+              <CodeInput @success="dialog = true; currentLevel.completed = true;"/>
               <VueTypedJs :strings="['First text', 'Second Text']">
                 <h1 class="typing"></h1>
               </VueTypedJs>
@@ -82,7 +82,8 @@ export default {
       this.error = error;
     },
     nextLevel(indexNextLevel){
-      this.currentLevel = this.levels[indexNextLevel]
+      console.log(indexNextLevel)
+      this.currentLevel = this.levels[indexNextLevel];
       this.currentLevelId = this.currentLevel.id;
     }
   },
