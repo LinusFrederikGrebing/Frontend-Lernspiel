@@ -67,26 +67,44 @@ props: {error: String},
         });
       }
     },
+    addStringsToString(wholeStr,searchStr,addStr) {
+      if (wholeStr.search(searchStr) == -1 ) return wholeStr;
+      let restStr = wholeStr;
+      let returnStr = '';
+      while(restStr.search(searchStr) > -1 ) {
+        let insertPos = restStr.search(searchStr)
+        returnStr += [restStr.slice(0,insertPos),addStr,restStr.slice(insertPos,insertPos + searchStr.length)].join('');
+        restStr = restStr.slice(insertPos + searchStr.length)
+      }
+      return returnStr + restStr;
+    },
     runfunction() {
-      let code = this.codeToRun;
-      let funcPos = code.search("paint")
-      let evalCode = [code.slice(0,funcPos),"this.",(code.slice(funcPos))].join('');
+      let evalCode = this.addStringsToString(this.codeToRun,"paint","this.");
+      console.log(evalCode);
       try {
         eval(evalCode);
         this.errorMessage = "Keine Fehlermeldung!";
         this.checkResult();
-      } catch {
-        const first = this.codeToRun.match(/\d+/g)?.[0];
-        const second = this.codeToRun.match(/\d+/g)?.[1];
-        if (!second || !first) {
-          this.errorMessage = "Es wurde keine zwei Koordinaten gefunden";
-        }
+      } catch (error) {
+        /*const first = this.codeToRun.match(/\d+/g)?.[0];
+        const second = this.codeToRun.match(/\d+/g)?.[1];*/
+          this.changeErrorMsg(error);
       }
     },
     checkIfCodeFilled(){
       if(this.codeToRun === "/*Type your own code!*/"){
         this.codeToRun = '';
       }
+    },
+    checkIfPaintCall(code) {
+      if (code.search("paint") == -1) return false;
+      else return true;
+    },
+    changeErrorMsg(error) {
+      if (error instanceof ReferenceError) this.errorMessage = "Folgender Ausdruck ist nicht definiert!\n\n" + error;
+      else if (error instanceof TypeError) this.errorMessage = "Ein oder Mehrere Parameter wurden nicht übergeben oder sind vom falschen Typ!\n\n" + error;
+      else if (error instanceof SyntaxError) this.errorMessage = "Da stimmt etwas mit deiner Syntax nicht!\n\n" + error;
+      else this.errorMessage = error;
     }
   },
 
