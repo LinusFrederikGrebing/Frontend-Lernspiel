@@ -24,6 +24,31 @@
         "id":"5",
         "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false"
+      },
+      {
+        "id":"6",
+        "patternCode":"this.paint(1,1);",
+        "completed": "false"
+      },
+      {
+        "id":"7",
+        "patternCode":"this.paint(1,1); this.paint(1,3)",
+        "completed": "false"
+      },
+      {
+        "id":"8",
+        "patternCode":"this.paint(1,1);",
+        "completed": "false"
+      },
+      {
+        "id":"9",
+        "patternCode":"this.paint(1,1);",
+        "completed": "false"
+      },
+      {
+        "id":"10",
+        "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
+        "completed": "false"
       }
     ]
 }

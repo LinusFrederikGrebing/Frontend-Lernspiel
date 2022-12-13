@@ -1,13 +1,17 @@
 <template>
     <div>
-      <v-app-bar short dense color="rgb(74, 92, 102)" app>
-        <div class="app-bar-content">
-          <h2 class="mx-16 transition-default"> Draw IT!</h2>
-          <v-btn  @click="drawer = !drawer">
+      <v-app-bar class="d-flex mb-6" short dense color="rgb(74, 92, 102)" app>
+        <transition appear @before-enter="beforeEnter" @enter="enter">
+        <h2 class="mx-16" id="background"> Draw IT!</h2>
+        </transition>
+          <v-btn class="pa-2 ml-auto" @click="drawer = !drawer">
+            <transition appear @enter="enterMenu">
             <v-icon class="thmcolorgreen" title="Menu">mdi-menu</v-icon>
+          </transition>
+          <transition appear @enter="enterMenu">
             <div class="thmcolorgreen">Menu</div>
+          </transition>
           </v-btn>
-        </div>
       </v-app-bar>
       <v-navigation-drawer
         v-model="drawer"
@@ -36,7 +40,7 @@
                   >
   
                   <v-slide-x-transition mode="in-out" leave-absolute>
-                    <div class="link-title" v-show="menuCompact.hidden" @click="setLink(link)">
+                    <div class="link-title" v-show="menuCompact.hidden" @click="this.setLink(link)">
                       {{ link.title }}
                     </div>
                   </v-slide-x-transition>
@@ -50,6 +54,8 @@
   </template>
   
   <script>
+  import gsap from "gsap";
+
   export default {
     name: "SideBar",
     props:{currentLevelId: {
@@ -72,21 +78,90 @@
       };
     },
     methods:{
+    enterMenu(el) {
+      gsap.fromTo(
+        el,
+        {
+          y: 0,
+          x: +200,
+        },
+        {
+          duration: 2,
+          y: 0,
+          x: 0,
+          opacity: 1,
+          ease: "back.out(3)"
+        }
+      );
+    },
+
+
+      beforeEnter(el) {
+      el.style.opacity = "0";
+      el.style.transform = "translateX(-100px)";
+      el.style.transform = "translateY(-100px)";
+    },
+  
+    enter(el) {
+      gsap.fromTo(
+        el,
+        {
+          y: -35,
+          x: -300,
+        },
+        {
+          duration: 2,
+          y: -35,
+          x: -100,
+          opacity: 1,
+          ease: "back.out(2)"
+        }
+      );
+    },
+
       setLink(link){
         if(link.title=== "Level-Auswahl"){
           this.$emit('lvlSelection')
         }
+      },
+
+      levelAnomation(link) {
+        for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let element = document.getElementById("x" + i + "y" + j);
+          gsap.to(element, {
+            duration: 0.5,
+            scale: 0.2,
+            y: 60,
+            yoyo: true,
+            ease: "power1.inOut",
+            delay: 0.5,
+            stagger: {
+              amount: 1.5,
+              grid: "auto",
+              from: "center",
+            },
+            repeatDelay: 1,
+            onComplete: () =>  this.setLink(link)
+          
+          });
+        }
       }
+      
+    },
+    
     },
    watch:{
     currentLevel(){
       console.log(this.currentLevelId)
     }
    }
+
+
   };
   </script>
 
-  <style>
+  <style scoped>
 
 .thmcolorgreen {
    color: rgba(128,186,36, 1);
@@ -187,4 +262,39 @@
     .app-bar-content h2 {
         font-size: 18px;
     }
-}</style>
+}
+
+#background {
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 50%;
+            left: 5%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, .1);
+            background: linear-gradient(to right,
+                    rgb(142, 226, 159),
+                    rgb(147, 202, 225),
+                    rgb(156, 156, 202),
+                    rgb(155, 200, 159),
+                    rgb(153, 196, 160),
+                    rgb(145, 144, 191),
+                    rgb(154, 188, 203),
+                    rgb(166, 209, 175));
+            background-size: 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-weight: 700;
+            font-size: 3em;
+            animation: sTransition 10s linear infinite;
+        }
+
+        @keyframes sTransition {
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 400%;
+            }
+        }
+</style>
