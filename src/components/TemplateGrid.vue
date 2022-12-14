@@ -17,9 +17,10 @@
             </v-container>
           </v-col>
           <v-col cols="col-2" md="2">
+            <transition appear @before-enter="beforeEnter" @enter="enterRefreshButton">
             <v-btn icon id="refreshbtn" color="green" @click="resetPaintedFields">
               <v-icon>mdi-cached</v-icon>
-            </v-btn>
+            </v-btn></transition>
           </v-col>
         </v-row>
       </v-container>
@@ -37,16 +38,7 @@ export default {
   methods: {
 
     rotate(){
-      gsap.fromTo(
-        '#refreshbtn',
-        {
-          rotate: 0,
-          duration: 1,
-        },
-        {
-          rotate: 360,
-          duration: 1,
-        });
+      gsap.fromTo('#refreshbtn', { rotate: 0, duration: 1},{rotate: 360, duration: 1});
     },
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
@@ -67,25 +59,12 @@ export default {
     },
 
     enter(el) {
-  
-      gsap.fromTo(
-        el,
-        {
-          scale: 0.1,
-          y: -20,
-          x: -20,
-        },
-        {
-          delay: Math.random(),
-          duration: 3,
-          scale: 1,
-          y: 0,
-          x: 0,
-          opacity: 1,
-        }
-      );
+      gsap.fromTo(el,{scale: 0.1, y: -20, x: +2000},{delay: Math.random(), duration: 3, scale: 1, y: 0, x: 0, opacity: 1});
     },
-  },
+    enterRefreshButton(el) {
+      gsap.fromTo(el,{y: -100, x: 0,},{delay: 3, duration: 3, ease: "none", y: 40, x: 0, opacity: 1});
+    },
+},
   watch: {
     currentLevel(){
       eval(this.currentLevel.patternCode)
