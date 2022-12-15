@@ -4,7 +4,7 @@
       <v-row no-gutters v-for="y in 10" :key="y">
         <v-col no-gutters v-for="x in 10" :key="x">
           <transition appear @before-enter="beforeEnter" @enter="enter">
-            <v-card elevation="4" :id="'x' + (x - 1) + 'y' + (y - 1)"></v-card>
+            <v-card elevation="4" :id="'x' + (x - 1) + 'y' + (y - 1)" @mouseover="getid($event)"></v-card>
           </transition>
         </v-col>
       </v-row>
@@ -25,6 +25,30 @@ export default {
     };
   },
   methods: {
+
+    getid(obj) {
+     
+      let element = document.getElementById(obj.target.id); 
+      let scale = element.getBoundingClientRect().width / element.offsetWidth;
+        gsap.fromTo(
+        element,
+        {
+          scale: 0.7,
+          y: 0,
+          x: 0,
+          backgroundColor: 'rgba(128, 186, 36, 1)'
+        },
+        {
+          backgroundColor: '#ffffff',
+          duration: 0.5,
+          scale: scale,
+          y: 0,
+          x: 40,
+          opacity: 1,
+        }
+      );
+    },
+
     beforeEnter(el) {
       el.style.opacity = "0";
       el.style.transform = "translateX(-100px)";
@@ -32,7 +56,6 @@ export default {
     },
 
     enter(el) {
-  
       gsap.fromTo(
         el,
         {
@@ -50,7 +73,6 @@ export default {
         }
       );
     },
-
 
     levelAnomation() {
       for (let i = 0; i < 10; i++) {
@@ -75,10 +97,7 @@ export default {
       }
     },
 
-
-
-
-    changeGrid() {
+    changeGrid() { 
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           let element = document.getElementById("x" + i + "y" + j);
@@ -111,7 +130,7 @@ export default {
   height: 4vw;
 }
 .painted {
-  background-color: rgba(128, 186, 36, 1);
+  background-color: rgba(128, 186, 36, 1) !important;
 }
 .v-col {
   flex-basis: 0;

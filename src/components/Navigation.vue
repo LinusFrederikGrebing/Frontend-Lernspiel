@@ -2,7 +2,7 @@
   <div>
     <v-app-bar class="d-flex mb-6" short dense color="rgb(74, 92, 102)" app>
       <transition appear @before-enter="beforeEnter" @enter="enter">
-        <h2 class="mx-16" id="background"> Draw IT!</h2>
+        <h2 class="mx-16" id="background">Draw IT!</h2>
       </transition>
       <v-btn class="pa-2 ml-auto" @click="drawer = !drawer">
         <transition appear @enter="enterMenu">
@@ -13,8 +13,14 @@
         </transition>
       </v-btn>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" :temporary="false" disable-resize-watcher :mini-variant="!menuCompact.hidden"
-      mini-variant-width="100" app>
+    <v-navigation-drawer
+      v-model="drawer"
+      :temporary="false"
+      disable-resize-watcher
+      :mini-variant="!menuCompact.hidden"
+      mini-variant-width="100"
+      app
+    >
       <div class="py-8" id="sidebar">
         <div class="sidebar-body">
           <div class="sidebar-links">
@@ -23,11 +29,22 @@
             <small class="my-8">{{ "Level " + currentLevelId }}</small>
             <hr class="divider" />
             <div class="links">
-              <a v-for="link in menuLinks" :key="link.title" :href="link.path" target="_blank">
-                <v-icon :title="link.title" class="icon">mdi-{{ link.icon }}</v-icon>
+              <a
+                v-for="link in menuLinks"
+                :key="link.title"
+                :href="link.path"
+                target="_blank"
+              >
+                <v-icon :title="link.title" class="icon"
+                  >mdi-{{ link.icon }}</v-icon
+                >
 
                 <v-slide-x-transition mode="in-out" leave-absolute>
-                  <div class="link-title" v-show="menuCompact.hidden" @click="this.setLink(link)">
+                  <div
+                    class="link-title"
+                    v-show="menuCompact.hidden"
+                    @click="this.setLink(link)"
+                  >
                     {{ link.title }}
                   </div>
                 </v-slide-x-transition>
@@ -66,20 +83,28 @@ export default {
     };
   },
   methods: {
-    beforeEnter(el) { 
-      el.style.opacity = "0"; 
-      el.style.transform = "translateX(-100px)"; 
+    beforeEnter(el) {
+      el.style.opacity = "0";
+      el.style.transform = "translateX(-100px)";
       el.style.transform = "translateY(-100px)";
     },
     enterMenu(el) {
-      gsap.fromTo(el, { y: 0, x: +200},{ duration: 2, y: 0, x: 0, opacity: 1, ease: "back.out(3)" });
+      gsap.fromTo(
+        el,
+        { y: 0, x: +200 },
+        { delay:2, duration: 2, y: 0, x: 0, opacity: 1, ease: "back.out(3)" }
+      );
     },
     enter(el) {
-      gsap.fromTo(el,{y: -35, x: -300},{duration: 2, y: -35, x: -100, opacity: 1, ease: "back.out(2)"});
+      gsap.fromTo(
+        el,
+        { y: -35, x: -300 },
+        { delay: 1, duration: 2, y: -35, x: -100, opacity: 1, ease: "back.out(2)" }
+      );
     },
     setLink(link) {
       if (link.title === "Level-Auswahl") {
-        this.$emit('lvlSelection')
+        this.$emit("lvlSelection");
       }
     },
     // Momentan nicht in Benutzung, war evtl. als Übergang zur Levelübersicht gedacht
@@ -100,23 +125,18 @@ export default {
               from: "center",
             },
             repeatDelay: 1,
-            onComplete: () => this.setLink(link)
-
+            onComplete: () => this.setLink(link),
           });
         }
       }
-
     },
-
   },
 
   watch: {
     currentLevel() {
-      console.log(this.currentLevelId)
-    }
-  }
-
-
+      console.log(this.currentLevelId);
+    },
+  },
 };
 </script>
 
@@ -174,7 +194,11 @@ export default {
 
 .sidebar-links a:hover {
   transform: scale(1.08);
-  background-image: linear-gradient(to right, rgba(128, 186, 36, 1), rgb(76, 119, 7));
+  background-image: linear-gradient(
+    to right,
+    rgba(128, 186, 36, 1),
+    rgb(76, 119, 7)
+  );
   box-shadow: 0px 0px 8px rgba(128, 186, 36, 0.85);
   border-color: rgb(198, 246, 121);
 }
@@ -229,16 +253,18 @@ export default {
   top: 50%;
   left: 5%;
   transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, .1);
-  background: linear-gradient(to right,
-      rgb(142, 226, 159),
-      rgb(147, 202, 225),
-      rgb(156, 156, 202),
-      rgb(155, 200, 159),
-      rgb(153, 196, 160),
-      rgb(145, 144, 191),
-      rgb(154, 188, 203),
-      rgb(166, 209, 175));
+  color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    to right,
+    rgb(142, 226, 159),
+    rgb(147, 202, 225),
+    rgb(156, 156, 202),
+    rgb(155, 200, 159),
+    rgb(153, 196, 160),
+    rgb(145, 144, 191),
+    rgb(154, 188, 203),
+    rgb(166, 209, 175)
+  );
   background-size: 400%;
   -webkit-background-clip: text;
   background-clip: text;
