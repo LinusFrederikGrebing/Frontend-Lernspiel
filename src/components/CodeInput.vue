@@ -6,8 +6,8 @@
       </v-btn>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enter">
-      <v-btn color="accent" depressed elevation="1" outlined
-        @click="editorActive = false; consoleActive = true">Console</v-btn>
+      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="accent" depressed elevation="1" outlined
+        @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enterInput">
       <CodeEditor v-if="editorActive" height="30vh" width="25vw" v-model="codeToRun" @click="checkIfCodeFilled">
@@ -15,7 +15,7 @@
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enterInput">
     <v-textarea v-if="consoleActive" v-model="errorMessage"
-      :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!' }, { 'greenText': errorMessage === 'Keine Fehlermeldung!' }]"></v-textarea>
+      :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}, {'greenText': errorMessage === ''}]"></v-textarea>
     </transition>
     <div>
       <transition appear @before-enter="beforeEnter" @enter="enter">
@@ -42,8 +42,9 @@ export default {
       levelElements: [],
       paintedElements: [],
       editorActive: true,
-      errorMessage: "Keine Fehlermeldung!",
+      errorMessage: '',
       consoleActive: false,
+      gotUnreadErrors: false,
       codeToRun: "/*Type your own code!*/",
     };
   },
@@ -132,17 +133,22 @@ export default {
       return returnStr + restStr;
     },
     runfunction() {
+      this.errorMessage = '';
       let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
       console.log(evalCode);
+      this.checkIfPaintCall(evalCode);
       try {
+        this.checkPaintParams(evalCode);
         eval(evalCode);
-        this.errorMessage = "Keine Fehlermeldung!";
+        //console.log('Bracket: ' + this.lastParenthesizedSubstring(evalCode));
         this.checkResult();
       } catch (error) {
         /*const first = this.codeToRun.match(/\d+/g)?.[0];
         const second = this.codeToRun.match(/\d+/g)?.[1];*/
         this.changeErrorMsg(error);
+        this.gotUnreadErrors = true;
       }
+      if (this.errorMessage == '') this.errorMessage = "Keine Fehlermeldung!";
     },
     checkIfCodeFilled() {
       if (this.codeToRun === "/*Type your own code!*/") {
@@ -150,15 +156,54 @@ export default {
       }
     },
     checkIfPaintCall(code) {
-      if (code.search("paint") == -1) return false;
-      else return true;
+      if (code.search("paint") == -1) this.errorMessage += "Rufe die paint(x,y) Methode aus um Felder anzumalen!\n";
+    },
+    getBracket(str, pos) {
+      if (str[pos] == '(') {
+        let depth = 1;
+        for (let i = pos + 1; i < str.length; i++) {
+          switch (str[i]) {
+          case '(':
+            depth++;
+            break;
+          case ')':
+            if (--depth == 0) {
+              return str.slice(pos,i);
+            }
+            break;
+          }
+        }
+      }
+    },
+    getBracketContent(str) {
+      console.log("inFunktion " + str);
+      let restStr = str;
+      let startPos = restStr.indexOf('(');
+      restStr = restStr.slice(startPos+1);
+      if (restStr.indexOf(')') < restStr.indexOf('(') || restStr.indexOf('(') == -1) {
+        return restStr.slice(0,restStr.indexOf(')'))
+      }
+      else {
+        console.log("Else: " + restStr.slice(0,restStr.indexOf('(')) + " | " + restStr.slice(restStr.indexOf(')')+1))
+        return this.getBracketContent([restStr.slice(0,restStr.indexOf('(')),'',restStr.slice(restStr.indexOf(')')+1)].join(''));
+      }
+    },
+    checkPaintParams(code) {
+      let error = new Error("Zu viele Parameter angegeben für die Methode paint.")
+      let restCode = code;
+      while (restCode.search("paint") > -1) {
+        let pos = restCode.search("paint");
+        let bracketContent = this.getBracket(restCode,pos+5);
+        if ((bracketContent.match(/,/g) || []).length != 1) throw error;
+        restCode = restCode.slice(pos+5+bracketContent.length);
+      }
     },
     changeErrorMsg(error) {
-      if (error instanceof ReferenceError) this.errorMessage = "Folgender Ausdruck ist nicht definiert!\n\n" + error;
-      else if (error instanceof TypeError) this.errorMessage = "Ein oder Mehrere Parameter wurden nicht übergeben oder sind vom falschen Typ!\n\n" + error;
-      else if (error instanceof SyntaxError) this.errorMessage = "Da stimmt etwas mit deiner Syntax nicht!\n\n" + error;
+      if (error instanceof ReferenceError) this.errorMessage += "Folgender Ausdruck ist nicht definiert:\n" + error;
+      else if (error instanceof TypeError) this.errorMessage += "Ein oder Mehrere Parameter wurden nicht übergeben oder sind vom falschen Typ:\n" + error;
+      else if (error instanceof SyntaxError) this.errorMessage += "Da stimmt etwas mit deiner Syntax nicht!\n" + error;
       else this.errorMessage = error;
-    }
+    },
   },
 
   watch: {
@@ -178,5 +223,16 @@ export default {
 
 .redText {
   color: red;
+}
+
+.console_warning {
+  animation: warning 1s linear infinite;
+  background-color: red;
+}
+
+@keyframes warning {
+  50% {
+    opacity: 0;
+  }
 }
 </style>
