@@ -27,13 +27,12 @@ export default {
   methods: {
 
     getid(obj) {
-     
       let element = document.getElementById(obj.target.id); 
       let scale = element.getBoundingClientRect().width / element.offsetWidth;
+  
         gsap.fromTo(
         element,
         {
-          scale: 0.7,
           y: 0,
           x: 0,
           backgroundColor: 'rgba(128, 186, 36, 1)'
