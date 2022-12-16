@@ -34,7 +34,7 @@
     </transition>
     <div>
       <transition appear @before-enter="beforeEnter" @enter="enter">
-        <v-btn color="warning" depressed elevation="2" outlined>
+        <v-btn color="warning" depressed elevation="2" outlined @click="checkResult">
           Validate
         </v-btn>
       </transition>
@@ -96,6 +96,8 @@ export default {
     },
     paint(first, second) {
       let element = document.getElementById("x" + first + "y" + second);
+      this.checkParamValue(first);
+      this.checkParamValue(second);
       element.classList.add("painted");
     },
     checkResult() {
@@ -150,12 +152,9 @@ export default {
       this.checkIfPaintCall(evalCode);
       try {
         this.checkPaintParams(evalCode);
-        eval(evalCode);
-        //console.log('Bracket: ' + this.lastParenthesizedSubstring(evalCode));
-        this.checkResult();
+        eval(this.InsertInfinitySafety(evalCode));
+        //this.checkResult();
       } catch (error) {
-        /*const first = this.codeToRun.match(/\d+/g)?.[0];
-        const second = this.codeToRun.match(/\d+/g)?.[1];*/
         this.changeErrorMsg(error);
         this.gotUnreadErrors = true;
       }
@@ -166,8 +165,31 @@ export default {
         this.codeToRun = "";
       }
     },
+    InsertInfinitySafety(code) {
+      let startPos = code.search("for");
+      if (code.search("for") > -1) {
+         let head = this.getBracket(code,startPos+3);
+         console.log("Head: " + "[" + head + "]");
+         let posAfterHead = startPos+3+head.length+1
+         let restStr = code.slice(posAfterHead);
+         console.log("RestStr: " + "[" + restStr + "]");
+         let bodyPos = restStr.indexOf("{");
+         let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Dieser Schleife ist zu lang oder unendlich!");';
+         let newCodePart = [code.slice(0,startPos),"let infinitySafetyCounter = 0;\n",code.slice(startPos,bodyPos+posAfterHead+1)].join('');
+         console.log("NewCodePart: " + "[" + newCodePart + "]");
+         let newCodeWhole = [newCodePart,infCheck,code.slice(bodyPos+posAfterHead+1)].join('');
+         //let body = this.getBracket(restStr,bodyPos);
+         console.log("NewCodeWhole: " + "[" + newCodeWhole + "]");
+         return newCodeWhole;
+      } else return code;
+    },
     checkIfPaintCall(code) {
       if (code.search("paint") == -1) this.errorMessage += "Rufe die paint(x,y) Methode aus um Felder anzumalen!\n";
+    },
+    checkParamValue(num) {
+      const gridElems = document.querySelectorAll(".grid-card");
+      let maxValue = Math.sqrt(gridElems.length) - 1;
+      if (num > maxValue) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");
     },
     getBracket(str, pos) {
       if (str[pos] == '(') {
@@ -179,24 +201,25 @@ export default {
             break;
           case ')':
             if (--depth == 0) {
-              return str.slice(pos,i);
+              return str.slice(pos+1,i);
             }
             break;
           }
         }
-      }
-    },
-    getBracketContent(str) {
-      console.log("inFunktion " + str);
-      let restStr = str;
-      let startPos = restStr.indexOf('(');
-      restStr = restStr.slice(startPos+1);
-      if (restStr.indexOf(')') < restStr.indexOf('(') || restStr.indexOf('(') == -1) {
-        return restStr.slice(0,restStr.indexOf(')'))
-      }
-      else {
-        console.log("Else: " + restStr.slice(0,restStr.indexOf('(')) + " | " + restStr.slice(restStr.indexOf(')')+1))
-        return this.getBracketContent([restStr.slice(0,restStr.indexOf('(')),'',restStr.slice(restStr.indexOf(')')+1)].join(''));
+      } else if (str[pos] == '{') {
+        let depth = 1;
+        for (let i = pos + 1; i < str.length; i++) {
+          switch (str[i]) {
+          case '{':
+            depth++;
+            break;
+          case '}':
+            if (--depth == 0) {
+              return str.slice(pos+1,i);
+            }
+            break;
+          }
+        }
       }
     },
     checkPaintParams(code) {
@@ -205,6 +228,7 @@ export default {
       while (restCode.search("paint") > -1) {
         let pos = restCode.search("paint");
         let bracketContent = this.getBracket(restCode,pos+5);
+        //console.log('[' + bracketContent + ']');
         if ((bracketContent.match(/,/g) || []).length != 1) throw error;
         restCode = restCode.slice(pos+5+bracketContent.length);
       }
@@ -235,7 +259,7 @@ export default {
 }
 
 .console_warning {
-  animation: warning 1s linear infinite;
+  animation: warning 2s linear infinite;
   background-color: red;
 }
 
