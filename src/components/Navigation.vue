@@ -4,7 +4,7 @@
       <transition appear @before-enter="beforeEnter" @enter="enter">
         <h2 class="mx-16" id="background">Draw IT!</h2>
       </transition>
-      <v-btn class="pa-2 ml-auto" @click="drawer = !drawer">
+      <v-btn class="pa-2 ml-auto" @click="drawer = !drawer" icon>
         <transition appear @enter="enterMenu">
           <v-icon class="thmcolorgreen" title="Menu">mdi-menu</v-icon>
         </transition>
@@ -43,7 +43,7 @@
                   <div
                     class="link-title"
                     v-show="menuCompact.hidden"
-                    @click="this.setLink(link)"
+                    @click="setLink(link)"
                   >
                     {{ link.title }}
                   </div>

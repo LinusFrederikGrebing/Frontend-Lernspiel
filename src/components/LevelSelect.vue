@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row justify="space-around">
         <v-col cols="5" v-for="level in accessibleLevels" :key="level.id">
-          <v-card @click="this.$emit('closeLevelSelect')">
+          <v-card @click="setLevel(level)">
             <v-img
               src="https://picsum.photos/510/300?random"
               aspect-ratio="1.7"
@@ -35,20 +35,22 @@ export default {
         }
       });
     },
+    setLevel(level){
+      console.log(level)
+      this.$emit('setLevel', level)
+    }
   },
   mounted() {
+    this.accessibleLevels.push(this.levels[0]);
     this.levels.forEach((level) => {
       if (level.completed === true) {
-        this.accessibleLevels.push(level);
+        this.accessibleLevels.push(
+          this.levels[
+          this.levels.findIndex((nextLvl) => nextLvl.id === level.id) + 1
+          ]
+        );
       }
     });
-    let lastLevel = this.accessibleLevels[this.accessibleLevels.length - 1];
-    this.accessibleLevels.push(
-      this.levels[
-        this.levels.findIndex((nextLvl) => nextLvl.id === lastLevel.id) + 1
-      ]
-    );
-    console.log(this.accessibleLevels);
   },
 };
 </script>

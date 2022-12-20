@@ -34,18 +34,14 @@
             <v-col cols="6" md="4">
               <TemplateGrid :currentLevel="currentLevel"/>
               <CodeInput @success="dialog = true; currentLevel.completed = true;"/>
-              <VueTypedJs :strings="['First text', 'Second Text']">
-                <h1 class="typing"></h1>
-              </VueTypedJs>
             </v-col>
           </v-row>
         </v-container>
       </div>
-      <LevelSelection v-else :levels="levels" @closeLevelSelect="levelSelect=false"/>
+      <LevelSelection v-else :levels="levels" @setLevel="setSelectedLevel" />
     </v-main>
   </v-app>
 </template>
-
 <script>
 import SideBar from "./components/Navigation.vue";
 import CodeInput from "./components/CodeInput.vue";
@@ -82,15 +78,25 @@ export default {
       this.error = error;
     },
     nextLevel(indexNextLevel){
-      console.log(indexNextLevel)
       this.currentLevel = this.levels[indexNextLevel];
       this.currentLevelId = this.currentLevel.id;
+    },
+    setSelectedLevel(level){
+      this.levelSelect=false;
+      this.currenLevel=level;
+      this.currentLevelId = level.id;
+    }
+  },
+  watch:{
+    currentLevel(oldVal, newVal){
+      console.log(oldVal, newVal)
     }
   },
   mounted(){
     this.levels = Object.values(Object.values(levels)[0]);
     this.currentLevel = this.levels[0];
     this.currentLevelId = this.currentLevel.id;
+    console.log(this.$vuetify.breakpoint)
   }
 };
 </script>
