@@ -2,10 +2,9 @@
   <div id="container" class="d-f">
     <transition appear @before-enter="beforeEnter" @enter="enter">
       <v-btn
-        color="accent"
+      color="deep-purple lighten-5"
         depressed
         elevation="1"
-        outlined
         @click="
           editorActive = true;
           consoleActive = false;
@@ -15,7 +14,7 @@
       </v-btn>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enter">
-      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="accent" depressed elevation="1" outlined
+      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="deep-purple lighten-5" depressed elevation="1"
         @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enterInput">
@@ -34,7 +33,7 @@
     </transition>
     <div>
       <transition appear @before-enter="beforeEnter" @enter="enter">
-        <v-btn color="warning" depressed elevation="2" outlined @click="checkResult">
+        <v-btn color="warning" depressed elevation="2" @click="checkResult">
           Validate
         </v-btn>
       </transition>
@@ -43,7 +42,6 @@
           color="success"
           depressed
           elevation="2"
-          outlined
           @click="runfunction"
         >
           Finished
