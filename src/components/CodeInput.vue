@@ -101,7 +101,6 @@ export default {
       element.classList.add("painted");
     },
     checkResult() {
-      console.log("checkResult");
       let allElements = document.getElementsByClassName("painted");
       this.levelElements = [];
       this.paintedElements = [];
@@ -112,8 +111,6 @@ export default {
           this.paintedElements.push(allElements[i].id.replace(/\D/g, ""));
         }
       }
-      console.log(this.levelElements);
-      console.log(this.paintedElements);
       if (this.areEqual(this.levelElements, this.paintedElements)) {
         this.levelElements = [];
         this.paintedElements = [];
@@ -148,7 +145,6 @@ export default {
     runfunction() {
       this.errorMessage = '';
       let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
-      console.log(evalCode);
       this.checkIfPaintCall(evalCode);
       try {
         this.checkPaintParams(evalCode);
@@ -179,7 +175,6 @@ export default {
          console.log("NewCodePart: " + "[" + newCodePart + "]");
          let newCodeWhole = [newCodePart,infCheck,code.slice(bodyPos+posAfterHead+1)].join('');
          //let body = this.getBracket(restStr,bodyPos);
-         console.log("NewCodeWhole: " + "[" + newCodeWhole + "]");
          return newCodeWhole;
       } else return code;
     },

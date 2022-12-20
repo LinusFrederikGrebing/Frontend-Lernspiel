@@ -4,7 +4,7 @@
       <v-container class="grey lighten-5">
         <v-row no-gutters>
           <v-col cols="col-10" md="10">
-            <v-container class="mx-auto" >
+            <v-container class="mx-auto">
               <v-row no-gutters v-for="y in 10" :key="y">
                 <v-col no-gutters v-for="x in 10" :key="x">
                   <transition appear @before-enter="beforeEnter" @enter="enter">
@@ -40,11 +40,13 @@
 
 <script>
 import gsap from "gsap";
+
 export default {
   name: "GameGrid",
   props: {
     currentLevel: Object,
   },
+
   methods: {
     rotate() {
       gsap.fromTo(
@@ -75,7 +77,7 @@ export default {
       gsap.fromTo(
         el,
         { y: -20, x: +2000 },
-        { delay: Math.random()+3, duration: 3, y: 0, x: 0, opacity: 1 }
+        { delay: Math.random() + 3, duration: 3, y: 0, x: 0, opacity: 1 }
       );
     },
     enterRefreshButton(el) {
@@ -87,7 +89,8 @@ export default {
     },
   },
   watch: {
-    currentLevel() {
+    currentLevel(oldVal, newVal) {
+      console.log(oldVal, newVal);
       eval(this.currentLevel.patternCode);
     },
   },
