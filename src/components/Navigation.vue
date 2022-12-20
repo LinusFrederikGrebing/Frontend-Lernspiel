@@ -21,12 +21,12 @@
       mini-variant-width="100"
       app
     >
-      <div class="py-8" id="sidebar">
+      <div id="sidebar">
         <div class="sidebar-body">
           <div class="sidebar-links">
             <small class="my-8">Menu</small>
             <hr class="divider" />
-            <small class="my-8">{{ "Level " + currentLevelId }}</small>
+            <small>{{ "Level " + currentLevelId }}</small>
             <hr class="divider" />
             <div class="links">
               <a
@@ -91,15 +91,15 @@ export default {
     enterMenu(el) {
       gsap.fromTo(
         el,
-        { y: 0, x: +200 },
+        { y: 0, x: 0},
         { delay:2, duration: 2, y: 0, x: 0, opacity: 1, ease: "back.out(3)" }
       );
     },
     enter(el) {
       gsap.fromTo(
         el,
-        { y: -35, x: -300 },
-        { delay: 1, duration: 2, y: -35, x: -100, opacity: 1, ease: "back.out(2)" }
+        { y: -35, x: 0 },
+        { delay: 1, duration: 2, y: -35, x: 0, opacity: 1, ease: "back.out(2)" }
       );
     },
     setLink(link) {

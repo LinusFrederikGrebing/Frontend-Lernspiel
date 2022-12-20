@@ -8,8 +8,7 @@
         @click="
           editorActive = true;
           consoleActive = false;
-        "
-      >
+        ">
         Editor
       </v-btn>
     </transition>
