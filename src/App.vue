@@ -103,6 +103,6 @@ export default {
 <style>
 
 .bg-color1 {
-  background-color: rgba(212, 212, 212, 0.397) !important;
+  background-color: rgba(179, 179, 179, 0.397) !important;
 }
 </style>

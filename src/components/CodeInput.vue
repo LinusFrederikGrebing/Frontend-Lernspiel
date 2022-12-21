@@ -31,7 +31,7 @@
     :readonly=true
     filled
     v-if="consoleActive" v-model="errorMessage"
-      :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}, {'greenText': errorMessage === ''}]"></v-textarea>
+      :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}]"></v-textarea>
     </transition>
     <div>
       <transition appear @before-enter="beforeEnter" @enter="enter">
@@ -67,7 +67,7 @@ export default {
       levelElements: [],
       paintedElements: [],
       editorActive: true,
-      errorMessage: '',
+      errorMessage: 'Keine Fehlermeldung!',
       consoleActive: false,
       gotUnreadErrors: false,
       codeToRun: "/*Type your own code!*/",
@@ -313,6 +313,7 @@ export default {
 
 .greenText {
   background-color: rgba(128, 186, 36, 0.4) !important;
+  color: rgba(128, 186, 36, 0.4) !important;
 }
 
 .redText {
