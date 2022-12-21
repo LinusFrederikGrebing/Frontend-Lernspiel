@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <v-container class="grey lighten-5">
+      <v-container>
         <v-row no-gutters>
           <v-col cols="col-10" md="10">
             <v-container class="mx-auto">
@@ -104,11 +104,12 @@ export default {
 .painted {
   background-color: rgba(128, 186, 36, 1);
 }
-.v-col {
-  flex-basis: 0;
-  flex-grow: 0;
+.col {
+  flex-basis: 0 !important;
+  flex-grow: 0 !important;
   /* max-width: 100%; */
 }
+
 #x1y1 {
   background-color: red;
 }

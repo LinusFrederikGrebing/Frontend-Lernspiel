@@ -2,20 +2,18 @@
   <div id="container" class="d-f">
     <transition appear @before-enter="beforeEnter" @enter="enter">
       <v-btn
-        color="accent"
+      color="deep-purple lighten-5"
         depressed
         elevation="1"
-        outlined
         @click="
           editorActive = true;
           consoleActive = false;
-        "
-      >
+        ">
         Editor
       </v-btn>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enter">
-      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="accent" depressed elevation="1" outlined
+      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="deep-purple lighten-5" depressed elevation="1"
         @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enterInput">
@@ -29,12 +27,15 @@
       </CodeEditor>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enterInput">
-    <v-textarea v-if="consoleActive" v-model="errorMessage"
+    <v-textarea 
+    :readonly=true
+    filled
+    v-if="consoleActive" v-model="errorMessage"
       :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}, {'greenText': errorMessage === ''}]"></v-textarea>
     </transition>
     <div>
       <transition appear @before-enter="beforeEnter" @enter="enter">
-        <v-btn color="warning" depressed elevation="2" outlined @click="checkResult">
+        <v-btn color="warning" depressed elevation="2" @click="checkResult">
           Validate
         </v-btn>
       </transition>
@@ -43,7 +44,6 @@
           color="success"
           depressed
           elevation="2"
-          outlined
           @click="runfunction"
         >
           Finished
@@ -144,9 +144,6 @@ export default {
     },
     runfunction() {
       this.errorMessage = '';
-<<<<<<< HEAD
-      let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
-=======
       //let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
       let paintStr = 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\nelement.classList.add("painted");}\n';
       let checkParamValueStr = 'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n'
@@ -309,22 +306,24 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .consoleArea {
   background-color: white;
 }
 
 .greenText {
-  color: rgba(128, 186, 36, 1);
+  background-color: rgba(128, 186, 36, 0.4) !important;
 }
 
 .redText {
-  color: red;
+  background-color: rgba(255, 0, 0, 0.2) !important;
 }
 
 .console_warning {
   animation: warning 2s linear infinite;
-  background-color: red;
+  color: red !important;
+  font-weight: bold;
 }
 
 @keyframes warning {

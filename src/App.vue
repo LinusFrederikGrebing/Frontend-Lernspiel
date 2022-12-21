@@ -1,5 +1,5 @@
 <template>
-  <v-app class="bg-color">
+  <v-app class="bg-color1">
     <v-main>
       <SideBar :currentLevelId="currentLevelId" @lvlSelection="levelSelect=true"/>
       <div v-if="!levelSelect">
@@ -26,7 +26,7 @@
             </v-card>
           </v-dialog>
         </div>
-        <v-container class="grey lighten-5">
+        <v-container class="bg-color1">
           <v-row no-gutters>
             <v-col cols="12" sm="6" md="8">
               <GameGrid />
@@ -34,9 +34,6 @@
             <v-col cols="6" md="4">
               <TemplateGrid :currentLevel="currentLevel"/>
               <CodeInput @success="dialog = true; currentLevel.completed = true;"/>
-              <VueTypedJs :strings="['First text', 'Second Text']">
-                <h1 class="typing"></h1>
-              </VueTypedJs>
             </v-col>
           </v-row>
         </v-container>
@@ -45,7 +42,6 @@
     </v-main>
   </v-app>
 </template>
-
 <script>
 import SideBar from "./components/Navigation.vue";
 import CodeInput from "./components/CodeInput.vue";
@@ -105,7 +101,8 @@ export default {
 };
 </script>
 <style>
-.bg-color {
-  background-color: rgba(237, 237, 237, 1);
+
+.bg-color1 {
+  background-color: rgba(212, 212, 212, 0.397) !important;
 }
 </style>
