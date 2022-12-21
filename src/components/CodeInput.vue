@@ -27,7 +27,10 @@
       </CodeEditor>
     </transition>
     <transition appear @before-enter="beforeEnter" @enter="enterInput">
-    <v-textarea v-if="consoleActive" v-model="errorMessage"
+    <v-textarea 
+    :readonly=true
+    filled
+    v-if="consoleActive" v-model="errorMessage"
       :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}, {'greenText': errorMessage === ''}]"></v-textarea>
     </transition>
     <div>
@@ -141,11 +144,21 @@ export default {
     },
     runfunction() {
       this.errorMessage = '';
-      let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
+      //let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
+      let paintStr = 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\nelement.classList.add("painted");}\n';
+      let checkParamValueStr = 'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n'
+      let evalCode = this.codeToRun;
+      console.log(evalCode);
       this.checkIfPaintCall(evalCode);
       try {
         this.checkPaintParams(evalCode);
-        eval(this.InsertInfinitySafety(evalCode));
+        evalCode = this.InsertForLoopInfinitySafety(evalCode);
+        evalCode = this.InsertWhileInfinitySafety(evalCode);
+        console.log("InfSafetyCode: " + "[" + evalCode + "]");
+        evalCode = [paintStr, checkParamValueStr,
+        "let infinitySafetyCounter = 0;\n",evalCode].join('');
+        let runCodeSafely = new Function(evalCode);
+        runCodeSafely();
         //this.checkResult();
       } catch (error) {
         this.changeErrorMsg(error);
@@ -158,22 +171,77 @@ export default {
         this.codeToRun = "";
       }
     },
-    InsertInfinitySafety(code) {
+    InsertForLoopInfinitySafety(code) {
       let startPos = code.search("for");
-      if (code.search("for") > -1) {
+      if (code.search("for") == -1) {
+        return code;
+      }
+      else {
          let head = this.getBracket(code,startPos+3);
-         console.log("Head: " + "[" + head + "]");
+         //console.log("Head: " + "[" + head + "]");
          let posAfterHead = startPos+3+head.length+1
          let restStr = code.slice(posAfterHead);
-         console.log("RestStr: " + "[" + restStr + "]");
+         //console.log("RestStr: " + "[" + restStr + "]");
          let bodyPos = restStr.indexOf("{");
          let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Dieser Schleife ist zu lang oder unendlich!");';
-         let newCodePart = [code.slice(0,startPos),"let infinitySafetyCounter = 0;\n",code.slice(startPos,bodyPos+posAfterHead+1)].join('');
-         console.log("NewCodePart: " + "[" + newCodePart + "]");
-         let newCodeWhole = [newCodePart,infCheck,code.slice(bodyPos+posAfterHead+1)].join('');
+         let newReturnCode = [code.slice(0,startPos),code.slice(startPos,bodyPos+posAfterHead+1),infCheck].join('');
+         //console.log("NewReturnCode: " + "[" + newCodePart + "]");
+         let restCode = code.slice(bodyPos+posAfterHead+1);
          //let body = this.getBracket(restStr,bodyPos);
-         return newCodeWhole;
-      } else return code;
+         //console.log("RestCode: " + "[" + restCode + "]");
+         return [newReturnCode,this.InsertForLoopInfinitySafety(restCode)].join('');
+      }
+    },
+    InsertWhileInfinitySafety(code) {
+      var doCount = (code.match(/do/g) || []).length;
+      var whileCount = (code.match(/while/g) || []).length;
+      let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Dieser Schleife ist zu lang oder unendlich!");';
+      let returnStr = "";
+      let restCode = code;
+      if (doCount == 0 && whileCount == 0) {
+        return code;
+      }
+      else if(doCount == whileCount) {
+        for (let i = doCount; i > 0; i--) {
+         let startPos = restCode.search("do"); 
+         let bodyPos = restCode.slice(startPos).indexOf('{');
+         //console.log("Head: " + "[" + head + "]");
+         //console.log("RestStr: " + "[" + restStr + "]");
+         returnStr += [restCode.slice(0,startPos+bodyPos+1),infCheck].join('');
+         //console.log("NewReturnCode: " + "[" + newCodePart + "]");
+         restCode = restCode.slice(startPos+bodyPos+1);
+         //let body = this.getBracket(restStr,bodyPos);
+         //console.log("RestCode: " + "[" + restCode + "]");
+        }
+        return returnStr + restCode;
+      }
+      else if (doCount < whileCount) {
+        while (doCount > 0 || whileCount > 0) {
+          let doPos = restCode.search("do");
+          let whilePos = restCode.search("while");
+          if (doPos == -1) doPos = 1000000;
+          if (whilePos == -1) whilePos = 1000000;
+          if (whilePos <= doPos) {
+            let startPos = restCode.search("while");
+            let headPos = startPos + restCode.slice(startPos).indexOf("(");
+            let head = this.getBracket(restCode,headPos);
+            let posAfterHead = headPos+head.length+1;
+            let restStr = restCode.slice(posAfterHead);
+            let bodyPos = restStr.indexOf("{");
+            returnStr += [restCode.slice(0,startPos),restCode.slice(startPos,bodyPos+posAfterHead+1),infCheck].join('');
+            restCode = restCode.slice(bodyPos+posAfterHead+1);
+            whileCount--
+          } else if (whilePos > doPos) {
+            let startPos = restCode.search("do"); 
+            let bodyPos = restCode.slice(startPos).indexOf('{');
+            let whilePos = restCode.search("while");
+            returnStr += [restCode.slice(0,startPos+bodyPos+1),infCheck].join('');
+            restCode = restCode.slice(whilePos);
+            doCount--;
+            whileCount--;
+          }
+        }
+      } else throw new Error("Kein korrekter Aufbau einer While oder Do..While Schleife!");
     },
     checkIfPaintCall(code) {
       if (code.search("paint") == -1) this.errorMessage += "Rufe die paint(x,y) Methode aus um Felder anzumalen!\n";
@@ -181,7 +249,7 @@ export default {
     checkParamValue(num) {
       const gridElems = document.querySelectorAll(".grid-card");
       let maxValue = Math.sqrt(gridElems.length) - 1;
-      if (num > maxValue) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");
+      if (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");
     },
     getBracket(str, pos) {
       if (str[pos] == '(') {
@@ -237,22 +305,24 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .consoleArea {
   background-color: white;
 }
 
 .greenText {
-  color: rgba(128, 186, 36, 1);
+  background-color: rgba(128, 186, 36, 0.4) !important;
 }
 
 .redText {
-  color: red;
+  background-color: rgba(255, 0, 0, 0.2) !important;
 }
 
 .console_warning {
   animation: warning 2s linear infinite;
-  background-color: red;
+  color: red !important;
+  font-weight: bold;
 }
 
 @keyframes warning {

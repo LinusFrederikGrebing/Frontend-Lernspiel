@@ -1,5 +1,5 @@
 <template>
-  <v-app class="bg-color">
+  <v-app class="bg-color1">
     <v-main>
       <SideBar :currentLevelId="currentLevelId" @lvlSelection="levelSelect=true"/>
       <div v-if="!levelSelect">
@@ -26,7 +26,7 @@
             </v-card>
           </v-dialog>
         </div>
-        <v-container class="grey lighten-5">
+        <v-container class="bg-color1">
           <v-row no-gutters>
             <v-col cols="12" sm="6" md="8">
               <GameGrid />
@@ -101,7 +101,8 @@ export default {
 };
 </script>
 <style>
-.bg-color {
-  background-color: rgba(237, 237, 237, 1);
+
+.bg-color1 {
+  background-color: rgba(212, 212, 212, 0.397) !important;
 }
 </style>

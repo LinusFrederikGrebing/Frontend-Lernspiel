@@ -131,9 +131,9 @@ export default {
 .painted {
   background-color: rgba(128, 186, 36, 1) !important;
 }
-.v-col {
-  flex-basis: 0;
-  flex-grow: 0;
+.col {
+  flex-basis: 0 !important;
+  flex-grow: 0 !important;
   /* max-width: 100%; */
 }
 

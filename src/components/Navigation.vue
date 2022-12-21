@@ -1,6 +1,8 @@
 <template>
   <div>
-    <v-app-bar class="d-flex mb-6" short dense color="rgb(74, 92, 102)" app>
+    <v-system-bar class="d-flex mb-6 header" 
+    
+    short dense color="rgb(74, 92, 102)" app>
       <transition appear @before-enter="beforeEnter" @enter="enter">
         <h2 class="mx-16" id="background">Draw IT!</h2>
       </transition>
@@ -12,7 +14,7 @@
           <div class="thmcolorgreen">Menu</div>
         </transition>
       </v-btn>
-    </v-app-bar>
+    </v-system-bar>
     <v-navigation-drawer
       v-model="drawer"
       :temporary="false"
@@ -21,12 +23,12 @@
       mini-variant-width="100"
       app
     >
-      <div id="sidebar">
+      <div class="py-8" id="sidebar">
         <div class="sidebar-body">
           <div class="sidebar-links">
             <small class="my-8">Menu</small>
             <hr class="divider" />
-            <small>{{ "Level " + currentLevelId }}</small>
+            <small class="my-8">{{ "Level " + currentLevelId }}</small>
             <hr class="divider" />
             <div class="links">
               <a
@@ -91,15 +93,15 @@ export default {
     enterMenu(el) {
       gsap.fromTo(
         el,
-        { y: 0, x: 0},
-        { delay:2, duration: 2, y: 0, x: 0, opacity: 1, ease: "back.out(3)" }
+        { y: 0, x: +200 },
+        { delay:2, duration: 2, y: 0, x: -50, opacity: 1, ease: "back.out(3)" }
       );
     },
     enter(el) {
       gsap.fromTo(
         el,
-        { y: -35, x: 0 },
-        { delay: 1, duration: 2, y: -35, x: 0, opacity: 1, ease: "back.out(2)" }
+        { y: -35, x: -300 },
+        { delay: 1, duration: 2, y: -30, x: -25, opacity: 1, ease: "back.out(2)" }
       );
     },
     setLink(link) {
@@ -142,7 +144,13 @@ export default {
 
 <style scoped>
 .thmcolorgreen {
-  color: rgba(128, 186, 36, 1);
+  color: rgba(128, 186, 36, 1) !important;
+}
+
+.header {
+  height: 7vh !important;
+  box-shadow: 0em 0.3em 0.3em rgba(255, 255, 255, 0.4);
+  z-index: 7;
 }
 
 #sidebar {
@@ -248,10 +256,10 @@ export default {
 }
 
 #background {
-  position: absolute;
+  
   font-family: Arial, Helvetica, sans-serif;
-  top: 50%;
-  left: 5%;
+  margin-top: 1.5em;
+  margin-left: 5em;
   transform: translate(-50%, -50%);
   color: rgba(255, 255, 255, 0.1);
   background: linear-gradient(
