@@ -149,7 +149,6 @@ export default {
       let checkParamValueStr = 'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n'
       let evalCode = this.codeToRun;
       console.log(evalCode);
->>>>>>> 53b9ae141dc0012104863472d7c8ec1af4497924
       this.checkIfPaintCall(evalCode);
       try {
         this.checkPaintParams(evalCode);
