@@ -68,7 +68,7 @@ export default {
     levels: [],
     currentLevel: null,
     currentLevelId: null,
-    levelSelect:false,
+    levelSelect: false,
   }),
   methods: {
     wieAuchImmer(item) {
@@ -96,8 +96,7 @@ export default {
 };
 </script>
 <style>
-
 .bg-color1 {
-  background-color: rgba(179, 179, 179, 0.397) !important;
+  background-color: rgb(236, 236, 236) !important;
 }
 </style>

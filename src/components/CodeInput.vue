@@ -114,6 +114,9 @@ export default {
       if (this.areEqual(this.levelElements, this.paintedElements)) {
         this.levelElements = [];
         this.paintedElements = [];
+        Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        el.classList.remove("painted");
+        });
         this.$emit("success");
       }
     },
