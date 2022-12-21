@@ -83,20 +83,15 @@ export default {
     },
     setSelectedLevel(level){
       this.levelSelect=false;
-      this.currenLevel=level;
+      this.currentLevel=level;
       this.currentLevelId = level.id;
-    }
-  },
-  watch:{
-    currentLevel(oldVal, newVal){
-      console.log(oldVal, newVal)
+      console.log(this.currentLevel)
     }
   },
   mounted(){
     this.levels = Object.values(Object.values(levels)[0]);
     this.currentLevel = this.levels[0];
     this.currentLevelId = this.currentLevel.id;
-    console.log(this.$vuetify.breakpoint)
   }
 };
 </script>

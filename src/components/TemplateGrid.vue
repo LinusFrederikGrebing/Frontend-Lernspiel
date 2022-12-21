@@ -88,10 +88,14 @@ export default {
       );
     },
   },
+  mounted(){
+    if(this.currentLevel !== null){
+      eval(this.currentLevel.patternCode)
+    }
+  },
   watch: {
-    currentLevel(oldVal, newVal) {
-      console.log(oldVal, newVal);
-      eval(this.currentLevel.patternCode);
+    currentLevel(newVal, oldVal) {
+      eval(newVal.patternCode)
     },
   },
 };

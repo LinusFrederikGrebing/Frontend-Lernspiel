@@ -36,7 +36,6 @@ export default {
       });
     },
     setLevel(level){
-      console.log(level)
       this.$emit('setLevel', level)
     }
   },
