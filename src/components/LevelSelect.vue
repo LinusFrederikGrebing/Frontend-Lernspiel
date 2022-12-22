@@ -1,16 +1,13 @@
 <template>
   <div>
     <flickity ref="flickity" :options="flickityOptions" class="carousel">
-      <div v-for="level in levels" class="styledDiv">
+      <div v-for="(level, index) in levels" class="styledDiv carousel-cell pa-5" ref="levelDiv">
         <v-card
+         
           elevation="12"
           height="25em"
           width="30em "
-          :class="
-            accessibleLevels.includes(level)
-              ? 'mx-auto my-8'
-              : 'locked mx-auto my-8'
-          "
+          :class="['mx-auto my-8', {' locked' : !accessibleLevels.includes(level)}]"
         >
           <v-img
             class="white--text align-end"
@@ -45,6 +42,7 @@ export default {
   },
   data: () => ({
     accessibleLevels: [],
+    selectedIndex: 0,
     flickityOptions: {
       freeScroll: true,
       prevNextButtons: false,
@@ -53,6 +51,7 @@ export default {
       groupCells: 1,
     },
   }),
+
   methods: {
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
@@ -83,8 +82,8 @@ export default {
         );
       }
     });
-    console.log(this.levels);
   },
+
   computed: {
     columns() {
       if (this.$vuetify.breakpoint.lgAndUp) {
@@ -112,52 +111,21 @@ export default {
   opacity: 1 !important;
   scale: 10;
 }
-.row.fill-height.align-center.justify-center {
-  background-color: rgb(236, 236, 236) !important;
-}
-.v-carousel__controls__item {
-  color: rgba(128, 186, 36, 1) !important;
-  opacity: 1 !important;
-}
-/* external css: flickity.css */
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-}
-
-.carousel {
-  background: #eee;
-}
 
 .carousel-cell {
-  width: 28%;
-  height: 200px;
-  background: #8c8;
+  height: 50vh !important;
+  margin-right: 10px;
   border-radius: 5px;
-  padding-right: 1000px !important;
   counter-increment: carousel-cell;
 }
 
 .carousel-cell.is-selected {
-  background: #ed2;
+  background: #ED2 !important;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-/* cell number */
-.carousel-cell:before {
-  display: block;
-  text-align: center;
-  content: counter(carousel-cell);
-  line-height: 200px;
-  font-size: 80px;
-  color: white;
-}
-
 .styledDiv{
+  margin-top: 10vh;
   margin-right: 80px !important;
 }
 </style>
