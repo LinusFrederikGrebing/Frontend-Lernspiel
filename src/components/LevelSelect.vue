@@ -1,66 +1,57 @@
 <template>
   <div>
-    <v-carousel class="my-6 my-auto" height="550"  hide-delimiter-background show-arrows-on-hover>
-      <template v-slot:prev="{ on, attrs }">
-        <v-btn color="success" height="50" v-bind="attrs" v-on="on">   
-          <v-icon>
-           mdi-chevron-left
-          </v-icon> 
-        </v-btn>
-      </template>
-      <template v-slot:next="{ on, attrs }">
-        <v-btn color="success" height="50" v-bind="attrs" v-on="on"> 
-          <v-icon>
-           mdi-chevron-right
-          </v-icon> 
-        </v-btn>
-      </template>
-      <template v-for="(item, index) in levels">
-        <v-carousel-item class="my-10" v-if="(index + 1) % columns === 1 || columns === 1" :key="index">
-          <v-row class="flex-nowrap" style="height:95%">
-            <template class="flex-nowrap" v-for="(n, i) in columns">
-              <template v-if="(index + i) < levels.length">
-                <v-col  :key="i">
-                  <v-sheet  v-if="(index + i) < levels.length" height="95%">
-                    <v-row class="fill-height" align="center" justify="center">
-                      <v-card  elevation="12" height="25em" width="30em "
-                      :class="accessibleLevels.includes(levels[index + i]) ? 'mx-auto my-8' : 'locked mx-auto my-8'"
-                      >
-                       
-                        <v-img class="white--text align-end" height="18em"
-                          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"> 
-                          <v-icon v-if="!accessibleLevels.includes(levels[index + i])" class="zentriert">mdi-lock</v-icon>
-                          <v-card-title>Level {{ levels[index + i].id }} </v-card-title>
-                        </v-img>
+    <flickity ref="flickity" :options="flickityOptions" class="carousel">
+      <div v-for="level in levels" class="styledDiv">
+        <v-card
+          elevation="12"
+          height="25em"
+          width="30em "
+          :class="
+            accessibleLevels.includes(level)
+              ? 'mx-auto my-8'
+              : 'locked mx-auto my-8'
+          "
+        >
+          <v-img
+            class="white--text align-end"
+            height="18em"
+            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+          >
+            <v-icon v-if="!accessibleLevels.includes(level)" class="zentriert"
+              >mdi-lock</v-icon
+            >
+            <v-card-title>Level {{ level.id }} </v-card-title>
+          </v-img>
 
-                        <v-card-subtitle class="pb-0">
-                          Information zum Level vielleicht?
-                        </v-card-subtitle>
-
-                        <v-card-actions>
-                          <v-btn  @click="setLevel(levels[index + i])" color="orange" text>
-                            Start
-                          </v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-row>
-                  </v-sheet>
-                </v-col>
-              </template>
-            </template>
-          </v-row>
-        </v-carousel-item>
-      </template>
-    </v-carousel>
+          <v-card-subtitle class="pb-0">
+            Information zum Level vielleicht?
+          </v-card-subtitle>
+          <v-card-actions>
+            <v-btn @click="setLevel(level)" color="orange" text> Start </v-btn>
+          </v-card-actions>
+        </v-card>
+      </div>
+    </flickity>
   </div>
 </template>
 
 <script>
+import Flickity from "vue-flickity";
 export default {
   name: "LevelSelect",
   props: { levels: Array },
+  components: {
+    Flickity,
+  },
   data: () => ({
     accessibleLevels: [],
+    flickityOptions: {
+      freeScroll: true,
+      prevNextButtons: false,
+      autoPlay: 2200,
+      pauseAutoPlayOnHover: false,
+      groupCells: 1,
+    },
   }),
   methods: {
     paint(first, second) {
@@ -76,11 +67,10 @@ export default {
     },
     setLevel(level) {
       if (this.accessibleLevels.includes(level)) {
-        this.$emit('setLevel', level)
+        this.$emit("setLevel", level);
       }
-      console.log(level.completed)
-
-    }
+      console.log(level.completed);
+    },
   },
   mounted() {
     this.accessibleLevels.push(this.levels[0]);
@@ -88,7 +78,7 @@ export default {
       if (level.completed === true) {
         this.accessibleLevels.push(
           this.levels[
-          this.levels.findIndex((nextLvl) => nextLvl.id === level.id) + 1
+            this.levels.findIndex((nextLvl) => nextLvl.id === level.id) + 1
           ]
         );
       }
@@ -97,7 +87,7 @@ export default {
   },
   computed: {
     columns() {
-       if (this.$vuetify.breakpoint.lgAndUp) {
+      if (this.$vuetify.breakpoint.lgAndUp) {
         return 3;
       }
 
@@ -106,17 +96,15 @@ export default {
       }
 
       return 1;
-    }
+    },
   },
 };
 </script>
 <style>
-
-.locked{
+.locked {
   opacity: 0.5;
-  
 }
-.zentriert{
+.zentriert {
   position: absolute;
   margin: 5em;
   width: 10em;
@@ -127,8 +115,49 @@ export default {
 .row.fill-height.align-center.justify-center {
   background-color: rgb(236, 236, 236) !important;
 }
-   .v-carousel__controls__item{
-      color:  rgba(128, 186, 36, 1) !important;
-      opacity: 1 !important;
-   }
+.v-carousel__controls__item {
+  color: rgba(128, 186, 36, 1) !important;
+  opacity: 1 !important;
+}
+/* external css: flickity.css */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.carousel {
+  background: #eee;
+}
+
+.carousel-cell {
+  width: 28%;
+  height: 200px;
+  background: #8c8;
+  border-radius: 5px;
+  padding-right: 1000px !important;
+  counter-increment: carousel-cell;
+}
+
+.carousel-cell.is-selected {
+  background: #ed2;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* cell number */
+.carousel-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(carousel-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
+
+.styledDiv{
+  margin-right: 80px !important;
+}
 </style>
