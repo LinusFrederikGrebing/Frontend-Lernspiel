@@ -49,6 +49,7 @@ import GameGrid from "./components/GameGrid.vue";
 import TemplateGrid from "./components/TemplateGrid.vue";
 import levels from "../data/levels.json"
 import LevelSelection from "./components/LevelSelect.vue";
+import Help from "./components/HelpTemplate.vue";
 
 export default {
   name: "App",
@@ -58,7 +59,8 @@ export default {
     GameGrid,
     CodeInput,
     TemplateGrid,
-    LevelSelection
+    LevelSelection,
+    Help
   },
 
   data: () => ({

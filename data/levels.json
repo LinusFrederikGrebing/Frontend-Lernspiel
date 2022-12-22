@@ -3,50 +3,60 @@
       {
         "id":"1",
         "patternCode":"this.paint(1,1);",
+        "difficulty": 1.5,
         "completed": "false"
       },
       {
         "id":"2",
+        "difficulty": 2,
         "patternCode":"this.paint(1,1); this.paint(1,3)",
         "completed": "false"
       },
       {
         "id":"3",
+        "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false"
       },
       {
         "id":"4",
+        "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false"
       },
       {
         "id":"5",
+        "difficulty": 5,
         "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false"
       },
       {
         "id":"6",
+        "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false"
       },
       {
         "id":"7",
+        "difficulty": 2,
         "patternCode":"this.paint(1,1); this.paint(1,3)",
         "completed": "false"
       },
       {
         "id":"8",
+        "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false"
       },
       {
         "id":"9",
+        "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false"
       },
       {
         "id":"10",
+        "difficulty": 5,
         "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false"
       }
