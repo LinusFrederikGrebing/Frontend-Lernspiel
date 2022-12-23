@@ -3,60 +3,54 @@
     <v-container fluid>
       <div class="general-content js-general-content">
         <div class="general-component">
-          <div class="componente" v-for="level in 5" :key="level">
+          <div class="componente" v-for="item in informations" :key="item.id">
             <div class="non-scroll-component">
               <div class="component-internal">
                 <div class="components-background-image"></div>
                 <div class="initial-visual-component">
-                  <h2 class="white--text">- Kapitel {{ level }} - </h2>
+                  <h2 class="white--text">- Kapitel {{ item.id }} - </h2>
                 </div>
                 <div class="componente-content">
-                  <div class="white--text"><h1>{{ level }} Überschrift-Bereich</h1></div>
                   <div class="component-close-button"></div>
-                  <v-card class="mx-auto" >
-                    <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="35em"></v-img>
-
+                  <v-card class="mx-auto my-2" elevation="20" >
+                    <v-img :src="item.src" height="12em"></v-img>
                     <v-card-title>
-                      Informationen über Schleifen...
+                      {{ item.subheader }}
                     </v-card-title>
 
-                    <v-card-subtitle>
-                      Text mit Informationen
-                    </v-card-subtitle>
-
+                    <v-card-text class="black--text">
+                      {{ item.informations1 }}
+                    </v-card-text>
+                    <hr class="divider" />
+                    <v-card-title>
+                      {{ item.subheader2 }}
+                    </v-card-title>
+                    <v-card-text class="black--text">
+                      {{ item.informations2 }}
+                    </v-card-text>
+                    <hr class="divider" />
+                    <v-card-title>
+                    Beispiel:
+                    </v-card-title>
+                    <v-img :src="item.Beispiel" class="ml-4 float-left mr-8" ></v-img>
+                    <v-card-text class="black--text">
+                      {{ item.beispieltext }}
+                    </v-card-text>
+                    <hr class="divider mt-8" />
                     <v-card-actions>
-                      <v-btn color="orange lighten-2" text>
+                      <v-btn color="orange lighten-2 my-2 mx-2">
                         Button zu offizieller Doku?
                       </v-btn>
-
-                      <v-spacer></v-spacer>
-
-                      <v-btn icon @click="show = !show">
-                        <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                      </v-btn>
                     </v-card-actions>
-
-                    <v-expand-transition>
-                      <div v-show="show">
-                        <v-divider></v-divider>
-
-                        <v-card-text>
-                          I'm a thing. But, like most politicians, he promised more than he could deliver. You won't
-                          have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go
-                          with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do
-                          his laundry? I've got to find a way to escape.
-                        </v-card-text>
-                      </div>
-                    </v-expand-transition>
                   </v-card>
                 </div>
               </div>
             </div>
             <div class="componente-index">
-              <div class="componente-index-back">{{ level }}</div>
+              <div class="componente-index-back">{{ item.id }}</div>
               <div class="componente-index-front">
-                <div class="componente-index-overlay" :data-index="level">
-                  {{ level }}
+                <div class="componente-index-overlay" :data-index="item.id">
+                  {{ item.id }}
                 </div>
               </div>
             </div>
@@ -71,6 +65,17 @@
 export default {
   name: "HelpTemplate",
   props: { levels: Array },
+  data() {
+    return {
+    informations: [
+        { id: 1, label: 'Variablen', subheader: "Was sind Variablen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 2, label: 'Funktionen', subheader: "Was sind Funktionen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 3, label: 'For-Schleifen', subheader: "Was sind For-Schleifen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 4, label: 'While-Schleifen', subheader: "Was sind While-Schleifen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 5, label: 'Do-While-Schleifen', subheader: "Was sind Do-While-Schleifen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+    ]
+  };     
+  },
   methods: {
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
@@ -115,10 +120,24 @@ export default {
           .classList.remove("component-active");
       });
     });
+
+    function paint(first, second) {
+      let element = document.getElementById("vx" + first + "vy" + second);
+      element.classList.add("painted");
+    };
+    /* Funktionsaufruf: */ paint(1,1);
+
   },
 };
 </script>
 <style scoped>
+*{
+  overflow: hidden;
+}
+.divider {
+  opacity: 0.5;
+  border-radius: 100%;
+}
 .componente {
   cursor: pointer;
   position: absolute;
@@ -234,12 +253,12 @@ export default {
 
 .componente-index-back {
   color: #2f3840;
-  opacity: 0;
+  opacity: 0.25;
   transition: opacity 0.25s 0.25s;
 }
 
 .componente:hover .componente-index-back {
-  transition: opacity 0.25s;
+  transition: opacity 1.25s;
   opacity: 1;
 }
 

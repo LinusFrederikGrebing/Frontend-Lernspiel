@@ -62,7 +62,7 @@
           </v-row>
         </v-container>
       </div>
-      <LevelSelection v-else :levels="levels" @setLevel="setSelectedLevel" />
+      <Help v-else :levels="levels" @setLevel="setSelectedLevel" />
     </v-main>
   </v-app>
 </template>
