@@ -32,13 +32,14 @@
                     <v-card-title>
                     Beispiel:
                     </v-card-title>
-                    <v-img :src="item.Beispiel" class="ml-4 float-left mr-8" ></v-img>
-                    <v-card-text class="black--text">
+                    <div class="d-flex">
+                    <v-img :src="item.Beispiel" class="ml-4 mr-8" ></v-img>
+                    <v-card-text class="black--text mr-8">
                       {{ item.beispieltext }}
-                    </v-card-text>
+                    </v-card-text></div>
                     <hr class="divider mt-8" />
                     <v-card-actions>
-                      <v-btn color="orange lighten-2 my-2 mx-2">
+                      <v-btn color="orange lighten-2 my-2 mr-8">
                         Button zu offizieller Doku?
                       </v-btn>
                     </v-card-actions>
@@ -137,6 +138,7 @@ export default {
 .divider {
   opacity: 0.5;
   border-radius: 100%;
+  background-color: red;
 }
 .componente {
   cursor: pointer;
