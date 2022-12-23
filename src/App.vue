@@ -25,6 +25,30 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+          <v-dialog v-model="dialogFalse" width="500">
+            <v-card>
+              <v-card-title class="text-h5 red">
+                Your answer is wrong.
+              </v-card-title>
+
+              <v-card-text>
+                Deine Antwort entspricht leider nicht dem erwünschten Ergebnis.
+                Versuche es nochmal oder probier ein anderes Level.
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" text @click="dialogFalse = false; setSelectedLevel(currentLevel)">
+                  Go back
+                </v-btn>
+                <v-btn color="primary" text @click="dialogFalse = false; levelSelect = true;">
+                  Level Selection
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
         <v-container class="bg-color1">
           <v-row no-gutters>
@@ -33,7 +57,7 @@
             </v-col>
             <v-col cols="6" md="4">
               <TemplateGrid :currentLevel="currentLevel"/>
-              <CodeInput @success="dialog = true; currentLevel.completed = true;"/>
+              <CodeInput @success="dialog = true; currentLevel.completed = true;" @failure="dialogFalse = true;"/>
             </v-col>
           </v-row>
         </v-container>
@@ -67,6 +91,7 @@ export default {
     myFunction: null,
     error: null,
     dialog: false,
+    dialogFalse: false,
     levels: [],
     currentLevel: null,
     currentLevelId: null,

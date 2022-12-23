@@ -49,6 +49,23 @@
           Finished
         </v-btn>
       </transition>
+      <transition appear @before-enter="beforeEnter" @enter="enter">
+        <v-btn
+          :style="{backgroundColor:color}"
+          depressed
+          elevation="2"
+          @click="colorPicker ? colorPicker = false : colorPicker = true"
+        >
+          Color
+        </v-btn>
+      </transition>
+      <v-color-picker
+        v-if="colorPicker"
+        v-model="color"
+        dot-size="6"
+        mode="rgba"
+        swatches-max-height="250"
+      ></v-color-picker>
     </div>
   </div>
 </template>
@@ -64,8 +81,10 @@ export default {
   },
   data: () => {
     return {
+      color: '#FFFFFF',
       levelElements: [],
       paintedElements: [],
+      colorPicker: false,
       editorActive: true,
       errorMessage: 'Keine Fehlermeldung!',
       consoleActive: false,
@@ -99,6 +118,7 @@ export default {
       this.checkParamValue(first);
       this.checkParamValue(second);
       element.classList.add("painted");
+      element.style.backgroundColor = this.color;
     },
     checkResult() {
       let allElements = document.getElementsByClassName("painted");
@@ -118,7 +138,7 @@ export default {
         el.classList.remove("painted");
         });
         this.$emit("success");
-      }
+      } else this.$emit("failure");
     },
     areEqual(array1, array2) {
       if (array1.length === array2.length) {
@@ -186,7 +206,7 @@ export default {
          let restStr = code.slice(posAfterHead);
          //console.log("RestStr: " + "[" + restStr + "]");
          let bodyPos = restStr.indexOf("{");
-         let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Dieser Schleife ist zu lang oder unendlich!");';
+         let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Diese Schleife ist zu lang oder unendlich!");';
          let newReturnCode = [code.slice(0,startPos),code.slice(startPos,bodyPos+posAfterHead+1),infCheck].join('');
          //console.log("NewReturnCode: " + "[" + newCodePart + "]");
          let restCode = code.slice(bodyPos+posAfterHead+1);
@@ -198,7 +218,7 @@ export default {
     InsertWhileInfinitySafety(code) {
       var doCount = (code.match(/do/g) || []).length;
       var whileCount = (code.match(/while/g) || []).length;
-      let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Dieser Schleife ist zu lang oder unendlich!");';
+      let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Diese Schleife ist zu lang oder unendlich!");';
       let returnStr = "";
       let restCode = code;
       if (doCount == 0 && whileCount == 0) {
@@ -228,22 +248,22 @@ export default {
             let startPos = restCode.search("while");
             let headPos = startPos + restCode.slice(startPos).indexOf("(");
             let head = this.getBracket(restCode,headPos);
-            let posAfterHead = headPos+head.length+1;
-            let restStr = restCode.slice(posAfterHead);
-            let bodyPos = restStr.indexOf("{");
-            returnStr += [restCode.slice(0,startPos),restCode.slice(startPos,bodyPos+posAfterHead+1),infCheck].join('');
+            let posAfterHead = headPos+head.length+2;
+            let bodyPos = restCode.slice(posAfterHead).indexOf("{");
+            returnStr += [restCode.slice(0,bodyPos+posAfterHead+1),infCheck].join('');
             restCode = restCode.slice(bodyPos+posAfterHead+1);
             whileCount--
           } else if (whilePos > doPos) {
             let startPos = restCode.search("do"); 
             let bodyPos = restCode.slice(startPos).indexOf('{');
             let whilePos = restCode.search("while");
-            returnStr += [restCode.slice(0,startPos+bodyPos+1),infCheck].join('');
-            restCode = restCode.slice(whilePos);
+            returnStr += [restCode.slice(0,startPos+bodyPos+1),infCheck,restCode.slice(startPos+bodyPos+1,whilePos+5)].join('');
+            restCode = restCode.slice(whilePos+5);
             doCount--;
             whileCount--;
           }
         }
+        return returnStr + restCode;
       } else throw new Error("Kein korrekter Aufbau einer While oder Do..While Schleife!");
     },
     checkIfPaintCall(code) {
