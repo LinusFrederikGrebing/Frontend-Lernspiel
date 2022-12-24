@@ -79,7 +79,7 @@ export default {
       menuLinks: [
         { title: "Level-Auswahl", icon: "home" },
         { path: "#", title: "Tutorial", icon: "information-variant" },
-        { path: "#", title: "Hilfen", icon: "email" },
+        { title: "Hilfen", icon: "email" },
         { path: "#", title: "Back to Homepage", icon: "logout-variant" },
       ],
     };
@@ -107,6 +107,9 @@ export default {
     setLink(link) {
       if (link.title === "Level-Auswahl") {
         this.$emit("lvlSelection");
+      }
+      if (link.title === "Hilfen") {
+        this.$emit("hilfen");
       }
     },
     // Momentan nicht in Benutzung, war evtl. als Übergang zur Levelübersicht gedacht

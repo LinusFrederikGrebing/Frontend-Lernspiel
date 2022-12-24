@@ -2,18 +2,24 @@
   <div>
     <v-container fluid>
       <div class="general-content js-general-content">
-        <div class="general-component">
-          <div class="componente" v-for="item in informations" :key="item.id">
+        <div class="general-component" >
+          <div class="componente" v-for="item in informations" :key="item.id" :style="{ backgroundImage: `url('${item.url}')`, backgroundSize: contain } ">
             <div class="non-scroll-component">
               <div class="component-internal">
                 <div class="components-background-image"></div>
                 <div class="initial-visual-component">
-                  <h2 class="white--text">- Kapitel {{ item.id }} - </h2>
+                  <div>
+                    <h2 class="white--text">- Kapitel {{ item.id }} - </h2>
+                  </div>
+                  
                 </div>
                 <div class="componente-content">
                   <div class="component-close-button"></div>
-                  <v-card class="mx-auto my-2" elevation="20" >
-                    <v-img :src="item.src" height="12em"></v-img>
+                  <v-card class="mx-auto my-4 card" elevation="20" >
+                    <div class="image">
+                      <v-img :src="item.src" height="11em"></v-img>
+                    <h2 class="" id="background"><i>{{item.label}}!</i></h2>
+                    </div>
                     <v-card-title>
                       {{ item.subheader }}
                     </v-card-title>
@@ -69,11 +75,11 @@ export default {
   data() {
     return {
     informations: [
-        { id: 1, label: 'Variablen', subheader: "Was sind Variablen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
-        { id: 2, label: 'Funktionen', subheader: "Was sind Funktionen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
-        { id: 3, label: 'For-Schleifen', subheader: "Was sind For-Schleifen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
-        { id: 4, label: 'While-Schleifen', subheader: "Was sind While-Schleifen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
-        { id: 5, label: 'Do-While-Schleifen', subheader: "Was sind Do-While-Schleifen?", src: require('../assets/javascript-functions.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 1, url: require('../assets/programmingVariablen.png'), label: 'Variablen', subheader: "Was sind Variablen?", src: require('../assets/helpTemplateBackground.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 2, url: require('../assets/programmingFunktion.png'), label: '        Funktionen', subheader: "Was sind Funktionen?", src: require('../assets/helpTemplateBackground.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 3, url: require('../assets/programmingFor.png'), label: '     For-Schleifen', subheader: "Was sind For-Schleifen?", src: require('../assets/helpTemplateBackground.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 4, url: require('../assets/programmingWhile.png'), label: '   While-Schleifen', subheader: "Was sind While-Schleifen?", src: require('../assets/helpTemplateBackground.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
+        { id: 5, url: require('../assets/programmingDoWhile.png'), label: 'Do-While-Schleifen', subheader: "Was sind Do-While-Schleifen?", src: require('../assets/helpTemplateBackground.png'), informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.', subheader2: 'Ablauf von Funktionen und Funktionsaufrufen', informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.', Beispiel: require('../assets/paintedFunction.png'), beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.' },
     ]
   };     
   },
@@ -135,10 +141,52 @@ export default {
 *{
   overflow: hidden;
 }
+.card{
+  box-shadow: 3em 3em 3em rgba(0, 0, 0, 0.7) !important;
+}
+.image {
+  max-height: 11em;
+}
+#background {
+  width: 100%;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(
+    to right,
+    rgb(142, 226, 159),
+    rgb(147, 202, 225),
+    rgb(156, 156, 202),
+    rgb(155, 200, 159),
+    rgb(153, 196, 160),
+    rgb(145, 144, 191),
+    rgb(154, 188, 203),
+    rgb(166, 209, 175)
+  );
+  background-size: 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-weight: 700;
+  margin-left: 70vw;
+  margin-top: -5vh;
+  font-size: 6vw;
+  animation: sTransition 10s linear infinite;
+}
+
+@keyframes sTransition {
+  0% {
+    background-position: 0%;
+  }
+
+  100% {
+    background-position: 400%;
+  }
+}
 .divider {
-  opacity: 0.5;
+  opacity: 1;
   border-radius: 100%;
-  background-color: red;
+  background-color:  rgba(128, 186, 36, 1);
 }
 .componente {
   cursor: pointer;
@@ -148,6 +196,7 @@ export default {
   width: 19.2%;
   height: 100%;
   background: #252525;
+  background-image: attr(bgurl); 
   transition: transform 0.6s 0.7s, width 0.7s, opacity 0.6s 0.7s,
     z-index 0s 1.3s;
   will-change: transform, width, opacity;
@@ -185,7 +234,7 @@ export default {
 .component-close-button {
   position: absolute;
   right: 1em;
-  top: 1em;
+  top: 2em;
   width: 4em;
   height: 4em;
   opacity: 0;

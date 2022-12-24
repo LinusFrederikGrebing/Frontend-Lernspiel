@@ -1,8 +1,10 @@
 <template>
   <v-app class="bg-color1">
     <v-main>
-      <SideBar :currentLevelId="currentLevelId" @lvlSelection="levelSelect=true"/>
-      <div v-if="!levelSelect">
+      <SideBar :currentLevelId="currentLevelId" @lvlSelection="levelSelect=true; hilfenTemp=false" @hilfen="hilfenTemp=true; levelSelect=false"/>
+      <LevelSelection v-if="levelSelect" :levels="levels" @setLevel="setSelectedLevel" />
+      <Help v-else-if="hilfenTemp" :levels="levels" @setLevel="setSelectedLevel" />
+      <div v-else>
         <div class="text-center">
           <v-dialog v-model="dialog" width="500">
             <v-card>
@@ -62,7 +64,7 @@
           </v-row>
         </v-container>
       </div>
-      <Help v-else :levels="levels" @setLevel="setSelectedLevel" />
+     
     </v-main>
   </v-app>
 </template>
@@ -96,6 +98,7 @@ export default {
     currentLevel: null,
     currentLevelId: null,
     levelSelect: false,
+    hilfenTemp: false,
   }),
   methods: {
     wieAuchImmer(item) {
