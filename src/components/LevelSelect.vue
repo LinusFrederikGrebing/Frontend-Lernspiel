@@ -17,6 +17,13 @@
           <v-btn color="primary" depressed elevation="2" @click="setLevel(level)">
             Start
           </v-btn>
+          <v-icon
+          v-if="level.completed === true"
+          color="green"
+          right
+        >
+          mdi-checkbox-marked-circle
+        </v-icon>
         </v-card-actions>
       </v-card>
 
