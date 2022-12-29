@@ -29,6 +29,7 @@ const opts = {
           primary_light: '#738AAE', //#305886
           grey_light: '#F3F3F3', //#f7f7f7
           grey: '#999995', //#f7f7f7
+          thmBlue: '#4a5c66',
   
           blue_background: '#EFF2F7',
           blue_shade1: '#D9E0ED',
