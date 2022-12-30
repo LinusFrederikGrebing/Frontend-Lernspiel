@@ -2,7 +2,10 @@
   <v-app class="bg-color1">
     <v-main>
       <SideBar :currentLevelId="currentLevelId" @lvlSelection="levelSelect=true; hilfenTemp=false" @hilfen="hilfenTemp=true; levelSelect=false"/>
-      <LevelSelection v-if="levelSelect" :levels="levels" @setLevel="setSelectedLevel" />
+      <router-view></router-view>
+      <!--
+
+     <LevelSelection v-if="levelSelect" :levels="levels" @setLevel="setSelectedLevel" />
       <Help v-else-if="hilfenTemp" :levels="levels" @setLevel="setSelectedLevel" />
       <div v-else>
         <div class="text-center">
@@ -64,29 +67,19 @@
           </v-row>
         </v-container>
       </div>
-     
+      -->
     </v-main>
   </v-app>
 </template>
 <script>
 import SideBar from "./components/Navigation.vue";
-import CodeInput from "./components/CodeInput.vue";
-import GameGrid from "./components/GameGrid.vue";
-import TemplateGrid from "./components/TemplateGrid.vue";
 import levels from "../data/levels.json"
-import LevelSelection from "./components/LevelSelect.vue";
-import Help from "./components/HelpTemplate.vue";
 
 export default {
   name: "App",
 
   components: {
     SideBar,
-    GameGrid,
-    CodeInput,
-    TemplateGrid,
-    LevelSelection,
-    Help
   },
 
   data: () => ({
@@ -107,16 +100,6 @@ export default {
     logError(error) {
       this.error = error;
     },
-    nextLevel(indexNextLevel){
-      this.currentLevel = this.levels[indexNextLevel];
-      this.currentLevelId = this.currentLevel.id;
-    },
-    setSelectedLevel(level){
-      this.levelSelect=false;
-      this.currentLevel=level;
-      this.currentLevelId = level.id;
-      console.log(this.currentLevel)
-    }
   },
   mounted(){
     this.levels = Object.values(Object.values(levels)[0]);

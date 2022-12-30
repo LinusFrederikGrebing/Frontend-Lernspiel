@@ -35,7 +35,6 @@
                 v-for="link in menuLinks"
                 :key="link.title"
                 :href="link.path"
-                target="_blank"
               >
                 <v-icon :title="link.title" class="icon"
                   >mdi-{{ link.icon }}</v-icon
@@ -77,10 +76,10 @@ export default {
         hidden: true,
       },
       menuLinks: [
-        { title: "Level-Auswahl", icon: "home" },
-        { path: "#", title: "Tutorial", icon: "information-variant" },
-        { title: "Hilfen", icon: "email" },
-        { path: "#", title: "Back to Homepage", icon: "logout-variant" },
+        { title: "Level-Auswahl", icon: "home", path: "/LevelSelect"},
+        { title: "Tutorial", icon: "information-variant", path: "#"},
+        { title: "Hilfen", icon: "email", path: "/Help"},
+        { title: "Back to Homepage", icon: "logout-variant", path: "#"},
       ],
     };
   },

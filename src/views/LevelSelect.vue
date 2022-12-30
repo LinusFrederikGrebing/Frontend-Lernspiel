@@ -2,7 +2,7 @@
   <div>
     <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
       <v-card v-for="(level, index) in levels" class="styledDiv carousel-cell pa-5 mx-8" ref="levelDiv" elevation="12"
-        height="25em" width="30em " :class="['mx-auto my-8', { ' locked': !accessibleLevels.includes(level) }]">
+        height="25em" width="30em " :class="['mx-auto my-8', { ' locked': !accessibleLevels.includes(level) }]" :key="index">
         <v-img class="white--text align-end" height="18em" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
           <v-icon v-if="!accessibleLevels.includes(level)" class="zentriert">mdi-lock</v-icon>
           <v-card-title>Level {{ level.id }} </v-card-title>
@@ -33,9 +33,9 @@
 
 <script>
 import Flickity from "vue-flickity";
+import levels from "../../data/levels.json";
 export default {
   name: "LevelSelect",
-  props: { levels: Array },
   components: {
     Flickity,
   },
@@ -65,23 +65,23 @@ export default {
       });
     },
     setLevel(level) {
-      if (this.accessibleLevels.includes(level)) {
-        this.$emit("setLevel", level);
-      }
-      console.log(level.completed);
+      this.$router.push({
+        name: "GameView",
+        params: {
+          level: {
+            ...level
+          },
+        },
+      });
     },
   },
   mounted() {
-    this.accessibleLevels.push(this.levels[0]);
-    this.levels.forEach((level) => {
-      if (level.completed === true) {
-        this.accessibleLevels.push(
-          this.levels[
-          this.levels.findIndex((nextLvl) => nextLvl.id === level.id) + 1
-          ]
-        );
-      }
-    });
+    if(this.$route.params.accessibleLevel){
+      this.accessibleLevels = this.$route.params.accessibleLevels
+    }else {
+      this.accessibleLevels.push(this.levels[0])
+    }
+  
   },
 
   computed: {
@@ -96,6 +96,9 @@ export default {
 
       return 1;
     },
+    levels(){
+      return Object.values(Object.values(levels)[0]);
+    }
   },
 };
 </script>
