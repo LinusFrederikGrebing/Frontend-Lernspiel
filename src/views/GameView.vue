@@ -86,7 +86,6 @@
 </template>
 
 <script>
-import SideBar from "../components/Navigation.vue";
 import CodeInput from "../components/CodeInput.vue";
 import GameGrid from "../components/GameGrid.vue";
 import TemplateGrid from "../components/TemplateGrid.vue";
@@ -94,22 +93,20 @@ import levels from "../../data/levels.json";
 export default {
   name: "GameView",
   components: {
-    SideBar,
     GameGrid,
     CodeInput,
     TemplateGrid,
   },
 
   data: () => ({
-    myFunction: null,
     error: null,
     dialog: false,
     dialogFalse: false,
     levels: [],
     currentLevel: null,
     currentLevelId: null,
-    levelSelect: false,
     hilfenTemp: false,
+    accessibleLevels: [],
   }),
 methods:{
   nextLevel(indexNextLevel){
@@ -119,9 +116,24 @@ methods:{
 },
   mounted() {
     this.levels = Object.values(Object.values(levels)[0]);
-    this.currentLevel =this.$route.params.level;
+    this.currentLevel = this.$route.params.level;
     this.currentLevelId = this.currentLevel.id;
   },
+
+  watch:{
+    currentLevel(newVal, oldVal){
+      if(oldVal !== null && oldVal!==undefined){
+        if(JSON.parse(localStorage.getItem('accessibleLevels')) !== null){
+          this.accessibleLevels = JSON.parse(localStorage.getItem('accessibleLevels'));
+        }
+        if(!this.accessibleLevels.includes(oldVal) ){
+          this.accessibleLevels.push(oldVal)
+          localStorage.setItem('accessibleLevels', JSON.stringify(this.accessibleLevels))
+          console.log(this.accessibleLevels)
+        }
+      }
+    }
+  }
 };
 </script>
 

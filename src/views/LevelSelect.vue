@@ -2,9 +2,9 @@
   <div>
     <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
       <v-card v-for="(level, index) in levels" class="styledDiv carousel-cell pa-5 mx-8" ref="levelDiv" elevation="12"
-        height="25em" width="30em " :class="['mx-auto my-8', { ' locked': !accessibleLevels.includes(level) }]" :key="index">
+        height="25em" width="30em " :class="['mx-auto my-8', { ' locked': levelIsAccessible(level) === false}]" :key="index">
         <v-img class="white--text align-end" height="18em" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
-          <v-icon v-if="!accessibleLevels.includes(level)" class="zentriert">mdi-lock</v-icon>
+          <v-icon v-if="levelIsAccessible(level) === false" class="zentriert">mdi-lock</v-icon>
           <v-card-title>Level {{ level.id }} </v-card-title>
         </v-img>
 
@@ -40,7 +40,6 @@ export default {
     Flickity,
   },
   data: () => ({
-    accessibleLevels: [],
     selectedIndex: 0,
     flickityOptions: {
       wrapAround: true,
@@ -74,14 +73,22 @@ export default {
         },
       });
     },
+    levelIsAccessible(level){
+      let index = this.accessibleLevels.findIndex(accessibleLevel=>{ return level.id === accessibleLevel.id})
+      if(index === -1){
+        return false
+      }else{
+        return level.completed = true
+      }
+    }
   },
   mounted() {
-    if(this.$route.params.accessibleLevel){
-      this.accessibleLevels = this.$route.params.accessibleLevels
-    }else {
-      this.accessibleLevels.push(this.levels[0])
-    }
-  
+    this.levels.forEach((level)=>{
+        if(this.accessibleLevels.includes(level)){
+          console.log("ahh")
+          level.completed=true;
+        }
+      })
   },
 
   computed: {
@@ -98,6 +105,13 @@ export default {
     },
     levels(){
       return Object.values(Object.values(levels)[0]);
+    },
+    accessibleLevels(){
+      if(localStorage.getItem('accessibleLevels') !== null){
+        return JSON.parse(localStorage.getItem('accessibleLevels'));
+      }else {
+       return [this.levels[0]]
+      }
     }
   },
 };

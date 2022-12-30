@@ -2,8 +2,8 @@
     "levels": [
       {
         "id":"1",
-        "patternCode":"this.paint(1,1);",
         "difficulty": 1.5,
+        "patternCode":"this.paint(1,1);",
         "completed": "false"
       },
       {
