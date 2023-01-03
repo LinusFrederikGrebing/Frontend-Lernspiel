@@ -108,32 +108,57 @@ export default {
     hilfenTemp: false,
     accessibleLevels: [],
   }),
-methods:{
-  nextLevel(indexNextLevel){
+  methods: {
+    nextLevel(indexNextLevel) {
+      this.levels[indexNextLevel - 1].completed = true;
       this.currentLevel = this.levels[indexNextLevel];
       this.currentLevelId = this.currentLevel.id;
+      localStorage.setItem("levels", JSON.stringify(this.levels));
     },
-},
+  },
   mounted() {
-    this.levels = Object.values(Object.values(levels)[0]);
+    if (localStorage.getItem("levels") !== null) {
+      this.levels = JSON.parse(localStorage.getItem("levels"));
+    } else {
+      this.levels = Object.values(Object.values(levels)[0]);
+    }
+
     this.currentLevel = this.$route.params.level;
     this.currentLevelId = this.currentLevel.id;
   },
 
-  watch:{
-    currentLevel(newVal, oldVal){
-      if(oldVal !== null && oldVal!==undefined){
-        if(JSON.parse(localStorage.getItem('accessibleLevels')) !== null){
-          this.accessibleLevels = JSON.parse(localStorage.getItem('accessibleLevels'));
+  watch: {
+    currentLevel(newVal, oldVal) {
+      let newValIndex = this.accessibleLevels.findIndex((level) => {
+        return newVal.id === level.id;
+      });
+      let oldValIndex = this.accessibleLevels.findIndex((level) => {
+        return oldVal.id === level.id;
+      });
+      if (oldVal !== null && oldVal !== undefined) {
+        if (JSON.parse(localStorage.getItem("accessibleLevels")) !== null) {
+          this.accessibleLevels = JSON.parse(
+            localStorage.getItem("accessibleLevels")
+          );
         }
-        if(!this.accessibleLevels.includes(oldVal) ){
-          this.accessibleLevels.push(oldVal)
-          localStorage.setItem('accessibleLevels', JSON.stringify(this.accessibleLevels))
-          console.log(this.accessibleLevels)
+        if (oldValIndex === -1) {
+          this.accessibleLevels.push(oldVal);
+        } else if (oldValIndex !== -1) {
+          this.accessibleLevels[oldValIndex].completed = true;
+        }
+        if (newValIndex === -1) {
+          this.accessibleLevels.push(newVal);
         }
       }
-    }
-  }
+    },
+    accessibleLevels() {
+      console.log(this.accessibleLevels);
+      localStorage.setItem(
+        "accessibleLevels",
+        JSON.stringify(this.accessibleLevels)
+      );
+    },
+  },
 };
 </script>
 

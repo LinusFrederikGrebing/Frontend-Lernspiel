@@ -1,32 +1,75 @@
 <template>
   <div>
+    <v-dialog v-model="dialog" width="500">
+      <v-card class="pa-1">
+        <v-alert prominent type="error" >
+          I'm a shaped alert with a dense prominent option that Praesent blandit
+          laoreet nibh. Praesent nonummy mi in odio. Phasellus tempus. Mauris
+          turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Duis
+          leo.
+        </v-alert>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" text @click="dialog = false">
+            Verstanden
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
-      <v-card v-for="(level, index) in levels" class="styledDiv carousel-cell pa-5 mx-8" ref="levelDiv" elevation="12"
-        height="25em" width="30em " :class="['mx-auto my-8', { ' locked': levelIsAccessible(level) === false}]" :key="index">
-        <v-img class="white--text align-end" height="18em" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
-          <v-icon v-if="levelIsAccessible(level) === false" class="zentriert">mdi-lock</v-icon>
+      <v-card
+        v-for="(level, index) in levels"
+        class="styledDiv carousel-cell pa-5 mx-8"
+        ref="levelDiv"
+        elevation="12"
+        height="25em"
+        width="30em "
+        :class="[
+          'mx-auto my-8',
+          { ' locked': levelIsAccessible(level) === false },
+        ]"
+        :key="index"
+      >
+        <v-img
+          class="white--text align-end"
+          height="18em"
+          src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+        >
+          <v-icon v-if="levelIsAccessible(level) === false" class="zentriert"
+            >mdi-lock</v-icon
+          >
           <v-card-title>Level {{ level.id }} </v-card-title>
         </v-img>
 
         <v-card-subtitle class="pb-0 font-weight-black">
           Schwierigkeit:
-          <v-rating color="yellow darken-3" background-color="grey darken-1" empty-icon="$ratingFull" half-increments
-            hover length="8" readonly size="35" :value=level.difficulty></v-rating>
+          <v-rating
+            color="yellow darken-3"
+            background-color="grey darken-1"
+            empty-icon="$ratingFull"
+            half-increments
+            hover
+            length="8"
+            readonly
+            size="35"
+            :value="level.difficulty"
+          ></v-rating>
         </v-card-subtitle>
         <v-card-actions class="my-4">
-          <v-btn color="primary" depressed elevation="2" @click="setLevel(level)">
+          <v-btn
+            color="primary"
+            depressed
+            elevation="2"
+            @click="setLevel(level)"
+          >
             Start
           </v-btn>
-          <v-icon
-          v-if="level.completed === true"
-          color="green"
-          right
-        >
-          mdi-checkbox-marked-circle
-        </v-icon>
+          <v-icon v-if="level.completed === true" color="green" right>
+            mdi-checkbox-marked-circle
+          </v-icon>
         </v-card-actions>
       </v-card>
-
     </flickity>
   </div>
 </template>
@@ -41,6 +84,7 @@ export default {
   },
   data: () => ({
     selectedIndex: 0,
+    dialog: false,
     flickityOptions: {
       wrapAround: true,
       freeScroll: true,
@@ -64,31 +108,31 @@ export default {
       });
     },
     setLevel(level) {
-      this.$router.push({
-        name: "GameView",
-        params: {
-          level: {
-            ...level
+      if (this.levelIsAccessible(level)) {
+        this.$router.push({
+          name: "GameView",
+          params: {
+            level: {
+              ...level,
+            },
           },
-        },
-      });
-    },
-    levelIsAccessible(level){
-      let index = this.accessibleLevels.findIndex(accessibleLevel=>{ return level.id === accessibleLevel.id})
-      if(index === -1){
-        return false
-      }else{
-        return level.completed = true
+        });
+      } else {
+        this.dialog = true;
       }
-    }
+    },
+    levelIsAccessible(level) {
+      let index = this.accessibleLevels.findIndex((accessibleLevel) => {
+        return level.id === accessibleLevel.id;
+      });
+      if (index === -1) {
+        return false;
+      } else {
+        return true;
+      }
+    },
   },
   mounted() {
-    this.levels.forEach((level)=>{
-        if(this.accessibleLevels.includes(level)){
-          console.log("ahh")
-          level.completed=true;
-        }
-      })
   },
 
   computed: {
@@ -103,16 +147,20 @@ export default {
 
       return 1;
     },
-    levels(){
-      return Object.values(Object.values(levels)[0]);
-    },
-    accessibleLevels(){
-      if(localStorage.getItem('accessibleLevels') !== null){
-        return JSON.parse(localStorage.getItem('accessibleLevels'));
-      }else {
-       return [this.levels[0]]
+    levels() {
+      if (localStorage.getItem("levels") !== null) {
+        return JSON.parse(localStorage.getItem("levels"));
+      } else {
+        return Object.values(Object.values(levels)[0]);
       }
-    }
+    },
+    accessibleLevels() {
+      if (localStorage.getItem("accessibleLevels") !== null) {
+        return JSON.parse(localStorage.getItem("accessibleLevels"));
+      } else {
+        return [this.levels[0]];
+      }
+    },
   },
 };
 </script>

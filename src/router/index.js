@@ -9,7 +9,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path:'/',
-    name:'LevelSelect',
+    name:'Homeview',
     component: LevelSelect
   },
   {
