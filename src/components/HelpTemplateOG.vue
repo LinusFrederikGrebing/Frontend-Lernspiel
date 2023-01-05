@@ -208,9 +208,9 @@ export default {
 .initial-visual-component {
   z-index: 2;
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 2em;
+  align-items: flex-start;
   position: absolute;
   width: 100%;
   height: 100%;
