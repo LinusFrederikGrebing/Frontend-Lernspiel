@@ -8,10 +8,10 @@
       </transition>
       <v-btn class="pa-2 ml-auto" @click="drawer = !drawer" icon>
         <transition appear @enter="enterMenu">
-          <v-icon class="thmcolorgreen" title="Menu">mdi-menu</v-icon>
+          <v-icon class="white--text text-body-2 text-md-h5" title="Menu">mdi-menu</v-icon>
         </transition>
         <transition appear @enter="enterMenu">
-          <div class="thmcolorgreen">Menu</div>
+          <div class="white--text text-body-2 text-md-h5">Menu</div>
         </transition>
       </v-btn>
     </v-system-bar>
@@ -71,7 +71,7 @@ export default {
   },
   data: () => {
     return {
-      drawer: true,
+      drawer: false,
       menuCompact: {
         hidden: true,
       },
