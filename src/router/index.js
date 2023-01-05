@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import GameView from '../views/GameView'
+import Onepager from '../views/Onepager'
 import LevelSelect from '../views/LevelSelect'
 import Help from '../views/HelpTemplate'
 
@@ -9,8 +10,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path:'/',
-    name:'Homeview',
-    component: LevelSelect
+    name:'Onepager',
+    component: Onepager
   },
   {
     path:'/LevelSelect',
