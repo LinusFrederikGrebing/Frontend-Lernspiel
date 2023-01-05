@@ -18,6 +18,9 @@ import gsap from "gsap";
 
 export default {
   name: "GameGrid",
+  props: {
+    color: String
+  },
   data: () => {
     return {
       timeLine: null,
@@ -29,16 +32,17 @@ export default {
     getid(obj) {
       let element = document.getElementById(obj.target.id); 
       let scale = element.getBoundingClientRect().width / element.offsetWidth;
-  
+      let returnColor = '#ffffff';
+      if (element.classList.contains("painted")) returnColor = this.color;  
         gsap.fromTo(
         element,
         {
           y: 0,
           x: 0,
-          backgroundColor: 'rgba(128, 186, 36, 1)'
+          backgroundColor: this.color
         },
         {
-          backgroundColor: '#ffffff',
+          backgroundColor: returnColor,
           duration: 0.5,
           scale: scale,
           y: 0,
@@ -128,9 +132,7 @@ export default {
   width: 4vw;
   height: 4vw;
 }
-.painted {
-  background-color: rgba(128, 186, 36, 1) !important;
-}
+
 .col {
   flex-basis: 0 !important;
   flex-grow: 0 !important;

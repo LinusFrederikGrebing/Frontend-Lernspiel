@@ -8,7 +8,7 @@
               <v-row no-gutters v-for="y in 10" :key="y">
                 <v-col no-gutters v-for="x in 10" :key="x">
                   <transition appear @before-enter="beforeEnter" @enter="enter">
-                    <v-card :id="'vx' + (x - 1) + 'vy' + (y - 1)">
+                    <v-card class="template-card" :id="'vx' + (x - 1) + 'vy' + (y - 1)">
                       {{ "" }}
                     </v-card>
                   </transition>
@@ -45,8 +45,8 @@ export default {
   name: "GameGrid",
   props: {
     currentLevel: Object,
+    color: String,
   },
-
   methods: {
     rotate() {
       gsap.fromTo(
@@ -64,6 +64,11 @@ export default {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         if (!el.id.includes("v")) {
           el.classList.remove("painted");
+        }
+      });
+      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
+        if (!el.classList.contains("painted")) {
+          el.style.backgroundColor = '#ffffff';
         }
       });
     },
@@ -96,6 +101,10 @@ export default {
   watch: {
     currentLevel(newVal, oldVal) {
       eval(newVal.patternCode)
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        el.style.backgroundColor = this.color;
+        console.log(el.id);
+        });
     },
   },
 };
@@ -105,9 +114,7 @@ export default {
   width: 1.5vw;
   height: 1.5vw;
 }
-.painted {
-  background-color: rgba(128, 186, 36, 1);
-}
+
 .col {
   flex-basis: 0 !important;
   flex-grow: 0 !important;

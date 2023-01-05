@@ -29,7 +29,6 @@
     <transition appear @before-enter="beforeEnter" @enter="enterInput">
     <v-textarea 
     :readonly=true
-    filled
     v-if="consoleActive" v-model="errorMessage"
       :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}]"></v-textarea>
     </transition>
@@ -59,13 +58,18 @@
           Color
         </v-btn>
       </transition>
+      <transition appear @before-enter="beforeEnter" @enter="enter">
       <v-color-picker
-        v-if="colorPicker"
-        v-model="color"
-        dot-size="6"
-        mode="rgba"
-        swatches-max-height="250"
-      ></v-color-picker>
+          v-if="colorPicker"
+          @click.native="changeColor(color)"
+          v-model="color"
+          dot-size="6"
+          mode="hexa"
+          hid-inputs
+          hide-mode-switch
+          swatches-max-height="250"
+          ></v-color-picker>          
+      </transition>
     </div>
   </div>
 </template>
@@ -81,10 +85,10 @@ export default {
   },
   data: () => {
     return {
-      color: '#FFFFFF',
+      color: '#cc00cc',
       levelElements: [],
       paintedElements: [],
-      colorPicker: false,
+      colorPicker: true,
       editorActive: true,
       errorMessage: 'Keine Fehlermeldung!',
       consoleActive: false,
@@ -94,6 +98,12 @@ export default {
   },
 
   methods: {
+    changeColor(clr) {
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        el.style.backgroundColor = clr;
+        }); 
+      this.$emit('change-color',clr);
+    },
     beforeEnter(el) {
       el.style.opacity = "0";
       el.style.transform = "translateX(-100px)";
@@ -118,7 +128,7 @@ export default {
       this.checkParamValue(first);
       this.checkParamValue(second);
       element.classList.add("painted");
-      element.style.backgroundColor = this.color;
+      element.style.backgroundColor = color;
     },
     checkResult() {
       let allElements = document.getElementsByClassName("painted");
@@ -182,7 +192,7 @@ export default {
         "let infinitySafetyCounter = 0;\n",evalCode].join('');
         let runCodeSafely = new Function(evalCode);
         runCodeSafely();
-        //this.checkResult();
+        this.changeColor(this.color);
       } catch (error) {
         this.changeErrorMsg(error);
         this.gotUnreadErrors = true;
@@ -324,12 +334,25 @@ export default {
     },
   },
 
-  watch: {},
+  watch: {
+    color(newVal, oldVal) {
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        el.style.backgroundColor = this.color;
+      });
+    },
+    paintedElements(newVal, oldVal) {
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        el.style.backgroundColor = this.color;
+      });
+    }
+  },
+
 };
 </script>
 
 
-<style scoped>
+<style>
+
 .consoleArea {
   background-color: white;
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="text-center">
-      <v-dialog v-model="dialog" width="500">
+      <v-dialog v-model="dialog" width="500" persistent>
         <v-card>
           <v-card-title class="text-h5 green"> Level completed </v-card-title>
           <v-card-text>
@@ -26,7 +26,7 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-dialog v-model="dialogFalse" width="500">
+      <v-dialog v-model="dialogFalse" width="500" persistent>
         <v-card>
           <v-card-title class="text-h5 red">
             Your answer is wrong.
@@ -68,16 +68,17 @@
     <v-container class="bg-color1">
       <v-row no-gutters>
         <v-col cols="12" sm="6" md="8">
-          <GameGrid />
+          <GameGrid :color="color"/>
         </v-col>
         <v-col cols="6" md="4">
-          <TemplateGrid :currentLevel="currentLevel" />
+          <TemplateGrid :currentLevel="currentLevel" :color="color" />
           <CodeInput
             @success="
               dialog = true;
               currentLevel.completed = true;
             "
             @failure="dialogFalse = true"
+            @change-color="changeColor"
           />
         </v-col>
       </v-row>
@@ -99,6 +100,7 @@ export default {
   },
 
   data: () => ({
+    color: null,
     error: null,
     dialog: false,
     dialogFalse: false,
@@ -109,11 +111,27 @@ export default {
     accessibleLevels: [],
   }),
   methods: {
+    changeColor(clr) {
+      this.color = clr;
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        el.style.backgroundColor = clr;
+        });
+    },
     nextLevel(indexNextLevel) {
       this.levels[indexNextLevel - 1].completed = true;
       this.currentLevel = this.levels[indexNextLevel];
       this.currentLevelId = this.currentLevel.id;
       localStorage.setItem("levels", JSON.stringify(this.levels));
+      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
+        if (!el.classList.contains("painted")) {
+          el.style.backgroundColor = '#ffffff';
+        }
+      });
+      Array.from(document.querySelectorAll(".template-card")).forEach((el) => {
+        if (!el.classList.contains("painted")) {
+          el.style.backgroundColor = '#ffffff';
+        }
+      });
     },
   },
   mounted() {
