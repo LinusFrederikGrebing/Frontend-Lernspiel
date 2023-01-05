@@ -11,7 +11,7 @@
           <v-icon class="white--text text-body-2 text-md-h5" title="Menu">mdi-menu</v-icon>
         </transition>
         <transition appear @enter="enterMenu">
-          <div class="white--text text-body-2 text-md-h5">Menu</div>
+          <div class="white--text text-body-2 text-md-body-1">Menu</div>
         </transition>
       </v-btn>
     </v-system-bar>
@@ -79,7 +79,7 @@ export default {
         { title: "Level-Auswahl", icon: "home", path: "/LevelSelect"},
         { title: "Tutorial", icon: "information-variant", path: "#"},
         { title: "Hilfen", icon: "email", path: "/Help"},
-        { title: "Back to Homepage", icon: "logout-variant", path: "#"},
+        { title: "Back to Homepage", icon: "logout-variant", path: "/"},
       ],
     };
   },

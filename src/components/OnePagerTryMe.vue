@@ -5,7 +5,7 @@
            rounded
            block
            x-large
-           color="thmBlue"
+           color="#4a5c66"
     >Try Me</v-btn>
   </div>
 </template>
