@@ -1,17 +1,13 @@
 <template>
   <v-container>
-    <div class="background-image"></div>
+    <div class="b/ackground-image"></div>
     <v-row>
       <v-col class="text-center my-8">
-        <v-card
-            elevation="24"
-            outlined
-            shaped
-          >
-        <h2 style="background: white; border-radius: 15px;" class="text-h2 text-md-h1 text-center my-4">
+       
+        <h2 class="text-h2 text-md-h1 text-center my-4">
           Warum Draw IT?
         </h2>
-        </v-card>
+        
       </v-col>
     </v-row>
     <v-row>
@@ -23,10 +19,12 @@
           class="text-center"
       >
         <v-card
+            :id="'goal'+index"
             style="height: 25em"
             elevation="24"
             outlined
             shaped
+            @mouseenter="getbig($event)" @mouseleave="getsmall($event)"
         >
           <v-avatar size="100" class="ma-8">
             <v-img :src="item.link"></v-img>
@@ -37,14 +35,65 @@
         <v-row no-gutters></v-row>
       </v-col>
     </v-row>
+    <OnePagerTryMe />
     <v-row no-gutters>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import OnePagerTryMe from "@/components/OnePagerTryMe";
+import gsap from "gsap";
 export default {
   name: "OnePagerLearningGoals",
+  components: {
+    OnePagerTryMe
+  },
+  methods: {
+
+    getbig(obj) {
+      let element = document.getElementById(obj.target.id); 
+      console.log(element);
+      gsap.fromTo(
+        element,
+        {
+          scale: 1,
+          y: 0,
+          x: 0,
+          zIndex: 0,
+        },
+        {
+          duration: 0.2,
+          scale: 1.05,
+          y: 0,
+          x: 0,
+          zIndex: 2,
+          opacity: 1,
+        }
+      );
+    },
+    getsmall(obj) {
+      let element = document.getElementById(obj.target.id); 
+      console.log(element);
+      gsap.fromTo(
+        element,
+        {
+          scale: 1.05,
+          y: 0,
+          zIndex: 2,
+          x: 0,
+        },
+        {
+          duration: 0.2,
+          scale: 1,
+          zIndex: 0,
+          y: 0,
+          x: 0,
+          opacity: 1,
+        }
+      );
+    },
+  },
   data() {
     return {
       items: [
@@ -76,15 +125,18 @@ export default {
 
 
 .background-image {
+  top: -0.5em;
   position: absolute;
-  left: -100px;
-  background-repeat: no-repeat;
+  left: -8em;
   z-index: 0;
   display: block;
+ /* background-image: url("../assets/bg.jpg");*/
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   /*background-image: url("../assets/");*/
-  width: 1900px;
-  height: 1100px;
-  filter: blur(5px);
+  width: 130em;
+  height: 50.5em;
+
 }
 
 h2, p, *{

@@ -1,19 +1,19 @@
 <template>
   <div>
-    <OnePagerLearningGoals />
+    <v-parallax  height="25" dark src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"> </v-parallax>
+      <OnePagerLearningGoals />
       <!-- <OnePagerIntroduction /> -->
-     <OnePagerTryMe />
-     <OnePagerTutorialSection />
+      <v-parallax height="200" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"> </v-parallax>
      <hr class="divider">
      <h1  class="header">Level-Auswahl:</h1>
      <hr class="divider">
      <LevelSelect />
-     <OnePagerTutorialSection />
+     <v-parallax height="200" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"> </v-parallax>
      <hr class="divider">
      <h1 class="header">Hilfen:</h1>
      <hr class="divider">
      <HelpTemplateNew />
-
+  
   </div>
 </template>
 
@@ -47,4 +47,6 @@ export default {
   border-radius: 100%;
   background-color: rgba(128, 186, 36, 1);
 }
+
+
 </style>

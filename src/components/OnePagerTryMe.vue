@@ -1,5 +1,5 @@
 <template>
-  <div class="my-16">
+  <div class="my-16 ">
     <v-btn class="white--text"
            elevation="24"
            rounded
@@ -22,4 +22,5 @@ div {
   width: 80%;
   margin: auto;
 }
+
 </style>
