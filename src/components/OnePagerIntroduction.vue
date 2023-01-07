@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg">
     <p class="text-center text-h5 text-md-h4 text-center">
       Draw IT unterstützt dich spielerisch bei deinen ersten Schritten in der Softwareentwicklung. Du kriegst eine
       Vielzahl von Drawings die du mit unserem Editor nachzeichnen sollst.

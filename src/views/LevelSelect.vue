@@ -117,9 +117,26 @@ export default {
             },
           },
         });
+         localStorage.setItem(
+        "currentLevel",
+        JSON.stringify(level)
+      );
       } else {
-        this.dialog = true;
+        this.showAlertFailure(level.id);
       }
+    },
+    showAlertFailure(level) {
+      // Use sweetalert2
+      this.$swal(
+        {
+        title: 'Noch nicht freigeschaltet!',
+        text: "Schließe das vorherige Level ab, um das Level " + level + " spielen zu können!",
+        icon: 'error',
+        confirmButtonColor: '#6D9E1F',
+        confirmButtonText: 'Okay!',
+
+        allowOutsideClick: false
+      });
     },
     levelIsAccessible(level) {
       let index = this.accessibleLevels.findIndex((accessibleLevel) => {

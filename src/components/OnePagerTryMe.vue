@@ -6,13 +6,19 @@
            block
            x-large
            color="#4a5c66"
-    >Try Me</v-btn>
+    @click="lvlSelect">Try Me</v-btn>
   </div>
 </template>
 
 <script>
+
 export default {
-  name: "OnePagerTryMe"
+  name: "OnePagerTryMe",
+  methods: {
+    lvlSelect(){
+      this.$router.push({ path: '/LevelSelect' });
+    }
+  }
 }
 
 </script>

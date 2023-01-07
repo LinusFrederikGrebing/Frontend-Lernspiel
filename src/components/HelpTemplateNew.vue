@@ -150,8 +150,6 @@ export default {
   },
   mounted() {
 
-
-    console.log(this.levels);
     var $conteudoGeral = document.querySelector(".general-content");
     var $conteudoEmArray = [].slice.call(
         document.querySelectorAll(".componente")

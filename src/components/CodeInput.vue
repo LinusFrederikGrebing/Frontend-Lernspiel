@@ -147,8 +147,62 @@ export default {
         Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.classList.remove("painted");
         });
-        this.$emit("success");
-      } else this.$emit("failure");
+        this.showAlertSuccess();
+      } else this.showAlertFailure();
+    },
+    showAlertSuccess() {
+      // Use sweetalert2
+      this.$swal( 
+        {
+        title: 'Hervorragend!',
+        text: "Du hast das Level gemeistert! Nun kannst du dich an an dem nächsten Level versuchen!",
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonColor: '#6D9E1F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Nächstes Level!',
+        cancelButtonText: 'Zur Levelauswahl!',
+        allowOutsideClick: () => {
+        const popup = this.$swal.getPopup()
+        popup.classList.remove('swal2-show')
+        setTimeout(() => {
+          popup.classList.add('animate__animated', 'animate__headShake')
+        })
+        setTimeout(() => {
+          popup.classList.remove('animate__animated', 'animate__headShake')
+        }, 500)
+        return false
+  }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit("success");
+        } else {
+          this.$router.push({ path: '/LevelSelect' });
+        }
+      }
+      );
+    },
+    showAlertFailure() {
+      // Use sweetalert2
+      this.$swal( 
+        {
+        title: 'Beim nächsten Mal...!',
+        text: "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt!",
+        icon: 'error',
+        showCancelButton: true,
+        confirmButtonColor: '#6D9E1F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Level wiederholen!',
+        cancelButtonText: 'Zur Levelauswahl!',
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit("failure");
+        } else {
+          this.$router.push({ path: '/LevelSelect' });
+        }
+      }
+      );
     },
     areEqual(array1, array2) {
       if (array1.length === array2.length) {

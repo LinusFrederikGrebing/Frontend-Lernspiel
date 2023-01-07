@@ -53,7 +53,6 @@ export default {
 
     getbig(obj) {
       let element = document.getElementById(obj.target.id); 
-      console.log(element);
       gsap.fromTo(
         element,
         {
@@ -74,7 +73,6 @@ export default {
     },
     getsmall(obj) {
       let element = document.getElementById(obj.target.id); 
-      console.log(element);
       gsap.fromTo(
         element,
         {
@@ -98,7 +96,7 @@ export default {
     return {
       items: [
         {
-          title: 'Spielerisches Lernen',
+          title: 'Spielerisches Vertiefen',
           text:
               'Draw IT ermöglicht dir einen spaßigen Einstieg in die Programmierwelt. Dadurch wirst du zwar gefordert, allerdings nicht überfordet. Bunte Farben und Rätsel bringen dich immer wieder ins Grübeln!',
           link: require("../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),

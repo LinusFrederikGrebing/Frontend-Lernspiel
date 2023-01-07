@@ -44,9 +44,10 @@ import gsap from "gsap";
 export default {
   name: "GameGrid",
   props: {
-    currentLevel: Object,
     color: String,
-  },
+  }, 
+  data: () => ({
+  }),
   methods: {
     rotate() {
       gsap.fromTo(
@@ -56,6 +57,7 @@ export default {
       );
     },
     paint(first, second) {
+      console.log("paint");
       let element = document.getElementById("vx" + first + "vy" + second);
       element.classList.add("painted");
     },
@@ -94,19 +96,29 @@ export default {
     },
   },
   mounted(){
+    console.log("test im mounted"+ this.currentLevel);
+    console.log(this.currentLevel);
     if(this.currentLevel !== null){
       eval(this.currentLevel.patternCode)
     }
   },
+  computed: {
+    currentLevel() {
+      if (localStorage.getItem("currentLevel") !== null) {
+        return JSON.parse(localStorage.getItem("currentLevel"));
+      } 
+    },
+  },
   watch: {
     currentLevel(newVal, oldVal) {
+      console.log("change test");
       eval(newVal.patternCode)
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = this.color;
         console.log(el.id);
         });
     },
-  },
+  }
 };
 </script>
 <style scoped>

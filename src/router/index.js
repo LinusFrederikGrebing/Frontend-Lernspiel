@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import GameView from '../views/GameView'
 import Onepager from '../views/Onepager'
 import LevelSelect from '../views/LevelSelect'
-import Help from '../views/HelpTemplate'
+import HelpOG from '../components/HelpTemplateOG'
+import HelpNew from '../components/HelpTemplateNew'
 
 Vue.use(VueRouter)
 
@@ -25,9 +26,14 @@ const routes = [
   },
   {
     path: '/Help',
-    name: 'Help',
-    component: Help
+    name: 'HelpNew',
+    component: HelpNew
   },
+  {
+    path: '/HelpNav',
+    name: 'HelpOG',
+    component: HelpOG
+  }
 ]
 
 const router = new VueRouter({
