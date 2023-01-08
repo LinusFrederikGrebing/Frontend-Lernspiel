@@ -1,6 +1,6 @@
 <template>
   <div id="container" class="d-f">
-    <transition appear @before-enter="beforeEnter" @enter="enter">
+    <transition appear @enter="enter">
       <v-btn
       color="deep-purple lighten-5"
         depressed
@@ -12,11 +12,11 @@
         Editor
       </v-btn>
     </transition>
-    <transition appear @before-enter="beforeEnter" @enter="enter">
+    <transition appear @enter="enter">
       <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="deep-purple lighten-5" depressed elevation="1"
         @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
     </transition>
-    <transition appear @before-enter="beforeEnter" @enter="enterInput">
+    <transition appear @enter="enterInput">
       <CodeEditor
         v-if="editorActive"
         height="30vh"
@@ -26,19 +26,19 @@
       >
       </CodeEditor>
     </transition>
-    <transition appear @before-enter="beforeEnter" @enter="enterInput">
+    <transition appear @enter="enterInput">
     <v-textarea 
     :readonly=true
     v-if="consoleActive" v-model="errorMessage"
       :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}]"></v-textarea>
     </transition>
     <div>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear @enter="enter">
         <v-btn color="warning" depressed elevation="2" @click="checkResult">
           Validate
         </v-btn>
       </transition>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear  @enter="enter">
         <v-btn
           color="success"
           depressed
@@ -48,7 +48,7 @@
           Finished
         </v-btn>
       </transition>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear @enter="enter">
         <v-btn
           :style="{backgroundColor:color}"
           depressed
@@ -58,10 +58,10 @@
           Color
         </v-btn>
       </transition>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear @enter="enter">
       <v-color-picker
           v-if="colorPicker"
-          @click.native="changeColor(color)"
+          @click="changeColor(color)"
           v-model="color"
           dot-size="6"
           mode="hexa"
@@ -85,10 +85,10 @@ export default {
   },
   data: () => {
     return {
-      color: '#cc00cc',
+      color: '#80ba24',
       levelElements: [],
       paintedElements: [],
-      colorPicker: true,
+      colorPicker: false,
       editorActive: true,
       errorMessage: 'Keine Fehlermeldung!',
       consoleActive: false,
@@ -101,13 +101,8 @@ export default {
     changeColor(clr) {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = clr;
-        }); 
+      }); 
       this.$emit('change-color',clr);
-    },
-    beforeEnter(el) {
-      el.style.opacity = "0";
-      el.style.transform = "translateX(-100px)";
-      el.style.transform = "translateY(-100px)";
     },
     enter(el) {
       gsap.fromTo(
@@ -119,7 +114,7 @@ export default {
     enterInput(el) {
       gsap.fromTo(
         el,
-        { y: 0, x: +200 },
+        { y: 0, x: +200, opacity: 0 },
         { delay: 0, duration: 1, y: 0, x: 0, opacity: 1 }
       );
     },
@@ -162,18 +157,7 @@ export default {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Nächstes Level!',
         cancelButtonText: 'Zur Levelauswahl!',
-        allowOutsideClick: () => {
-        const popup = this.$swal.getPopup()
-        popup.classList.remove('swal2-show')
-        setTimeout(() => {
-          popup.classList.add('animate__animated', 'animate__headShake')
-        })
-        setTimeout(() => {
-          popup.classList.remove('animate__animated', 'animate__headShake')
-        }, 500)
-        return false
-  }
-      }).then((result) => {
+        allowOutsideClick: false, }).then((result) => {
         if (result.isConfirmed) {
           this.$emit("success");
         } else {
@@ -184,8 +168,7 @@ export default {
     },
     showAlertFailure() {
       // Use sweetalert2
-      this.$swal( 
-        {
+      this.$swal({
         title: 'Beim nächsten Mal...!',
         text: "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt!",
         icon: 'error',
@@ -390,6 +373,7 @@ export default {
 
   watch: {
     color(newVal, oldVal) {
+      console.log(this.color)
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = this.color;
       });
@@ -400,6 +384,10 @@ export default {
       });
     }
   },
+  mounted(){
+    console.log(this.color)
+    this.color = '#80ba24'
+  }
 
 };
 </script>

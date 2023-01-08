@@ -5,7 +5,7 @@
         "difficulty": 1.5,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
-        "description": "<h1>Hallo und Herzlich Wilkommen zu Draw IT!</h1> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit</p> <p class=\"line-1 anim-typewriter3\"> bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen.</p> <p class=\"line-1 anim-typewriter4\"> Das Feld einzeichen kannst Du mit der Methode: <b>paint(x, y)</b>.</p> <p class=\"line-1 anim-typewriter5\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>"
+        "description": "<h3>Hallo und Herzlich Wilkommen zu Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit</p> <p class=\"line-1 anim-typewriter3\"> bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen.</p> <p class=\"line-1 anim-typewriter4\"> Das Feld einzeichen kannst Du mit der Methode: <b>paint(x, y)</b>.</p> <p class=\"line-1 anim-typewriter5\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>"
       },
       {
         "id":"2",

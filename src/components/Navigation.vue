@@ -1,9 +1,8 @@
 <template>
   <div>
     <v-system-bar class="d-flex mb-6 header" 
-    
     short dense color="rgb(74, 92, 102)" app>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear @enter="enterHeader">
         <h2 class="mx-16" id="background">Draw IT!</h2>
       </transition>
       <v-btn class="pa-2 ml-auto" @click="drawer = !drawer" icon>
@@ -27,8 +26,6 @@
         <div class="sidebar-body">
           <div class="sidebar-links">
             <small class="my-8">Menu</small>
-            <hr class="divider" />
-            <small class="my-8">{{ "Level " + currentLevelId }}</small>
             <hr class="divider" />
             <div class="links">
               <a
@@ -84,32 +81,19 @@ export default {
     };
   },
   methods: {
-    beforeEnter(el) {
-      el.style.opacity = "0";
-      el.style.transform = "translateX(-100px)";
-      el.style.transform = "translateY(-100px)";
-    },
-    enterMenu(el) {
+    enterMenu(element) {
       gsap.fromTo(
-        el,
+        element,
         { y: 0, x: +200 },
         { delay:2, duration: 2, y: 0, x: -50, opacity: 1, ease: "back.out(3)" }
       );
     },
-    enter(el) {
+    enterHeader(element) {
       gsap.fromTo(
-        el,
-        { y: -35, x: -300 },
-        { delay: 1, duration: 2, y: -30, x: -25, opacity: 1, ease: "back.out(2)" }
+        element,
+        { y: 0, x: -300 },
+        { delay: 1, duration: 2, y: -0, x: 50, opacity: 1, ease: "back.out(2)" }
       );
-    },
-    setLink(link) {
-      if (link.title === "Level-Auswahl") {
-        this.$emit("lvlSelection");
-      }
-      if (link.title === "Hilfen") {
-        this.$emit("hilfen");
-      }
     },
     // Momentan nicht in Benutzung, war evtl. als Übergang zur Levelübersicht gedacht
     levelAnimation(link) {
@@ -135,19 +119,10 @@ export default {
       }
     },
   },
-
-  watch: {
-    currentLevel() {
-      console.log(this.currentLevelId);
-    },
-  },
 };
 </script>
 
 <style scoped>
-.thmcolorgreen {
-  color: rgba(128, 186, 36, 1) !important;
-}
 
 .header {
   height: 7vh !important;
@@ -280,10 +255,10 @@ export default {
   background-clip: text;
   font-weight: 700;
   font-size: 3em;
-  animation: sTransition 10s linear infinite;
+  animation: bgTransition 10s linear infinite;
 }
 
-@keyframes sTransition {
+@keyframes bgTransition {
   0% {
     background-position: 0%;
   }

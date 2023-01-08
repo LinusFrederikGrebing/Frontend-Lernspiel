@@ -19,9 +19,9 @@
   </div>
 </template>
 <script>
-import CodeInput from "../components/CodeInput.vue";
-import GameGrid from "../components/GameGrid.vue";
-import TemplateGrid from "../components/TemplateGrid.vue";
+import CodeInput from "../components/GameviewComponents/CodeInput.vue";
+import GameGrid from "../components/GameviewComponents/GameGrid.vue";
+import TemplateGrid from "../components/GameviewComponents/TemplateGrid.vue";
 import levels from "../../data/levels.json";
 
 export default {
@@ -45,12 +45,14 @@ export default {
       this.color = clr;
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = clr;
-        });
+      });
     },
+
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
       element.classList.add("painted");
     },
+
     nextLevel(indexNextLevel) {
       this.levels[indexNextLevel - 1].completed = true;
       this.currentLevel = this.levels[indexNextLevel];
@@ -60,8 +62,11 @@ export default {
         JSON.stringify(this.currentLevel)
       );
       eval(this.currentLevel.patternCode);
-      console.log(this.currentLevel.patternCode);
-      localStorage.setItem("levels", JSON.stringify(this.levels));
+      console.log(this.levels);
+      localStorage.setItem(
+        "levels", 
+        JSON.stringify(this.levels)
+      );
       Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
         if (!el.classList.contains("painted")) {
           el.style.backgroundColor = '#ffffff';
@@ -113,19 +118,21 @@ export default {
   
  
   watch: {
+    
     currentLevel(newVal, oldVal) {
-      let newValIndex = this.accessibleLevels.findIndex((level) => {
-        return newVal.id === level.id;
-      });
-      let oldValIndex = this.accessibleLevels.findIndex((level) => {
-        return oldVal.id === level.id;
-      });
+      console.log("im WATCH");
       if (oldVal !== null && oldVal !== undefined) {
         if (JSON.parse(localStorage.getItem("accessibleLevels")) !== null) {
           this.accessibleLevels = JSON.parse(
             localStorage.getItem("accessibleLevels")
           );
         }
+        let newValIndex = this.accessibleLevels.findIndex((level) => {
+           return newVal.id === level.id;
+        });
+        let oldValIndex = this.accessibleLevels.findIndex((level) => {
+           return oldVal.id === level.id;
+        });
         if (oldValIndex === -1) {
           this.accessibleLevels.push(oldVal);
         } else if (oldValIndex !== -1) {
@@ -137,7 +144,6 @@ export default {
       }
     },
     accessibleLevels() {
-      console.log(this.accessibleLevels);
       localStorage.setItem(
         "accessibleLevels",
         JSON.stringify(this.accessibleLevels)

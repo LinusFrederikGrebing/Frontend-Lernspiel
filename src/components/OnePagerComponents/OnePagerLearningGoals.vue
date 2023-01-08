@@ -24,7 +24,7 @@
             elevation="24"
             outlined
             shaped
-            @mouseenter="getbig($event)" @mouseleave="getsmall($event)"
+            @mouseenter="hoverEnter($event)" @mouseleave="hoverLeave($event)"
         >
           <v-avatar size="100" class="ma-8">
             <v-img :src="item.link"></v-img>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import OnePagerTryMe from "@/components/OnePagerTryMe";
+import OnePagerTryMe from "./OnePagerTryMe";
 import gsap from "gsap";
 export default {
   name: "OnePagerLearningGoals",
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
 
-    getbig(obj) {
+    hoverEnter(obj) {
       let element = document.getElementById(obj.target.id); 
       gsap.fromTo(
         element,
@@ -59,32 +59,28 @@ export default {
           scale: 1,
           y: 0,
           x: 0,
-          zIndex: 0,
         },
         {
           duration: 0.2,
           scale: 1.05,
           y: 0,
           x: 0,
-          zIndex: 2,
           opacity: 1,
         }
       );
     },
-    getsmall(obj) {
+    hoverLeave(obj) {
       let element = document.getElementById(obj.target.id); 
       gsap.fromTo(
         element,
         {
           scale: 1.05,
           y: 0,
-          zIndex: 2,
           x: 0,
         },
         {
           duration: 0.2,
           scale: 1,
-          zIndex: 0,
           y: 0,
           x: 0,
           opacity: 1,
@@ -97,21 +93,18 @@ export default {
       items: [
         {
           title: 'Spielerisches Vertiefen',
-          text:
-              'Draw IT ermöglicht dir einen spaßigen Einstieg in die Programmierwelt. Dadurch wirst du zwar gefordert, allerdings nicht überfordet. Bunte Farben und Rätsel bringen dich immer wieder ins Grübeln!',
-          link: require("../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
+          text: 'Draw IT ermöglicht dir einen spaßigen Einstieg in die Programmierwelt. Dadurch wirst du zwar gefordert, allerdings nicht überfordet. Bunte Farben und Rätsel bringen dich immer wieder ins Grübeln!',
+          link: require("../../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
         },
         {
           title: 'Übersichtlich',
-          text:
-              'Programmierung kann (nicht nur) für Neulinge ziemlich monoton und kompliziert aussehen. Um das einzudämmen zeigen wir dir deine Codeeingaben auf der Stelle und geben dir ggf. Tipps und Hilfestellungen.',
-          link: require("../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
+          text: 'Programmierung kann (nicht nur) für Neulinge ziemlich monoton und kompliziert aussehen. Um das einzudämmen zeigen wir dir deine Codeeingaben auf der Stelle und geben dir ggf. Tipps und Hilfestellungen.',
+          link: require("../../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
         },
         {
           title: 'Schnell nutzbar',
-          text:
-              'Draw IT ist auf einer vielzahl von Geräten nutzbar und es ist keine Installation nötig! Lediglich Internet solltest du haben.',
-          link: require("../assets/play-button-svgrepo-com (1).svg"),
+          text: 'Draw IT ist auf einer vielzahl von Geräten nutzbar und es ist keine Installation nötig! Lediglich Internet solltest du haben.',
+          link: require("../../assets/play-button-svgrepo-com (1).svg"),
         },
       ],
     }
@@ -120,23 +113,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-.background-image {
-  top: -0.5em;
-  position: absolute;
-  left: -8em;
-  z-index: 0;
-  display: block;
- /* background-image: url("../assets/bg.jpg");*/
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  /*background-image: url("../assets/");*/
-  width: 130em;
-  height: 50.5em;
-
-}
-
 h2, p, *{
   color: #49403c;
   position: relative;

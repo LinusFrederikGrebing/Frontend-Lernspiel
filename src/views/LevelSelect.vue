@@ -1,22 +1,5 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" width="500">
-      <v-card class="pa-1">
-        <v-alert prominent type="error" >
-          I'm a shaped alert with a dense prominent option that Praesent blandit
-          laoreet nibh. Praesent nonummy mi in odio. Phasellus tempus. Mauris
-          turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Duis
-          leo.
-        </v-alert>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="dialog = false">
-            Verstanden
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
     <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
       <v-card
         v-for="(level, index) in levels"
@@ -66,6 +49,7 @@
             Start
           </v-btn>
           <v-icon v-if="level.completed === true" color="green" right>
+          
             mdi-checkbox-marked-circle
           </v-icon>
         </v-card-actions>

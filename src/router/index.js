@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 import GameView from '../views/GameView'
 import Onepager from '../views/Onepager'
 import LevelSelect from '../views/LevelSelect'
-import HelpOG from '../components/HelpTemplateOG'
-import HelpNew from '../components/HelpTemplateNew'
+import HelpOG from '../components/HelpComponents/HelpTemplateOG'
+import HelpNew from '../components/HelpComponents/HelpTemplateNew'
 
 Vue.use(VueRouter)
 

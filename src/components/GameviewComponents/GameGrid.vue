@@ -3,8 +3,8 @@
     <v-container class="container">
       <v-row no-gutters v-for="y in 10" :key="y">
         <v-col no-gutters v-for="x in 10" :key="x">
-          <transition appear @before-enter="beforeEnter" @enter="enter">
-            <v-card class="grid-card" elevation="4" :id="'x' + (x - 1) + 'y' + (y - 1)" @mouseover="getid($event)"></v-card>
+          <transition appear @enter="enterGrid">
+            <v-card class="grid-card" elevation="4" :id="'x' + (x - 1) + 'y' + (y - 1)" @mouseover="hoverAnimation($event)"></v-card>
           </transition>
         </v-col>
       </v-row>
@@ -28,8 +28,7 @@ export default {
     };
   },
   methods: {
-
-    getid(obj) {
+    hoverAnimation(obj) {
       let element = document.getElementById(obj.target.id); 
       let scale = element.getBoundingClientRect().width / element.offsetWidth;
       let returnColor = '#ffffff';
@@ -51,16 +50,9 @@ export default {
         }
       );
     },
-
-    beforeEnter(el) {
-      el.style.opacity = "0";
-      el.style.transform = "translateX(-100px)";
-      el.style.transform = "translateY(-100px)";
-    },
-
-    enter(el) {
+    enterGrid(element) {
       gsap.fromTo(
-        el,
+        element,
         {
           scale: 0.1,
           y: -2000,
@@ -77,7 +69,7 @@ export default {
       );
     },
 
-    levelAnomation() {
+    levelAnimation() {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           let element = document.getElementById("x" + i + "y" + j);

@@ -18,11 +18,11 @@
 </template>
 
 <script>
-import OnePagerIntroduction from "@/components/OnePagerIntroduction";
-import OnePagerTutorialSection from "@/components/OnePagerTutorialSection";
-import OnePagerTryMe from "@/components/OnePagerTryMe";
-import OnePagerLearningGoals from "@/components/OnePagerLearningGoals";
-import HelpTemplateNew from "@/components/HelpTemplateNew";
+import OnePagerIntroduction from "@/components/OnePagerComponents/OnePagerIntroduction";
+import OnePagerTutorialSection from "@/components/OnePagerComponents/OnePagerTutorialSection";
+import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
+import OnePagerLearningGoals from "@/components/OnePagerComponents/OnePagerLearningGoals";
+import HelpTemplateNew from "@/components/HelpComponents/HelpTemplateNew";
 import LevelSelect from "@/views/LevelSelect";
 
 export default {
