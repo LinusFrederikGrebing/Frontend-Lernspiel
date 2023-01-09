@@ -1,9 +1,11 @@
 <template>
   <div>
+    <v-card elevation="24" height="55em" outlined shaped class="container">
+    <h1 class="h1 font-weight-black"> - Hilfen - </h1>
     <v-container>
       <div class="general-content js-general-content">
         <div class="general-component">
-          <div class="componente" v-for="item in informations" :key="item.id">
+          <div class="component" v-for="item in informations" :key="item.id">
             <div>
               <div class="component-internal">
                 <div class="initial-visual-component">
@@ -11,7 +13,7 @@
                     <h2 class="white--text text-body-2 text-sm-h5 my-4">{{ item.label }}</h2>
                   </div>
                 </div>
-                <div class="componente-content">
+                <div class="component-content">
                   <div class="component-close-button"></div>
                   <v-card class="mx-auto my-10 card" elevation="20">
                     <div class="container-image-chapter-open">
@@ -54,14 +56,15 @@
                 </div>
               </div>
             </div>
-            <div class="componente-index">
-              <div class="componente-index-back">{{ item.id }}</div>
-              <div class="componente-index-front"></div>
+            <div class="component-index">
+              <div class="component-index-back">{{ item.id }}</div>
+              <div class="component-index-front"></div>
             </div>
           </div>
         </div>
       </div>
     </v-container>
+    </v-card>
   </div>
 </template>
 
@@ -148,37 +151,35 @@ export default {
     },
   },
   mounted() {
+    var generalcontent = document.querySelector(".general-content");
+      var arraycontent = [].slice.call(
+          document.querySelectorAll(".component")
+      );
+      var closebuttons = [].slice.call(
+          document.querySelectorAll(".component-close-button")
+      );
 
-    var $conteudoGeral = document.querySelector(".general-content");
-    var $conteudoEmArray = [].slice.call(
-        document.querySelectorAll(".componente")
-    );
-    var $botoesDeFechar = [].slice.call(
-        document.querySelectorAll(".component-close-button")
-    );
+      setTimeout(function () {
+        generalcontent.classList.remove("js-general-content");
+      }, 200);
 
-    setTimeout(function () {
-      $conteudoGeral.classList.remove("js-general-content");
-    }, 200);
-
-    $conteudoEmArray.forEach(function ($componente) {
-      $componente.addEventListener("click", function () {
-        if (this.classList.contains("component-active")) return;
-        $conteudoGeral.classList.add("component--active");
-        this.classList.add("component-active");
+      arraycontent.forEach(function (component) {
+        component.addEventListener("click", function () {
+          if (this.classList.contains("component-active")) return;
+          generalcontent.classList.add("component--active");
+          this.classList.add("component-active");
+        });
       });
-    });
 
-    $botoesDeFechar.forEach(function ($btn) {
-      $btn.addEventListener("click", function (e) {
-        e.stopPropagation();
-        $conteudoGeral.classList.remove("component--active");
-        document
-            .querySelector(".componente.component-active")
-            .classList.remove("component-active");
+      closebuttons.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          generalcontent.classList.remove("component--active");
+          document
+              .querySelector(".component.component-active")
+              .classList.remove("component-active");
+        });
       });
-    });
-
   },
 };
 </script>
@@ -200,7 +201,7 @@ export default {
 .card {
   box-shadow: 3em 3em 3em rgba(0, 0, 0, 0.7) !important;
   overflow: scroll;
-  max-height: 78vh;
+  max-height: 65vh;
 }
 
 .image {
@@ -248,7 +249,7 @@ export default {
   background-color: rgba(128, 186, 36, 1);
 }
 
-.componente {
+.component {
   cursor: pointer;
   justify-content: space-between;
   position: absolute;
@@ -259,7 +260,8 @@ export default {
   transition: transform 0.6s 0.7s, width 0.7s, opacity 0.6s 0.7s,
   z-index 0s 1.3s;
   will-change: transform, width, opacity;
-  height: 90vh;
+  height: 80vh;
+  margin-top: 5em;
 }
 
 .initial-visual-component {
@@ -272,7 +274,7 @@ export default {
   width: 100%;
 }
 
-.componente-content {
+.component-content {
   z-index: -1;
   position: absolute;
   left: 0;
@@ -283,7 +285,7 @@ export default {
   transition: all 0.1s;
 }
 
-.componente.component-active .componente-content {
+.component.component-active .component-content {
   z-index: 2;
   opacity: 1;
   transition: all 0.5s 1.4s;
@@ -291,8 +293,8 @@ export default {
 
 .component-close-button {
   position: absolute;
-  right: 1em;
-  top: 2em;
+  right: 2em;
+  top: 0em;
   width: 4em;
   height: 4em;
   opacity: 0;
@@ -308,20 +310,20 @@ export default {
   top: 50%;
   width: 100%;
   height: 8px;
-  margin-top: -4px;
-  background: #fff;
+  margin-left: 0em;
+  background: #80ba24;
   opacity: 0;
   transition: opacity 0s;
 }
 
-.componente.component-active .component-close-button {
+.component.component-active .component-close-button {
   z-index: 5;
   opacity: 1;
 
 }
 
-.componente.component-active .component-close-button:before,
-.componente.component-active .component-close-button:after {
+.component.component-active .component-close-button:before,
+.component.component-active .component-close-button:after {
   opacity: 1;
 }
 
@@ -329,7 +331,7 @@ export default {
   transform: rotate(45deg) translateX(100%);
 }
 
-.componente.component-active .component-close-button:before {
+.component.component-active .component-close-button:before {
   transition: all 0.3s 1.4s cubic-bezier(0.72, 0.09, 0.32, 1.57);
   transform: rotate(45deg) translateX(0);
 }
@@ -338,12 +340,12 @@ export default {
   transform: rotate(-45deg) translateX(100%);
 }
 
-.componente.component-active .component-close-button:after {
+.component.component-active .component-close-button:after {
   transition: all 0.3s 1.55s cubic-bezier(0.72, 0.09, 0.32, 1.57);
   transform: rotate(-45deg) translateX(0);
 }
 
-.componente-index {
+.component-index {
   position: relative;
   top: 30px;
   width: 100%;
@@ -353,80 +355,80 @@ export default {
   font-weight: bold;
 }
 
-.general-content.component--active .componente-index {
+.general-content.component--active .component-index {
   opacity: 0;
 }
 
-.componente-index-front {
+.component-index-front {
   position: absolute;
   left: 30px;
   top: -15px;
 }
 
-.componente-index-back {
+.component-index-back {
   color: #80ba24;
   opacity: 0.25;
   transition: opacity 0.25s 0.25s;
 }
 
-.componente:hover .componente-index-back {
+.component:hover .component-index-back {
   transition: opacity 1.25s;
   opacity: 1;
 }
 
-.componente:nth-child(2) {
+.component:nth-child(2) {
   transform: translate3d(105.2083333333%, 0, 0);
 }
 
-.general-content.component--active .componente:nth-child(2):not(.component-active) {
+.general-content.component--active .component:nth-child(2):not(.component-active) {
   transform: scale(0.5) translate3d(105.2083333333%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
 
-.componente:nth-child(2) .component-internal {
+.component:nth-child(2) .component-internal {
   transition-delay: 0.1s;
 }
 
-.componente:nth-child(3) {
+.component:nth-child(3) {
   transform: translate3d(210.4166666667%, 0, 0);
   transform-origin: 260.4166666667% 50%;
 }
 
-.general-content.component--active .componente:nth-child(3):not(.component-active) {
+.general-content.component--active .component:nth-child(3):not(.component-active) {
   transform: scale(0.5) translate3d(210.4166666667%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
 
-.componente:nth-child(4) {
+.component:nth-child(4) {
   transform: translate3d(315.625%, 0, 0);
   transform-origin: 365.625% 50%;
 }
 
-.general-content.component--active .componente:nth-child(4):not(.component-active) {
+.general-content.component--active .component:nth-child(4):not(.component-active) {
   transform: scale(0.5) translate3d(315.625%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
 
-.componente:nth-child(4) .component-internal {
+.component:nth-child(4) .component-internal {
   transition-delay: 0.3s;
 }
 
-.componente:nth-child(5) {
+.component:nth-child(5) {
   transform: translate3d(420.8333333333%, 0, 0);
   transform-origin: 470.8333333333% 50%;
 }
 
-.general-content.component--active .componente:nth-child(5):not(.component-active) {
+.general-content.component--active .component:nth-child(5):not(.component-active) {
   transform: scale(0.5) translate3d(420.8333333333%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
 
 
-.componente.component-active {
+.component.component-active {
   z-index: 1;
   width: 100%;
   transform: translate3d(0, 0, 0);

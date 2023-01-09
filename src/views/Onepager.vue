@@ -1,19 +1,28 @@
 <template>
   <div>
-    <v-parallax  height="25" dark src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"> </v-parallax>
-      <OnePagerLearningGoals />
-      <!-- <OnePagerIntroduction /> -->
-      <v-parallax height="200" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"> </v-parallax>
-     <hr class="divider">
-     <h1  class="header">Level-Auswahl:</h1>
-     <hr class="divider">
-     <LevelSelect />
-     <v-parallax height="200" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"> </v-parallax>
-     <hr class="divider">
-     <h1 class="header">Hilfen:</h1>
-     <hr class="divider">
-     <HelpTemplateNew />
-  
+    <v-parallax height="2850" :src="`${require(`@/assets/Hexagon3.svg`)}`">
+      <div class="test">
+        <OnePagerLearningGoals />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <LevelSelect />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />  
+        <HelpTemplateNew />
+      </div>
+    </v-parallax>
   </div>
 </template>
 
@@ -24,7 +33,9 @@ import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
 import OnePagerLearningGoals from "@/components/OnePagerComponents/OnePagerLearningGoals";
 import HelpTemplateNew from "@/components/HelpComponents/HelpTemplateNew";
 import LevelSelect from "@/views/LevelSelect";
-
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "Onepager",
   components: {
@@ -33,12 +44,15 @@ export default {
     OnePagerIntroduction,
     OnePagerLearningGoals,
     HelpTemplateNew,
-    LevelSelect
+    LevelSelect,
   },
-}
+  mounted() {
+    gsap.to(".events", { scrollTrigger: ".events", x: 0, duration: 3 });
+  },
+};
 </script>
 <style scoped>
-.header{
+.header {
   margin: 1em 2em;
   color: black;
 }
@@ -47,6 +61,8 @@ export default {
   border-radius: 100%;
   background-color: rgba(128, 186, 36, 1);
 }
-
-
+.v-parallax__image {
+  transform: none !important;
+  width: 100% !important;
+}
 </style>

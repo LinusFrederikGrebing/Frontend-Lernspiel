@@ -92,7 +92,7 @@ export default {
       gsap.fromTo(
         element,
         { y: 0, x: -300 },
-        { delay: 1, duration: 2, y: -0, x: 50, opacity: 1, ease: "back.out(2)" }
+        { delay: 1, duration: 2, y: 0, x: 50, opacity: 1, ease: "back.out(2)" }
       );
     },
     // Momentan nicht in Benutzung, war evtl. als Übergang zur Levelübersicht gedacht

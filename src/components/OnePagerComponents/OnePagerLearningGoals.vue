@@ -3,11 +3,16 @@
     <div class="b/ackground-image"></div>
     <v-row>
       <v-col class="text-center my-8">
-       
+        <v-card
+            height="8em" 
+            elevation="24"
+            outlined
+            shaped
+        >
         <h2 class="text-h2 text-md-h1 text-center my-4">
           Warum Draw IT?
         </h2>
-        
+        </v-card>
       </v-col>
     </v-row>
     <v-row>
@@ -114,7 +119,7 @@ export default {
 
 <style scoped>
 h2, p, *{
-  color: #49403c;
+  color: #000000;
   position: relative;
   z-index: 1;
 }

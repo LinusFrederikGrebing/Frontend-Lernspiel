@@ -1,17 +1,20 @@
 <template>
-  <v-app class="bg-color1">
+  <v-app class="bg-color ">
     <v-main>
       <SideBar/>
-      <router-view></router-view>
+      <router-view></router-view> 
+      <FooterComponent />
     </v-main>
   </v-app>
 </template>
 <script>
 import SideBar from "./components/Navigation.vue";
+import FooterComponent from "./components/Footer.vue";
 export default {
   name: "App",
   components: {
     SideBar,
+    FooterComponent
   },
   data: () => ({
   
@@ -23,7 +26,11 @@ export default {
 };
 </script>
 <style>
-.bg-color1 {
+.test{
+  margin-top: 0em;
+}
+.bg-color {
   background-color: rgb(236, 236, 236) !important;
 }
+
 </style>
