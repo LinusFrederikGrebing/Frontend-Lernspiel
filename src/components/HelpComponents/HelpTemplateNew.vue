@@ -260,7 +260,7 @@ export default {
   transition: transform 0.6s 0.7s, width 0.7s, opacity 0.6s 0.7s,
   z-index 0s 1.3s;
   will-change: transform, width, opacity;
-  height: 80vh;
+  height: 75vh;
   margin-top: 5em;
 }
 

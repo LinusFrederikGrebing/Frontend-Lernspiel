@@ -1,10 +1,10 @@
 <template>
-    <v-footer padless  height="100em" color="rgb(74, 92, 102)">
+    <v-footer app class="footer" padless color="rgb(74, 92, 102)">
       <v-col
-        class="text-center footer"
+        class="text-center footerText"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong> Ein Projekt aus Fachbereich IEM-Medieninformatik! </strong>
+        {{ new Date().getFullYear() }} —  Ein Projekt aus dem Fachbereich IEM-Medieninformatik! 
       </v-col>
     </v-footer>
 </template>
@@ -16,7 +16,13 @@ export default {
 </script>
 
 <style scoped>
+
+.footerText{
+   color: white;
+   font-size: 0.8em;
+}
 .footer{
-    color: white;
+  height: 2.5em;
+ 
 }
 </style>

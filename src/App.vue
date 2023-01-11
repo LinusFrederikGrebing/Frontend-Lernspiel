@@ -26,9 +26,7 @@ export default {
 };
 </script>
 <style>
-.test{
-  margin-top: 0em;
-}
+
 .bg-color {
   background-color: rgb(236, 236, 236) !important;
 }

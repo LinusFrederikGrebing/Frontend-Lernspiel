@@ -8,10 +8,14 @@
             elevation="24"
             outlined
             shaped
-        >
-        <h2 class="text-h2 text-md-h1 text-center my-4">
-          Warum Draw IT?
-        </h2>
+        ><div class="flex">
+            <h2 id="warum" class="text-h1 text-md-h1 text-center my-4">
+              Warum 
+            </h2>
+            <h2 id="draw" class="text-h1 text-md-h1 text-center my-4">
+              DrawIT?
+            </h2>
+        </div>
         </v-card>
       </v-col>
     </v-row>
@@ -46,9 +50,11 @@
   </v-container>
 </template>
 
+<script src="https://unpkg.com/split-type"></script>
 <script>
 import OnePagerTryMe from "./OnePagerTryMe";
 import gsap from "gsap";
+
 export default {
   name: "OnePagerLearningGoals",
   components: {
@@ -113,14 +119,81 @@ export default {
         },
       ],
     }
+},
+mounted() {
+  gsap.fromTo(
+        '#warum',
+        {
+          scale: 1.5,
+          opacity: 0,
+          y: 0, 
+          x: -400
+        },
+        {
+          scale: 1,
+          delay: 1,
+          opacity: 1,
+          duration: 1,
+          ease: Elastic.easeOut.config(1, 0.3),
+          y: 0,
+          x: -15
+        }
+  );
+  gsap.fromTo(
+        '#draw',
+        {
+          scale: 1.5,
+          opacity: 0,
+          y: 0, 
+          x: 400
+        },
+        {
+          scale: 1,
+          delay: 1,
+          opacity: 1,
+          duration: 1,
+          ease: Elastic.easeOut.config(1, 0.3),
+          y: 0,
+          x: 15
+        }
+  );
+
+  for(let i = 0; i < this.items.length; i++){
+    let element = document.getElementById("goal"+i); 
+    gsap.fromTo(
+        element,
+        {
+          scale: 0,
+          y: 0,
+          x: 0,
+        },
+        {
+          delay: (i/2)+1,
+          duration: 2,
+          scale: 1,
+          y: 0,
+          x: 0,
+          opacity: 1,
+        }
+      );
   }
 }
+}
+
 </script>
 
 <style scoped>
+.flex{
+  display: flex;
+  justify-content: center;
+}
 h2, p, *{
   color: #000000;
   position: relative;
   z-index: 1;
+}
+#text{
+  text-shadow: 2px 2px 3px #828382;
+  font-weight: 500;
 }
 </style>

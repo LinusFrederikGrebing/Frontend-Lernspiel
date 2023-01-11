@@ -1,25 +1,15 @@
 <template>
   <div>
     <v-parallax height="2850" :src="`${require(`@/assets/Hexagon3.svg`)}`">
-      <div class="test">
+      <div class="learning_goals">
         <OnePagerLearningGoals />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+      </div>
+
+      <div class="page_section lvl_select">
         <LevelSelect />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />  
+      </div>
+
+      <div class="page_section help_template">
         <HelpTemplateNew />
       </div>
     </v-parallax>
@@ -35,6 +25,7 @@ import HelpTemplateNew from "@/components/HelpComponents/HelpTemplateNew";
 import LevelSelect from "@/views/LevelSelect";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "Onepager",
@@ -47,11 +38,46 @@ export default {
     LevelSelect,
   },
   mounted() {
-    gsap.to(".events", { scrollTrigger: ".events", x: 0, duration: 3 });
+
+    gsap.fromTo(
+      ".lvl_select",
+      {
+        y: 0,
+        x: -1900,
+        opacity: 0,
+      },
+      {
+        opacity: 1,
+        x: 0,
+        scrollTrigger: {
+          trigger: ".lvl_select",
+          start: "top 100%",
+          end: "bottom 100%",
+          scrub: true,
+          id: "scrub",
+        },
+      }
+    );
+
+    gsap.from(".help_template", {
+      duration: 0.5,
+      opacity: 0,
+      x: "+50vw",
+      ease: "linear",
+      scrollTrigger: {
+        trigger: ".help_template",
+        start: "top 75%",
+        end: "bottom 25%",
+        toggleActions: "restart complete reverse reset",
+      },
+    });
   },
 };
 </script>
 <style scoped>
+.page_section {
+  margin-top: 13em;
+}
 .header {
   margin: 1em 2em;
   color: black;

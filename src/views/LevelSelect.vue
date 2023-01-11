@@ -1,6 +1,6 @@
 <template>
   <v-card elevation="24" outlined shaped class="container">
-    <h1 class="h1 font-weight-black"> - Level-Auswahl - </h1>
+    <h1 class="h1 font-weight-black">- Level-Auswahl -</h1>
     <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
       <v-card
         v-for="(level, index) in levels"
@@ -77,12 +77,10 @@
                 mdi-checkbox-marked-circle
               </v-icon>
             </template>
-            <span
-              ><h3>Du hast das Level bereits gemeistert!</h3>
-              <h4>
-                Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!
-              </h4></span
-            >
+            <span>
+              <h4>Du hast das Level bereits gemeistert!</h4>
+              <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
+            </span>
           </v-tooltip>
         </v-card-actions>
       </v-card>
@@ -94,6 +92,7 @@
 import gsap from "gsap";
 import Flickity from "vue-flickity";
 import levels from "../../data/levels.json";
+
 export default {
   name: "LevelSelect",
   components: {
@@ -297,6 +296,9 @@ export default {
 };
 </script>
 <style>
+.container {
+
+}
 .flickity-button {
   background: #4a5c66;
 }
@@ -321,7 +323,7 @@ export default {
   right: 40px;
 }
 
-.h1{
+.h1 {
   position: absolute;
   margin-top: 0.5em;
   margin-left: auto;
@@ -333,7 +335,6 @@ export default {
 
 .flickity-page-dots {
   bottom: -22px;
- 
 }
 
 .flickity-page-dots .dot {
