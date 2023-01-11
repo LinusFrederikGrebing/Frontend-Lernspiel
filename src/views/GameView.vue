@@ -33,7 +33,7 @@ export default {
   },
 
   data: () => ({
-    color: null,
+    color: 'null',
     levels: [],
     currentLevel: null,
     currentLevelId: null,
@@ -75,7 +75,7 @@ export default {
       Array.from(document.querySelectorAll(".template-card")).forEach((el) => {
         if (!el.classList.contains("painted")) {
           el.style.backgroundColor = '#ffffff';
-        }
+        } else el.style.backgroundColor = this.color;
       });
       this.startPopUp(this.levels[indexNextLevel]);
     },
