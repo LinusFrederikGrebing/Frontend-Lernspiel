@@ -9,7 +9,6 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-btn @click="levelAnomation()">Useless, but cool animation</v-btn>
   </div>
 </template>
 

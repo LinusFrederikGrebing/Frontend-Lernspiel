@@ -2,7 +2,6 @@
   <div id="container" class="d-f">
     <transition appear @enter="enter">
       <v-btn
-      color="deep-purple lighten-5"
         depressed
         elevation="1"
         @click="
@@ -13,7 +12,7 @@
       </v-btn>
     </transition>
     <transition appear @enter="enter">
-      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="deep-purple lighten-5" depressed elevation="1"
+      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" depressed elevation="1"
         @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
     </transition>
     <transition appear @enter="enterInput">
@@ -58,7 +57,16 @@
           Color
         </v-btn>
       </transition>
-      <transition appear @enter="enter">
+      <transition appear  @enter="enter">
+        <v-btn
+          class="reset-btn"
+          depressed
+          elevation="2"
+          @click="animateTutorial"
+        >
+          Reset
+        </v-btn>
+      </transition>
       <v-color-picker
           v-if="colorPicker"
           @click="changeColor(color)"
@@ -69,7 +77,6 @@
           hide-mode-switch
           swatches-max-height="250"
           ></v-color-picker>          
-      </transition>
     </div>
   </div>
 </template>
@@ -98,6 +105,68 @@ export default {
   },
 
   methods: {
+    animateTutorial() {
+      let startElem = document.querySelector("#x0y0");
+      //console.log("EINS")
+      let x = 0;
+      let y = 0;
+      while (startElem && !isNaN(startElem.offsetLeft) && !isNaN(startElem.offsetTop)) {
+      x += startElem.offsetLeft - startElem.scrollLeft;
+      y += startElem.offsetTop - startElem.scrollTop;
+      startElem = startElem.offsetParent;
+      }
+      //console.log("ZWEI " + rectStartElem.top)
+      gsap.to("#mouse-cursor", {duration: 0, x: x, visibility: "visible"});
+      //console.log("DREI ")
+
+      this.editorActive = true;
+      let tutorialCode = "paint(1,1);"
+      let index = 0;
+      this.codeToRun = "";
+      let intervalId = setInterval(() => {
+        if (index >= tutorialCode.length) {
+          clearInterval(intervalId);
+          return;
+        }
+        this.codeToRun += tutorialCode.substring(index,index+1);
+        index++;
+      }, 250);  
+    },
+    resetPaintedFields() {
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        if (!el.id.includes("v")) {
+          el.classList.remove("painted");
+        }
+      });
+      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
+        if (!el.classList.contains("painted")) {
+          el.style.backgroundColor = '#ffffff';
+        }
+      });
+      this.levelAnimation();
+    },
+    levelAnimation() {
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let element = document.getElementById("x" + i + "y" + j);
+          gsap.to(element, {
+            duration: 1,
+            scale: 0.2,
+            y: 60,
+            yoyo: true,
+            ease: "power1.inOut",
+            delay: Math.random(),
+            stagger: {
+              amount: 1.5,
+              grid: "auto",
+              from: "center",
+            },
+            repeat: 1,
+            repeatDelay: 3,
+          });
+        }
+      }
+    },
     changeColor(clr) {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = clr;
@@ -399,6 +468,10 @@ export default {
   background-color: white;
 }
 
+.reset-btn {
+  background-color: red !important;
+}
+
 .greenText {
   background-color: rgba(128, 186, 36, 0.4) !important;
   color: rgba(128, 186, 36, 0.4) !important;
@@ -410,8 +483,7 @@ export default {
 
 .console_warning {
   animation: warning 2s linear infinite;
-  color: red !important;
-  font-weight: bold;
+  background-color: red !important;
 }
 
 @keyframes warning {
