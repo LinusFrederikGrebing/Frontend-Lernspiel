@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import OnePagerTryMe from "@/components/OnePagerTryMe";
+import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
 import gsap from "gsap";
 export default {
-  name: "OnePagerLearningGoals",
+  name: "OnePagerWhy",
   components: {
     OnePagerTryMe
   },
