@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-parallax height="5250" :src="`${require(`@/assets/Hexagon3.svg`)}`">
+    <v-parallax height="6250" :src="`${require(`@/assets/Hexagon3.svg`)}`">
       <div class="learning_goals">
-        <OnePagerLearningGoals />
+        <OnePagerWhy />
       </div>
 
       <div class="page_section lvl_select">
@@ -17,8 +17,12 @@
         <OnePagerGoals />
       </div>
 
-      <div class="page_section help_template">
-        <HelpTemplateNew />
+      <div class="page_section help_template d-sm-none">
+        <HelpTemplateMobile class="d-sm-none" />
+      </div>
+
+      <div class="page_section help_template hidden-xs-only">
+        <HelpTemplateDesktop class="hidden-xs-only"/>
       </div>
     </v-parallax>
   </div>
@@ -29,21 +33,23 @@ import OnePagerIntroduction from "@/components/OnePagerComponents/OnePagerIntrod
 import OnePagerTutorialSection from "@/components/OnePagerComponents/OnePagerTutorialSection";
 import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
 import OnePagerGoals from "@/components/OnePagerComponents/OnePagerGoals";
-import OnePagerLearningGoals from "@/components/OnePagerComponents/OnePagerLearningGoals";
-import HelpTemplateNew from "@/components/HelpComponents/HelpTemplateNew";
+import OnePagerWhy from "@/components/OnePagerWhy";
 import LevelSelect from "@/views/LevelSelect";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import HelpTemplateMobile from "@/components/HelpComponents/HelpTemplateMobile";
+import HelpTemplateDesktop from "@/components/HelpComponents/HelpTemplateDesktop";
 
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "Onepager",
   components: {
+    HelpTemplateMobile,
+    HelpTemplateDesktop,
     OnePagerTutorialSection,
     OnePagerTryMe,
     OnePagerIntroduction,
-    OnePagerLearningGoals,
-    HelpTemplateNew,
+    OnePagerWhy,
     LevelSelect,
     OnePagerGoals
   },
@@ -91,6 +97,7 @@ export default {
   margin: 1em 2em;
   color: black;
 }
+
 .divider {
   opacity: 1;
   border-radius: 100%;

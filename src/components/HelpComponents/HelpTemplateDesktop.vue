@@ -1,58 +1,11 @@
 <template>
-  <v-container>
-    <div class="d-sm-none">
-    <v-expansion-panels>
-      <v-expansion-panel v-scrollanimation
-          v-for="item in informations" :key="item.id"
-      >
-        <v-expansion-panel-header class="text-h6 text-sm-h5 my-4">
-          {{ item.label }}
-        </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <v-card elevation="2">
-              <v-img :src="item.src" max-height="5vh"></v-img>
-              <h2 style="position: absolute; top:2%; left:5%"
-                  class="white--text text-h4 text-md-h3"><i>{{ item.label }}!</i></h2>
-              <v-card-title>
-                {{ item.subheader }}
-              </v-card-title>
-              <v-card-text class="black--text">
-                {{ item.informations1 }}
-              </v-card-text>
-              <hr class="divider"/>
-              <v-card-title>
-                {{ item.subheader2 }}
-              </v-card-title>
-              <v-card-text class="black--text">
-                {{ item.informations2 }}
-              </v-card-text>
-              <hr class="divider"/>
-              <v-card-title>
-                Beispiel:
-              </v-card-title>
-              <div class="d-md-flex">
-                <v-img :src="item.Beispiel" class="ml-4 mr-8" max-height="100px" contain></v-img>
-                <v-card-text class="black--text mr-8">
-                  {{ item.beispieltext }}
-                </v-card-text>
-              </div>
-              <hr class="divider mt-8"/>
-              <v-card-actions>
-                <v-btn color="orange lighten-2 my-2 mr-8">
-                  Button zu offizieller Doku?
-                </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
-    </div>
-
-    <div class="hidden-xs-only">
+  <div>
+    <v-card elevation="24" height="55em" outlined shaped class="container">
+      <h1 class="h1 font-weight-black"> - Hilfen - </h1>
       <v-container>
-        <div v-scrollanimation class="general-content js-general-content">
+        <div class="general-content js-general-content">
           <div class="general-component">
-            <div class="componente" v-for="item in informations" :key="item.id">
+            <div class="component" v-for="item in informations" :key="item.id">
               <div>
                 <div class="component-internal">
                   <div class="initial-visual-component">
@@ -60,13 +13,13 @@
                       <h2 class="white--text text-body-2 text-sm-h5 my-4">{{ item.label }}</h2>
                     </div>
                   </div>
-                  <div class="componente-content">
+                  <div class="component-content">
                     <div class="component-close-button"></div>
                     <v-card class="mx-auto my-10 card" elevation="20">
                       <div class="container-image-chapter-open">
                         <div class="image">
                           <v-img :src="item.src" contain></v-img>
-                          <h2 style="position: absolute; top:45%; left:5%" class="white--text text-h4 text-md-h3"><i>{{ item.label }}!</i></h2>
+                          <h2 style="position: absolute; top:50%; left:25%; transform: translate(-25%, -50%)" class="white--text text-h4 text-md-h3"><i>{{ item.label }}!</i></h2>
                         </div>
                       </div>
                       <v-card-title>
@@ -103,24 +56,21 @@
                   </div>
                 </div>
               </div>
-              <div class="componente-index">
-                <div class="componente-index-back">{{ item.id }}</div>
-                <div class="componente-index-front"></div>
+              <div class="component-index">
+                <div class="component-index-back">{{ item.id }}</div>
+                <div class="component-index-front"></div>
               </div>
             </div>
           </div>
         </div>
       </v-container>
-    </div>
-  </v-container>
+    </v-card>
+  </div>
 </template>
 
 <script>
-import { onMounted, onUnmounted } from 'vue'
-
 export default {
-  name: "AHelpTemplateNew",
-  props: {levels: Array},
+  name: "HelptemplateDesktop",
   data() {
     return {
       informations: [
@@ -151,7 +101,7 @@ export default {
         {
           id: 3,
           url: require('../../assets/programmingFor.png'),
-          label: 'For-Schleifen',
+          label: 'For',
           subheader: "Was sind For-Schleifen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Die for-Schleife wird verwendet, wenn eine bestimmte Anzahl an Durchläufen benötigt wird. Der Schleifenkopf fasst die Vorbereitung der ganzen Schleife, die Schleifenbedingung und die nötigen Berechnungen zur Fortsetzung der Schleife zusammen.',
@@ -163,7 +113,7 @@ export default {
         {
           id: 4,
           url: require('../../assets/programmingWhile.png'),
-          label: 'While-Schleifen',
+          label: 'While',
           subheader: "Was sind While-Schleifen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Die while-Schleife wertet zunächst die Schleifenbedingung aus. Ergibt sich dabei der Wert true (oder ein true-artiger Wert), wird der Schleifenrumpf ausgeführt. Danach beginnt der Ablauf von vorn. Dieser Schleifentyp eignet sich wenn Sie im Voraus nicht wissen, wie oft die Schleife zu durchlaufen ist wenn es beabsichtigt ist, dass der Schleifenrumpf eventuell gar nicht durchlaufen wird',
@@ -175,7 +125,7 @@ export default {
         {
           id: 5,
           url: require('../../assets/programmingDoWhile.png'),
-          label: 'Do-While-Schleifen',
+          label: 'Do-While',
           subheader: "Was sind Do-While-Schleifen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Die do-while-Schleife verhält sich ähnlich wie die while-Schleife, wertet aber die Schleifenbedingung erst nach Ausführung des Schleifenrumpfes aus. Dieser Schleifentyp eignet sich dann, wenn Sie mindestens einmal durch den Schleifenrumpf durchlaufen müssen, um entscheiden zu können, ob der Rumpf wiederholt werden muss oder nicht.',
@@ -202,89 +152,38 @@ export default {
   },
   mounted() {
     var generalcontent = document.querySelector(".general-content");
-      var arraycontent = [].slice.call(
-          document.querySelectorAll(".component")
-      );
-      var closebuttons = [].slice.call(
-          document.querySelectorAll(".component-close-button")
-      );
+    var arraycontent = [].slice.call(
+        document.querySelectorAll(".component")
+    );
+    var closebuttons = [].slice.call(
+        document.querySelectorAll(".component-close-button")
+    );
 
-      setTimeout(function () {
-        generalcontent.classList.remove("js-general-content");
-      }, 200);
+    setTimeout(function () {
+      generalcontent.classList.remove("js-general-content");
+    }, 200);
 
-      arraycontent.forEach(function (component) {
-        component.addEventListener("click", function () {
-          if (this.classList.contains("component-active")) return;
-          generalcontent.classList.add("component--active");
-          this.classList.add("component-active");
-        });
+    arraycontent.forEach(function (component) {
+      component.addEventListener("click", function () {
+        if (this.classList.contains("component-active")) return;
+        generalcontent.classList.add("component--active");
+        this.classList.add("component-active");
       });
+    });
 
-      closebuttons.forEach(function (btn) {
-        btn.addEventListener("click", function (e) {
-          e.stopPropagation();
-          generalcontent.classList.remove("component--active");
-          document
-              .querySelector(".component.component-active")
-              .classList.remove("component-active");
-        });
+    closebuttons.forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        generalcontent.classList.remove("component--active");
+        document
+            .querySelector(".component.component-active")
+            .classList.remove("component-active");
       });
+    });
   },
-}
+};
 </script>
 <style scoped>
-.before-enter {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: all 2s ease-out;
-}
-
-.before-enter .componente {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: all 3s ease-out;
-}
-
-.enter {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
-.container {
-  width: 80%;
-  min-width: 450px;
-  margin: 0 auto;
-}
-
-.fade-in {
-  background-color: #2ecc71;
-  height: 500px;
-  margin-bottom: 50px;
-  opacity: 0;
-  transition: 0.3s all ease-out;
-  transform: scale(0.8);
-  box-sizing: border-box;
-  padding: 20px;
-  display: inline-block;
-}
-.full-width{
-  width: 100%;
-}
-
-.half-width {
-  width: 47.5%;
-}
-
-.half-width:nth-of-type(2n + 1) {
-  margin-right: 2.5%;
-}
-
-.half-width:nth-of-type(2n) {
-  margin-left: 2.5%;
-}
-
-
 * {
   overflow: hidden;
 }
@@ -302,7 +201,7 @@ export default {
 .card {
   box-shadow: 3em 3em 3em rgba(0, 0, 0, 0.7) !important;
   overflow: scroll;
-  max-height: 78vh;
+  max-height: 65vh;
 }
 
 .image {
@@ -411,8 +310,8 @@ export default {
   top: 50%;
   width: 100%;
   height: 8px;
-  margin-top: -4px;
-  background: #fff;
+  margin-left: 0em;
+  background: #80ba24;
   opacity: 0;
   transition: opacity 0s;
 }
