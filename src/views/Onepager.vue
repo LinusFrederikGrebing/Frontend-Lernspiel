@@ -38,7 +38,7 @@ export default {
 }
 </script>
 <style scoped>
-.header{
+.header {
   margin: 1em 2em;
   color: black;
 }
@@ -47,6 +47,4 @@ export default {
   border-radius: 100%;
   background-color: rgba(128, 186, 36, 1);
 }
-
-
 </style>

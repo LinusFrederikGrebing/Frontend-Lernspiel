@@ -3,11 +3,9 @@
     <div class="b/ackground-image"></div>
     <v-row>
       <v-col class="text-center my-8">
-       
         <h2 class="text-h2 text-md-h1 text-center my-4">
           Warum Draw IT?
         </h2>
-        
       </v-col>
     </v-row>
     <v-row>
