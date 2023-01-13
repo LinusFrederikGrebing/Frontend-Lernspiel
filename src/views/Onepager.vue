@@ -13,7 +13,7 @@
         <OnePagerTutorialSection />
       </div>
 
-      <div class="page_section lvl_select">
+      <div class="page_section goals">
         <OnePagerGoals />
       </div>
 
@@ -48,7 +48,6 @@ export default {
     OnePagerGoals
   },
   mounted() {
-
     gsap.fromTo(
       ".lvl_select",
       {

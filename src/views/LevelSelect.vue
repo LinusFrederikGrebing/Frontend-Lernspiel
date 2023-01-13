@@ -23,7 +23,7 @@
           <v-img
             class="white--text align-end"
             height="18em"
-            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            :src= "require(`@/assets/${level.img}`)"
           >
             <div :id="'lockIcon' + index" class="zentriertLockIcon">
               <v-icon
