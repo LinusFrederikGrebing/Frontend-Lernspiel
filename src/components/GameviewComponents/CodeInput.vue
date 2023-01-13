@@ -18,6 +18,7 @@
     <transition appear @enter="enterInput">
       <CodeEditor
         v-if="editorActive"
+        id="code-editor"
         height="30vh"
         width="25vw"
         v-model="codeToRun"
@@ -40,6 +41,7 @@
       <transition appear  @enter="enter">
         <v-btn
           color="success"
+          id="button-finished"
           depressed
           elevation="2"
           @click="runfunction"
@@ -62,7 +64,7 @@
           class="reset-btn"
           depressed
           elevation="2"
-          @click="animateTutorial"
+          @click="animateTutorial()"
         >
           Reset
         </v-btn>
@@ -106,19 +108,39 @@ export default {
 
   methods: {
     animateTutorial() {
-      let startElem = document.querySelector("#x0y0");
+      var timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      var timelineToButton = gsap.timeline({callbackScope: timelineToEditor,repeat: 0, repeatDelay: 0, });
+      let codeEditor = document.querySelector("#code-editor");
+      let buttonFinished = document.querySelector("#button-finished");
       //console.log("EINS")
-      let x = 0;
-      let y = 0;
-      while (startElem && !isNaN(startElem.offsetLeft) && !isNaN(startElem.offsetTop)) {
-      x += startElem.offsetLeft - startElem.scrollLeft;
-      y += startElem.offsetTop - startElem.scrollTop;
-      startElem = startElem.offsetParent;
+      let x = parseInt(codeEditor.offsetWidth) / 4;
+      let y = parseInt(codeEditor.offsetHeight) / 4;
+      while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
+      x += codeEditor.offsetLeft - codeEditor.scrollLeft;
+      y += codeEditor.offsetTop - codeEditor.scrollTop;
+      codeEditor = codeEditor.offsetParent;
       }
+      //console.log("DAS X IST:" + x);
       //console.log("ZWEI " + rectStartElem.top)
-      gsap.to("#mouse-cursor", {duration: 0, x: x, visibility: "visible"});
-      //console.log("DREI ")
+      timelineToEditor.to("#mouse-cursor", {duration: 3, x: x, y: y, visibility: "visible", zIndex: 4});
+      timelineToEditor.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
+      timelineToEditor.eventCallback("onComplete", () => {
+        this.animateCodeEditor();
+        let x = 0;
+        let y = 0;
+        while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
+        x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
+        y += buttonFinished.offsetTop - buttonFinished.scrollTop;
+        buttonFinished = buttonFinished.offsetParent;
+      }
 
+      timelineToButton.to("#mouse-cursor", {duration: 1, x: x, y: y});
+      timelineToButton.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
+      timelineToButton.eventCallback("onComplete", this.runfunction());
+      });
+      //console.log("DREI ")
+    },
+    animateCodeEditor() {
       this.editorActive = true;
       let tutorialCode = "paint(1,1);"
       let index = 0;
@@ -130,7 +152,7 @@ export default {
         }
         this.codeToRun += tutorialCode.substring(index,index+1);
         index++;
-      }, 250);  
+      }, 250); 
     },
     resetPaintedFields() {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
@@ -154,6 +176,7 @@ export default {
             scale: 0.2,
             y: 60,
             yoyo: true,
+            repeat: 1,
             ease: "power1.inOut",
             delay: Math.random(),
             stagger: {
@@ -161,8 +184,6 @@ export default {
               grid: "auto",
               from: "center",
             },
-            repeat: 1,
-            repeatDelay: 3,
           });
         }
       }
