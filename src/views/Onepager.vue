@@ -1,12 +1,20 @@
 <template>
   <div>
-    <v-parallax height="2850" :src="`${require(`@/assets/Hexagon3.svg`)}`">
+    <v-parallax height="5250" :src="`${require(`@/assets/Hexagon3.svg`)}`">
       <div class="learning_goals">
         <OnePagerLearningGoals />
       </div>
 
       <div class="page_section lvl_select">
         <LevelSelect />
+      </div>
+
+      <div class="page_section tutorial">
+        <OnePagerTutorialSection />
+      </div>
+
+      <div class="page_section lvl_select">
+        <OnePagerGoals />
       </div>
 
       <div class="page_section help_template">
@@ -20,6 +28,7 @@
 import OnePagerIntroduction from "@/components/OnePagerComponents/OnePagerIntroduction";
 import OnePagerTutorialSection from "@/components/OnePagerComponents/OnePagerTutorialSection";
 import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
+import OnePagerGoals from "@/components/OnePagerComponents/OnePagerGoals";
 import OnePagerLearningGoals from "@/components/OnePagerComponents/OnePagerLearningGoals";
 import HelpTemplateNew from "@/components/HelpComponents/HelpTemplateNew";
 import LevelSelect from "@/views/LevelSelect";
@@ -36,6 +45,7 @@ export default {
     OnePagerLearningGoals,
     HelpTemplateNew,
     LevelSelect,
+    OnePagerGoals
   },
   mounted() {
 

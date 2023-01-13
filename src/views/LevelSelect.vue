@@ -296,9 +296,7 @@ export default {
 };
 </script>
 <style>
-.container {
 
-}
 .flickity-button {
   background: #4a5c66;
 }
