@@ -16,21 +16,6 @@
               </v-row>
             </v-container>
           </v-col>
-          <v-col cols="col-2" md="2">
-            <transition
-              appear
-              @enter="enterRefreshButton"
-            >
-              <v-btn
-                icon
-                id="refreshbtn"
-                color="green"
-                @click="resetPaintedFields"
-              >
-                <v-icon>mdi-cached</v-icon>
-              </v-btn></transition
-            >
-          </v-col>
         </v-row>
       </v-container>
     </div>
@@ -74,19 +59,6 @@ export default {
       let element = document.getElementById("vx" + first + "vy" + second);
       element.style.backgroundColor = '#80ba24';
       element.classList.add("painted");
-    },
-    resetPaintedFields() {
-      this.rotate();
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        if (!el.id.includes("v")) {
-          el.classList.remove("painted");
-        }
-      });
-      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
-        if (!el.classList.contains("painted")) {
-          el.style.backgroundColor = '#ffffff';
-        }
-      });
     },
   },
   mounted(){ 

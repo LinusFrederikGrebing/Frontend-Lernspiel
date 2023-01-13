@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img id="mouse-cursor" src="../assets/mouse-cursor.png">
     <v-container class="bg-color1">
       <v-row no-gutters>
         <v-col cols="12" sm="6" md="8">
@@ -158,6 +159,13 @@ export default {
     border-right: 2px solid rgba(255,255,255,.75);
     white-space: nowrap;
     overflow: hidden;
+}
+
+#mouse-cursor {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  visibility: hidden;
 }
 
 /* Animation */

@@ -2,7 +2,6 @@
   <div id="container" class="d-f">
     <transition appear @enter="enter">
       <v-btn
-      color="deep-purple lighten-5"
         depressed
         elevation="1"
         @click="
@@ -13,12 +12,13 @@
       </v-btn>
     </transition>
     <transition appear @enter="enter">
-      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="deep-purple lighten-5" depressed elevation="1"
+      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" depressed elevation="1"
         @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
     </transition>
     <transition appear @enter="enterInput">
       <CodeEditor
         v-if="editorActive"
+        id="code-editor"
         height="30vh"
         width="25vw"
         v-model="codeToRun"
@@ -41,6 +41,7 @@
       <transition appear  @enter="enter">
         <v-btn
           color="success"
+          id="button-finished"
           depressed
           elevation="2"
           @click="runfunction"
@@ -58,7 +59,16 @@
           Color
         </v-btn>
       </transition>
-      <transition appear @enter="enter">
+      <transition appear  @enter="enter">
+        <v-btn
+          class="reset-btn"
+          depressed
+          elevation="2"
+          @click="animateTutorial()"
+        >
+          Reset
+        </v-btn>
+      </transition>
       <v-color-picker
           v-if="colorPicker"
           @click="changeColor(color)"
@@ -69,7 +79,6 @@
           hide-mode-switch
           swatches-max-height="250"
           ></v-color-picker>          
-      </transition>
     </div>
   </div>
 </template>
@@ -98,6 +107,87 @@ export default {
   },
 
   methods: {
+    animateTutorial() {
+      var timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      var timelineToButton = gsap.timeline({callbackScope: timelineToEditor,repeat: 0, repeatDelay: 0, });
+      let codeEditor = document.querySelector("#code-editor");
+      let buttonFinished = document.querySelector("#button-finished");
+      //console.log("EINS")
+      let x = parseInt(codeEditor.offsetWidth) / 4;
+      let y = parseInt(codeEditor.offsetHeight) / 4;
+      while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
+      x += codeEditor.offsetLeft - codeEditor.scrollLeft;
+      y += codeEditor.offsetTop - codeEditor.scrollTop;
+      codeEditor = codeEditor.offsetParent;
+      }
+      //console.log("DAS X IST:" + x);
+      //console.log("ZWEI " + rectStartElem.top)
+      timelineToEditor.to("#mouse-cursor", {duration: 3, x: x, y: y, visibility: "visible", zIndex: 4});
+      timelineToEditor.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
+      timelineToEditor.eventCallback("onComplete", () => {
+        this.animateCodeEditor();
+        let x = 0;
+        let y = 0;
+        while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
+        x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
+        y += buttonFinished.offsetTop - buttonFinished.scrollTop;
+        buttonFinished = buttonFinished.offsetParent;
+      }
+
+      timelineToButton.to("#mouse-cursor", {duration: 1, x: x, y: y});
+      timelineToButton.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
+      timelineToButton.eventCallback("onComplete", this.runfunction());
+      });
+      //console.log("DREI ")
+    },
+    animateCodeEditor() {
+      this.editorActive = true;
+      let tutorialCode = "paint(1,1);"
+      let index = 0;
+      this.codeToRun = "";
+      let intervalId = setInterval(() => {
+        if (index >= tutorialCode.length) {
+          clearInterval(intervalId);
+          return;
+        }
+        this.codeToRun += tutorialCode.substring(index,index+1);
+        index++;
+      }, 250); 
+    },
+    resetPaintedFields() {
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        if (!el.id.includes("v")) {
+          el.classList.remove("painted");
+        }
+      });
+      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
+        if (!el.classList.contains("painted")) {
+          el.style.backgroundColor = '#ffffff';
+        }
+      });
+      this.levelAnimation();
+    },
+    levelAnimation() {
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let element = document.getElementById("x" + i + "y" + j);
+          gsap.to(element, {
+            duration: 1,
+            scale: 0.2,
+            y: 60,
+            yoyo: true,
+            repeat: 1,
+            ease: "power1.inOut",
+            delay: Math.random(),
+            stagger: {
+              amount: 1.5,
+              grid: "auto",
+              from: "center",
+            },
+          });
+        }
+      }
+    },
     changeColor(clr) {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = clr;
@@ -399,6 +489,10 @@ export default {
   background-color: white;
 }
 
+.reset-btn {
+  background-color: red !important;
+}
+
 .greenText {
   background-color: rgba(128, 186, 36, 0.4) !important;
   color: rgba(128, 186, 36, 0.4) !important;
@@ -410,8 +504,7 @@ export default {
 
 .console_warning {
   animation: warning 2s linear infinite;
-  color: red !important;
-  font-weight: bold;
+  background-color: red !important;
 }
 
 @keyframes warning {
