@@ -5,9 +5,11 @@ import router from './router'
 import scrollanimation from "./directives/scrollanimation"
 
 Vue.directive("scrollanimation", scrollanimation);
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.config.productionTip = false
-
+Vue.use(VueSweetalert2);
 new Vue({
   vuetify,
   router,

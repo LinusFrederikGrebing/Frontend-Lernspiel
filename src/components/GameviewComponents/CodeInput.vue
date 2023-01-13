@@ -1,8 +1,7 @@
 <template>
   <div id="container" class="d-f">
-    <transition appear @before-enter="beforeEnter" @enter="enter">
+    <transition appear @enter="enter">
       <v-btn
-      color="deep-purple lighten-5"
         depressed
         elevation="1"
         @click="
@@ -12,13 +11,14 @@
         Editor
       </v-btn>
     </transition>
-    <transition appear @before-enter="beforeEnter" @enter="enter">
-      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" color="deep-purple lighten-5" depressed elevation="1"
+    <transition appear @enter="enter">
+      <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" depressed elevation="1"
         @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
     </transition>
-    <transition appear @before-enter="beforeEnter" @enter="enterInput">
+    <transition appear @enter="enterInput">
       <CodeEditor
         v-if="editorActive"
+        id="code-editor"
         height="30vh"
         width="25vw"
         v-model="codeToRun"
@@ -26,21 +26,22 @@
       >
       </CodeEditor>
     </transition>
-    <transition appear @before-enter="beforeEnter" @enter="enterInput">
+    <transition appear @enter="enterInput">
     <v-textarea 
     :readonly=true
     v-if="consoleActive" v-model="errorMessage"
       :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}]"></v-textarea>
     </transition>
     <div>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear @enter="enter">
         <v-btn color="warning" depressed elevation="2" @click="checkResult">
           Validate
         </v-btn>
       </transition>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear  @enter="enter">
         <v-btn
           color="success"
+          id="button-finished"
           depressed
           elevation="2"
           @click="runfunction"
@@ -48,7 +49,7 @@
           Finished
         </v-btn>
       </transition>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear @enter="enter">
         <v-btn
           :style="{backgroundColor:color}"
           depressed
@@ -58,10 +59,19 @@
           Color
         </v-btn>
       </transition>
-      <transition appear @before-enter="beforeEnter" @enter="enter">
+      <transition appear  @enter="enter">
+        <v-btn
+          class="reset-btn"
+          depressed
+          elevation="2"
+          @click="animateTutorial()"
+        >
+          Reset
+        </v-btn>
+      </transition>
       <v-color-picker
           v-if="colorPicker"
-          @click.native="changeColor(color)"
+          @click="changeColor(color)"
           v-model="color"
           dot-size="6"
           mode="hexa"
@@ -69,7 +79,6 @@
           hide-mode-switch
           swatches-max-height="250"
           ></v-color-picker>          
-      </transition>
     </div>
   </div>
 </template>
@@ -85,10 +94,10 @@ export default {
   },
   data: () => {
     return {
-      color: '#cc00cc',
+      color: '#80ba24',
       levelElements: [],
       paintedElements: [],
-      colorPicker: true,
+      colorPicker: false,
       editorActive: true,
       errorMessage: 'Keine Fehlermeldung!',
       consoleActive: false,
@@ -98,16 +107,92 @@ export default {
   },
 
   methods: {
+    animateTutorial() {
+      var timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      var timelineToButton = gsap.timeline({callbackScope: timelineToEditor,repeat: 0, repeatDelay: 0, });
+      let codeEditor = document.querySelector("#code-editor");
+      let buttonFinished = document.querySelector("#button-finished");
+      //console.log("EINS")
+      let x = parseInt(codeEditor.offsetWidth) / 4;
+      let y = parseInt(codeEditor.offsetHeight) / 4;
+      while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
+      x += codeEditor.offsetLeft - codeEditor.scrollLeft;
+      y += codeEditor.offsetTop - codeEditor.scrollTop;
+      codeEditor = codeEditor.offsetParent;
+      }
+      //console.log("DAS X IST:" + x);
+      //console.log("ZWEI " + rectStartElem.top)
+      timelineToEditor.to("#mouse-cursor", {duration: 3, x: x, y: y, visibility: "visible", zIndex: 4});
+      timelineToEditor.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
+      timelineToEditor.eventCallback("onComplete", () => {
+        this.animateCodeEditor();
+        let x = 0;
+        let y = 0;
+        while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
+        x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
+        y += buttonFinished.offsetTop - buttonFinished.scrollTop;
+        buttonFinished = buttonFinished.offsetParent;
+      }
+
+      timelineToButton.to("#mouse-cursor", {duration: 1, x: x, y: y});
+      timelineToButton.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
+      timelineToButton.eventCallback("onComplete", this.runfunction());
+      });
+      //console.log("DREI ")
+    },
+    animateCodeEditor() {
+      this.editorActive = true;
+      let tutorialCode = "paint(1,1);"
+      let index = 0;
+      this.codeToRun = "";
+      let intervalId = setInterval(() => {
+        if (index >= tutorialCode.length) {
+          clearInterval(intervalId);
+          return;
+        }
+        this.codeToRun += tutorialCode.substring(index,index+1);
+        index++;
+      }, 250); 
+    },
+    resetPaintedFields() {
+      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
+        if (!el.id.includes("v")) {
+          el.classList.remove("painted");
+        }
+      });
+      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
+        if (!el.classList.contains("painted")) {
+          el.style.backgroundColor = '#ffffff';
+        }
+      });
+      this.levelAnimation();
+    },
+    levelAnimation() {
+      for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+          let element = document.getElementById("x" + i + "y" + j);
+          gsap.to(element, {
+            duration: 1,
+            scale: 0.2,
+            y: 60,
+            yoyo: true,
+            repeat: 1,
+            ease: "power1.inOut",
+            delay: Math.random(),
+            stagger: {
+              amount: 1.5,
+              grid: "auto",
+              from: "center",
+            },
+          });
+        }
+      }
+    },
     changeColor(clr) {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = clr;
-        }); 
+      }); 
       this.$emit('change-color',clr);
-    },
-    beforeEnter(el) {
-      el.style.opacity = "0";
-      el.style.transform = "translateX(-100px)";
-      el.style.transform = "translateY(-100px)";
     },
     enter(el) {
       gsap.fromTo(
@@ -119,7 +204,7 @@ export default {
     enterInput(el) {
       gsap.fromTo(
         el,
-        { y: 0, x: +200 },
+        { y: 0, x: +200, opacity: 0 },
         { delay: 0, duration: 1, y: 0, x: 0, opacity: 1 }
       );
     },
@@ -147,8 +232,50 @@ export default {
         Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.classList.remove("painted");
         });
-        this.$emit("success");
-      } else this.$emit("failure");
+        this.showAlertSuccess();
+      } else this.showAlertFailure();
+    },
+    showAlertSuccess() {
+      // Use sweetalert2
+      this.$swal( 
+        {
+        title: 'Hervorragend!',
+        text: "Du hast das Level gemeistert! Nun kannst du dich an an dem nächsten Level versuchen!",
+        icon: 'success',
+        showCancelButton: true,
+        confirmButtonColor: '#6D9E1F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Nächstes Level!',
+        cancelButtonText: 'Zur Levelauswahl!',
+        allowOutsideClick: false, }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit("success");
+        } else {
+          this.$router.push({ path: '/LevelSelect' });
+        }
+      }
+      );
+    },
+    showAlertFailure() {
+      // Use sweetalert2
+      this.$swal({
+        title: 'Beim nächsten Mal...!',
+        text: "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt!",
+        icon: 'error',
+        showCancelButton: true,
+        confirmButtonColor: '#6D9E1F',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Level wiederholen!',
+        cancelButtonText: 'Zur Levelauswahl!',
+        allowOutsideClick: false
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$emit("failure");
+        } else {
+          this.$router.push({ path: '/LevelSelect' });
+        }
+      }
+      );
     },
     areEqual(array1, array2) {
       if (array1.length === array2.length) {
@@ -336,6 +463,7 @@ export default {
 
   watch: {
     color(newVal, oldVal) {
+      console.log(this.color)
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = this.color;
       });
@@ -346,6 +474,10 @@ export default {
       });
     }
   },
+  mounted(){
+    console.log(this.color)
+    this.color = '#80ba24'
+  }
 
 };
 </script>
@@ -355,6 +487,10 @@ export default {
 
 .consoleArea {
   background-color: white;
+}
+
+.reset-btn {
+  background-color: red !important;
 }
 
 .greenText {
@@ -368,8 +504,7 @@ export default {
 
 .console_warning {
   animation: warning 2s linear infinite;
-  color: red !important;
-  font-weight: bold;
+  background-color: red !important;
 }
 
 @keyframes warning {
