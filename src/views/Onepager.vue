@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <v-parallax height="6250" :src="`${require(`@/assets/Hexagon3.svg`)}`">
+  <div class="sec">
+    <v-parallax height="5500" :src="`${require(`@/assets/Hexagon3.svg`)}`">
+      <div>
+
+      
       <div class="learning_goals">
         <OnePagerWhy />
       </div>
@@ -17,13 +20,14 @@
         <OnePagerGoals />
       </div>
 
-      <div class="page_section help_template d-sm-none">
-        <HelpTemplateMobile class="d-sm-none" />
+      <div class="page_section help_template d-xs-none">
+        <HelpTemplateMobile class="d-xs-none" />
       </div>
 
       <div class="page_section help_template hidden-xs-only">
         <HelpTemplateDesktop class="hidden-xs-only"/>
       </div>
+    </div>
     </v-parallax>
   </div>
 </template>
@@ -33,7 +37,7 @@ import OnePagerIntroduction from "@/components/OnePagerComponents/OnePagerIntrod
 import OnePagerTutorialSection from "@/components/OnePagerComponents/OnePagerTutorialSection";
 import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
 import OnePagerGoals from "@/components/OnePagerComponents/OnePagerGoals";
-import OnePagerWhy from "@/components/OnePagerWhy";
+import OnePagerWhy from "@/components/OnePagerComponents/OnePagerWhy";
 import LevelSelect from "@/views/LevelSelect";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
@@ -90,8 +94,11 @@ export default {
 };
 </script>
 <style scoped>
+.sec{
+  background: rgba(255, 255, 255, 0.7)    /*  40% opaque green */ 
+}
+
 .page_section {
-  margin-top: 13em;
 }
 .header {
   margin: 1em 2em;

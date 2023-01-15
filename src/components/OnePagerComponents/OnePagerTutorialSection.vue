@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="containerpadding">
     <v-card
       elevation="24"
       outlined
@@ -9,37 +9,44 @@
       class="header">
        <h1 class="h1 font-weight-black"> - Tutorial - </h1>
     </v-card>
-    <div class="d-flex justify-center tutorial">
-    <div class="container2">
-          <v-row no-gutters v-for="y in 2" :key="y">
-                <v-col no-gutters v-for="x in 2" :key="x">
-                  <transition>
-                    <v-card class="" elevation="18" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
-                  </transition>
-                </v-col>
-          </v-row>
-    </div>
-    <div class="editor">
-    <CodeEditor
-       :read_only="true"
-        font_size="37px"
-        height="440px"
-        width="805px"
-        v-model="actualCodeToRun"
-      >
-      </CodeEditor>
-        <v-btn color="warning" depressed elevation="2">
-          Validate
-        </v-btn>
-        <v-btn
-          color="success"
-          depressed
-          elevation="2"
-        >
-          Finished
-        </v-btn>
-    </div>
-  </div>
+    <v-card
+      elevation="10"
+      outlined
+      height="40em"
+      width="120em"
+      class="">
+        <div class="display-flex justify-center tutorial">
+        <div class="container2">
+              <v-row no-gutters v-for="y in 2" :key="y">
+                    <v-col no-gutters v-for="x in 2" :key="x">
+                      <transition>
+                        <v-card class="" elevation="18" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
+                      </transition>
+                    </v-col>
+              </v-row>
+        </div>
+        <div class="editor">
+        <CodeEditor
+          :read_only="true"
+            font_size="37px"
+            height="440px"
+            width="805px"
+            v-model="actualCodeToRun"
+          >
+          </CodeEditor>
+            <v-btn color="warning" depressed elevation="2">
+              Validate
+            </v-btn>
+            <v-btn
+              color="success"
+              depressed
+              elevation="2"
+            >
+              Finished
+            </v-btn>
+        </div>
+      </div>
+  </v-card>
   </v-container>
 </template>
 
@@ -69,8 +76,7 @@ export default {
           };
           this.delay(6500).then(() => this.paintTutorialField(1,1));
           this.delay(10000).then(() => this.actualCodeToRun="" );
-          this.delay(10000).then(() => this.resetPaintedFields());
-          this.delay(10000).then(() => this.tutorialAnimation());
+       ;
           
     },
     paintTutorialField(first, second) {
@@ -95,6 +101,9 @@ export default {
 </script>
 
 <style scoped>
+.containerpadding{
+  padding-bottom: 30em;
+}
 .header {
   margin-top: 10em;
 }
@@ -123,5 +132,15 @@ export default {
   width: 15em;
   height: 15em;
 }
+@media only screen and (min-device-width: 1900px) {
+  .display-flex{
+    display: flex;
+  }
+}
 
+@media only screen and (min-device-width: 0px) and (max-device-width: 1900px) {
+  .container2{
+    margin: auto;
+  }
+}
 </style>

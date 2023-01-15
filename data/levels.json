@@ -3,6 +3,7 @@
       {
         "id":"1",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "loesungsweg": "PaintAufruf",
         "difficulty": 1.5,
         "patternCode":"this.paint(1,1);",
@@ -12,6 +13,7 @@
       {
         "id":"2",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 2,
         "patternCode":"this.paint(1,1); this.paint(1,3)",
         "completed": "false",
@@ -21,6 +23,7 @@
       {
         "id":"3",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
@@ -30,6 +33,7 @@
       {
         "id":"4",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 4,
         "patternCode":"for(let i = 0; i<10; i++){ this.paint(i,i) }",
         "completed": "false",
@@ -38,6 +42,7 @@
       {
         "id":"5",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 5,
         "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false",
@@ -47,6 +52,7 @@
       {
         "id":"6",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
@@ -56,6 +62,7 @@
       {
         "id":"7",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 2,
         "patternCode":"this.paint(1,1); this.paint(1,3)",
         "completed": "false",
@@ -65,6 +72,7 @@
       {
         "id":"8",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
@@ -74,6 +82,7 @@
       {
         "id":"9",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
@@ -83,6 +92,7 @@
       {
         "id":"10",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "bestTimeinSek": 0,
         "difficulty": 5,
         "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false",
