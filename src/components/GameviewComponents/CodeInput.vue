@@ -107,6 +107,7 @@ export default {
   },
   data: () => {
     return {
+      solution: "",
       color: '#80ba24',
       levelElements: [],
       paintedElements: [],
@@ -250,6 +251,8 @@ export default {
       let allElements = document.getElementsByClassName("painted");
       this.levelElements = [];
       this.paintedElements = [];
+      let requiredSolution = this.currentLevel.id;
+      console.log("THE REQUIRED SOLUTION IS: " + requiredSolution);
       for (let i = 0; i < allElements.length; i++) {
         if (allElements[i].id.includes("v")) {
           this.levelElements.push(allElements[i].id.replace(/\D/g, ""));
@@ -257,6 +260,9 @@ export default {
           this.paintedElements.push(allElements[i].id.replace(/\D/g, ""));
         }
       }
+
+      
+
       if (this.areEqual(this.levelElements, this.paintedElements)) {
         this.levelElements = [];
         this.paintedElements = [];
@@ -337,6 +343,7 @@ export default {
     runfunction() {
       this.errorMessage = '';
       //let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
+      this.checkWhichSolutionUsed(this.codeToRun);
       let paintStr = 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\nelement.classList.add("painted");}\n';
       let checkParamValueStr = 'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n'
       let evalCode = this.codeToRun;
@@ -383,6 +390,18 @@ export default {
          //console.log("RestCode: " + "[" + restCode + "]");
          return [newReturnCode,this.InsertForLoopInfinitySafety(restCode)].join('');
       }
+    },
+    checkWhichSolutionUsed(code){
+      let paintCall = code.search("paint");
+      let forCall = code.search("for");
+      let whileCall = code.search("while");
+      let doCall = code.search("do");
+      let functionCall = code.search("paint");
+      if (functionCall > 0) this.result = "Funktion";
+      else if (whileCall > 0 && whileCall == doCall && forCall == -1) this.result = "DoWhileSchleife";
+      else if (whileCall > 0 && doCall == -1 && forCall == -1) this.result = "WhileSchleife";
+      else if (forCall > 0 && doCall == -1 && whileCall == -1) this.result = "ForSchleife";
+      else if (forCall == -1 && doCall == -1 && whileCall == -1) this.result = "PaintAufruf";
     },
     InsertWhileInfinitySafety(code) {
       var doCount = (code.match(/do/g) || []).length;
@@ -492,8 +511,19 @@ export default {
       else this.errorMessage = error;
     },
   },
-
+  computed: {
+    currentLevel() {
+      if (localStorage.getItem("currentLevel") !== null) {
+        return JSON.parse(localStorage.getItem("currentLevel"));
+      } 
+    },
+  },
   watch: {
+    currentLevel() {
+      if (localStorage.getItem("currentLevel") !== null) {
+        return JSON.parse(localStorage.getItem("currentLevel"));
+      } 
+    },
     color(newVal, oldVal) {
       console.log(this.color)
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {

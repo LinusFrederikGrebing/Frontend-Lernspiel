@@ -35,14 +35,14 @@
           >
           </CodeEditor>
             <v-btn color="warning" depressed elevation="2">
-              Validate
+              Validieren
             </v-btn>
             <v-btn
               color="success"
               depressed
               elevation="2"
             >
-              Finished
+              Ausführen
             </v-btn>
         </div>
       </div>

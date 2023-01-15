@@ -9,6 +9,7 @@
         <v-col cols="6" md="4">
           <TemplateGrid :currentLevel="currentLevel" :color="color" />
           <CodeInput
+            :currentLevel="currentLevel"
             @success="
               nextLevel(currentLevelId);
             "
