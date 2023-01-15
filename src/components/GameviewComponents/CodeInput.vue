@@ -121,11 +121,16 @@ export default {
 
   methods: {
     animateTutorial() {
-      var timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      const preventClicksListener = function(event) {
+        event.preventDefault();
+      };
+      document.body.style.pointerEvents = "none";
+      let timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
       let codeEditor = document.querySelector("#code-editor");
       let header = document.querySelector('.header');
       let headerHeight = parseInt(header.offsetHeight);
       //console.log("EINS")
+      gsap.to("#mouse-cursor", {duration: 0, x: 0, y: 0});
       let x = window.pageXOffset + parseInt(codeEditor.offsetWidth) / 4;
       let y = window.pageXOffset + parseInt(codeEditor.offsetHeight) / 2 - headerHeight;
       while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
@@ -138,15 +143,15 @@ export default {
       timelineToEditor.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
       timelineToEditor.eventCallback("onComplete", () => {
         this.animateCodeEditor();
-        this.delay(3000).then(() => this.animatePathToButton() );
+        this.delay(3000).then(() => this.animatePathToButton());
+        this.delay(5000).then(() => document.body.style.pointerEvents = "");
       })        
-      //console.log("DREI ")
     },
     delay(time) {
      return new Promise(resolve => setTimeout(resolve, time));
     },
     animatePathToButton() {
-      var timelineToButton = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      let timelineToButton = gsap.timeline({repeat: 0, repeatDelay: 0, });
       let buttonFinished = document.querySelector("#button-finished");
       let header = document.querySelector('.header');
       let headerHeight = parseInt(header.offsetHeight);
