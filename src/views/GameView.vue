@@ -34,7 +34,7 @@ export default {
   },
 
   data: () => ({
-    color: 'null',
+    color: '#80ba24',
     levels: [],
     currentLevel: null,
     currentLevelId: null,

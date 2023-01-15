@@ -13,7 +13,9 @@
     </transition>
     <transition appear @enter="enter">
       <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" depressed elevation="1"
-        @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
+        @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">
+        Konsole
+      </v-btn>
     </transition>
     <transition appear @enter="enterInput">
       <CodeEditor
@@ -35,7 +37,7 @@
     <div>
       <transition appear @enter="enter">
         <v-btn color="warning" depressed elevation="2" @click="checkResult">
-          Validate
+          Validieren
         </v-btn>
       </transition>
       <transition appear  @enter="enter">
@@ -46,7 +48,7 @@
           elevation="2"
           @click="runfunction"
         >
-          Finished
+          Ausführen
         </v-btn>
       </transition>
       <transition appear @enter="enter">
@@ -56,7 +58,7 @@
           elevation="2"
           @click="colorPicker ? colorPicker = false : colorPicker = true"
         >
-          Color
+          Farbenauswahl
         </v-btn>
       </transition>
       <transition appear  @enter="enter">
@@ -64,11 +66,21 @@
           class="reset-btn"
           depressed
           elevation="2"
-          @click="animateTutorial()"
+          @click="levelAnimation()"
         >
           Reset
         </v-btn>
       </transition>
+      <transition appear  @enter="enter">
+        <v-btn
+          depressed
+          elevation="2"
+          @click="animateTutorial()"
+        >
+          Tutorial
+        </v-btn>
+      </transition>
+      <div v-on:mouseout="changeColor(color)">
       <v-color-picker
           v-if="colorPicker"
           @click="changeColor(color)"
@@ -78,7 +90,8 @@
           hid-inputs
           hide-mode-switch
           swatches-max-height="250"
-          ></v-color-picker>          
+          ></v-color-picker>  
+        </div>        
     </div>
   </div>
 </template>
@@ -109,36 +122,48 @@ export default {
   methods: {
     animateTutorial() {
       var timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
-      var timelineToButton = gsap.timeline({callbackScope: timelineToEditor,repeat: 0, repeatDelay: 0, });
       let codeEditor = document.querySelector("#code-editor");
-      let buttonFinished = document.querySelector("#button-finished");
+      let header = document.querySelector('.header');
+      let headerHeight = parseInt(header.offsetHeight);
       //console.log("EINS")
-      let x = parseInt(codeEditor.offsetWidth) / 4;
-      let y = parseInt(codeEditor.offsetHeight) / 4;
+      let x = window.pageXOffset + parseInt(codeEditor.offsetWidth) / 4;
+      let y = window.pageXOffset + parseInt(codeEditor.offsetHeight) / 2 - headerHeight;
       while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
       x += codeEditor.offsetLeft - codeEditor.scrollLeft;
       y += codeEditor.offsetTop - codeEditor.scrollTop;
       codeEditor = codeEditor.offsetParent;
       }
-      //console.log("DAS X IST:" + x);
       //console.log("ZWEI " + rectStartElem.top)
       timelineToEditor.to("#mouse-cursor", {duration: 3, x: x, y: y, visibility: "visible", zIndex: 4});
       timelineToEditor.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
       timelineToEditor.eventCallback("onComplete", () => {
         this.animateCodeEditor();
-        let x = 0;
-        let y = 0;
-        while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
-        x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
-        y += buttonFinished.offsetTop - buttonFinished.scrollTop;
+        this.delay(3000).then(() => this.animatePathToButton() );
+      })        
+      //console.log("DREI ")
+    },
+    delay(time) {
+     return new Promise(resolve => setTimeout(resolve, time));
+    },
+    animatePathToButton() {
+      var timelineToButton = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      let buttonFinished = document.querySelector("#button-finished");
+      let header = document.querySelector('.header');
+      let headerHeight = parseInt(header.offsetHeight);
+      let x2 = window.pageXOffset + parseInt(buttonFinished.offsetWidth) / 2;
+      let y2 = window.pageYOffset + parseInt(buttonFinished.offsetHeight) / 2 - headerHeight;
+      while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
+        x2 += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
+        y2 += buttonFinished.offsetTop - buttonFinished.scrollTop;
         buttonFinished = buttonFinished.offsetParent;
       }
-
-      timelineToButton.to("#mouse-cursor", {duration: 1, x: x, y: y});
+      timelineToButton.to("#mouse-cursor", {duration: 1, x: x2, y: y2});
       timelineToButton.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
-      timelineToButton.eventCallback("onComplete", this.runfunction());
-      });
-      //console.log("DREI ")
+      timelineToButton.eventCallback("onComplete", () => {
+        this.runfunction()
+        document.querySelector("#mouse-cursor").style.visibility = "hidden";
+      }
+        );
     },
     animateCodeEditor() {
       this.editorActive = true;
@@ -165,13 +190,14 @@ export default {
           el.style.backgroundColor = '#ffffff';
         }
       });
-      this.levelAnimation();
+
     },
     levelAnimation() {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           let element = document.getElementById("x" + i + "y" + j);
           gsap.to(element, {
+            onUpdate: this.resetPaintedFields(),
             duration: 1,
             scale: 0.2,
             y: 60,
