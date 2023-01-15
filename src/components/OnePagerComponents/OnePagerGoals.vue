@@ -9,7 +9,11 @@
        <h1 class="h1 font-weight-black">- Lernziele
          -</h1>
     </v-card>
-   
+    <v-card
+      elevation="10"
+      outlined
+      height="60em"
+      class="">
     <div class="flex_container"  v-for="(item, index) in items" :key="index" >
       <div class="seccontainer">
         <div :id="'section' + index"  class="section"> <img class="rund item" :src="item.img" width="200px" alt="">
@@ -24,6 +28,7 @@
         </div>
       </div>
     </div>
+  </v-card>
   </v-container>
 </template>
 
@@ -97,8 +102,12 @@ export default {
 </script>
 
 <style scoped>
+@media only screen and (min-device-width: 1600px) {
 .header{
-  margin-bottom: 5em;
+  padding-bottom: 5em;
+}
+.sec{
+  background: rgba(255, 255, 255, 0)    /*  40% opaque green */ 
 }
 h1,p{
   color: black;
@@ -138,5 +147,38 @@ h1,p{
   border-radius: 200px;
   -moz-border-radius: 200px;
   -webkit-border-radius: 200px
+}
+}
+
+@media only screen and (min-device-width: 0px) and (max-device-width: 1600px) {
+  .section{ 
+    justify-content: center;
+    display: inline-flex;
+    position: relative;
+    width: 45em;
+  
+  }
+  .item{
+  
+    background-color: #4a5c66;
+    padding: 2em;
+  }
+
+  .rund {
+    border-radius: 200px;
+    -moz-border-radius: 200px;
+    -webkit-border-radius: 200px
+  }
+  .seccontainer {
+    display: flex;
+    justify-content: center;
+     margin-top: 1.5em;
+  }
+  .text {
+  width: 40em;
+  padding: 2em;
+  
+  top: 1em;
+}
 }
 </style>

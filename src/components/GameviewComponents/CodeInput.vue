@@ -262,7 +262,8 @@ export default {
         this.paintedElements = [];
         Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.classList.remove("painted");
-        });
+        }); 
+        this.$emit("timer");
         this.showAlertSuccess();
       } else this.showAlertFailure();
     },

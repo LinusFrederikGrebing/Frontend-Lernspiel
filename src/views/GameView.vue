@@ -12,6 +12,7 @@
             @success="
               nextLevel(currentLevelId);
             "
+            @timer="setTime(currentLevelId)"
             @change-color="changeColor"
           />
         </v-col>
@@ -34,6 +35,8 @@ export default {
   },
 
   data: () => ({
+    startTime: null,
+    time: null,
     color: '#80ba24',
     levels: [],
     currentLevel: null,
@@ -54,7 +57,23 @@ export default {
       element.classList.add("painted");
     },
 
+    setTime(indexNextLevel){
+      this.time = (new Date() - this.startTime)/1000;
+      console.log(this.currentLevel.bestTimeinSek)
+      console.log(this.time)
+      if(this.currentLevel.bestTimeinSek > this.time) {
+        this.levels[indexNextLevel - 1].bestTimeinSek = this.time;
+      }
+     
+      this.levels[indexNextLevel - 1].completed = true;
+      localStorage.setItem(
+        "levels", 
+        JSON.stringify(this.levels)
+      );
+    },
+
     nextLevel(indexNextLevel) {
+      this.startTime = new Date();
       this.levels[indexNextLevel - 1].completed = true;
       this.currentLevel = this.levels[indexNextLevel];
       this.currentLevelId = this.currentLevel.id;
@@ -101,6 +120,8 @@ export default {
   },
 
   mounted() {
+    this.startTime = new Date();
+
     if (localStorage.getItem("levels") !== null) {
       this.levels = JSON.parse(localStorage.getItem("levels"));
     } else {
@@ -119,7 +140,6 @@ export default {
   
  
   watch: {
-    
     currentLevel(newVal, oldVal) {
       console.log("im WATCH");
       if (oldVal !== null && oldVal !== undefined) {

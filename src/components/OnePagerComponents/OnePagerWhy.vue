@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div class="b/ackground-image"></div>
+    <div class="b/ackground-image" ></div>
     <v-row>
       <v-col class="text-center my-8">
         <v-card
@@ -23,20 +23,21 @@
       <v-col
           v-for="(item, index) in items"
           :key="index"
-          cols="1"
-          xs="1" 
-         
-          sm="1" 
-          md="1"
-          class=""
-      >79
+          cols="12"
+          xs="12" 
+          sm="12" 
+          md="12"
+          xl="4"
+          class="text-center"
+      >
         <v-card
             :id="'goal'+index"
-            style="height: 25em"
+            style="min-height: 25em"
             elevation="24"
             outlined
             shaped
             @mouseenter="hoverEnter($event)" @mouseleave="hoverLeave($event)"
+            class=""
         >
           <v-avatar size="100" class="ma-8">
             <v-img :src="item.link"></v-img>
@@ -59,7 +60,7 @@ import OnePagerTryMe from "./OnePagerTryMe";
 import gsap from "gsap";
 
 export default {
-  name: "OnePagerLearningGoals",
+  name: "OnePagerWhy",
   components: {
     OnePagerTryMe
   },
@@ -186,6 +187,10 @@ mounted() {
 </script>
 
 <style scoped>
+
+.test{
+  margin-top: 20em;
+}
 .flex{
   display: flex;
   justify-content: center;

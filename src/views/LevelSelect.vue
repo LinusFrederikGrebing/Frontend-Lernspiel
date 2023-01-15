@@ -23,7 +23,7 @@
           <v-img
             class="white--text align-end"
             height="18em"
-            src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+            :src= "require(`@/assets/${level.img}`)"
           >
             <div :id="'lockIcon' + index" class="zentriertLockIcon">
               <v-icon
@@ -63,7 +63,9 @@
           >
             Start
           </v-btn>
-
+          <v-card-title v-if="level.bestTimeinSek > 0" >
+            Bestzeit: {{level.bestTimeinSek }} Sekunden
+          </v-card-title>
           <v-tooltip bottom color="success">
             <template v-slot:activator="{ on, attrs }">
               <v-icon
