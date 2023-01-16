@@ -73,21 +73,6 @@ export default {
       } 
     },
   },
-  watch: {
-    currentLevel(newVal, oldVal) {
-      console.log("change test");
-      eval(newVal.patternCode)
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        if(this.color == null){
-          el.style.backgroundColor = '#CC00CC';
-        } else {
-          el.style.backgroundColor = this.color;
-        }
-     
-        console.log(el.id);
-        });
-    },
-  }
 };
 </script>
 <style scoped>
