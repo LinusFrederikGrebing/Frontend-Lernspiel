@@ -12,12 +12,12 @@
     <v-card
       elevation="10"
       outlined
-      height="40em"
-      width="120em"
+     height="100%"
+      width="100%"
       class="">
         <div class="display-flex justify-center tutorial">
         <div class="container2">
-              <v-row no-gutters v-for="y in 2" :key="y">
+              <v-row no-gutters v-for="y in 2" :key="y" class="">
                     <v-col no-gutters v-for="x in 2" :key="x">
                       <transition>
                         <v-card class="" elevation="18" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
@@ -101,9 +101,6 @@ export default {
 </script>
 
 <style scoped>
-.containerpadding{
-  padding-bottom: 30em;
-}
 .header {
   margin-top: 10em;
 }
@@ -136,11 +133,22 @@ export default {
   .display-flex{
     display: flex;
   }
+  .containerpadding{
+    padding-bottom: 30em;
+  }
 }
 
 @media only screen and (min-device-width: 0px) and (max-device-width: 1900px) {
   .container2{
-    margin: auto;
+    margin-left: 13em;
+    text-align: center;
   }
+  .editor{
+    margin-top: 2em;
+    margin-left: 2em;
+  }
+  .containerpadding{
+   padding-bottom: 10em;
+}
 }
 </style>
