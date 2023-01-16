@@ -1,6 +1,6 @@
 <template>
   <div class="sec">
-    <v-parallax height="5500" :src="`${require(`@/assets/Hexagon3.svg`)}`">
+    <v-parallax :height="height" :src="`${require(`@/assets/Hexagon3.svg`)}`">
       <div>
 
       
@@ -91,6 +91,17 @@ export default {
       },
     });
   },
+  computed: {
+      height () {
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 6400
+          case 'sm': return 6000
+          case 'md': return 6000
+          case 'lg': return 5200
+          case 'xl': return 5000
+        }
+      },
+    },
 };
 </script>
 <style scoped>

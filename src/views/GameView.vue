@@ -61,8 +61,9 @@ export default {
       this.time = (new Date() - this.startTime)/1000;
       console.log(this.currentLevel.bestTimeinSek)
       console.log(this.time)
-      if(this.currentLevel.bestTimeinSek > this.time) {
+      if(this.currentLevel.bestTimeinSek == 0 || this.currentLevel.bestTimeinSek == 0 > this.time) {
         this.levels[indexNextLevel - 1].bestTimeinSek = this.time;
+        console.log("test")
       }
      
       this.levels[indexNextLevel - 1].completed = true;
