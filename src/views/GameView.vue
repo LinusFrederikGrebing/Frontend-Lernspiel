@@ -9,6 +9,7 @@
         <v-col cols="6" md="4">
           <TemplateGrid :currentLevel="currentLevel" :color="color" />
           <CodeInput
+            :currentLevel="currentLevel"
             @success="
               nextLevel(currentLevelId);
             "
@@ -37,7 +38,7 @@ export default {
   data: () => ({
     startTime: null,
     time: null,
-    color: 'null',
+    color: '#80ba24',
     levels: [],
     currentLevel: null,
     currentLevelId: null,
