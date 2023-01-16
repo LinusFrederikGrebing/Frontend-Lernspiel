@@ -3,73 +3,74 @@
       {
         "id":"1",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "loesungsweg": "PaintAufruf",
-        "difficulty": 1.5,
+        "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
-        "description": "<h3>Hallo und Herzlich Wilkommen zu Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit</p> <p class=\"line-1 anim-typewriter3\"> bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen.</p> <p class=\"line-1 anim-typewriter4\"> Das Feld einzeichen kannst Du mit der Methode: <b>paint(x, y)</b>.</p> <p class=\"line-1 anim-typewriter5\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>"
+        "description": "<h3>Hallo und Herzlich Wilkommen zu Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit</p> <p class=\"line-1 anim-typewriter3\"> bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen.</p> <p class=\"line-1 anim-typewriter4\"> Das Feld einzeichen kannst Du mit der Methode: <b>paint(x, y)</b>.</p> <p class=\"line-1 anim-typewriter5\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>",
+        "loesungswege":"PaintAufruf"
       },
       {
         "id":"2",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "difficulty": 2,
-        "patternCode":"this.paint(1,1); this.paint(1,3)",
+        "patternCode":"for(let i = 1; i<10; i++){ this.paint(5,i) }",
         "completed": "false",
-        "description": "Zweites Level"
-
+        "description": "Im zweiten Level benutzen wir eine For-Schleife. Viel Spaß!",
+        "loesungswege":"ForSchleife"
       },
       {
         "id":"3",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 1,
-        "patternCode":"this.paint(1,1);",
-        "completed": "false",
-        "description": "drittes Level"
-     
-      },
-      {
-        "id":"4",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 4,
+        "difficulty": 2,
         "patternCode":"for(let i = 0; i<10; i++){ this.paint(i,i) }",
         "completed": "false",
-        "description": "Im vierten Level benutzen wir eine For-Schleife. Viel Spaß!"
+        "description": "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">Das dritte Level wirkt vielleicht etwas schwer...</p> <p class=\"line-1 anim-typewriter2\">Aber vergiss nicht die Macht der For-Schleife</p>",
+        "loesungswege":"ForSchleife"
+      },
+      {
+        "id": "4",
+        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "difficulty": 1,
+        "patternCode": "for(let i = 0; i<10; i++){ this.paint(i,i) }",
+        "completed": "false",
+        "description": "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Wir wollens uns ja nicht wiederholen...</p> <p class=\"line-1 anim-typewriter2\">Aber die For-Schleife kann Wunder vollbringen!</p>",
+        "loesungswege":"ForSchleife"
       },
       {
         "id":"5",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 5,
-        "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
+        "difficulty": 3.5,
+        "patternCode":"for(let i = 1; i<10; i++){ this.paint(5,i) }",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!"
-     
+        "description": "<h3>Level 5</h3><p class=\"line-1 anim-typewriter1\"> Ja das ist das gleiche Bild... </p> <p class=\"line-1 anim-typewriter2\">Aber diesmal nutze bitte die While Schleife! </p>",
+        "loesungswege":"WhileSchleife"
       },
       {
         "id":"6",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 1,
-        "patternCode":"this.paint(1,1);",
+        "difficulty": 3.5,
+        "patternCode":"for (int x = 0; x <= 8; x += 2) { for (int y = 0; y <= x; y++) { this.paint(x, y); }}",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!"
-     
+        "description": "<h3>Level 6</h3><p class=\"line-1 anim-typewriter1\"> Du wirst immer besser und besser!</p> <p class=\"line-1 anim-typewriter2\">Du machst große Schritte (wie bei einer Treppe :) )</p>",
+        "loesungswege":"x"
       },
       {
         "id":"7",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 2,
-        "patternCode":"this.paint(1,1); this.paint(1,3)",
+        "difficulty": 1,
+        "patternCode":"this.paint(1,1);",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!"
-     
+        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
+        "loesungswege":"x"
       },
       {
         "id":"8",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 1,
-        "patternCode":"this.paint(1,1);",
+        "difficulty": 2,
+        "patternCode":"this.paint(1,1); this.paint(1,3)",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!"
-     
+        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
+        "loesungswege":"x"
       },
       {
         "id":"9",
@@ -77,17 +78,26 @@
         "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!"
-     
+        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
+        "loesungswege":"x"
       },
       {
         "id":"10",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "difficulty": 1,
+        "patternCode":"this.paint(1,1);",
+        "completed": "false",
+        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
+        "loesungswege":"x"
+      },
+      {
+        "id":"11",
+        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "difficulty": 5,
         "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!"
-     
+        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
+        "loesungswege":"x"
       }
     ]
 }

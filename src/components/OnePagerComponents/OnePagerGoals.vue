@@ -34,6 +34,7 @@ import gsap from "gsap";
 export default {
   name: "OnePagerGoals",
   components: {
+
   },
   methods: {
 
@@ -48,17 +49,17 @@ export default {
         },
         {
           title: 'Genauigkeit',
-          text: 'Mit DrawIT kannst du du Programmierungsskills in der Skriptsprache JavaScript vertiefen und deine Programmierungskenntnisse erweitern!',
+          text: 'Es gibt mehrere eingefärbte Kästchen auf dem Kachelfeld. Dein Ziel ist es diese Form präzise nachzubauen.',
           img: require("../../assets/genauigkeit.png"),
         },
         {
           title: 'Analytisches Denkvermögen',
-          text: 'Mit DrawIT kannst du du Programmierungsskills in der Skriptsprache JavaScript vertiefen und deine Programmierungskenntnisse erweitern!',
+          text: 'Es sind "nur" einige Kästchen die ein Problem darstellen, aber es gibt einen Haufen Lösungen um an das Ziel zu gelangen!',
           img: require("../../assets/analytischesdenken.png"),
         },
         {
           title: 'Problemlösungskompetenz',
-          text: 'Mit DrawIT kannst du du Programmierungsskills in der Skriptsprache JavaScript vertiefen und deine Programmierungskenntnisse erweitern!',
+          text: 'Der einfachste Weg ist nicht immer der Beste! Gebe dich nicht mit einer simplen Lösung für ein Problem zufrieden.',
           img: require("../../assets/problemlösung.png"),
         },
       ],
