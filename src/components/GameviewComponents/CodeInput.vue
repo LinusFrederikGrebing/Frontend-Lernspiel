@@ -13,7 +13,9 @@
     </transition>
     <transition appear @enter="enter">
       <v-btn :class="[{ 'console_warning': !consoleActive && gotUnreadErrors}]" depressed elevation="1"
-        @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">Console</v-btn>
+        @click="editorActive = false; consoleActive = true; gotUnreadErrors = false;">
+        Konsole
+      </v-btn>
     </transition>
     <transition appear @enter="enterInput">
       <CodeEditor
@@ -35,7 +37,7 @@
     <div>
       <transition appear @enter="enter">
         <v-btn color="warning" depressed elevation="2" @click="checkResult">
-          Validate
+          Validieren
         </v-btn>
       </transition>
       <transition appear  @enter="enter">
@@ -46,7 +48,7 @@
           elevation="2"
           @click="runfunction"
         >
-          Finished
+          Ausführen
         </v-btn>
       </transition>
       <transition appear @enter="enter">
@@ -56,7 +58,7 @@
           elevation="2"
           @click="colorPicker ? colorPicker = false : colorPicker = true"
         >
-          Color
+          Farbenauswahl
         </v-btn>
       </transition>
       <transition appear  @enter="enter">
@@ -64,11 +66,21 @@
           class="reset-btn"
           depressed
           elevation="2"
-          @click="animateTutorial()"
+          @click="levelAnimation()"
         >
           Reset
         </v-btn>
       </transition>
+      <transition appear  @enter="enter">
+        <v-btn
+          depressed
+          elevation="2"
+          @click="animateTutorial()"
+        >
+          Tutorial
+        </v-btn>
+      </transition>
+      <div v-on:mouseout="changeColor(color)">
       <v-color-picker
           v-if="colorPicker"
           @click="changeColor(color)"
@@ -78,7 +90,8 @@
           hid-inputs
           hide-mode-switch
           swatches-max-height="250"
-          ></v-color-picker>          
+          ></v-color-picker>  
+        </div>        
     </div>
   </div>
 </template>
@@ -94,6 +107,7 @@ export default {
   },
   data: () => {
     return {
+      solution: "",
       color: '#80ba24',
       levelElements: [],
       paintedElements: [],
@@ -108,37 +122,54 @@ export default {
 
   methods: {
     animateTutorial() {
-      var timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
-      var timelineToButton = gsap.timeline({callbackScope: timelineToEditor,repeat: 0, repeatDelay: 0, });
+      const preventClicksListener = function(event) {
+        event.preventDefault();
+      };
+      document.body.style.pointerEvents = "none";
+      let timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
       let codeEditor = document.querySelector("#code-editor");
-      let buttonFinished = document.querySelector("#button-finished");
+      let header = document.querySelector('.header');
+      let headerHeight = parseInt(header.offsetHeight);
       //console.log("EINS")
-      let x = parseInt(codeEditor.offsetWidth) / 4;
-      let y = parseInt(codeEditor.offsetHeight) / 4;
+      gsap.to("#mouse-cursor", {duration: 0, x: 0, y: 0});
+      let x = window.pageXOffset + parseInt(codeEditor.offsetWidth) / 4;
+      let y = window.pageXOffset + parseInt(codeEditor.offsetHeight) / 2 - headerHeight;
       while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
       x += codeEditor.offsetLeft - codeEditor.scrollLeft;
       y += codeEditor.offsetTop - codeEditor.scrollTop;
       codeEditor = codeEditor.offsetParent;
       }
-      //console.log("DAS X IST:" + x);
       //console.log("ZWEI " + rectStartElem.top)
       timelineToEditor.to("#mouse-cursor", {duration: 3, x: x, y: y, visibility: "visible", zIndex: 4});
       timelineToEditor.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
       timelineToEditor.eventCallback("onComplete", () => {
         this.animateCodeEditor();
-        let x = 0;
-        let y = 0;
-        while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
-        x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
-        y += buttonFinished.offsetTop - buttonFinished.scrollTop;
+        this.delay(3000).then(() => this.animatePathToButton());
+        this.delay(5000).then(() => document.body.style.pointerEvents = "");
+      })        
+    },
+    delay(time) {
+     return new Promise(resolve => setTimeout(resolve, time));
+    },
+    animatePathToButton() {
+      let timelineToButton = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      let buttonFinished = document.querySelector("#button-finished");
+      let header = document.querySelector('.header');
+      let headerHeight = parseInt(header.offsetHeight);
+      let x2 = window.pageXOffset + parseInt(buttonFinished.offsetWidth) / 2;
+      let y2 = window.pageYOffset + parseInt(buttonFinished.offsetHeight) / 2 - headerHeight;
+      while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
+        x2 += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
+        y2 += buttonFinished.offsetTop - buttonFinished.scrollTop;
         buttonFinished = buttonFinished.offsetParent;
       }
-
-      timelineToButton.to("#mouse-cursor", {duration: 1, x: x, y: y});
+      timelineToButton.to("#mouse-cursor", {duration: 1, x: x2, y: y2});
       timelineToButton.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
-      timelineToButton.eventCallback("onComplete", this.runfunction());
-      });
-      //console.log("DREI ")
+      timelineToButton.eventCallback("onComplete", () => {
+        this.runfunction()
+        document.querySelector("#mouse-cursor").style.visibility = "hidden";
+      }
+        );
     },
     animateCodeEditor() {
       this.editorActive = true;
@@ -165,13 +196,14 @@ export default {
           el.style.backgroundColor = '#ffffff';
         }
       });
-      this.levelAnimation();
+
     },
     levelAnimation() {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           let element = document.getElementById("x" + i + "y" + j);
           gsap.to(element, {
+            onUpdate: this.resetPaintedFields(),
             duration: 1,
             scale: 0.2,
             y: 60,
@@ -219,6 +251,8 @@ export default {
       let allElements = document.getElementsByClassName("painted");
       this.levelElements = [];
       this.paintedElements = [];
+      let requiredSolution = this.currentLevel.id;
+      console.log("THE REQUIRED SOLUTION IS: " + requiredSolution);
       for (let i = 0; i < allElements.length; i++) {
         if (allElements[i].id.includes("v")) {
           this.levelElements.push(allElements[i].id.replace(/\D/g, ""));
@@ -226,12 +260,16 @@ export default {
           this.paintedElements.push(allElements[i].id.replace(/\D/g, ""));
         }
       }
+
+      
+
       if (this.areEqual(this.levelElements, this.paintedElements)) {
         this.levelElements = [];
         this.paintedElements = [];
         Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.classList.remove("painted");
-        });
+        }); 
+        this.$emit("timer");
         this.showAlertSuccess();
       } else this.showAlertFailure();
     },
@@ -305,6 +343,7 @@ export default {
     runfunction() {
       this.errorMessage = '';
       //let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
+      this.checkWhichSolutionUsed(this.codeToRun);
       let paintStr = 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\nelement.classList.add("painted");}\n';
       let checkParamValueStr = 'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n'
       let evalCode = this.codeToRun;
@@ -351,6 +390,18 @@ export default {
          //console.log("RestCode: " + "[" + restCode + "]");
          return [newReturnCode,this.InsertForLoopInfinitySafety(restCode)].join('');
       }
+    },
+    checkWhichSolutionUsed(code){
+      let paintCall = code.search("paint");
+      let forCall = code.search("for");
+      let whileCall = code.search("while");
+      let doCall = code.search("do");
+      let functionCall = code.search("paint");
+      if (functionCall > 0) this.result = "Funktion";
+      else if (whileCall > 0 && whileCall == doCall && forCall == -1) this.result = "DoWhileSchleife";
+      else if (whileCall > 0 && doCall == -1 && forCall == -1) this.result = "WhileSchleife";
+      else if (forCall > 0 && doCall == -1 && whileCall == -1) this.result = "ForSchleife";
+      else if (forCall == -1 && doCall == -1 && whileCall == -1) this.result = "PaintAufruf";
     },
     InsertWhileInfinitySafety(code) {
       var doCount = (code.match(/do/g) || []).length;
@@ -460,8 +511,19 @@ export default {
       else this.errorMessage = error;
     },
   },
-
+  computed: {
+    currentLevel() {
+      if (localStorage.getItem("currentLevel") !== null) {
+        return JSON.parse(localStorage.getItem("currentLevel"));
+      } 
+    },
+  },
   watch: {
+    currentLevel() {
+      if (localStorage.getItem("currentLevel") !== null) {
+        return JSON.parse(localStorage.getItem("currentLevel"));
+      } 
+    },
     color(newVal, oldVal) {
       console.log(this.color)
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {

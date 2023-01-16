@@ -63,7 +63,9 @@
           >
             Start
           </v-btn>
-
+          <v-card-title v-if="level.bestTimeinSek > 0" >
+            Bestzeit: {{level.bestTimeinSek }} Sekunden
+          </v-card-title>
           <v-tooltip bottom color="success">
             <template v-slot:activator="{ on, attrs }">
               <v-icon
