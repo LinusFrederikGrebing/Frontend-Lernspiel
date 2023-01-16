@@ -30,5 +30,11 @@ export default {
 .bg-color {
   background-color: rgb(236, 236, 236) !important;
 }
+@media only screen and (min-device-width: 1900px) {
+  .containerpadding{
+      padding-bottom: 10em;
+  }
+}
+
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="sec">
-    <v-parallax :height="height" :src="`${require(`@/assets/Hexagon3.svg`)}`">
+    <v-parallax :height="height" :src="`${require(`@/assets/Hexagon4.svg`)}`">
       <div>
 
       
@@ -58,35 +58,28 @@ export default {
     OnePagerGoals
   },
   mounted() {
-    gsap.fromTo(
-      ".lvl_select",
-      {
-        y: 0,
-        x: -1900,
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        scrollTrigger: {
-          trigger: ".lvl_select",
+    gsap.from(".lvl_select", {
+      duration: 0.5,
+      opacity: 0,
+      x: "-50em",
+      ease: "linear",
+      scrollTrigger: {
+        trigger: ".lvl_select",
           start: "top 100%",
           end: "bottom 100%",
-          scrub: true,
-          id: "scrub",
-        },
-      }
-    );
+        toggleActions: "restart complete reverse reset",
+      },
+    });
 
     gsap.from(".help_template", {
       duration: 0.5,
       opacity: 0,
-      x: "+50vw",
+      x: "-50em",
       ease: "linear",
       scrollTrigger: {
         trigger: ".help_template",
-        start: "top 75%",
-        end: "bottom 25%",
+        start: "top 90%",
+        end: "bottom 50%",
         toggleActions: "restart complete reverse reset",
       },
     });
@@ -94,10 +87,10 @@ export default {
   computed: {
       height () {
         switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 6400
-          case 'sm': return 6000
-          case 'md': return 6000
-          case 'lg': return 5200
+          case 'xs': return 5600
+          case 'sm': return 5800
+          case 'md': return 5800
+          case 'lg': return 4900
           case 'xl': return 5000
         }
       },
@@ -109,8 +102,6 @@ export default {
   background: rgba(255, 255, 255, 0.7)    /*  40% opaque green */ 
 }
 
-.page_section {
-}
 .header {
   margin: 1em 2em;
   color: black;

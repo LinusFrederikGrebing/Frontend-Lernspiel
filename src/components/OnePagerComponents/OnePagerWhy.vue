@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="containerpadding">
     <div class="b/ackground-image" ></div>
     <v-row>
       <v-col class="text-center my-8">

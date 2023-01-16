@@ -1,5 +1,8 @@
 <template>
-  <v-card elevation="24" outlined shaped class="container">
+  <v-container class="">
+
+ 
+  <v-card elevation="24" outlined shaped class="">
     <h1 class="h1 font-weight-black">- Level-Auswahl -</h1>
     <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
       <v-card
@@ -63,9 +66,6 @@
           >
             Start
           </v-btn>
-          <v-card-title v-if="level.bestTimeinSek > 0" >
-            Bestzeit: {{level.bestTimeinSek }} Sekunden
-          </v-card-title>
           <v-tooltip bottom color="success">
             <template v-slot:activator="{ on, attrs }">
               <v-icon
@@ -84,10 +84,17 @@
               <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
             </span>
           </v-tooltip>
+          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" >
+            Bestzeit: {{level.bestTimeinSek }} Sekunden
+          </v-card-title>
+          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" >
+            Bestzeit: {{ (Math.round(((level.bestTimeinSek)/60) * 100) / 100) }} Minuten
+          </v-card-title>
         </v-card-actions>
       </v-card>
     </flickity>
-  </v-card>
+  </v-card> 
+  </v-container>
 </template>
 
 <script>
@@ -107,7 +114,6 @@ export default {
       wrapAround: true,
       freeScroll: true,
       prevNextButtons: true,
-      autoPlay: 100000,
       pauseAutoPlayOnHover: false,
       groupCells: 1,
     },
@@ -269,17 +275,7 @@ export default {
   },
 
   computed: {
-    columns() {
-      if (this.$vuetify.breakpoint.lgAndUp) {
-        return 3;
-      }
-
-      if (this.$vuetify.breakpoint.md) {
-        return 2;
-      }
-
-      return 1;
-    },
+   
     levels() {
       if (localStorage.getItem("levels") !== null) {
         return JSON.parse(localStorage.getItem("levels"));

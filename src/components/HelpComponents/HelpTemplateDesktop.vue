@@ -1,4 +1,5 @@
 <template>
+  <v-container class="">
   <div>
     <v-card elevation="24" height="55em" outlined shaped class="container">
       <h1 class="h1 font-weight-black"> - Hilfen - </h1>
@@ -65,7 +66,8 @@
         </div>
       </v-container>
     </v-card>
-  </div>
+  </div> 
+  </v-container>
 </template>
 
 <script>
@@ -201,37 +203,13 @@ export default {
 .card {
   box-shadow: 3em 3em 3em rgba(0, 0, 0, 0.7) !important;
   overflow: scroll;
-  max-height: 65vh;
+  max-height: 35em;
 }
 
 .image {
   max-height: 8em;
 }
 
-#background {
-  width: 100%;
-  position: relative;
-  font-family: Arial, Helvetica, sans-serif;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, 0.1);
-  background: linear-gradient(to right,
-  rgb(142, 226, 159),
-  rgb(147, 202, 225),
-  rgb(156, 156, 202),
-  rgb(155, 200, 159),
-  rgb(153, 196, 160),
-  rgb(145, 144, 191),
-  rgb(154, 188, 203),
-  rgb(166, 209, 175));
-  background-size: 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-weight: 700;
-  margin-left: 50vw;
-  margin-top: -5vh;
-  font-size: 6vw;
-  animation: sTransition 10s linear infinite;
-}
 
 @keyframes sTransition {
   0% {
@@ -260,7 +238,7 @@ export default {
   transition: transform 0.6s 0.7s, width 0.7s, opacity 0.6s 0.7s,
   z-index 0s 1.3s;
   will-change: transform, width, opacity;
-  height: 75vh;
+  height: 45em;
   margin-top: 5em;
 }
 
@@ -351,7 +329,7 @@ export default {
   width: 100%;
   height: 100%;
   text-align: center;
-  font-size: 15vw;
+  font-size: 15em;
   font-weight: bold;
 }
 

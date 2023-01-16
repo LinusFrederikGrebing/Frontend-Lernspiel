@@ -15,15 +15,17 @@
      height="100%"
       width="100%"
       class="">
-        <div class="display-flex justify-center tutorial">
+        <div class="display-flex tutorial">
         <div class="container2">
-              <v-row no-gutters v-for="y in 2" :key="y" class="">
-                    <v-col no-gutters v-for="x in 2" :key="x">
+          <v-card elevation="24" width="30em">
+              <v-row no-gutters v-for="y in 4" :key="y" class="">
+                    <v-col no-gutters v-for="x in 4" :key="x">
                       <transition>
-                        <v-card class="" elevation="18" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
+                        <v-card class="cardgrid" elevation="2" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
                       </transition>
                     </v-col>
               </v-row>
+            </v-card>
         </div>
         <div class="editor">
         <CodeEditor
@@ -52,6 +54,9 @@
 
 <script>
 import CodeEditor from "simple-code-editor";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
   name: "OnePagerTutorialSection",
@@ -61,7 +66,10 @@ export default {
   data: () => {
     return {
       codeToRun: "paint(1,1);",
-      actualCodeToRun: ""
+      actualCodeToRun: "",
+      timerTutorialAnimation: null,
+      paintTutorialAnimation: null
+
     };
   },
   methods: {
@@ -71,20 +79,22 @@ export default {
     tutorialAnimation(){
         let steps = 250;
           for(let i = 0; i<=this.codeToRun.length; i++){
-            this.delay(steps).then(() =>  this.actualCodeToRun = this.codeToRun.substring(0, i));
-            steps=steps+500;
+          this.timerTutorialAnimation = this.delay(steps).then(() =>  this.actualCodeToRun = this.codeToRun.substring(0, i));
+            steps=steps+250;
           };
-          this.delay(6500).then(() => this.paintTutorialField(1,1));
-          this.delay(10000).then(() => this.actualCodeToRun="" );
-       ;
-          
+          this.paintTutorialAnimation = this.delay(3500).then(() => this.paintTutorialField(1,1));        
     },
+
     paintTutorialField(first, second) {
       let element = document.getElementById("xTutorial" + first + "yTutorial" + second);
       element.style.backgroundColor = '#80ba24';
       element.classList.add("painted");
     },
+
     resetPaintedFields() {
+      clearTimeout(this.timerTutorialAnimation);
+      clearTimeout(this.paintTutorialAnimation);
+      this.actualCodeToRun = "";
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         if (el.id.includes("Tutorial")) {
           el.classList.remove("painted");
@@ -94,8 +104,37 @@ export default {
     },
   },
   mounted() { 
-  this.tutorialAnimation()
-  
+    gsap.fromTo(
+       ".tutorial",
+        {
+          x: 1900
+        },
+        {
+          duration: 2,
+          x: 0,
+          scrollTrigger: {
+            trigger: ".tutorial",
+            start: "top 100%",
+            end: "bottom 0%",
+            toggleActions: "play reset play reset "
+          },
+        }
+      );
+
+      gsap.to(
+       ".editor",
+        {
+          duration: 2,
+          x: 0,
+          scrollTrigger: {
+            trigger:  ".editor",
+            onEnter: this.tutorialAnimation,
+            onLeave: this.resetPaintedFields,
+            onEnterBack:  this.tutorialAnimation,
+            onLeaveBack:  this.resetPaintedFields
+          },
+        }
+      );
   }
 }
 </script>
@@ -125,16 +164,14 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.v-card {
-  width: 15em;
-  height: 15em;
+.cardgrid {
+  width: 7.5em;
+  height: 7.5em;
 }
 @media only screen and (min-device-width: 1900px) {
   .display-flex{
     display: flex;
-  }
-  .containerpadding{
-    padding-bottom: 30em;
+    justify-content: center;
   }
 }
 
@@ -147,8 +184,5 @@ export default {
     margin-top: 2em;
     margin-left: 2em;
   }
-  .containerpadding{
-   padding-bottom: 10em;
-}
 }
 </style>
