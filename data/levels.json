@@ -2,17 +2,17 @@
     "levels": [
       {
         "id":"1",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "img": "levelimgs/level1.jpg",
         "bestTimeinSek": 0,
         "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
-        "description": "<h3>Hallo und Herzlich Wilkommen zu Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit</p> <p class=\"line-1 anim-typewriter3\"> bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen.</p> <p class=\"line-1 anim-typewriter4\"> Das Feld einzeichen kannst Du mit der Methode: <b>paint(x, y)</b>.</p> <p class=\"line-1 anim-typewriter5\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>",
+        "description": "<h3>Hallo und Herzlich Wilkommen zum ersten Level von Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit</p> <p class=\"line-1 anim-typewriter3\"> bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen.</p> <p class=\"line-1 anim-typewriter4\"> Das Feld einzeichen kannst Du mit der Methode: <b>paint(x, y)</b>.</p> <p class=\"line-1 anim-typewriter5\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>",
         "loesungsweg": "PaintAufruf"
       },
       {
         "id":"2",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "img": "levelimgs/level2.jpg",
         "bestTimeinSek": 0,
         "difficulty": 1.5,
         "patternCode":"for(let i = 1; i<10; i++){ this.paint(5,i) }",
@@ -22,7 +22,7 @@
       },
       {
         "id":"3",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "img": "levelimgs/level3.jpg",
         "difficulty": 1.5,
         "patternCode":"for(let i = 0; i < 10; i += 2){ this.paint(5, i) }",
         "bestTimeinSek": 0,
@@ -32,7 +32,7 @@
       },
       {
         "id": "4",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "img": "levelimgs/level456.jpg",
         "difficulty": 2,
         "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i) }",
         "bestTimeinSek": 0,
@@ -42,9 +42,9 @@
       },
       {
         "id": "5",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "img": "levelimgs/level456.jpg",
         "difficulty": 2.5,
-        "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i) }",
+        "patternCode": "let i = 0; while(i <= 9) {this.paint(i, i);i++;}",
         "bestTimeinSek": 0,
         "completed": "false",
         "description": "<h3>Level 5</h3> <br /> <p class=\"line-1 anim-typewriter1\">Es ist das selbe Muster!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür aber diesmal die While Schleife</p>",
@@ -52,9 +52,9 @@
       },
       {
         "id": "6",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "img": "levelimgs/level456.jpg",
         "difficulty": 3,
-        "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i) }",
+        "patternCode": "let i = 0; do{ this.paint(i, i); i++;} while(i <= 9)",
         "bestTimeinSek": 0,
         "completed": "false",
         "description": "<h3>Level 6</h3> <br /> <p class=\"line-1 anim-typewriter1\">Mach das selbe nochmal!!</p> <p class=\"line-1 anim-typewriter2\">Keine Sorge, nur noch einmal mit einer Do-While Schleife!</p>",
@@ -62,7 +62,7 @@
       },
       {
         "id":"7",
-        "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "img": "levelimgs/level7.jpg",
         "bestTimeinSek": 0,
         "difficulty": 3.5,
         "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
