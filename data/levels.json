@@ -4,7 +4,7 @@
         "id":"1",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "bestTimeinSek": 0,
-        "difficulty": 1.5,
+        "difficulty": 1,
         "patternCode":"this.paint(1,1);",
         "completed": "false",
         "description": "<h3>Hallo und Herzlich Wilkommen zu Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit</p> <p class=\"line-1 anim-typewriter3\"> bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen.</p> <p class=\"line-1 anim-typewriter4\"> Das Feld einzeichen kannst Du mit der Methode: <b>paint(x, y)</b>.</p> <p class=\"line-1 anim-typewriter5\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>",
@@ -14,100 +14,100 @@
         "id":"2",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "bestTimeinSek": 0,
-        "difficulty": 2,
+        "difficulty": 1.5,
         "patternCode":"for(let i = 1; i<10; i++){ this.paint(5,i) }",
         "completed": "false",
-        "description": "Im zweiten Level benutzen wir eine For-Schleife. Viel Spaß!",
+        "description": "<h3>Level 2</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im zweiten Level benutzen wir eine For-Schleife. Viel Spaß!",
         "loesungswege":"ForSchleife"
       },
       {
         "id":"3",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 2,
-        "patternCode":"for(let i = 0; i<10; i++){ this.paint(i,i) }",
+        "difficulty": 1.5,
+        "patternCode":"for(let i = 0; i < 10; i += 2){ this.paint(5, i) }",
         "bestTimeinSek": 0,
         "completed": "false",
-        "description": "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">Das dritte Level wirkt vielleicht etwas schwer...</p> <p class=\"line-1 anim-typewriter2\">Aber vergiss nicht die Macht der For-Schleife</p>",
+        "description": "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">Ein bisschen Abstand dazwischen ist bestimmt nicht so schwer!</p> <p class=\"line-1 anim-typewriter2\">Nutze nochmal die For Schleife!</p>",
         "loesungswege":"ForSchleife"
       },
       {
         "id": "4",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 1,
-        "patternCode": "for(let i = 0; i<10; i++){ this.paint(i,i) }",
+        "difficulty": 2,
+        "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i) }",
         "bestTimeinSek": 0,
         "completed": "false",
-        "description": "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Wir wollens uns ja nicht wiederholen...</p> <p class=\"line-1 anim-typewriter2\">Aber die For-Schleife kann Wunder vollbringen!</p>",
+        "description": "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Jetzt trau dich mal an eine Diagonale!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür die For Schleife</p>",
         "loesungswege":"ForSchleife"
       },
       {
-        "id":"5",
+        "id": "5",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
+        "difficulty": 2.5,
+        "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i) }",
         "bestTimeinSek": 0,
-        "difficulty": 5,
-        "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false",
-        "description": "<h3>Level 5</h3><p class=\"line-1 anim-typewriter1\"> Ja das ist das gleiche Bild... </p> <p class=\"line-1 anim-typewriter2\">Aber diesmal nutze bitte die While Schleife! </p>",
+        "description": "<h3>Level 5</h3> <br /> <p class=\"line-1 anim-typewriter1\">Es ist das selbe Muster!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür aber diesmal die While Schleife</p>",
         "loesungswege":"WhileSchleife"
       },
       {
-        "id":"6",
+        "id": "6",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "difficulty": 3.5,
-        "patternCode":"for (int x = 0; x <= 8; x += 2) { for (int y = 0; y <= x; y++) { this.paint(x, y); }}",
+        "difficulty": 3,
+        "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i) }",
+        "bestTimeinSek": 0,
         "completed": "false",
-        "description": "<h3>Level 6</h3><p class=\"line-1 anim-typewriter1\"> Du wirst immer besser und besser!</p> <p class=\"line-1 anim-typewriter2\">Du machst große Schritte (wie bei einer Treppe :) )</p>",
-        "loesungswege":"x"
+        "description": "<h3>Level 6</h3> <br /> <p class=\"line-1 anim-typewriter1\">Mach das selbe nochmal!!</p> <p class=\"line-1 anim-typewriter2\">Keine Sorge, nur noch einmal mit einer Do-While Schleife!</p>",
+        "loesungswege":"DoWhileSchleife"
       },
       {
         "id":"7",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "bestTimeinSek": 0,
-        "difficulty": 1,
-        "patternCode":"this.paint(1,1);",
+        "difficulty": 3.5,
+        "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
-        "loesungswege":"x"
+        "description": "<h3>Level 7</h3> <br /><p class=\"line-1 anim-typewriter1\">Es ist garnicht so schwer wie es aus sieht!</p> <br />  <p class=\"line-1 anim-typewriter2\">Tipp: Du benötigst nur eine einzige For Schleife!</p>",
+        "loesungswege":"ForSchleife"
       },
       {
         "id":"8",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "bestTimeinSek": 0,
-        "difficulty": 2,
-        "patternCode":"this.paint(1,1); this.paint(1,3)",
+        "difficulty": 4,
+        "patternCode":"for(let x = 0; x <= 8; x += 2) { for(int y = 0; y <= x; y++){ this.paint(x, y) }}",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
-        "loesungswege":"x"
+        "description": "<h3>Level 8>/h3> <br /><p class=\"line-1 anim-typewriter1\">Das sieht bisschen aus wie ein bekanntes Logo!</p> <br /> <p class=\"line-1 anim-typewriter2\">Mach das bitte in einer While Schleife</p>",
+        "loesungswege":"While"
       },
       {
         "id":"9",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
-        "bestTimeinSek": 0,
-        "difficulty": 1,
-        "patternCode":"this.paint(1,1);",
+        "difficulty": 4.5,
+        "patternCode":"for (let y = 2; y <= 7; y++) {  let x = y-1; for(let i = 0; i <= 2; i++) { this.paint(x + i, y); }} ",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
-        "loesungswege":"x"
+        "description": "<h3>Level 9</h3> <br /> <p class=\"line-1 anim-typewriter1\"> Du wirst immer besser und besser!</p> <p class=\"line-1 anim-typewriter2\">Du machst große Schritte!</p> <p class=\"line-1 anim-typewriter3\">Nutze nochmal die For Schleife!</p>",
+        "loesungswege":"ForSchleife"
       },
       {
         "id":"10",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "bestTimeinSek": 0,
-        "difficulty": 1,
-        "patternCode":"this.paint(1,1);",
+        "difficulty": 2,
+        "patternCode":"for(let x = 0; x < 10; x++) { for(let y = 0; y < 10; y++){ this.paint(x, y); }}",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
-        "loesungswege":"x"
+        "description": "<h3>Level 10</h3> <br /> <p class=\"line-1 anim-typewriter1\">Färb doch mal alles hier ein!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür die For Schleife!</p>",
+        "loesungswege":"ForSchleife"
       },
       {
         "id":"11",
         "img": "dice_httpswww.pngwing.comenfree-png-pvivu.png",
         "bestTimeinSek": 0,
         "difficulty": 5,
-        "patternCode":"for (let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
+        "patternCode":"for(let i = 0; i < 10; i++){ for(let j = 0; j < 10; j++){ if(i % 2 == 0 || j % 2 == 0){ this.paint(i,j); }}}",
         "completed": "false",
-        "description": "Hallo und Herzlich Wilkommen zu Draw IT, im ersten Level wirst Du die Grundlage des Spiels erlernen. Links findest du die Vorlage. Deine Aufgabe ist es die Vorlage mit bekannten Javascript-Operatoren ins rechte Feld nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode: paint(x, y). Jetzt bist Du an der Reihe! Viel Spaß!",
-        "loesungswege":"x"
+        "description": "<h3>Level 11</h3> <br /> <p class=\"line-1 anim-typewriter1\">Guck mal!</p> <p class=\"line-1 anim-typewriter2\">Das Muster sieht doch schön aus!</p> <p class=\"line-1 anim-typewriter3\">Es ist wichtig selbst recherchieren zu können! Informiere dich nun selbständig über if-Abfragen!</p> <p class=\"line-1 anim-typewriter4\">Die werden dir hier helfen!. Du schaffst das!</p>  <p class=\"line-1 anim-typewriter5\">Nutze auch hier nochmal die For Schleife!</p>",
+        "loesungswege":"ForSchleife"
       }
     ]
 }
