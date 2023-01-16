@@ -9,7 +9,6 @@
         <v-col cols="6" md="4">
           <TemplateGrid :currentLevel="currentLevel" :color="color" />
           <CodeInput
-            :currentLevel="currentLevel"
             @success="
               nextLevel(currentLevelId);
             "
@@ -143,7 +142,6 @@ export default {
  
   watch: {
     currentLevel(newVal, oldVal) {
-      console.log("im WATCH");
       if (oldVal !== null && oldVal !== undefined) {
         if (JSON.parse(localStorage.getItem("accessibleLevels")) !== null) {
           this.accessibleLevels = JSON.parse(
