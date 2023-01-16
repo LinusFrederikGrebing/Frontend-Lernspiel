@@ -36,7 +36,7 @@
                 mdi-lock
               </v-icon>
             </div>
-            <v-card-title>Level {{ level.id }} </v-card-title>
+            <v-card-title class="black--text">Level {{ level.id }} </v-card-title>
           </v-img>
         </div>
         <v-card-subtitle class="pb-0 font-weight-black">

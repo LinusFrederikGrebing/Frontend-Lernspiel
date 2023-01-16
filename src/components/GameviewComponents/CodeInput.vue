@@ -240,18 +240,24 @@ export default {
         { delay: 0, duration: 1, y: 0, x: 0, opacity: 1 }
       );
     },
-    paint(first, second) {
+    /*paint(first, second) {
       let element = document.getElementById("x" + first + "y" + second);
       this.checkParamValue(first);
       this.checkParamValue(second);
       element.classList.add("painted");
       element.style.backgroundColor = color;
-    },
+    },*/
     checkResult() {
       let allElements = document.getElementsByClassName("painted");
       this.levelElements = [];
       this.paintedElements = [];
-      let requiredSolution = this.currentLevel.id;
+      let currentLevel = [];
+
+      if (localStorage.getItem("currentLevel") !== null) {
+       currentLevel = JSON.parse(localStorage.getItem("currentLevel"));
+      }
+
+      let requiredSolution = currentLevel.id;
       console.log("THE REQUIRED SOLUTION IS: " + requiredSolution);
       for (let i = 0; i < allElements.length; i++) {
         if (allElements[i].id.includes("v")) {
@@ -530,15 +536,14 @@ export default {
         el.style.backgroundColor = this.color;
       });
     },
-    paintedElements(newVal, oldVal) {
+    /*paintedElements(newVal, oldVal) {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = this.color;
       });
-    }
+    }*/
   },
   mounted(){
-    console.log(this.color)
-    this.color = '#80ba24'
+    //this.color = '#80ba24'
   }
 
 };
