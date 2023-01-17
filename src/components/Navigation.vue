@@ -232,12 +232,6 @@ export default {
   color: rgba(128, 186, 36, 1);
 }
 
-@media screen and (max-width: 600px) {
-  .app-bar-content h2 {
-    font-size: 18px;
-  }
-}
-
 #background {
   
   font-family: Arial, Helvetica, sans-serif;

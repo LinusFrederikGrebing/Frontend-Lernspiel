@@ -151,15 +151,14 @@ export default {
 }
 </script>
 <style scoped>
-.mobile{
-  margin-bottom: 30em;
-}
 .container {
   width: 100%;
   min-width: 450px;
   margin: 0 auto;
 }
-
+.mobile {
+  margin-bottom: 10em;
+}
 .container-image-chapter-open {
   position: relative;
   text-align: center;

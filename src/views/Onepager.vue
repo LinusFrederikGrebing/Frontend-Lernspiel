@@ -20,10 +20,14 @@
         <OnePagerGoals />
       </div>
 
-     
-        <HelpTemplateDesktop class=""/>
+     <div :class="[{'desktop_invisible' : $vuetify.breakpoint.mdAndDown}]">
+        <HelpTemplateDesktop  />
+     </div>
+     <div :class="[{'desktop_invisible' : $vuetify.breakpoint.lgAndUp}]">
+        <HelpTemplateMobile  />
+     </div>
     
-        <HelpTemplateMobile  class="" />
+       
      
     </div>
     </v-parallax>
@@ -57,15 +61,15 @@ export default {
   },
   mounted() {
     gsap.from(".lvl_select", {
-      duration: 0.5,
+      duration: 1,
       opacity: 0,
       x: "-50em",
       ease: "linear",
       scrollTrigger: {
         trigger: ".lvl_select",
           start: "top 100%",
-          end: "bottom 100%",
-        toggleActions: "restart complete reverse reset",
+          end: "top 80%",
+        toggleActions: "start complete reverse reset",
       },
     });
 
@@ -91,11 +95,11 @@ export default {
       height () {
         console.log(this.$vuetify.breakpoint.name);
         switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 7400
-          case 'sm': return 5800
-          case 'md': return 6000
-          case 'lg': return 5000
-          case 'xl': return 5000
+          case 'xs': return 6800
+          case 'sm': return 6500
+          case 'md': return 6600
+          case 'lg': return 5600
+          case 'xl': return 5150
         }
       },
     },
@@ -105,7 +109,9 @@ export default {
 .sec{
   background: rgba(255, 255, 255, 0.7)    /*  40% opaque green */ 
 }
-
+.content-section {
+  margin-top: 10em;
+}
 .header {
   margin: 1em 2em;
   color: black;
@@ -120,23 +126,9 @@ export default {
   transform: none !important;
   width: 100% !important;
 }
-
-@media only screen and (min-device-width: 961px) {
-  .desktop {
-    display: block !important;
-  }
-  .mobile {
+  .desktop_invisible {
     display: none !important;
   }
-}
 
-@media only screen and (max-device-width: 960px) {
-  .desktop {
-    display: none !important;
-  }
-  .mobile {
-    display: block !important;
-  }
-}
 
 </style>

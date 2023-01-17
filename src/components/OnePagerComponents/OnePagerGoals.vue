@@ -1,13 +1,13 @@
 <template>
-  <v-container class="containerpadding">
+  <v-container class="content-section">
     <v-card elevation="24" outlined shaped height="5em" class="header">
       <h1 class="h1 font-weight-black">- Lernziele -</h1>
     </v-card>
-    <v-card elevation="10" outlined height="100em" class="">
-      <div :class="['', {'flex_container' : !$vuetify.breakpoint.lgAndDown}, {'' : $vuetify.breakpoint.lgAndDown}]" class="" v-for="(item, index) in items" :key="index">
-        <div :class="['', {'seccontainer' : !$vuetify.breakpoint.lgAndDown}, {'' : $vuetify.breakpoint.lgAndDown}]" class="">
-          <div :id="'section' + index" :class="['', {'section' : !$vuetify.breakpoint.lgAndDown}, {'' : $vuetify.breakpoint.lgAndDown}]" class="d-md-and-down-flex flex-md-and-down-column">
-            <img class="rund item" :src="item.img" width="200px" alt="" />
+    <v-card elevation="10" outlined :height="height">
+      <div :class="[{'flex_container' : !$vuetify.breakpoint.lgAndDown}]" v-for="(item, index) in items" :key="index">
+        <div :class="[{'seccontainer' : !$vuetify.breakpoint.lgAndDown}]" >
+          <div :id="'section' + index" :class="[{'section' : !$vuetify.breakpoint.lgAndDown}]" class="">
+            <img class="mr-auto ml-auto d-block mt-8 rund item" :src="item.img" width="200px" alt="" />
             <v-card
               elevation="24"
               outlined
@@ -94,6 +94,18 @@ export default {
       );
     }
   },
+  computed: {
+      height () {
+        console.log(this.$vuetify.breakpoint.name);
+        switch (this.$vuetify.breakpoint.name) {
+          case 'xs': return 2100
+          case 'sm': return 1700
+          case 'md': return 1650
+          case 'lg': return 1600
+          case 'xl': return 1100
+        }
+      },
+    },
 };
 </script>
 

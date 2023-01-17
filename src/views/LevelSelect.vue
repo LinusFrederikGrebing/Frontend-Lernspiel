@@ -1,5 +1,5 @@
 <template>
-  <v-container class="">
+  <v-container class="content-section">
 
  
   <v-card elevation="24" outlined shaped class="">
@@ -10,6 +10,7 @@
         class="styledDiv carousel-cell pa-5 mx-8"
         elevation="12"
         width="30em"
+        color="#4a5c66"
         :class="[
           'mx-auto my-8',
           { ' locked': levelIsAccessible(level) === false },
@@ -37,11 +38,11 @@
             <v-card-title class="black--text">Level {{ level.id }} </v-card-title>
           </v-img>
         </div>
-        <v-card-subtitle class="pb-0 font-weight-black">
+        <v-card-subtitle class="pb-0 font-weight-bold white--text">
           Schwierigkeit:
           <v-rating
             color="yellow darken-3"
-            background-color="grey darken-1"
+            background-color="white darken-1"
             empty-icon="$ratingFull"
             half-increments
             hover
@@ -82,10 +83,10 @@
               <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
             </span>
           </v-tooltip>
-          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" >
+          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text">
             Bestzeit: {{level.bestTimeinSek }} Sekunden
           </v-card-title>
-          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" >
+          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text">
             Bestzeit: {{ (Math.round(((level.bestTimeinSek)/60) * 100) / 100) }} Minuten
           </v-card-title>
         </v-card-actions>
@@ -342,7 +343,7 @@ export default {
 
 .locked {
   opacity: 0.7;
-  filter: grayscale(80%);
+ 
 }
 
 .zentriert {
@@ -368,7 +369,7 @@ export default {
 }
 
 .carousel-cell.is-selected {
-  background: rgba(128, 186, 36, 1) !important;
+  background: rgb(67, 96, 19) !important;
   box-shadow: 1em 1em 1em rgba(43, 61, 15, 0.7) !important;
 }
 </style>
