@@ -1,7 +1,7 @@
 <template>
     <v-container>
-      <div class="d-sm-none">
-        <v-expansion-panels v-scrollanimation>
+      <div class="mobile">
+        <v-expansion-panels>
           <v-expansion-panel
                              v-for="item in informations" :key="item.id"
           >
@@ -9,10 +9,7 @@
               {{ item.label }}
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <v-card elevation="2">
-                <v-img :src="item.src" max-height="5vh"></v-img>
-                <h2 style="position: absolute; top:2%; left:5%"
-                    class="white--text text-h4 text-md-h3"><i>{{ item.label }}!</i></h2>
+                <v-img :src="item.src" max-height="5em"></v-img>
                 <v-card-title>
                   {{ item.subheader }}
                 </v-card-title>
@@ -30,7 +27,7 @@
                 <v-card-title>
                   Beispiel:
                 </v-card-title>
-                <div class="d-md-flex">
+                <div class="">
                   <v-img :src="item.Beispiel" class="ml-4 mr-8" max-height="100px" contain></v-img>
                   <v-card-text class="black--text mr-8">
                     {{ item.beispieltext }}
@@ -42,7 +39,6 @@
                     Button zu offizieller Doku?
                   </v-btn>
                 </v-card-actions>
-              </v-card>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -51,7 +47,6 @@
 </template>
 
 <script>
-import { onMounted, onUnmounted } from 'vue'
 
 export default {
   name: "HelpTemplateMobile",
@@ -122,19 +117,6 @@ export default {
   ]
 };
 },
-  methods: {
-  paint(first, second) {
-  let element = document.getElementById("vx" + first + "vy" + second);
-  element.classList.add("painted");
-},
-  resetPaintedFields() {
-  Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-  if (!el.id.includes("v")) {
-  el.classList.remove("painted");
-}
-});
-},
-},
   mounted() {
   var generalcontent = document.querySelector(".general-content");
   var arraycontent = [].slice.call(
@@ -169,64 +151,13 @@ export default {
 }
 </script>
 <style scoped>
-.before-enter {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: all 2s ease-out;
+.mobile{
+  margin-bottom: 30em;
 }
-
-.before-enter .componente {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: all 3s ease-out;
-}
-
-.enter {
-  opacity: 1;
-  transform: translateY(0px);
-}
-
 .container {
-  width: 80%;
+  width: 100%;
   min-width: 450px;
   margin: 0 auto;
-}
-
-.fade-in {
-  background-color: #2ecc71;
-  height: 500px;
-  margin-bottom: 50px;
-  opacity: 0;
-  transition: 0.3s all ease-out;
-  transform: scale(0.8);
-  box-sizing: border-box;
-  padding: 20px;
-  display: inline-block;
-}
-.full-width{
-  width: 100%;
-}
-
-.half-width {
-  width: 47.5%;
-}
-
-.half-width:nth-of-type(2n + 1) {
-  margin-right: 2.5%;
-}
-
-.half-width:nth-of-type(2n) {
-  margin-left: 2.5%;
-}
-
-
-* {
-  overflow: hidden;
-}
-
-.testclass {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
 }
 
 .container-image-chapter-open {
@@ -235,239 +166,10 @@ export default {
 }
 
 .card {
-  box-shadow: 3em 3em 3em rgba(0, 0, 0, 0.7) !important;
   overflow: scroll;
-  max-height: 78vh;
 }
 
 .image {
   max-height: 8em;
-}
-
-#background {
-  width: 100%;
-  position: relative;
-  font-family: Arial, Helvetica, sans-serif;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, 0.1);
-  background: linear-gradient(to right,
-  rgb(142, 226, 159),
-  rgb(147, 202, 225),
-  rgb(156, 156, 202),
-  rgb(155, 200, 159),
-  rgb(153, 196, 160),
-  rgb(145, 144, 191),
-  rgb(154, 188, 203),
-  rgb(166, 209, 175));
-  background-size: 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-weight: 700;
-  margin-left: 50vw;
-  margin-top: -5vh;
-  font-size: 6vw;
-  animation: sTransition 10s linear infinite;
-}
-
-@keyframes sTransition {
-  0% {
-    background-position: 0%;
-  }
-
-  100% {
-    background-position: 400%;
-  }
-}
-
-.divider {
-  opacity: 1;
-  border-radius: 100%;
-  background-color: rgba(128, 186, 36, 1);
-}
-
-.component {
-  cursor: pointer;
-  justify-content: space-between;
-  position: absolute;
-  left: 0;
-  width: 19.2%;
-  height: 85%;
-  background: #252525;
-  transition: transform 0.6s 0.7s, width 0.7s, opacity 0.6s 0.7s,
-  z-index 0s 1.3s;
-  will-change: transform, width, opacity;
-  height: 75vh;
-  margin-top: 5em;
-}
-
-.initial-visual-component {
-  z-index: 2;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  position: absolute;
-  width: 100%;
-}
-
-.component-content {
-  z-index: -1;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 30px;
-  opacity: 0;
-  transition: all 0.1s;
-}
-
-.component.component-active .component-content {
-  z-index: 2;
-  opacity: 1;
-  transition: all 0.5s 1.4s;
-}
-
-.component-close-button {
-  position: absolute;
-  right: 2em;
-  top: 0em;
-  width: 4em;
-  height: 4em;
-  opacity: 0;
-  transition: all 0s 0.45s;
-}
-
-.component-close-button:before,
-.component-close-button:after {
-  content: "";
-  position: absolute;
-  /*Sinn von diesen werten? Ziemlich unnötig soweit ich das sehe.*/
-  left: 0;
-  top: 50%;
-  width: 100%;
-  height: 8px;
-  margin-top: -4px;
-  background: #fff;
-  opacity: 0;
-  transition: opacity 0s;
-}
-
-.component.component-active .component-close-button {
-  z-index: 5;
-  opacity: 1;
-
-}
-
-.component.component-active .component-close-button:before,
-.component.component-active .component-close-button:after {
-  opacity: 1;
-}
-
-.component-close-button:before {
-  transform: rotate(45deg) translateX(100%);
-}
-
-.component.component-active .component-close-button:before {
-  transition: all 0.3s 1.4s cubic-bezier(0.72, 0.09, 0.32, 1.57);
-  transform: rotate(45deg) translateX(0);
-}
-
-.component-close-button:after {
-  transform: rotate(-45deg) translateX(100%);
-}
-
-.component.component-active .component-close-button:after {
-  transition: all 0.3s 1.55s cubic-bezier(0.72, 0.09, 0.32, 1.57);
-  transform: rotate(-45deg) translateX(0);
-}
-
-.component-index {
-  position: relative;
-  top: 30px;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  font-size: 15vw;
-  font-weight: bold;
-}
-
-.general-content.component--active .component-index {
-  opacity: 0;
-}
-
-.component-index-front {
-  position: absolute;
-  left: 30px;
-  top: -15px;
-}
-
-.component-index-back {
-  color: #80ba24;
-  opacity: 0.25;
-  transition: opacity 0.25s 0.25s;
-}
-
-.component:hover .component-index-back {
-  transition: opacity 1.25s;
-  opacity: 1;
-}
-
-.component:nth-child(2) {
-  transform: translate3d(105.2083333333%, 0, 0);
-}
-
-.general-content.component--active .component:nth-child(2):not(.component-active) {
-  transform: scale(0.5) translate3d(105.2083333333%, 0, 0);
-  opacity: 0;
-  transition: transform 0.95s, opacity 0.95s;
-}
-
-.component:nth-child(2) .component-internal {
-  transition-delay: 0.1s;
-}
-
-.component:nth-child(3) {
-  transform: translate3d(210.4166666667%, 0, 0);
-  transform-origin: 260.4166666667% 50%;
-}
-
-.general-content.component--active .component:nth-child(3):not(.component-active) {
-  transform: scale(0.5) translate3d(210.4166666667%, 0, 0);
-  opacity: 0;
-  transition: transform 0.95s, opacity 0.95s;
-}
-
-.component:nth-child(4) {
-  transform: translate3d(315.625%, 0, 0);
-  transform-origin: 365.625% 50%;
-}
-
-.general-content.component--active .component:nth-child(4):not(.component-active) {
-  transform: scale(0.5) translate3d(315.625%, 0, 0);
-  opacity: 0;
-  transition: transform 0.95s, opacity 0.95s;
-}
-
-.component:nth-child(4) .component-internal {
-  transition-delay: 0.3s;
-}
-
-.component:nth-child(5) {
-  transform: translate3d(420.8333333333%, 0, 0);
-  transform-origin: 470.8333333333% 50%;
-}
-
-.general-content.component--active .component:nth-child(5):not(.component-active) {
-  transform: scale(0.5) translate3d(420.8333333333%, 0, 0);
-  opacity: 0;
-  transition: transform 0.95s, opacity 0.95s;
-}
-
-
-.component.component-active {
-  z-index: 1;
-  width: 100%;
-  transform: translate3d(0, 0, 0);
-  transition: transform 0.6s, width 0.7s 0.7s, z-index 0s;
 }
 </style>

@@ -20,13 +20,11 @@
         <OnePagerGoals />
       </div>
 
-      <div class="page_section help_template d-xs-none">
-        <HelpTemplateMobile class="d-xs-none" />
-      </div>
-
-      <div class="page_section help_template hidden-xs-only">
-        <HelpTemplateDesktop class="hidden-xs-only"/>
-      </div>
+     
+        <HelpTemplateDesktop v-responsive.lg.xl class=""/>
+    
+        <HelpTemplateMobile v-responsive.sm.xs.md class="" />
+     
     </div>
     </v-parallax>
   </div>
@@ -84,14 +82,20 @@ export default {
       },
     });
   },
+  watch: {
+      height(){
+        console.log(this.$vuetify.breakpoint.name)
+      }
+  },
   computed: {
       height () {
+        console.log(this.$vuetify.breakpoint.name);
         switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 5600
-          case 'sm': return 5800
-          case 'md': return 5800
-          case 'lg': return 4900
-          case 'xl': return 5000
+          case 'xs': return 6000
+          case 'sm': return 6000
+          case 'md': return 6000
+          case 'lg': return 6000
+          case 'xl': return 6000
         }
       },
     },
@@ -116,4 +120,23 @@ export default {
   transform: none !important;
   width: 100% !important;
 }
+
+@media only screen and (min-device-width: 961px) {
+  .desktop {
+    display: block !important;
+  }
+  .mobile {
+    display: none !important;
+  }
+}
+
+@media only screen and (max-device-width: 960px) {
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: block !important;
+  }
+}
+
 </style>
