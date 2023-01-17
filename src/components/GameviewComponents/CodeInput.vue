@@ -413,8 +413,8 @@ export default {
         return code;
       }
       else {
-         let headpos = code.slice(startPos).indexOf('(')
-         let head = this.getBracket(code,headpos);
+         let headPos = code.slice(startPos).indexOf('(')
+         let head = this.getBracket(code,startPos+headPos);
          let posAfterHead = startPos+3+head.length+1
          let restStr = code.slice(posAfterHead);
          let bodyPos = restStr.indexOf("{");
