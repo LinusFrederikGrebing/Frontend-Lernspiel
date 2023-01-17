@@ -25,7 +25,7 @@ export default {
   mounted(){}
 };
 </script>
-<style>
+<style scoped>
 
 .bg-color {
   background-color: rgb(236, 236, 236) !important;
