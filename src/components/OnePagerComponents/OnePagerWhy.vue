@@ -2,20 +2,17 @@
   <v-container class="containerpadding">
     <div class="b/ackground-image" ></div>
     <v-row>
-      <v-col class="text-center my-8">
-        <v-card
-            height="8em" 
+      <v-col class="text-center my-4">
+        <v-card  
             elevation="24"
             outlined
             shaped
-        ><div class="flex">
-            <h2 id="warum" class="text-h1 text-md-h1 text-center my-4">
-              Warum 
+        >
+            <h2 class=" text-center text-lg-h2  text-md-h3  text-sm-h4 my-4">
+              Warum DrawIT?
             </h2>
-            <h2 id="draw" class="text-h1 text-md-h1 text-center my-4">
-              DrawIT?
-            </h2>
-        </div>
+         
+    
         </v-card>
       </v-col>
     </v-row>
@@ -44,7 +41,7 @@
             <v-img :src="item.link"></v-img>
           </v-avatar>
           <div class="title text-uppercase ma-4" v-text="item.title"></div>
-          <p v-text="item.text" class="text-body-1 text-md-body-2 mx-6"></p>
+          <p v-text="item.text" class="text-caption mx-6"></p>
         </v-card>
         <v-row no-gutters></v-row>
       </v-col>
@@ -126,42 +123,6 @@ export default {
     }
 },
 mounted() {
-  gsap.fromTo(
-        '#warum',
-        {
-          scale: 1.5,
-          opacity: 0,
-          y: 0, 
-          x: -400
-        },
-        {
-          scale: 1,
-          delay: 1,
-          opacity: 1,
-          duration: 1,
-          ease: Elastic.easeOut.config(1, 0.3),
-          y: 0,
-          x: -15
-        }
-  );
-  gsap.fromTo(
-        '#draw',
-        {
-          scale: 1.5,
-          opacity: 0,
-          y: 0, 
-          x: 400
-        },
-        {
-          scale: 1,
-          delay: 1,
-          opacity: 1,
-          duration: 1,
-          ease: Elastic.easeOut.config(1, 0.3),
-          y: 0,
-          x: 15
-        }
-  );
 
   for(let i = 0; i < this.items.length; i++){
     let element = document.getElementById("goal"+i); 
@@ -192,17 +153,8 @@ mounted() {
 .test{
   margin-top: 20em;
 }
-.flex{
-  display: flex;
-  justify-content: center;
-}
 h2, p, *{
   color: #000000;
-  position: relative;
   z-index: 1;
-}
-#text{
-  text-shadow: 2px 2px 3px #828382;
-  font-weight: 500;
 }
 </style>

@@ -3,20 +3,20 @@
     <v-card elevation="24" outlined shaped height="5em" class="header">
       <h1 class="h1 font-weight-black">- Lernziele -</h1>
     </v-card>
-    <v-card elevation="10" outlined height="60em" class="">
-      <div class="flex_container" v-for="(item, index) in items" :key="index">
-        <div class="seccontainer">
-          <div :id="'section' + index" class="section">
+    <v-card elevation="10" outlined height="100em" class="">
+      <div :class="['', {'flex_container' : !$vuetify.breakpoint.lgAndDown}, {'' : $vuetify.breakpoint.lgAndDown}]" class="" v-for="(item, index) in items" :key="index">
+        <div :class="['', {'seccontainer' : !$vuetify.breakpoint.lgAndDown}, {'' : $vuetify.breakpoint.lgAndDown}]" class="">
+          <div :id="'section' + index" :class="['', {'section' : !$vuetify.breakpoint.lgAndDown}, {'' : $vuetify.breakpoint.lgAndDown}]" class="d-md-and-down-flex flex-md-and-down-column">
             <img class="rund item" :src="item.img" width="200px" alt="" />
             <v-card
               elevation="24"
               outlined
               shaped
               :class="[
-                'text',
-                { left: index % 2 === 0 },
-                { right: index % 2 !== 0 },
-              ]"
+                { text_xs: $vuetify.breakpoint.lgAndDown},  { text: !$vuetify.breakpoint.lgAndDown},
+                { left: index % 2 === 0 && !$vuetify.breakpoint.lgAndDown}, {'mobile_right' : $vuetify.breakpoint.lgAndDown},
+                { right: index % 2 !== 0 && !$vuetify.breakpoint.lgAndDown }]"
+              
             >
               <h2 v-text="item.title"></h2>
               <p v-text="item.text"></p>
@@ -98,7 +98,6 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (min-device-width: 1600px) {
   .header {
     padding-bottom: 5em;
   }
@@ -120,6 +119,10 @@ export default {
     position: absolute;
     top: 1em;
   }
+  .text_xs {
+    padding: 2em;
+    top: 1em;
+  }
 
   .section {
     display: inline-block;
@@ -133,6 +136,10 @@ export default {
     right: -28em;
   }
 
+  .mobile_right{
+    right: 0em;
+  }
+
   .item {
     background-color: #4a5c66;
     padding: 2em;
@@ -143,35 +150,5 @@ export default {
     -moz-border-radius: 200px;
     -webkit-border-radius: 200px;
   }
-}
 
-@media only screen and (min-device-width: 0px) and (max-device-width: 1600px) {
-  .section {
-    justify-content: center;
-    display: inline-flex;
-    position: relative;
-    width: 45em;
-  }
-  .item {
-    background-color: #4a5c66;
-    padding: 2em;
-  }
-
-  .rund {
-    border-radius: 200px;
-    -moz-border-radius: 200px;
-    -webkit-border-radius: 200px;
-  }
-  .seccontainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 1.5em;
-  }
-  .text {
-    width: 40em;
-    padding: 2em;
-
-    top: 1em;
-  }
-}
 </style>

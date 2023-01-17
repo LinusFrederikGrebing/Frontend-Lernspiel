@@ -21,9 +21,9 @@
       </div>
 
      
-        <HelpTemplateDesktop v-responsive.lg.xl class=""/>
+        <HelpTemplateDesktop class=""/>
     
-        <HelpTemplateMobile v-responsive.sm.xs.md class="" />
+        <HelpTemplateMobile  class="" />
      
     </div>
     </v-parallax>
@@ -91,11 +91,11 @@ export default {
       height () {
         console.log(this.$vuetify.breakpoint.name);
         switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 6000
-          case 'sm': return 6000
+          case 'xs': return 7400
+          case 'sm': return 5800
           case 'md': return 6000
-          case 'lg': return 6000
-          case 'xl': return 6000
+          case 'lg': return 5000
+          case 'xl': return 5000
         }
       },
     },

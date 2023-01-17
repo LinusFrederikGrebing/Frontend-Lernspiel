@@ -3,7 +3,7 @@
     <v-main>
       <SideBar/>
       <router-view></router-view> 
-      {{ $vuetify.breakpoint.name }}
+      <h1>{{ $vuetify.breakpoint.name }}</h1>
       <FooterComponent />
     </v-main>
   </v-app>

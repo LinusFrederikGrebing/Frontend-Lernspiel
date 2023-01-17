@@ -15,13 +15,13 @@
      height="100%"
       width="100%"
       class="">
-        <div class="d-lg-flex justify-lg-center tutorial">
-        <div class="container2">
-          <v-card elevation="24" width="30em">
+        <div class="d-lg-flex justify-lg-center tutorial text-center">
+        <div>
+          <v-card class="text-center mr-auto ml-auto" elevation="24" :class="[{'cardgrid_container_mdAndUp' : $vuetify.breakpoint.mdAndUp}, {'cardgrid_container_sm' : $vuetify.breakpoint.sm}, {'cardgrid_container_xs' : $vuetify.breakpoint.xs}]">
               <v-row no-gutters v-for="y in 4" :key="y" class="">
                     <v-col no-gutters v-for="x in 4" :key="x">
                       <transition>
-                        <v-card class="cardgrid" elevation="2" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
+                        <v-card :class="[{'cardgrid_mdAndUp' : $vuetify.breakpoint.mdAndUp}, {'cardgrid_sm' : $vuetify.breakpoint.sm}, {'cardgrid_xs' : $vuetify.breakpoint.xs}]" elevation="2" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
                       </transition>
                     </v-col>
               </v-row>
@@ -125,7 +125,6 @@ export default {
        ".editor",
         {
           duration: 2,
-          x: 0,
           scrollTrigger: {
             trigger:  ".editor",
             onEnter: this.tutorialAnimation,
@@ -140,7 +139,9 @@ export default {
 </script>
 
 <style scoped>
-
+.test{
+  margin:0 auto !important;
+}
 .header {
   margin-top: 10em;
 }
@@ -152,9 +153,8 @@ export default {
   height: 100% !important;
 }
 .editor{
-  margin-left: 4em;
-  width: 30vw;
-  max-width: 30em;
+  margin-left: 1em;
+  width: 95%;
 }
 .col {
   flex-basis: 0.1 !important;
@@ -162,24 +162,32 @@ export default {
   /* max-width: 100%; */
 }
 
-.container2 {
-  margin-left: 3em;
-  display: flex;
-  flex-direction: column;
-}
-.cardgrid {
+.cardgrid_mdAndUp {
   width: 7.5em;
   height: 7.5em;
 }
 
-@media only screen and (min-device-width: 0px) and (max-device-width: 1900px) {
-  .container2{
-    margin-left: 13em;
-    text-align: center;
-  }
-  .editor{
-    margin-top: 2em;
-    margin-left: 2em;
-  }
+.cardgrid_container_mdAndUp {
+  width: 30em;
+  height: 30em;
+}
+
+.cardgrid_sm {
+  width: 5.5em;
+  height: 5.5em;
+}
+
+.cardgrid_container_sm {
+  width: 22em;
+  height: 22em;
+}
+
+.cardgrid_xs {
+  width: 3.5em;
+  height: 3.5em;
+}
+.cardgrid_container_xs {
+  width: 14em;
+  height: 14em;
 }
 </style>
