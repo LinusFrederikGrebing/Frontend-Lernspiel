@@ -10,8 +10,7 @@
           <TemplateGrid :currentLevel="currentLevel" :color="color" />
           <CodeInput
             @success="
-              nextLevel(currentLevelId);
-            "
+              nextLevel(currentLevelId);"
             @timer="setTime(currentLevelId)"
             @change-color="changeColor"
           />

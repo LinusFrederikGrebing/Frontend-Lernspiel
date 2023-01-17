@@ -17,6 +17,15 @@
         Konsole
       </v-btn>
     </transition>
+    <transition appear  @enter="enter">
+        <v-btn
+          depressed
+          elevation="2"
+          @click="animateTutorial()"
+        >
+          Tutorial
+        </v-btn>
+      </transition>
     <transition appear @enter="enterInput">
       <CodeEditor
         v-if="editorActive"
@@ -66,18 +75,9 @@
           class="reset-btn"
           depressed
           elevation="2"
-          @click="levelAnimation()"
+          @click="resetAnimation()"
         >
           Reset
-        </v-btn>
-      </transition>
-      <transition appear  @enter="enter">
-        <v-btn
-          depressed
-          elevation="2"
-          @click="animateTutorial()"
-        >
-          Tutorial
         </v-btn>
       </transition>
       <div v-on:mouseout="changeColor(color)">
@@ -122,24 +122,28 @@ export default {
 
   methods: {
     animateTutorial() {
-      const preventClicksListener = function(event) {
-        event.preventDefault();
-      };
+
       document.body.style.pointerEvents = "none";
       let timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
       let codeEditor = document.querySelector("#code-editor");
       let header = document.querySelector('.header');
+      let sidebar = document.querySelector('#sidebar');
       let headerHeight = parseInt(header.offsetHeight);
-      //console.log("EINS")
+      let sidebarWidth = 0;
+      if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
+
+      //Reset Mouse-Cursor Start Position
       gsap.to("#mouse-cursor", {duration: 0, x: 0, y: 0});
-      let x = window.pageXOffset + parseInt(codeEditor.offsetWidth) / 4;
+      //Calculate Absolute x,y Coordinates
+      let x = window.pageXOffset + parseInt(codeEditor.offsetWidth) / 4 - sidebarWidth;
       let y = window.pageXOffset + parseInt(codeEditor.offsetHeight) / 2 - headerHeight;
       while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
       x += codeEditor.offsetLeft - codeEditor.scrollLeft;
       y += codeEditor.offsetTop - codeEditor.scrollTop;
       codeEditor = codeEditor.offsetParent;
       }
-      //console.log("ZWEI " + rectStartElem.top)
+
+      //Animate the Cursor
       timelineToEditor.to("#mouse-cursor", {duration: 3, x: x, y: y, visibility: "visible", zIndex: 4});
       timelineToEditor.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
       timelineToEditor.eventCallback("onComplete", () => {
@@ -155,15 +159,21 @@ export default {
       let timelineToButton = gsap.timeline({repeat: 0, repeatDelay: 0, });
       let buttonFinished = document.querySelector("#button-finished");
       let header = document.querySelector('.header');
+      let sidebar = document.querySelector('#sidebar');
       let headerHeight = parseInt(header.offsetHeight);
-      let x2 = window.pageXOffset + parseInt(buttonFinished.offsetWidth) / 2;
-      let y2 = window.pageYOffset + parseInt(buttonFinished.offsetHeight) / 2 - headerHeight;
+      let sidebarWidth = 0;
+      if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
+
+      //Calculate Absolute x,y Coordinates
+      let x = window.pageXOffset + parseInt(buttonFinished.offsetWidth) / 2 - sidebarWidth;
+      let y = window.pageYOffset + parseInt(buttonFinished.offsetHeight) / 2 - headerHeight;
       while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
-        x2 += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
-        y2 += buttonFinished.offsetTop - buttonFinished.scrollTop;
+        x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
+        y += buttonFinished.offsetTop - buttonFinished.scrollTop;
         buttonFinished = buttonFinished.offsetParent;
       }
-      timelineToButton.to("#mouse-cursor", {duration: 1, x: x2, y: y2});
+      //Animate the Cursor
+      timelineToButton.to("#mouse-cursor", {duration: 1, x: x, y: y});
       timelineToButton.to("#mouse-cursor", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
       timelineToButton.eventCallback("onComplete", () => {
         this.runfunction()
@@ -171,6 +181,7 @@ export default {
       }
         );
     },
+    //Typewriter Effect for the Code Editor
     animateCodeEditor() {
       this.editorActive = true;
       let tutorialCode = "paint(1,1);"
@@ -183,8 +194,9 @@ export default {
         }
         this.codeToRun += tutorialCode.substring(index,index+1);
         index++;
-      }, 250); 
+      }, 250); //250ms per String position
     },
+    //Reset/Whiten the Painted Grid cards
     resetPaintedFields() {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         if (!el.id.includes("v")) {
@@ -198,7 +210,8 @@ export default {
       });
 
     },
-    levelAnimation() {
+    //GSAP Animation when resetting
+    resetAnimation() {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           let element = document.getElementById("x" + i + "y" + j);
@@ -220,12 +233,14 @@ export default {
         }
       }
     },
+    // Changes the Color of the Painted Cards and emits the Color-value to other Vue-Components that need to work with said value
     changeColor(clr) {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = clr;
       }); 
       this.$emit('change-color',clr);
     },
+    // Enter Animation for Certain HTML-Elements
     enter(el) {
       gsap.fromTo(
         el,
@@ -233,6 +248,7 @@ export default {
         { delay: 1, duration: 2, y: 0, x: 0, opacity: 1 }
       );
     },
+    // Enter Animation for Certain HTML-Elements
     enterInput(el) {
       gsap.fromTo(
         el,
@@ -247,18 +263,19 @@ export default {
       element.classList.add("painted");
       element.style.backgroundColor = color;
     },*/
+    // Checks If the Given Answer is correct
     checkResult() {
       let allElements = document.getElementsByClassName("painted");
       this.levelElements = [];
       this.paintedElements = [];
       let currentLevel = [];
 
+      //Get current level Information for the Required Solution
       if (localStorage.getItem("currentLevel") !== null) {
        currentLevel = JSON.parse(localStorage.getItem("currentLevel"));
       }
+      let requiredSolution = currentLevel.loesungsweg;
 
-      let requiredSolution = currentLevel.id;
-      console.log("THE REQUIRED SOLUTION IS: " + requiredSolution);
       for (let i = 0; i < allElements.length; i++) {
         if (allElements[i].id.includes("v")) {
           this.levelElements.push(allElements[i].id.replace(/\D/g, ""));
@@ -266,10 +283,9 @@ export default {
           this.paintedElements.push(allElements[i].id.replace(/\D/g, ""));
         }
       }
-
-      
-
-      if (this.areEqual(this.levelElements, this.paintedElements)) {
+      // If else to verify the result and the required Solution
+      if (this.areEqual(this.levelElements, this.paintedElements) && this.solution !== requiredSolution) this.showAlertFailure(requiredSolution,true);
+      else if (this.areEqual(this.levelElements, this.paintedElements) && this.solution == requiredSolution) {
         this.levelElements = [];
         this.paintedElements = [];
         Array.from(document.querySelectorAll(".painted")).forEach((el) => {
@@ -277,8 +293,9 @@ export default {
         }); 
         this.$emit("timer");
         this.showAlertSuccess();
-      } else this.showAlertFailure();
+      } else this.showAlertFailure(requiredSolution,false);
     },
+    // Method builds the Success Alert
     showAlertSuccess() {
       // Use sweetalert2
       this.$swal( 
@@ -300,11 +317,15 @@ export default {
       }
       );
     },
-    showAlertFailure() {
+    // Method builds the Failure Alert, depending on the failure cause (Wrong Painted Fields or Wrong Used Solution or Both)
+    showAlertFailure(requiredSolution, correctResult) {
+      let alertTxt = "";
+      if (!correctResult) alertTxt += "Leider hast du die Aufgabe nicht richtig bearbeitet! \n"
+      if (requiredSolution !== this.solution) alertTxt += "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt!\nLöse die Aufgabe mit dem folgenden: " + requiredSolution + ".";
       // Use sweetalert2
       this.$swal({
         title: 'Beim nächsten Mal...!',
-        text: "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt!",
+        text: alertTxt,
         icon: 'error',
         showCancelButton: true,
         confirmButtonColor: '#6D9E1F',
@@ -315,12 +336,14 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.$emit("failure");
+          this.resetAnimation();
         } else {
           this.$router.push({ path: '/LevelSelect' });
         }
       }
       );
     },
+    // Checks if two arrays are equals and returns Boolean
     areEqual(array1, array2) {
       if (array1.length === array2.length) {
         return array1.every((element, index) => {
@@ -330,7 +353,7 @@ export default {
           return false;
         });
       }
-    },
+    }, // Methode can search a String inside of a second String and add a third String in the second Strings Position
     addStringsToString(wholeStr, searchStr, addStr) {
       if (wholeStr.search(searchStr) == -1) return wholeStr;
       let restStr = wholeStr;
@@ -346,69 +369,63 @@ export default {
       }
       return returnStr + restStr;
     },
+    // Method tries to run the userwritten code and throws errors if needed
     runfunction() {
       this.errorMessage = '';
-      //let evalCode = this.addStringsToString(this.codeToRun, "paint", "this.");
       this.checkWhichSolutionUsed(this.codeToRun);
+      // Since the userwritten code is string that becomes a function without outside scope we need to insert the methods paint and checkParamValue as String into the code
+      // Methode paint(first,second) paints a grid card with the given coordinates
+      // Method checkParamValue(num) checks if the coordinates given in paint are in the range of the grid's length
       let paintStr = 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\nelement.classList.add("painted");}\n';
       let checkParamValueStr = 'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n'
       let evalCode = this.codeToRun;
-      console.log(evalCode);
       this.checkIfPaintCall(evalCode);
       try {
         this.checkPaintParams(evalCode);
+        console.log(evalCode);
         evalCode = this.InsertForLoopInfinitySafety(evalCode);
+        console.log(evalCode);
         evalCode = this.InsertWhileInfinitySafety(evalCode);
-        console.log("InfSafetyCode: " + "[" + evalCode + "]");
+        // Inserts a variable to count how many times a loop loops in case of an infinite loop
         evalCode = [paintStr, checkParamValueStr,
         "let infinitySafetyCounter = 0;\n",evalCode].join('');
         let runCodeSafely = new Function(evalCode);
         runCodeSafely();
+        this.gotUnreadErrors = false;
         this.changeColor(this.color);
       } catch (error) {
         this.changeErrorMsg(error);
+        // Boolean Variable gotUnreadErrors turn on the Console Notification blinking animation
         this.gotUnreadErrors = true;
       }
       if (this.errorMessage == '') this.errorMessage = "Keine Fehlermeldung!";
     },
+    //Placeholder for the Code Editor
     checkIfCodeFilled() {
       if (this.codeToRun === "/*Type your own code!*/") {
         this.codeToRun = "";
       }
     },
+    // Alot of complicated String manipulation to detect the position of a for-loop, dissect the for-loop and insert a maximum number of allowed iterations
     InsertForLoopInfinitySafety(code) {
       let startPos = code.search("for");
       if (code.search("for") == -1) {
         return code;
       }
       else {
-         let head = this.getBracket(code,startPos+3);
-         //console.log("Head: " + "[" + head + "]");
+         let headpos = code.slice(startPos).indexOf('(')
+         let head = this.getBracket(code,headpos);
          let posAfterHead = startPos+3+head.length+1
          let restStr = code.slice(posAfterHead);
-         //console.log("RestStr: " + "[" + restStr + "]");
          let bodyPos = restStr.indexOf("{");
          let infCheck = '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Diese Schleife ist zu lang oder unendlich!");';
          let newReturnCode = [code.slice(0,startPos),code.slice(startPos,bodyPos+posAfterHead+1),infCheck].join('');
-         //console.log("NewReturnCode: " + "[" + newCodePart + "]");
          let restCode = code.slice(bodyPos+posAfterHead+1);
-         //let body = this.getBracket(restStr,bodyPos);
-         //console.log("RestCode: " + "[" + restCode + "]");
          return [newReturnCode,this.InsertForLoopInfinitySafety(restCode)].join('');
       }
     },
-    checkWhichSolutionUsed(code){
-      let paintCall = code.search("paint");
-      let forCall = code.search("for");
-      let whileCall = code.search("while");
-      let doCall = code.search("do");
-      let functionCall = code.search("paint");
-      if (functionCall > 0) this.result = "Funktion";
-      else if (whileCall > 0 && whileCall == doCall && forCall == -1) this.result = "DoWhileSchleife";
-      else if (whileCall > 0 && doCall == -1 && forCall == -1) this.result = "WhileSchleife";
-      else if (forCall > 0 && doCall == -1 && whileCall == -1) this.result = "ForSchleife";
-      else if (forCall == -1 && doCall == -1 && whileCall == -1) this.result = "PaintAufruf";
-    },
+    // Even more complicated String manipulation, Essentially detects the number of "while" occurences, 
+    // For every occurence checks if "while" is a While-Loop or Do-While-Loop and inserts respectively the max amount of allowed iterations
     InsertWhileInfinitySafety(code) {
       var doCount = (code.match(/do/g) || []).length;
       var whileCount = (code.match(/while/g) || []).length;
@@ -422,13 +439,8 @@ export default {
         for (let i = doCount; i > 0; i--) {
          let startPos = restCode.search("do"); 
          let bodyPos = restCode.slice(startPos).indexOf('{');
-         //console.log("Head: " + "[" + head + "]");
-         //console.log("RestStr: " + "[" + restStr + "]");
          returnStr += [restCode.slice(0,startPos+bodyPos+1),infCheck].join('');
-         //console.log("NewReturnCode: " + "[" + newCodePart + "]");
          restCode = restCode.slice(startPos+bodyPos+1);
-         //let body = this.getBracket(restStr,bodyPos);
-         //console.log("RestCode: " + "[" + restCode + "]");
         }
         return returnStr + restCode;
       }
@@ -460,14 +472,30 @@ export default {
         return returnStr + restCode;
       } else throw new Error("Kein korrekter Aufbau einer While oder Do..While Schleife!");
     },
+    // Method checks which kind of loop has been used if any, and saves the value in the "solution"-property
+    checkWhichSolutionUsed(code){
+      let paintCall = (code.match(/paint/g) || []).length;
+      let forCall = (code.match(/for/g) || []).length;
+      let whileCall = (code.match(/while/g) || []).length;
+      let doCall = (code.match(/do/g) || []).length;
+      let functionCall = (code.match(/function/g) || []).length;
+      if (functionCall > 0) this.result = "Funktion";
+      else if (whileCall > 0 && whileCall == doCall && forCall == 0) this.solution = "DoWhileSchleife";
+      else if (whileCall > 0 && doCall == 0 && forCall == 0) this.solution = "WhileSchleife";
+      else if (forCall > 0 && doCall == 0 && whileCall == 0) this.solution = "ForSchleife";
+      else if (forCall == 0 && doCall == 0 && whileCall == 0 && paintCall > 0) this.solution = "PaintAufruf";
+      console.log("SOLUTION USED: " + this.solution);
+    },
+    // Method checks if the essential method paint has been called, throws an Error if not (to help new players understand that this method is needed)
     checkIfPaintCall(code) {
       if (code.search("paint") == -1) this.errorMessage += "Rufe die paint(x,y) Methode aus um Felder anzumalen!\n";
     },
-    checkParamValue(num) {
+    /*checkParamValue(num) {
       const gridElems = document.querySelectorAll(".grid-card");
       let maxValue = Math.sqrt(gridElems.length) - 1;
       if (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");
-    },
+    },*/
+    // Helper Method takes a String and the position of a Bracket as Parameter and returns the content of given Bracket
     getBracket(str, pos) {
       if (str[pos] == '(') {
         let depth = 1;
@@ -499,6 +527,7 @@ export default {
         }
       }
     },
+    // Method throws an Error if a paint-call has more or less than 2 parameters.
     checkPaintParams(code) {
       let error = new Error("Zu viele Parameter angegeben für die Methode paint.")
       let restCode = code;
@@ -510,6 +539,7 @@ export default {
         restCode = restCode.slice(pos+5+bracketContent.length);
       }
     },
+    // Some Custom Error messages that are easier to understand for new programmers
     changeErrorMsg(error) {
       if (error instanceof ReferenceError) this.errorMessage += "Folgender Ausdruck ist nicht definiert:\n" + error;
       else if (error instanceof TypeError) this.errorMessage += "Ein oder Mehrere Parameter wurden nicht übergeben oder sind vom falschen Typ:\n" + error;
@@ -518,6 +548,7 @@ export default {
     },
   },
   computed: {
+    // Load the current Level 
     currentLevel() {
       if (localStorage.getItem("currentLevel") !== null) {
         return JSON.parse(localStorage.getItem("currentLevel"));
@@ -525,11 +556,7 @@ export default {
     },
   },
   watch: {
-    currentLevel() {
-      if (localStorage.getItem("currentLevel") !== null) {
-        return JSON.parse(localStorage.getItem("currentLevel"));
-      } 
-    },
+    //The Watcher color makes sure the color property is update on change
     color(newVal, oldVal) {
       console.log(this.color)
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
@@ -550,7 +577,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 
 .consoleArea {
   background-color: white;

@@ -5,7 +5,7 @@
       <transition appear @enter="enterHeader">
         <h2 class="mx-16" id="background">Draw IT!</h2>
       </transition>
-      <v-btn class="pa-2 ml-auto" @click="drawer = !drawer" icon>
+      <v-btn class="pa-2 ml-auto" @click="moveDrawer()" icon>
         <transition appear @enter="enterMenu">
           <v-icon class="white--text text-body-2 text-md-h5" title="Menu">mdi-menu</v-icon>
         </transition>
@@ -81,6 +81,12 @@ export default {
     };
   },
   methods: {
+    moveDrawer() {
+      let sidebar = document.querySelector("#sidebar");
+      this.drawer = !this.drawer;
+      if (this.drawer) sidebar.classList.add("drawer-open");
+      else sidebar.classList.remove("drawer-open"); 
+    },
     enterMenu(element) {
       gsap.fromTo(
         element,
