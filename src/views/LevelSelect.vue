@@ -8,10 +8,8 @@
       <v-card
         v-for="(level, index) in levels"
         class="styledDiv carousel-cell pa-5 mx-8"
-        ref="levelDiv"
         elevation="12"
-        height="25px"
-        width="30em "
+        width="30em"
         :class="[
           'mx-auto my-8',
           { ' locked': levelIsAccessible(level) === false },
@@ -25,7 +23,7 @@
         >
           <v-img
             class="white--text align-end"
-            height="18em"
+            height="23em"
             :src= "require(`@/assets/${level.img}`)"
           >
             <div :id="'lockIcon' + index" class="zentriertLockIcon">
@@ -358,7 +356,7 @@ export default {
 }
 
 .carousel-cell {
-  height: 30em !important;
+  height: 35em !important;
   border-radius: 5px;
   padding: 0 !important;
   counter-increment: carousel-cell;

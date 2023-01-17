@@ -15,7 +15,7 @@
      height="100%"
       width="100%"
       class="">
-        <div class="display-flex tutorial">
+        <div class="d-lg-flex justify-lg-center tutorial">
         <div class="container2">
           <v-card elevation="24" width="30em">
               <v-row no-gutters v-for="y in 4" :key="y" class="">
@@ -32,7 +32,7 @@
           :read_only="true"
             font_size="37px"
             height="440px"
-            width="805px"
+            width="100%"
             v-model="actualCodeToRun"
           >
           </CodeEditor>
@@ -140,6 +140,7 @@ export default {
 </script>
 
 <style scoped>
+
 .header {
   margin-top: 10em;
 }
@@ -152,6 +153,8 @@ export default {
 }
 .editor{
   margin-left: 4em;
+  width: 30vw;
+  max-width: 30em;
 }
 .col {
   flex-basis: 0.1 !important;
@@ -167,12 +170,6 @@ export default {
 .cardgrid {
   width: 7.5em;
   height: 7.5em;
-}
-@media only screen and (min-device-width: 1900px) {
-  .display-flex{
-    display: flex;
-    justify-content: center;
-  }
 }
 
 @media only screen and (min-device-width: 0px) and (max-device-width: 1900px) {

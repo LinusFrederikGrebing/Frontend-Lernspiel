@@ -3,6 +3,7 @@
     <v-main>
       <SideBar/>
       <router-view></router-view> 
+      {{ $vuetify.breakpoint.name }}
       <FooterComponent />
     </v-main>
   </v-app>

@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import colors from 'vuetify/lib/util/colors';
-import '@mdi/font/css/materialdesignicons.css'
+import '@mdi/font/css/materialdesignicons.css';
+import responsive from 'vue-responsive';
+Vue.use(responsive);
 Vue.use(Vuetify);
 
 
