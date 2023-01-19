@@ -49,8 +49,8 @@
                       </div>
                       <hr class="divider mt-8"/>
                       <v-card-actions>
-                        <v-btn color="orange lighten-2 my-2 mr-8">
-                          Button zu offizieller Doku?
+                        <v-btn color="orange lighten-2 my-2 mr-8" @click="openInNewTab($event, item.documentation)">
+                          W3schools Dokumentation 
                         </v-btn>
                       </v-card-actions>
                     </v-card>
@@ -86,7 +86,8 @@ export default {
           subheader2: 'Verschiedene Arten von Variablen',
           informations2: 'In JavaScript gibt es drei verschiedene Möglichkeiten Variablen zu deklarieren: const: Symbolische Konstante; deklariert eine unveränderliche Variable ||  let: deklariert eine lokale Variable im Block Scope || var: deklariert eine Variable unabhängig von ihrem Scope (Gültigkeitsbereich).',
           Beispiel: require('../../assets/varExample.png'),
-          beispieltext: 'In der ersten Deklaration wird die Konstante PI-Deklariert. Während der Lauzeit kann diese Konstante nicht verändert, aber an beliebigen Stellen verwendet werden. Nach Deklaration einer Variable mit let oder var kann die Variable während der Lauzeit sowohl verändert werden, als auch von beliebigen Stellen genutzt werden.'
+          beispieltext: 'In der ersten Deklaration wird die Konstante PI-Deklariert. Während der Lauzeit kann diese Konstante nicht verändert, aber an beliebigen Stellen verwendet werden. Nach Deklaration einer Variable mit let oder var kann die Variable während der Lauzeit sowohl verändert werden, als auch von beliebigen Stellen genutzt werden.',
+          documentation: 'https://www.w3schools.com/js/js_variables.asp',
         },
         {
           id: 2,
@@ -98,7 +99,8 @@ export default {
           subheader2: 'Ablauf von Funktionen und Funktionsaufrufen',
           informations2: 'Eine JavaScript-Funktion wird mit dem Schlüsselwort function definiert, gefolgt von einem selbstdefinierten Namen, gefolgt von Klammern. Funktionsnamen können Buchstaben, Ziffern, Unterstriche und Dollarzeichen enthalten (dieselben Regeln wie bei Variablen). Die Klammern können durch Kommas getrennte Parameternamen enthalten:( parameter1, parameter2, ... ). Der von der Funktion auszuführende Code steht in geschweiften Klammern: {}. Der Javascript-Interpreter führt die Anweisungen im Block der Funktion erst beim Funktionsaufruf auf.',
           Beispiel: require('../../assets/paintedFunction.png'),
-          beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.'
+          beispieltext: 'Anhand der in die Funktion ünbergebenden Parameter kann das Element ermittelt und dem jeweiligen Element die Klasse "painted" zugewiesen werden. Der Funktionsaufruf geschieht über den Namen der Funktion und passender Parameterübergabe.',
+          documentation: 'https://www.w3schools.com/js/js_functions.asp',
         },
         {
           id: 3,
@@ -110,7 +112,8 @@ export default {
           subheader2: 'Syntax einer for-Schleife',
           informations2: 'Sie notieren also zunächst das Schlüsselwort for und öffnen eine runde Klammer. Es folgen drei Code-Stücke, die die Schleife steuern und durch ein Semikolon voneinander getrennt werden. Danach notieren Sie eine schließende runde Klammer und es folgen eine oder mehrere Anweisungen, die durch geschweifte Klammern zusammengefasst werden. Initialisierung: Sie geschieht als erstes, und nur ein einziges Mal. Hier können Sie beispielsweise einen Zähler auf seinen Anfangswert setzen. Schleifenbedingung: Sie wird vor jedem Schleifendurchlauf ausgewertet und muss true liefern, damit der Schleifenrumpf ausgeführt wird. Sie können hier prüfen, ob der Endwert Ihres Zählers noch nicht erreicht ist. Fortsetzung: Sie wird nach jedem Schleifendurchlauf ausgewertet. Ihr Zähler könnte hier um 1 erhöht werden. Grundsätzlich handelt es sich bei der For-Schleife um eine Form von syntaktischem Zucker, denn man könnte, von einer Kleinigkeit abgesehen, auf die wir noch eingehen, die for-Schleife genauso gut als while-Schleife aufschreiben:',
           Beispiel: require('../../assets/forExample.png'),
-          beispieltext: 'Im Beispiel wird eine result Variable deklariert. Die for-Schleife beginnt bei 0 und läuft solange, bis der Initialwert i kleiner als 5 ist. I wird bei jeden Schleifendurchlauf um einen Punkt erhöht. Die Schleife in dem Beispiel wird also 4x ausgeführt. Wenn die Schleife den 5 Schritt ebenfalls ausführen soll, dann muss die Abbruchbedingung ein <= aufweisen.'
+          beispieltext: 'Im Beispiel wird eine result Variable deklariert. Die for-Schleife beginnt bei 0 und läuft solange, bis der Initialwert i kleiner als 5 ist. I wird bei jeden Schleifendurchlauf um einen Punkt erhöht. Die Schleife in dem Beispiel wird also 4x ausgeführt. Wenn die Schleife den 5 Schritt ebenfalls ausführen soll, dann muss die Abbruchbedingung ein <= aufweisen.',
+          documentation: 'https://www.w3schools.com/js/js_loop_for.asp',
         },
         {
           id: 4,
@@ -122,7 +125,8 @@ export default {
           subheader2: 'Syntax einer While-Schleife',
           informations2: 'Eine while-Schleife beginnt mit dem Schlüsselwort while (while = solange). Dahinter folgt, in runden Klammern ( und ) stehend, die Schleifenbedingung. Um eine Bedingung zu formulieren, brauchen Sie beispielsweise Vergleichsoperatoren oder logische Operatoren. Danach folgt der Schleifenrumpf, der eine einzelne JavaScript-Anweisung sein kann oder ein Block aus mehreren Anweisungen, die in geschweifte Klammern { und } gesetzt werden.',
           Beispiel: require('../../assets/WhileExample.png'),
-          beispieltext: 'Anders als bei der for-Schleife muss die Zählvariable i hier außerhalb der Schleife angelegt werden, und innerhalb der Schleife zur Abbruchbedingung beigetragen werden. Innerhalb des Schleifen-blocks wird der gewünschte Code ausgeführt. Besonders bei einer While-Schleife muss Vorsicht geboten sein, denn die Zusammenhänge für Abbruchbedingung sind uneindeutiger als bei der for-Schleife, wodurch es leichter zu Endlosschleifen kommt.'
+          beispieltext: 'Anders als bei der for-Schleife muss die Zählvariable i hier außerhalb der Schleife angelegt werden, und innerhalb der Schleife zur Abbruchbedingung beigetragen werden. Innerhalb des Schleifen-blocks wird der gewünschte Code ausgeführt. Besonders bei einer While-Schleife muss Vorsicht geboten sein, denn die Zusammenhänge für Abbruchbedingung sind uneindeutiger als bei der for-Schleife, wodurch es leichter zu Endlosschleifen kommt.',
+          documentation: 'https://www.w3schools.com/js/js_loop_while.asp',
         },
         {
           id: 5,
@@ -134,22 +138,19 @@ export default {
           subheader2: 'Syntax einer do-While-Schleife',
           informations2: 'Eine do-while-Schleife beginnt mit dem Schlüsselwort do (do = tue etwas). Hinter dem do folgt eine einzelne Anweisung oder ein Anweisungsblock in geschweiften Klammern { und }. Darauf folgt als nächstes das Schlüsselwort while, hinter dem in runden Klammern ( und ) die Schleifenbedingung steht. Der Aufbau der do-while-Schleife ist eigentlich seltsam. Zum einen ist das do technisch gar nicht nötig, es ist eher eine Lesehilfe für Sie, damit Sie nicht unvermittelt vor dem Beginn eines Anweisungsblocks stehen. Andererseits, wenn man es schon einmal hat, könnte man auch ganz auf die geschweiften Klammern verzichten. Das geht aber wie in jeder anderen Kontrollstruktur nur, wenn der Schleifenrumpf nur aus einer einzelnen Anweisung besteht. JavaScript orientiert sich hier schlicht an seinem Vorbild, der Programmiersprache C.',
           Beispiel: require('../../assets/doWhileExample.png'),
-          beispieltext: 'Bei der do-While-Schleife wird die Zählvariable in der Regel ebenfalls außerhalb der Schleife deklariert. Bevor die Schleife prüft, ob der Schleifendurchgang wiederholt werden muss, wird bei der do-While-Schleife jedoch der Code im do-Bereich vorher ausgeführt. Wir zählen das i also hoch und verrechnen dieses mit unserem Ergebnis. Im Anschluss überprüfen wir, ob i < 5 ist. Solange i also kleiner als 5 ist, wird der bereich in do-Block weiter ausgeführt.'
+          beispieltext: 'Bei der do-While-Schleife wird die Zählvariable in der Regel ebenfalls außerhalb der Schleife deklariert. Bevor die Schleife prüft, ob der Schleifendurchgang wiederholt werden muss, wird bei der do-While-Schleife jedoch der Code im do-Bereich vorher ausgeführt. Wir zählen das i also hoch und verrechnen dieses mit unserem Ergebnis. Im Anschluss überprüfen wir, ob i < 5 ist. Solange i also kleiner als 5 ist, wird der bereich in do-Block weiter ausgeführt.',
+          documentation: 'https://www.w3schools.com/jsref/jsref_dowhile.asp',
         },
       ]
     };
   },
   methods: {
-    paint(first, second) {
-      let element = document.getElementById("vx" + first + "vy" + second);
-      element.classList.add("painted");
-    },
-    resetPaintedFields() {
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        if (!el.id.includes("v")) {
-          el.classList.remove("painted");
-        }
-      });
+    openInNewTab(event, url) {
+      event.preventDefault();
+      setTimeout(function(){
+        var win = window.open(url, '_blank');
+        win.focus();
+      }, 100);
     },
   },
   mounted() {

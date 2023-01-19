@@ -27,15 +27,16 @@
         </v-btn>
       </transition>
     <transition appear @enter="enterInput">
+      <div @click="checkIfCodeFilled()">
       <CodeEditor
         v-if="editorActive"
         id="code-editor"
         height="30vh"
         width="25vw"
         v-model="codeToRun"
-        @click="checkIfCodeFilled"
       >
       </CodeEditor>
+    </div>
     </transition>
     <transition appear @enter="enterInput">
     <v-textarea 
@@ -52,7 +53,7 @@
       <transition appear  @enter="enter">
         <v-btn
           color="success"
-          id="button-finished"
+          id="finished-btn"
           depressed
           elevation="2"
           @click="runfunction"
@@ -155,9 +156,10 @@ export default {
     delay(time) {
      return new Promise(resolve => setTimeout(resolve, time));
     },
+    // Second part of the Tutorial Animation
     animatePathToButton() {
       let timelineToButton = gsap.timeline({repeat: 0, repeatDelay: 0, });
-      let buttonFinished = document.querySelector("#button-finished");
+      let buttonFinished = document.querySelector("#finished-btn");
       let header = document.querySelector('.header');
       let sidebar = document.querySelector('#sidebar');
       let headerHeight = parseInt(header.offsetHeight);
@@ -212,6 +214,8 @@ export default {
     },
     //GSAP Animation when resetting
     resetAnimation() {
+      const resetBtn = document.querySelector(".reset-btn");
+      resetBtn.setAttribute("disabled", "disabled");
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
           let element = document.getElementById("x" + i + "y" + j);
@@ -232,6 +236,7 @@ export default {
           });
         }
       }
+      this.delay(4000).then(() => resetBtn.removeAttribute("disabled"));
     },
     // Changes the Color of the Painted Cards and emits the Color-value to other Vue-Components that need to work with said value
     changeColor(clr) {
@@ -256,13 +261,6 @@ export default {
         { delay: 0, duration: 1, y: 0, x: 0, opacity: 1 }
       );
     },
-    /*paint(first, second) {
-      let element = document.getElementById("x" + first + "y" + second);
-      this.checkParamValue(first);
-      this.checkParamValue(second);
-      element.classList.add("painted");
-      element.style.backgroundColor = color;
-    },*/
     // Checks If the Given Answer is correct
     checkResult() {
       let allElements = document.getElementsByClassName("painted");
@@ -404,7 +402,9 @@ export default {
     checkIfCodeFilled() {
       if (this.codeToRun === "/*Type your own code!*/") {
         this.codeToRun = "";
+        console.log("ADSAD1");
       }
+      console.log("ADSAD2");
     },
     // Alot of complicated String manipulation to detect the position of a for-loop, dissect the for-loop and insert a maximum number of allowed iterations
     InsertForLoopInfinitySafety(code) {
@@ -484,17 +484,11 @@ export default {
       else if (whileCall > 0 && doCall == 0 && forCall == 0) this.solution = "WhileSchleife";
       else if (forCall > 0 && doCall == 0 && whileCall == 0) this.solution = "ForSchleife";
       else if (forCall == 0 && doCall == 0 && whileCall == 0 && paintCall > 0) this.solution = "PaintAufruf";
-      console.log("SOLUTION USED: " + this.solution);
     },
     // Method checks if the essential method paint has been called, throws an Error if not (to help new players understand that this method is needed)
     checkIfPaintCall(code) {
       if (code.search("paint") == -1) this.errorMessage += "Rufe die paint(x,y) Methode aus um Felder anzumalen!\n";
     },
-    /*checkParamValue(num) {
-      const gridElems = document.querySelectorAll(".grid-card");
-      let maxValue = Math.sqrt(gridElems.length) - 1;
-      if (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");
-    },*/
     // Helper Method takes a String and the position of a Bracket as Parameter and returns the content of given Bracket
     getBracket(str, pos) {
       if (str[pos] == '(') {
@@ -556,23 +550,14 @@ export default {
     },
   },
   watch: {
-    //The Watcher color makes sure the color property is update on change
+    //The Watcher "color" makes sure the color property is update on change
     color(newVal, oldVal) {
       console.log(this.color)
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = this.color;
       });
     },
-    /*paintedElements(newVal, oldVal) {
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        el.style.backgroundColor = this.color;
-      });
-    }*/
   },
-  mounted(){
-    //this.color = '#80ba24'
-  }
-
 };
 </script>
 

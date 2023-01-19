@@ -8,14 +8,28 @@
               <v-row no-gutters v-for="y in 10" :key="y">
                 <v-col no-gutters v-for="x in 10" :key="x">
                   <transition appear @enter="enterTemplateGrid">
-                    <v-card class="template-card" :id="'vx' + (x - 1) + 'vy' + (y - 1)">
-                      {{ "" }}
+                    <v-card class="template-card" :id="'vx' + (x - 1)+ 'vy' + idArray[y-1]">
+                      <p v-if="coordsVisible" class="coords-text">{{ x - 1 + "|" + idArray[y-1] }}</p>
                     </v-card>
                   </transition>
                 </v-col>
               </v-row>
             </v-container>
           </v-col>
+          <v-col cols="col-2" md="2">
+            <transition
+              appear
+              @enter="enterTemplateGrid"
+            >
+              <v-btn
+                color="green"
+                @click="swapButtonText();coordsVisible = !coordsVisible;"
+              >
+              Koordinaten <br> {{btnText}} 
+              </v-btn></transition
+            >
+          </v-col>
+
         </v-row>
       </v-container>
     </div>
@@ -31,8 +45,15 @@ export default {
     color: String,
   }, 
   data: () => ({
+    idArray: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+    btnText: "anzeigen",
+    coordsVisible: false,
   }),
   methods: {
+    swapButtonText() {
+      if (this.btnText == "anzeigen") this.btnText = "verstecken";
+      else this.btnText = "anzeigen";
+    },
     enterTemplateGrid(element) {
       gsap.fromTo(
         element,
@@ -66,6 +87,11 @@ export default {
 .template-card {
   width: 2em;
   height: 2em;
+}
+
+.coords-text {
+  text-align: center;
+  font-size: 0.6vw;
 }
 
 .col {
