@@ -66,8 +66,8 @@
           ></v-color-picker>  
         </div> 
         <div class="floating-container">
-      <div class="floating-button">+</div>
-        <div class="element-container">
+      <v-btn class="floating-button" @click="openFAB()">+</v-btn>
+        <div id="fab-items" class="closedFAB">
             <span class="float-element tooltip-left">
               <v-btn
                 depressed
@@ -125,12 +125,24 @@ export default {
       consoleActive: false,
       gotUnreadErrors: false,
       codeToRun: "/*Type your own code!*/",
+      fab: false
     };
   },
 
   methods: {
+    openFAB(){
+      let element = document.getElementById("fab-items");
+      if(this.fab == false){
+        element.classList.add("element-container");
+        element.classList.remove("closedFAB");
+        this.fab = true;
+      } else {
+        element.classList.add("closedFAB");
+        element.classList.remove("element-container");
+        this.fab = false;
+      }
+    },
     animateTutorial() {
-
       document.body.style.pointerEvents = "none";
       let timelineToEditor = gsap.timeline({repeat: 0, repeatDelay: 0, });
       let codeEditor = document.querySelector("#code-editor");
@@ -619,25 +631,25 @@ export default {
   right: 0;
   margin: 5em 6em;
 }
-.floating-container:hover {
+.floating-container {
   height: 300px;
   width:  100px;
 }
-.floating-container:hover .floating-button {
+.floating-container .floating-button {
   -webkit-transform: translatey(5px);
           transform: translatey(5px);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
-.floating-container:hover .element-container .float-element:nth-child(1) {
+.floating-container .element-container .float-element:nth-child(1) {
   -webkit-animation: come-in 0.4s forwards 0.2s;
           animation: come-in 0.4s forwards 0.2s;
 }
-.floating-container:hover .element-container .float-element:nth-child(2) {
+.floating-container .element-container .float-element:nth-child(2) {
   -webkit-animation: come-in 0.4s forwards 0.4s;
           animation: come-in 0.4s forwards 0.4s;
 }
-.floating-container:hover .element-container .float-element:nth-child(3) {
+.floating-container .element-container .float-element:nth-child(3) {
   -webkit-animation: come-in 0.4s forwards 0.6s;
           animation: come-in 0.4s forwards 0.6s;
 }
@@ -665,6 +677,11 @@ export default {
   -webkit-transform: translateY(100px);
           transform: translateY(100px);
 }
+
+.closedFAB .float-element {
+  display: none;
+}
+
 .floating-container .float-element .material-icons {
   vertical-align: middle;
   font-size: 16px;

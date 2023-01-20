@@ -33,25 +33,7 @@
               </transition
             >
           </v-col>
-
         </v-row>
-        <v-tooltip bottom color="success">
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon
-                color="success"
-                dark
-                v-bind="attrs"
-                v-on="on"
-                left
-              >
-             info
-              </v-icon>
-            </template>
-            <span>
-              <h4>Du hast das Level bereits gemeistert!</h4>
-              <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
-            </span>
-          </v-tooltip>
       </v-container>
     </div>
   </div>
