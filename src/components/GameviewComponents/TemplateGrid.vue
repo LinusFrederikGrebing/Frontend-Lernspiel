@@ -4,7 +4,8 @@
       <v-container>
         <v-row no-gutters>
           <v-col cols="col-10" md="10">
-            <v-container class="" id="template_grid"  @click="openOrCloseFullscreen()">
+            <v-container id="template_grid"  @click="openOrCloseFullscreen()">
+              <div class="template-zoom-bg" id="template-zoom-bg-id">
               <v-row no-gutters v-for="y in 10" :key="y">
                 <v-col no-gutters v-for="x in 10" :key="x">
                   <transition appear @enter="enterTemplateGrid">
@@ -15,6 +16,7 @@
                  
                 </v-col>
               </v-row> 
+            </div>
             </v-container>
           </v-col>
           <v-col cols="col-2" md="2">
@@ -57,6 +59,7 @@
 
 <script>
 import gsap from "gsap";
+import zoomBgImg from '../../assets/zoom-in-lupe.png';
 
 export default {
   name: "GameGrid",
@@ -70,15 +73,28 @@ export default {
     zoomedGrid: false
   }),
   methods: {
+    showZoomOption() {
+        gsap.to(".template-zoom-bg", {duration: 0, opacity: 0.75, backgroundImage: `url(${zoomBgImg})`});
+        gsap.to(".template-card", {opacity: 0.5});
+    },
+    hideZoomOption() {
+        gsap.to(".template-zoom-bg", {opacity: 1, backgroundImage: ""});
+        gsap.to(".template-card", {opacity: 1});
+    },
     swapButtonText() {
       if (this.btnText == "anzeigen") this.btnText = "verstecken";
       else this.btnText = "anzeigen";
     },
     enterTemplateGrid(element) {
+      let zoomBg = document.getElementById("template-zoom-bg-id");
       gsap.fromTo(
         element,
         { y: -20, x: +2000 },
-        { delay: Math.random() + 3, duration: 3, y: 0, x: 0, opacity: 1 }
+        { delay: Math.random() + 3, duration: 3, y: 0, x: 0, opacity: 1, onComplete: () => {
+            zoomBg.addEventListener('mouseover', this.showZoomOption);
+            zoomBg.addEventListener('mouseleave', this.hideZoomOption);
+          }  
+        }
       );
     },
     paint(first, second) {
@@ -89,6 +105,7 @@ export default {
     },
     openOrCloseFullscreen(){
       let element = document.getElementById("template_grid");
+      let zoomBg = document.getElementById("template-zoom-bg-id");
       if(this.zoomedGrid == false){
         element.classList.add("template_grid");
         gsap.to(
@@ -100,6 +117,9 @@ export default {
         zIndex: 10 },
        );
        this.zoomedGrid = true
+       zoomBg.removeEventListener('mouseover', this.showZoomOption);
+       zoomBg.removeEventListener('mouseleave', this.hideZoomOption);
+       this.hideZoomOption();
       } else {
         gsap.to(
         '#template_grid',
@@ -108,9 +128,10 @@ export default {
           y: 0,
           backgroundColor: 'transparent',
         zIndex: 10 },
-       );
-       element.classList.remove("template_grid");
+       )
        this.zoomedGrid = false
+       zoomBg.addEventListener('mouseover', this.showZoomOption);
+       zoomBg.addEventListener('mouseleave', this.hideZoomOption);
       }
  
     
@@ -150,6 +171,11 @@ export default {
 .template-card {
   width: 2em;
   height: 2em;
+}
+
+.template-zoom-bg {
+  background-size: 75%;
+  background-position: center;
 }
 
 .coords-text {
