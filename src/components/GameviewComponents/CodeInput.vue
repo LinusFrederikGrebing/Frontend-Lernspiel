@@ -326,9 +326,7 @@ export default {
         confirmButtonText: 'Nächstes Level!',
         cancelButtonText: 'Zur Levelauswahl!',
         allowOutsideClick: false, }).then((result) => {
-        if (result.isConfirmed) {
-          this.$emit("success");
-        } else {
+        if (!result.isConfirmed) {
           this.$router.push({ path: '/LevelSelect' });
         }
       }
