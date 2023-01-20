@@ -1,98 +1,96 @@
 <template>
   <v-container class="content-section">
-
- 
-  <v-card elevation="24" outlined shaped class="">
-    <h1 class="h1 font-weight-black">- Level-Auswahl -</h1>
-    <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
-      <v-card
-        v-for="(level, index) in levels"
-        class="styledDiv carousel-cell pa-5 mx-8"
-        elevation="12"
-        width="30em"
-        color="#4a5c66"
-        :class="[
-          'mx-auto my-8',
-          { ' locked': levelIsAccessible(level) === false },
-        ]"
-        :key="index"
-      >
-        <div
-          :id="'lvlselect' + index"
-          @mouseenter="hoverEnter($event)"
-          @mouseleave="hoverLeave($event)"
+    <v-card elevation="24" outlined shaped class="">
+      <h1 class="h1 font-weight-black">- Level-Auswahl -</h1>
+      <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
+        <v-card
+          v-for="(level, index) in levels"
+          class="styledDiv carousel-cell pa-5 mx-8"
+          elevation="12"
+          width="30em"
+          color="#252525"
+          :class="[
+            'mx-auto my-8',
+            { ' locked': levelIsAccessible(level) === false },
+          ]"
+          :key="index"
         >
-          <v-img
-            class="white--text align-end"
-            height="23em"
-            :src= "require(`@/assets/${level.img}`)"
+          <div
+            :id="'lvlselect' + index"
+            @mouseenter="hoverEnter($event)"
+            @mouseleave="hoverLeave($event)"
           >
-            <div :id="'lockIcon' + index" class="zentriertLockIcon">
-              <v-icon
-                v-if="levelIsAccessible(level) === false"
-                class="zentriert"
-              >
-                mdi-lock
-              </v-icon>
-            </div>
-            <v-card-title class="black--text">Level {{ level.id }} </v-card-title>
-          </v-img>
-        </div>
-        <v-card-subtitle class="pb-0 font-weight-bold white--text">
-          Schwierigkeit:
-          <v-rating
-            color="yellow darken-3"
-            background-color="white darken-1"
-            empty-icon="$ratingFull"
-            half-increments
-            hover
-            length="8"
-            readonly
-            size="35"
-            :value="level.difficulty"
-          ></v-rating>
-        </v-card-subtitle>
+            <v-img
+              class="white--text align-end"
+              height="23em"
+              :src= "require(`@/assets/${level.img}`)"
+            >
+              <div :id="'lockIcon' + index" class="zentriertLockIcon">
+                <v-icon
+                  v-if="levelIsAccessible(level) === false"
+                  class="zentriert"
+                >
+                  mdi-lock
+                </v-icon>
+              </div>
+              <v-card-title class="black--text">Level {{ level.id }} </v-card-title>
+            </v-img>
+          </div>
+          <v-card-subtitle class="pb-0 font-weight-bold white--text">
+            Schwierigkeit:
+            <v-rating
+              color="yellow darken-3"
+              background-color="white darken-1"
+              empty-icon="$ratingFull"
+              half-increments
+              hover
+              length="8"
+              readonly
+              size="35"
+              :value="level.difficulty"
+            ></v-rating>
+          </v-card-subtitle>
 
-        <v-card-actions class="my-4">
-          <v-btn
-            :id="'button' + index"
-            color="primary"
-            depressed
-            elevation="2"
-            @click="setLevel(level)"
-            @mouseover="hoverButtonEnter($event)"
-            @mouseleave="hoverButtonLeave($event)"
-          >
-            Start
-          </v-btn>
-          <v-tooltip bottom color="success">
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon
-                color="success"
-                dark
-                v-bind="attrs"
-                v-on="on"
-                v-if="level.completed === true"
-                right
-              >
-                mdi-checkbox-marked-circle
-              </v-icon>
-            </template>
-            <span>
-              <h4>Du hast das Level bereits gemeistert!</h4>
-              <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
-            </span>
-          </v-tooltip>
-          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text">
-            Bestzeit: {{level.bestTimeinSek }} Sekunden
-          </v-card-title>
-          <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text">
-            Bestzeit: {{ (Math.round(((level.bestTimeinSek)/60) * 100) / 100) }} Minuten
-          </v-card-title>
-        </v-card-actions>
-      </v-card>
-    </flickity>
-  </v-card> 
+          <v-card-actions class="my-4">
+            <v-btn
+              :id="'button' + index"
+              color="primary"
+              depressed
+              elevation="2"
+              @click="setLevel(level)"
+              @mouseover="hoverButtonEnter($event)"
+              @mouseleave="hoverButtonLeave($event)"
+            >
+              Start
+            </v-btn>
+            <v-tooltip bottom color="success">
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon
+                  color="success"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  v-if="level.completed === true"
+                  right
+                >
+                  mdi-checkbox-marked-circle
+                </v-icon>
+              </template>
+              <span>
+                <h4>Du hast das Level bereits gemeistert!</h4>
+                <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
+              </span>
+            </v-tooltip>
+            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text">
+              Bestzeit: {{level.bestTimeinSek }} Sekunden
+            </v-card-title>
+            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text">
+              Bestzeit: {{ (Math.round(((level.bestTimeinSek)/60) * 100) / 100) }} Minuten
+            </v-card-title>
+          </v-card-actions>
+        </v-card>
+      </flickity>
+    </v-card> 
   </v-container>
 </template>
 
@@ -274,7 +272,6 @@ export default {
   },
 
   computed: {
-   
     levels() {
       if (localStorage.getItem("levels") !== null) {
         return JSON.parse(localStorage.getItem("levels"));
@@ -343,7 +340,6 @@ export default {
 
 .locked {
   opacity: 0.7;
- 
 }
 
 .zentriert {
@@ -369,7 +365,6 @@ export default {
 }
 
 .carousel-cell.is-selected {
-  background: rgb(67, 96, 19) !important;
-  box-shadow: 1em 1em 1em rgba(43, 61, 15, 0.7) !important;
+  box-shadow: 1em 1em 1em rgba(51, 42, 42, 0.7) !important;
 }
 </style>

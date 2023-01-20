@@ -1,5 +1,5 @@
 <template>
-    <v-footer app class="footer" padless color="rgb(74, 92, 102)">
+    <v-footer app height="40" padless color="rgb(74, 92, 102)">
       <v-col
         class="text-center footerText"
         cols="12"
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "footer"
+  name: "footertemplate"
 }
 </script>
 
@@ -20,9 +20,5 @@ export default {
 .footerText{
    color: white;
    font-size: 0.8em;
-}
-.footer{
-  height: 2.5em;
- 
 }
 </style>

@@ -32,11 +32,11 @@
                 v-for="link in menuLinks"
                 :key="link.title"
                 :href="link.path"
+                :target="link.target"
               >
-                <v-icon :title="link.title" class="icon"
-                  >mdi-{{ link.icon }}</v-icon
-                >
-
+                <v-icon :title="link.title" class="icon">
+                  mdi-{{ link.icon }}
+                </v-icon>
                 <v-slide-x-transition mode="in-out" leave-absolute>
                   <div
                     class="link-title"
@@ -73,10 +73,10 @@ export default {
         hidden: true,
       },
       menuLinks: [
-        { title: "Level-Auswahl", icon: "home", path: "/LevelSelect"},
-        { title: "Tutorial", icon: "information-variant", path: "#"},
-        { title: "Hilfen", icon: "email", path: "/Help"},
-        { title: "Back to Homepage", icon: "logout-variant", path: "/"},
+        { title: "Level-Auswahl", icon: "home", path: "/LevelSelect", target: "_self"},
+        { title: "Tutorial", icon: "information-variant", path: "#", target: "_self"},
+        { title: "Hilfen", icon: "email", path: "/Help", target: "_blank"},
+        { title: "Back to Homepage", icon: "logout-variant", path: "/", target: "_self"},
       ],
     };
   },

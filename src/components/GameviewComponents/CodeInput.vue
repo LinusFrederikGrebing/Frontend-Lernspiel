@@ -686,13 +686,8 @@ export default {
   vertical-align: middle;
   font-size: 16px;
 }
-
-
-
-
-
-
 .consoleArea {
+  width: 70%;
   background-color: white;
 }
 

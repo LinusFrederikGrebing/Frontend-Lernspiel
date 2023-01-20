@@ -16,7 +16,6 @@
                 { text_xs: $vuetify.breakpoint.lgAndDown},  { text: !$vuetify.breakpoint.lgAndDown},
                 { left: index % 2 === 0 && !$vuetify.breakpoint.lgAndDown}, {'mobile_right' : $vuetify.breakpoint.lgAndDown},
                 { right: index % 2 !== 0 && !$vuetify.breakpoint.lgAndDown }]"
-              
             >
               <h2 v-text="item.title"></h2>
               <p v-text="item.text"></p>
@@ -153,7 +152,7 @@ export default {
   }
 
   .item {
-    background-color: #4a5c66;
+    background-color: #252525;
     padding: 2em;
   }
 

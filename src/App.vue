@@ -9,7 +9,7 @@
 </template>
 <script>
 import SideBar from "./components/Navigation.vue";
-import FooterComponent from "./components/Footer.vue";
+import FooterComponent from "./components/FooterTemplate.vue";
 export default {
   name: "App",
   components: {

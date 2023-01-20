@@ -3,7 +3,7 @@
       <div class="mobile">
         <v-expansion-panels>
           <v-expansion-panel
-                             v-for="item in informations" :key="item.id"
+            v-for="item in informations" :key="item.id"
           >
             <v-expansion-panel-header class="text-h6 text-sm-h5 my-4">
               {{ item.label }}
@@ -130,37 +130,6 @@ methods: {
         win.focus();
       }, 100);
     },
-},
-mounted() {
-  var generalcontent = document.querySelector(".general-content");
-  var arraycontent = [].slice.call(
-    document.querySelectorAll(".component")
-  );
-  var closebuttons = [].slice.call(
-    document.querySelectorAll(".component-close-button")
-  );
-
-  setTimeout(function () {
-    generalcontent.classList.remove("js-general-content");
-  }, 200);
-
-  arraycontent.forEach(function (component) {
-    component.addEventListener("click", function () {
-      if (this.classList.contains("component-active")) return;
-      generalcontent.classList.add("component--active");
-      this.classList.add("component-active");
-    });
-  });
-
-  closebuttons.forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      generalcontent.classList.remove("component--active");
-      document
-          .querySelector(".component.component-active")
-          .classList.remove("component-active");
-    });
-  });
 },
 }
 </script>

@@ -20,7 +20,7 @@
                       <div class="container-image-chapter-open">
                         <div class="image">
                           <v-img :src="item.src" contain></v-img>
-                          <h2 style="position: absolute; top:50%; left:25%; transform: translate(-25%, -50%)" class="white--text text-h4 text-md-h3"><i>{{ item.label }}!</i></h2>
+                          <h2 style="position: absolute; top:50%; left:25%; transform: translate(-25%, -50%)" class="white--text text-h4 text-md-h3"><i>{{ item.name }}!</i></h2>
                         </div>
                       </div>
                       <v-card-title>
@@ -80,6 +80,7 @@ export default {
           id: 1,
           url: require('../../assets/programmingVariablen.png'),
           label: 'Variablen',
+          name: 'Variablen',
           subheader: "Was sind Variablen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Eine Variable lässt sich am besten mit einem Behälter, der genau einen Wert aufnehmen kann, vergleichen. Der Behälter ist ein logischer Speicherplatz mit einem (unveränderlichen) Namen und einem Wert, der verändert werden kann.',
@@ -93,6 +94,7 @@ export default {
           id: 2,
           url: require('../../assets/programmingFunktion.png'),
           label: 'Funktionen',
+          name: 'Funktionen',
           subheader: "Was sind Funktionen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Funktionen sind ein Block von Anweisungen unter einem Namen. Der Funktionsblock wird einmal definiert, dann können die Javascript-Befehle der Funktion über den Namen mehrfach im Programm aufgerufen werden. Das Zusammenfassen von Befehlen in einer Funktion verbessert die Lesbarkeit des Scripts und verhindert Fehler.',
@@ -106,6 +108,7 @@ export default {
           id: 3,
           url: require('../../assets/programmingFor.png'),
           label: 'For',
+          name: 'For-Schleife',
           subheader: "Was sind For-Schleifen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Die for-Schleife wird verwendet, wenn eine bestimmte Anzahl an Durchläufen benötigt wird. Der Schleifenkopf fasst die Vorbereitung der ganzen Schleife, die Schleifenbedingung und die nötigen Berechnungen zur Fortsetzung der Schleife zusammen.',
@@ -119,6 +122,7 @@ export default {
           id: 4,
           url: require('../../assets/programmingWhile.png'),
           label: 'While',
+          name: 'While-Schleife',
           subheader: "Was sind While-Schleifen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Die while-Schleife wertet zunächst die Schleifenbedingung aus. Ergibt sich dabei der Wert true (oder ein true-artiger Wert), wird der Schleifenrumpf ausgeführt. Danach beginnt der Ablauf von vorn. Dieser Schleifentyp eignet sich wenn Sie im Voraus nicht wissen, wie oft die Schleife zu durchlaufen ist wenn es beabsichtigt ist, dass der Schleifenrumpf eventuell gar nicht durchlaufen wird',
@@ -132,6 +136,7 @@ export default {
           id: 5,
           url: require('../../assets/programmingDoWhile.png'),
           label: 'Do-While',
+          name: 'Do-While-Schleife',
           subheader: "Was sind Do-While-Schleifen?",
           src: require('../../assets/helpTemplateBackground.png'),
           informations1: 'Die do-while-Schleife verhält sich ähnlich wie die while-Schleife, wertet aber die Schleifenbedingung erst nach Ausführung des Schleifenrumpfes aus. Dieser Schleifentyp eignet sich dann, wenn Sie mindestens einmal durch den Schleifenrumpf durchlaufen müssen, um entscheiden zu können, ob der Rumpf wiederholt werden muss oder nicht.',

@@ -21,7 +21,7 @@
               <v-row no-gutters v-for="y in 4" :key="y" class="">
                     <v-col no-gutters v-for="x in 4" :key="x">
                       <transition>
-                        <v-card :class="[{'cardgrid_mdAndUp' : $vuetify.breakpoint.mdAndUp}, {'cardgrid_sm' : $vuetify.breakpoint.sm}, {'cardgrid_xs' : $vuetify.breakpoint.xs}]" elevation="2" :id="'xTutorial' + (x - 1) + 'yTutorial' + (y - 1)"></v-card>
+                        <v-card :class="[{'cardgrid_mdAndUp' : $vuetify.breakpoint.mdAndUp}, {'cardgrid_sm' : $vuetify.breakpoint.sm}, {'cardgrid_xs' : $vuetify.breakpoint.xs}]" elevation="2" :id="'xTutorial' + (3-x) + 'yTutorial' + (4-y)"></v-card>
                       </transition>
                     </v-col>
               </v-row>

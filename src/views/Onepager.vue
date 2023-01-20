@@ -19,14 +19,14 @@
       <div class="page_section goals">
         <OnePagerGoals />
       </div>
-
-     <div :class="[{'desktop_invisible' : $vuetify.breakpoint.mdAndDown}]">
-        <HelpTemplateDesktop  />
-     </div>
-     <div :class="[{'desktop_invisible' : $vuetify.breakpoint.lgAndUp}]">
-        <HelpTemplateMobile  />
-     </div>
-    
+      <div class="help_template">
+        <div :class="[{'desktop_invisible' : $vuetify.breakpoint.mdAndDown}]">
+            <HelpTemplateDesktop  />
+        </div>
+        <div :class="[{'desktop_invisible' : $vuetify.breakpoint.lgAndUp}]">
+            <HelpTemplateMobile  />
+        </div>
+      </div>
        
      
     </div>
@@ -60,21 +60,27 @@ export default {
     OnePagerGoals
   },
   mounted() {
-    gsap.from(".lvl_select", {
-      duration: 1,
-      opacity: 0,
-      x: "-50em",
-      ease: "linear",
-      scrollTrigger: {
-        trigger: ".lvl_select",
-          start: "top 100%",
-          end: "top 80%",
-        toggleActions: "start complete reverse reset",
-      },
-    });
+    gsap.fromTo(
+      ".lvl_select",
+        {
+          y: 0,
+          x: -1000,
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          scrollTrigger: {
+            trigger: ".lvl_select",
+            start: "top 90%",
+            end: "bottom 50%",
+             toggleActions: "restart pause pause reset"
+          },
+        }
+      );
+
 
     gsap.from(".help_template", {
-      duration: 0.5,
       opacity: 0,
       x: "-50em",
       ease: "linear",
@@ -129,6 +135,8 @@ export default {
   .desktop_invisible {
     display: none !important;
   }
-
+.container {
+  max-width: 1900px;
+}
 
 </style>
