@@ -99,7 +99,7 @@
 <script>
 import gsap from "gsap";
 import Flickity from "vue-flickity";
-import levels from "../../data/levels.json";
+import levels from "../../../data/levels.json";
 
 export default {
   name: "LevelSelect",

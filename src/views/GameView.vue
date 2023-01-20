@@ -8,6 +8,8 @@
         </v-col>
         <v-col cols="6" md="4">
           <TemplateGrid :currentLevel="currentLevel" :color="color" />
+          <h3>- Level {{ currentLevel.id }} -</h3>
+          <h5>Anforderung: {{ currentLevel.loesungsweg }} </h5>
           <CodeInput
             @success="
               nextLevel(currentLevelId);"
@@ -174,6 +176,7 @@ export default {
 </script>
 
 <style>
+
 .line-1{
     border-right: 2px solid rgba(255,255,255,.75);
     white-space: nowrap;

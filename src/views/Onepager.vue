@@ -40,7 +40,7 @@ import OnePagerTutorialSection from "@/components/OnePagerComponents/OnePagerTut
 import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
 import OnePagerGoals from "@/components/OnePagerComponents/OnePagerGoals";
 import OnePagerWhy from "@/components/OnePagerComponents/OnePagerWhy";
-import LevelSelect from "@/views/LevelSelect";
+import LevelSelect from "@/components/OnePagerComponents/LevelSelect";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import HelpTemplateMobile from "@/components/HelpComponents/HelpTemplateMobile";

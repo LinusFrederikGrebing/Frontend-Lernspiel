@@ -3,7 +3,7 @@ import HelpTemplateDesktop from "@/components/HelpComponents/HelpTemplateDesktop
 import VueRouter from 'vue-router'
 import GameView from '../views/GameView'
 import Onepager from '../views/Onepager'
-import LevelSelect from '../views/LevelSelect'
+import LevelSelect from '@/components/OnePagerComponents/LevelSelect';
 
 Vue.use(VueRouter)
 

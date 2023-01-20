@@ -17,22 +17,13 @@
         Konsole
       </v-btn>
     </transition>
-    <transition appear  @enter="enter">
-        <v-btn
-          depressed
-          elevation="2"
-          @click="animateTutorial()"
-        >
-          Tutorial
-        </v-btn>
-      </transition>
     <transition appear @enter="enterInput">
       <div @click="checkIfCodeFilled()">
       <CodeEditor
         v-if="editorActive"
         id="code-editor"
-        height="30vh"
-        width="25vw"
+        height="25vh"
+        width="22vw"
         v-model="codeToRun"
       >
       </CodeEditor>
@@ -61,26 +52,7 @@
           Ausführen
         </v-btn>
       </transition>
-      <transition appear @enter="enter">
-        <v-btn
-          :style="{backgroundColor:color}"
-          depressed
-          elevation="2"
-          @click="colorPicker ? colorPicker = false : colorPicker = true"
-        >
-          Farbenauswahl
-        </v-btn>
-      </transition>
-      <transition appear  @enter="enter">
-        <v-btn
-          class="reset-btn"
-          depressed
-          elevation="2"
-          @click="resetAnimation()"
-        >
-          Reset
-        </v-btn>
-      </transition>
+  
       <div v-on:mouseout="changeColor(color)">
       <v-color-picker
           v-if="colorPicker"
@@ -92,8 +64,43 @@
           hide-mode-switch
           swatches-max-height="250"
           ></v-color-picker>  
-        </div>        
+        </div> 
+        <div class="floating-container">
+      <div class="floating-button">+</div>
+        <div class="element-container">
+            <span class="float-element tooltip-left">
+              <v-btn
+                depressed
+                elevation="2"
+                @click="animateTutorial()"
+              >
+                Tutorial
+              </v-btn>
+          </span>
+            <span class="float-element">
+              <v-btn
+                class="reset-btn"
+                depressed
+                elevation="2"
+                @click="resetAnimation()"
+              >
+                Reset
+              </v-btn>
+          </span>
+          <span class="float-element">
+              <v-btn
+                :style="{backgroundColor:color}"
+                depressed
+                elevation="2"
+                @click="colorPicker ? colorPicker = false : colorPicker = true"
+              >
+                Farbenauswahl
+              </v-btn>
+          </span>
+        </div>
+      </div>       
     </div>
+   
   </div>
 </template>
 
@@ -563,13 +570,113 @@ export default {
 
 
 <style scoped>
+@-webkit-keyframes come-in {
+  0% {
+    -webkit-transform: translatey(100px);
+            transform: translatey(100px);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: translateX(-50px) scale(0.4);
+            transform: translateX(-50px) scale(0.4);
+  }
+  70% {
+    -webkit-transform: translateX(0px) scale(1.2);
+            transform: translateX(0px) scale(1.2);
+  }
+  100% {
+    -webkit-transform: translatey(0px) scale(1);
+            transform: translatey(0px) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes come-in {
+  0% {
+    -webkit-transform: translatey(100px);
+            transform: translatey(100px);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: translateX(-50px) scale(0.4);
+            transform: translateX(-50px) scale(0.4);
+  }
+  70% {
+    -webkit-transform: translateX(0px) scale(1.2);
+            transform: translateX(0px) scale(1.2);
+  }
+  100% {
+    -webkit-transform: translatey(0px) scale(1);
+            transform: translatey(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+.floating-container {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  bottom: 0;
+  right: 0;
+  margin: 5em 6em;
+}
+.floating-container:hover {
+  height: 300px;
+  width:  100px;
+}
+.floating-container:hover .floating-button {
+  -webkit-transform: translatey(5px);
+          transform: translatey(5px);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.floating-container:hover .element-container .float-element:nth-child(1) {
+  -webkit-animation: come-in 0.4s forwards 0.2s;
+          animation: come-in 0.4s forwards 0.2s;
+}
+.floating-container:hover .element-container .float-element:nth-child(2) {
+  -webkit-animation: come-in 0.4s forwards 0.4s;
+          animation: come-in 0.4s forwards 0.4s;
+}
+.floating-container:hover .element-container .float-element:nth-child(3) {
+  -webkit-animation: come-in 0.4s forwards 0.6s;
+          animation: come-in 0.4s forwards 0.6s;
+}
+.floating-container .floating-button {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  background: #80ba24;
+  bottom: 0;
+  border-radius: 50%;
+  color: white;
+  line-height: 65px;
+  text-align: center;
+  font-size: 23px;
+  z-index: 100;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.floating-container .float-element {
+  position: relative;
+  display: block;
+
+  margin-top: 2em;
+  opacity: 0;
+  -webkit-transform: translateY(100px);
+          transform: translateY(100px);
+}
+.floating-container .float-element .material-icons {
+  vertical-align: middle;
+  font-size: 16px;
+}
+
+
+
+
+
 
 .consoleArea {
   background-color: white;
-}
-
-.reset-btn {
-  background-color: red !important;
 }
 
 .greenText {
