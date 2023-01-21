@@ -56,7 +56,6 @@ export default {
   informations: [
 {
   id: 1,
-  url: require('../../assets/programmingVariablen.png'),
   label: 'Variablen',
   subheader: "Was sind Variablen?",
   src: require('../../assets/helpTemplateBackground.png'),
@@ -69,7 +68,6 @@ export default {
 },
 {
   id: 2,
-  url: require('../../assets/programmingFunktion.png'),
   label: 'Funktionen',
   subheader: "Was sind Funktionen?",
   src: require('../../assets/helpTemplateBackground.png'),
@@ -82,7 +80,6 @@ export default {
 },
 {
   id: 3,
-  url: require('../../assets/programmingFor.png'),
   label: 'For-Schleifen',
   subheader: "Was sind For-Schleifen?",
   src: require('../../assets/helpTemplateBackground.png'),
@@ -95,7 +92,6 @@ export default {
 },
 {
   id: 4,
-  url: require('../../assets/programmingWhile.png'),
   label: 'While-Schleifen',
   subheader: "Was sind While-Schleifen?",
   src: require('../../assets/helpTemplateBackground.png'),
@@ -108,7 +104,6 @@ export default {
 },
 {
   id: 5,
-  url: require('../../assets/programmingDoWhile.png'),
   label: 'Do-While-Schleifen',
   subheader: "Was sind Do-While-Schleifen?",
   src: require('../../assets/helpTemplateBackground.png'),

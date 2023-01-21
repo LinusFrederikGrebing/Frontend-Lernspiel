@@ -12,9 +12,7 @@
               elevation="24"
               outlined
               shaped
-              :class="[
-                { text_xs: $vuetify.breakpoint.lgAndDown},  { text: !$vuetify.breakpoint.lgAndDown},
-                { left: index % 2 === 0 && !$vuetify.breakpoint.lgAndDown}, {'mobile_right' : $vuetify.breakpoint.lgAndDown},
+              :class="[textClass, { left: index % 2 === 0 && !$vuetify.breakpoint.lgAndDown}, {'mobile_right' : $vuetify.breakpoint.lgAndDown},
                 { right: index % 2 !== 0 && !$vuetify.breakpoint.lgAndDown }]"
             >
               <h2 v-text="item.title"></h2>
@@ -39,6 +37,7 @@ export default {
   },
   data() {
     return {
+      index: 0,
       items: [
         {
           title: "Programmierskills",
@@ -65,13 +64,9 @@ export default {
   },
   mounted() {
     let start = 0;
-    for (let i = 0; i < this.items.length; i++) {
-      let element = document.getElementById("section" + i);
-      if (i % 2 === 0) {
-        start = -500;
-      } else {
-        start = 500;
-      }
+    this.items.forEach((_, i) => {
+      const element = document.getElementById(`section${i}`);
+      start = i % 2 === 0 ? -500 : 500;
       gsap.fromTo(
         element,
         {
@@ -91,11 +86,21 @@ export default {
           },
         }
       );
-    }
+    });
   },
   computed: {
-      height () {
-        console.log(this.$vuetify.breakpoint.name);
+    breakpoint() {
+      return this.$vuetify.breakpoint
+    },
+    textClass() {
+      if (this.breakpoint.lgAndDown) {
+        return "text_xs"
+      } else {
+        return "text"
+      }
+    },
+
+    height () {
         switch (this.$vuetify.breakpoint.name) {
           case 'xs': return 2100
           case 'sm': return 1700
@@ -103,8 +108,8 @@ export default {
           case 'lg': return 1600
           case 'xl': return 1100
         }
-      },
-    },
+      },  
+  },      
 };
 </script>
 

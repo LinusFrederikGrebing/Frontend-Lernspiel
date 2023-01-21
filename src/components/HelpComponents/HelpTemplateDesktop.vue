@@ -26,7 +26,6 @@
                       <v-card-title>
                         {{ item.subheader }}
                       </v-card-title>
-
                       <v-card-text class="black--text">
                         {{ item.informations1 }}
                       </v-card-text>
@@ -78,7 +77,6 @@ export default {
       informations: [
         {
           id: 1,
-          url: require('../../assets/programmingVariablen.png'),
           label: 'Variablen',
           name: 'Variablen',
           subheader: "Was sind Variablen?",
@@ -92,7 +90,6 @@ export default {
         },
         {
           id: 2,
-          url: require('../../assets/programmingFunktion.png'),
           label: 'Funktionen',
           name: 'Funktionen',
           subheader: "Was sind Funktionen?",
@@ -106,7 +103,6 @@ export default {
         },
         {
           id: 3,
-          url: require('../../assets/programmingFor.png'),
           label: 'For',
           name: 'For-Schleife',
           subheader: "Was sind For-Schleifen?",
@@ -120,7 +116,6 @@ export default {
         },
         {
           id: 4,
-          url: require('../../assets/programmingWhile.png'),
           label: 'While',
           name: 'While-Schleife',
           subheader: "Was sind While-Schleifen?",
@@ -134,7 +129,6 @@ export default {
         },
         {
           id: 5,
-          url: require('../../assets/programmingDoWhile.png'),
           label: 'Do-While',
           name: 'Do-While-Schleife',
           subheader: "Was sind Do-While-Schleifen?",
@@ -160,21 +154,15 @@ export default {
   },
   mounted() {
     var generalcontent = document.querySelector(".general-content");
-    var arraycontent = [].slice.call(
-        document.querySelectorAll(".component")
-    );
-    var closebuttons = [].slice.call(
-        document.querySelectorAll(".component-close-button")
-    );
+    var arraycontent = [].slice.call(document.querySelectorAll(".component"));
+    var closebuttons = [].slice.call(document.querySelectorAll(".component-close-button"));
 
-    setTimeout(function () {
-      generalcontent.classList.remove("js-general-content");
-    }, 200);
+    setTimeout(function () { generalcontent.classList.remove("js-general-content") }, 200);
 
     arraycontent.forEach(function (component) {
       component.addEventListener("click", function () {
         if (this.classList.contains("component-active")) return;
-        generalcontent.classList.add("component--active");
+          generalcontent.classList.add("component--active");
         this.classList.add("component-active");
       });
     });
@@ -183,9 +171,7 @@ export default {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
         generalcontent.classList.remove("component--active");
-        document
-            .querySelector(".component.component-active")
-            .classList.remove("component-active");
+        document.querySelector(".component.component-active").classList.remove("component-active");
       });
     });
   },

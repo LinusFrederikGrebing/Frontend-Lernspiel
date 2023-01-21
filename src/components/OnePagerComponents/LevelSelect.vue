@@ -3,76 +3,49 @@
     <v-card elevation="24" outlined shaped class="">
       <h1 class="h1 font-weight-black">- Level-Auswahl -</h1>
       <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
-        <v-card
-          v-for="(level, index) in levels"
-          class="styledDiv carousel-cell pa-5 mx-8"
-          elevation="12"
-          width="30em"
-          color="#252525"
-          :class="[
-            'mx-auto my-8',
-            { ' locked': levelIsAccessible(level) === false },
-          ]"
-          :key="index"
-        >
-          <div
-            :id="'lvlselect' + index"
-            @mouseenter="hoverEnter($event)"
-            @mouseleave="hoverLeave($event)"
-          >
-            <v-img
-              class="white--text align-end"
-              height="23em"
-              :src= "require(`@/assets/${level.img}`)"
-            >
+        <v-card v-for="(level, index) in levels" 
+        class="styledDiv carousel-cell pa-5 mx-8" 
+        elevation="12" 
+        width="30em"
+        color="#252525" 
+        :class="['mx-auto my-8',{ ' locked': levelIsAccessible(level) === false }]" :key="index">
+          <div :id="'lvlselect' + index" @mouseenter="hoverEnter($event)" @mouseleave="hoverLeave($event)">
+            <v-img class="white--text align-end" height="23em" :src="require(`@/assets/${level.img}`)">
               <div :id="'lockIcon' + index" class="zentriertLockIcon">
-                <v-icon
-                  v-if="levelIsAccessible(level) === false"
-                  class="zentriert"
-                >
-                  mdi-lock
-                </v-icon>
+                <v-icon v-if="levelIsAccessible(level) === false" class="zentriert"> mdi-lock </v-icon>
               </div>
-              <v-card-title class="black--text">Level {{ level.id }} </v-card-title>
+              <v-card-title class="black--text">Level {{ level.id }}</v-card-title>
             </v-img>
           </div>
           <v-card-subtitle class="pb-0 font-weight-bold white--text">
             Schwierigkeit:
-            <v-rating
-              color="yellow darken-3"
-              background-color="white darken-1"
-              empty-icon="$ratingFull"
+              <v-rating 
+              color="yellow darken-3" 
+              background-color="white darken-1" 
+              empty-icon="$ratingFull" 
               half-increments
-              hover
-              length="8"
-              readonly
-              size="35"
-              :value="level.difficulty"
-            ></v-rating>
+              hover 
+              length="8" 
+              readonly 
+              size="35" 
+              :value="level.difficulty">
+            </v-rating>
           </v-card-subtitle>
 
           <v-card-actions class="my-4">
-            <v-btn
-              :id="'button' + index"
-              color="primary"
-              depressed
-              elevation="2"
+            <v-btn 
+              :id="'button' + index" 
+              color="primary" 
+              depressed 
+              elevation="2" 
               @click="setLevel(level)"
-              @mouseover="hoverButtonEnter($event)"
-              @mouseleave="hoverButtonLeave($event)"
-            >
+              @mouseover="hoverButtonEnter($event)" 
+              @mouseleave="hoverButtonLeave($event)">
               Start
             </v-btn>
             <v-tooltip bottom color="success">
               <template v-slot:activator="{ on, attrs }">
-                <v-icon
-                  color="success"
-                  dark
-                  v-bind="attrs"
-                  v-on="on"
-                  v-if="level.completed === true"
-                  right
-                >
+                <v-icon color="success" dark v-bind="attrs" v-on="on" v-if="level.completed === true" right>
                   mdi-checkbox-marked-circle
                 </v-icon>
               </template>
@@ -82,15 +55,16 @@
               </span>
             </v-tooltip>
             <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text">
-              Bestzeit: {{level.bestTimeinSek }} Sekunden
+              Bestzeit: {{ level.bestTimeinSek }} Sekunden
             </v-card-title>
             <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text">
-              Bestzeit: {{ (Math.round(((level.bestTimeinSek)/60) * 100) / 100) }} Minuten
+              Bestzeit:
+              {{ Math.round((level.bestTimeinSek / 60) * 100) / 100 }} Minuten
             </v-card-title>
           </v-card-actions>
         </v-card>
       </flickity>
-    </v-card> 
+    </v-card>
   </v-container>
 </template>
 
@@ -105,8 +79,6 @@ export default {
     Flickity,
   },
   data: () => ({
-    selectedIndex: 0,
-    dialog: false,
     flickityOptions: {
       wrapAround: true,
       freeScroll: true,
@@ -118,67 +90,25 @@ export default {
 
   methods: {
     hoverEnter(obj) {
-      let element = document.getElementById(obj.target.id);
       gsap.fromTo(
-        element,
-        {
-          scale: 1,
-          y: 0,
-          x: 0,
-        },
-        {
-          duration: 0.2,
-          scale: 1.09,
-          y: -10,
-          x: 0,
-          opacity: 1,
-        }
+        obj.target,
+        { scale: 1, y: 0 },
+        { duration: 0.2, scale: 1.09, y: -10, opacity: 1 }
       );
     },
     hoverLeave(obj) {
-      let element = document.getElementById(obj.target.id);
       gsap.fromTo(
-        element,
-        {
-          scale: 1.09,
-          y: 0,
-          x: 0,
-        },
-        {
-          duration: 0.2,
-          scale: 1,
-          y: 0,
-          x: 0,
-          opacity: 1,
-        }
+        obj.target,
+        { scale: 1.09 },
+        { duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1 }
       );
     },
     hoverButtonEnter(obj) {
-      let element = document.getElementById(obj.target.id);
-      gsap.fromTo(
-        element,
-        {
-          scale: 1,
-        },
-        {
-          duration: 0.01,
-          scale: 1.3,
-        }
-      );
+      gsap.fromTo(obj.target, { scale: 1 }, { duration: 0.01, scale: 1.3 });
     },
 
     hoverButtonLeave(obj) {
-      let element = document.getElementById(obj.target.id);
-      gsap.fromTo(
-        element,
-        {
-          scale: 1.3,
-        },
-        {
-          duration: 0.2,
-          scale: 1,
-        }
-      );
+      gsap.fromTo(obj.target, { scale: 1.3 }, { duration: 0.2, scale: 1 });
     },
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
@@ -207,7 +137,6 @@ export default {
       }
     },
     showAlertFailure(level) {
-      // Use sweetalert2
       this.$swal({
         title: "Noch nicht freigeschaltet!",
         html:
@@ -219,7 +148,6 @@ export default {
         icon: "error",
         confirmButtonColor: "#6D9E1F",
         confirmButtonText: "Okay!",
-
         allowOutsideClick: false,
       });
     },
@@ -238,32 +166,12 @@ export default {
         let element = document.getElementById("lockIcon" + i);
         gsap
           .timeline({ repeat: -1, delay: Math.random() * 3, repeatDelay: 0.75 })
-          .to(element, {
-            duration: 1,
-            rotation: -10,
-            ease: "none",
-          })
+          .to(element, { duration: 1, rotation: -10, ease: "none" })
           .to(element, { duration: 1, rotation: 20, ease: "none" })
-          .to(element, {
-            duration: 1,
-            rotation: -10,
-            ease: "none",
-          })
-          .to(element, {
-            duration: 1,
-            rotation: 0,
-            ease: "none",
-          })
-          .to(element, {
-            duration: 1,
-            rotation: 10,
-            ease: "none",
-          })
-          .to(element, {
-            duration: 1,
-            rotation: 0,
-            ease: "none",
-          });
+          .to(element, { duration: 1, rotation: -10, ease: "none" })
+          .to(element, { duration: 1, rotation: 0, ease: "none" })
+          .to(element, { duration: 1, rotation: 10, ease: "none" })
+          .to(element, { duration: 1, rotation: 0, ease: "none" });
       }
     },
   },
@@ -290,7 +198,6 @@ export default {
 };
 </script>
 <style>
-
 .flickity-button {
   background: #4a5c66;
 }

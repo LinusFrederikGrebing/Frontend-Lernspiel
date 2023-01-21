@@ -1,55 +1,64 @@
 <template>
   <v-container class="containerpadding">
-    <v-card
-      elevation="24"
-      outlined
-      shaped
-      width="120em"
-      height="5em"
-      class="header">
-       <h1 class="h1 font-weight-black"> - Tutorial - </h1>
-    </v-card>
-    <v-card
-      elevation="10"
-      outlined
-     height="100%"
-      width="100%"
-      class="">
-        <div class="d-lg-flex justify-lg-center tutorial text-center">
-        <div>
-          <v-card class="text-center mr-auto ml-auto" elevation="24" :class="[{'cardgrid_container_mdAndUp' : $vuetify.breakpoint.mdAndUp}, {'cardgrid_container_sm' : $vuetify.breakpoint.sm}, {'cardgrid_container_xs' : $vuetify.breakpoint.xs}]">
-              <v-row no-gutters v-for="y in 4" :key="y" class="">
-                    <v-col no-gutters v-for="x in 4" :key="x">
-                      <transition>
-                        <v-card :class="[{'cardgrid_mdAndUp' : $vuetify.breakpoint.mdAndUp}, {'cardgrid_sm' : $vuetify.breakpoint.sm}, {'cardgrid_xs' : $vuetify.breakpoint.xs}]" elevation="2" :id="'xTutorial' + (3-x) + 'yTutorial' + (4-y)"></v-card>
-                      </transition>
-                    </v-col>
-              </v-row>
-            </v-card>
-        </div>
-        <div class="editor">
+  <v-card
+    class="header"
+    elevation="24"
+    outlined
+    shaped
+    width="120em"
+    height="5em"
+  >
+    <h1 class="h1 font-weight-black"> - Tutorial - </h1>
+  </v-card>
+  <v-card
+    class=""
+    elevation="10"
+    outlined
+    height="100%"
+    width="100%"
+  >
+    <div class="d-lg-flex justify-lg-center tutorial text-center">
+      <div>
+        <v-card
+          class="text-center mr-auto ml-auto"
+          elevation="24"
+          :class="[
+            { 'cardgrid_container_mdAndUp': $vuetify.breakpoint.mdAndUp },
+            { 'cardgrid_container_sm': $vuetify.breakpoint.sm },
+            { 'cardgrid_container_xs': $vuetify.breakpoint.xs }
+          ]"
+        >
+          <v-row no-gutters v-for="y in 4" :key="y">
+            <v-col no-gutters v-for="x in 4" :key="x">
+              <transition>
+                <v-card
+                  :class="[
+                    { 'cardgrid_mdAndUp': $vuetify.breakpoint.mdAndUp },
+                    { 'cardgrid_sm': $vuetify.breakpoint.sm },
+                    { 'cardgrid_xs': $vuetify.breakpoint.xs }
+                  ]"
+                  elevation="2"
+                  :id="'xTutorial' + (3 - x) + 'yTutorial' + (4 - y)"
+                ></v-card>
+              </transition>
+            </v-col>
+          </v-row>
+        </v-card>
+      </div>
+      <div class="editor">
         <CodeEditor
           :read_only="true"
-            font_size="37px"
-            height="440px"
-            width="100%"
-            v-model="actualCodeToRun"
-          >
-          </CodeEditor>
-            <v-btn color="warning" depressed elevation="2">
-              Validieren
-            </v-btn>
-            <v-btn
-              color="success"
-              depressed
-              elevation="2"
-            >
-              Ausführen
-            </v-btn>
-        </div>
+          font_size="37px"
+          height="440px"
+          width="100%"
+          v-model="actualCodeToRun"
+        ></CodeEditor>
+        <v-btn color="warning" depressed elevation="2">Validieren</v-btn>
+        <v-btn color="success" depressed elevation="2">Ausführen</v-btn>
       </div>
+    </div>
   </v-card>
-  </v-container>
+</v-container>
 </template>
 
 <script>
@@ -73,16 +82,11 @@ export default {
     };
   },
   methods: {
-    delay(time) {
-     return new Promise(resolve => setTimeout(resolve, time));
-    },
-    tutorialAnimation(){
-        let steps = 250;
-          for(let i = 0; i<=this.codeToRun.length; i++){
-          this.timerTutorialAnimation = this.delay(steps).then(() =>  this.actualCodeToRun = this.codeToRun.substring(0, i));
-            steps=steps+250;
-          };
-          this.paintTutorialAnimation = this.delay(3500).then(() => this.paintTutorialField(1,1));        
+    tutorialAnimation() {
+    for (let i = 0; i <= this.codeToRun.length; i++) {
+      this.timerTutorialAnimation = setTimeout(() => this.actualCodeToRun = this.codeToRun.substring(0, i), i * 250);
+    }
+      this.paintTutorialAnimation = setTimeout(() => this.paintTutorialField(1, 1), 3500);
     },
 
     paintTutorialField(first, second) {
@@ -92,16 +96,17 @@ export default {
     },
 
     resetPaintedFields() {
-      clearTimeout(this.timerTutorialAnimation);
-      clearTimeout(this.paintTutorialAnimation);
-      this.actualCodeToRun = "";
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        if (el.id.includes("Tutorial")) {
-          el.classList.remove("painted");
-          el.style.backgroundColor = '#ffffff';
-        }
-      });
-    },
+        clearTimeout(this.timerTutorialAnimation);
+        clearTimeout(this.paintTutorialAnimation);
+        this.actualCodeToRun = "";
+        let paintedElements = document.querySelectorAll('.painted');
+        paintedElements.forEach(el => {
+            if (el.id.includes("Tutorial")) {
+                el.classList.remove("painted");
+                el.style.backgroundColor = '#ffffff';
+            }
+        });
+  }
   },
   mounted() { 
     gsap.fromTo(
