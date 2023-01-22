@@ -181,18 +181,10 @@ export default {
 
   computed: {
     levels() {
-      if (localStorage.getItem("levels") !== null) {
-        return JSON.parse(localStorage.getItem("levels"));
-      } else {
-        return Object.values(Object.values(levels)[0]);
-      }
+      return JSON.parse(localStorage.getItem("levels")) || Object.values(Object.values(levels)[0]);
     },
     accessibleLevels() {
-      if (localStorage.getItem("accessibleLevels") !== null) {
-        return JSON.parse(localStorage.getItem("accessibleLevels"));
-      } else {
-        return [this.levels[0]];
-      }
+      return JSON.parse(localStorage.getItem("accessibleLevels")) || [this.levels[0]];
     },
   },
 };
