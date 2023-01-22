@@ -1,5 +1,5 @@
 <template>
-  <div class="my-16 ">
+  <div id="tryBtn" class="my-16">
     <v-btn class="white--text"
            elevation="24"
            rounded
@@ -11,14 +11,33 @@
 </template>
 
 <script>
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "OnePagerTryMe",
   methods: {
     lvlSelect(){
       this.$router.push({ path: '/LevelSelect' });
     }
+  },
+  mounted() {
+  /*  gsap.to(
+      "#tryBtn",
+        {
+          duration: 2,
+          scrollTrigger: {
+            trigger:  "#tryBtn",
+            onEnter: this.tutorialAnimation,
+            onLeave: this.resetPaintedFields,
+            onEnterBack:  this.tutorialAnimation,
+            onLeaveBack:  this.resetPaintedFields
+          },
+        }
+      );*/
   }
+  
 }
 
 </script>
