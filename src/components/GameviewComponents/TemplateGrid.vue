@@ -96,20 +96,24 @@ export default {
           x: -150,
           y: 200,
           backgroundColor: '#4a5c66',
-        zIndex: 10 },
+        zIndex: 10 ,
+      onComplete: () => {document.body.addEventListener('click', this.openOrCloseFullscreen);}},
        );
        this.zoomedGrid = true
        zoomBg.removeEventListener('mouseover', this.showZoomOption);
        zoomBg.removeEventListener('mouseleave', this.hideZoomOption);
        this.hideZoomOption();
       } else {
+        element.classList.remove("template_grid");
+        document.body.removeEventListener('click', this.openOrCloseFullscreen);
         gsap.to(
         '#template_grid',
         { scale: 1,
           x: 0,
           y: 0,
           backgroundColor: 'transparent',
-        zIndex: 10 },
+        zIndex: 10 ,
+        onComplete: () => {document.body.removeEventListener('click', this.openOrCloseFullscreen);}},
        )
        this.zoomedGrid = false
        zoomBg.addEventListener('mouseover', this.showZoomOption);
