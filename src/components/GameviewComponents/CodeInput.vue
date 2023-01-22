@@ -36,23 +36,37 @@
       :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}]"></v-textarea>
     </transition>
     <div>
-      <transition appear @enter="enter">
-        <v-btn color="warning" depressed elevation="2" @click="checkResult">
-          Validieren
-        </v-btn>
-      </transition>
-      <transition appear  @enter="enter">
-        <v-btn
-          color="success"
-          id="finished-btn"
-          depressed
-          elevation="2"
-          @click="runfunction"
-        >
-          Ausführen
-        </v-btn>
-      </transition>
-  
+        <v-tooltip bottom color="warning">
+              <template v-slot:activator="{ on, attrs }">
+                <transition appear @enter="enter">
+                <v-btn color="warning" v-bind="attrs" v-on="on" depressed elevation="2" @click="checkResult">
+                  Validieren
+                </v-btn>
+               </transition>
+              </template>
+              <span>
+                <h4>Klicke auf Validieren um zu sehen ob deine Lösung richtig ist!</h4>
+              </span>
+        </v-tooltip>
+        <v-tooltip bottom color="success">
+              <template v-slot:activator="{ on, attrs }">
+                <transition appear  @enter="enter">
+                  <v-btn
+                    v-bind="attrs" 
+                    v-on="on"
+                    color="success"
+                    id="finished-btn"
+                    depressed
+                    elevation="2"
+                    @click="runfunction">
+                    Ausführen
+                   </v-btn>
+                </transition>
+              </template>
+              <span>
+                <h4>Klicke auf Ausführen um deinen Code zu zeichen!</h4>
+              </span>
+        </v-tooltip>
       <div v-on:mouseout="changeColor(color)">
       <v-color-picker
           v-if="colorPicker"
@@ -60,7 +74,7 @@
           v-model="color"
           dot-size="6"
           mode="hexa"
-          hid-inputs
+          hide-inputs
           hide-mode-switch
           swatches-max-height="250"
           ></v-color-picker>  
@@ -74,7 +88,7 @@
                 elevation="2"
                 @click="animateTutorial()"
               >
-                Tutorial
+                Wie zeichne ich?
               </v-btn>
           </span>
             <span class="float-element">
@@ -84,7 +98,7 @@
                 elevation="2"
                 @click="resetAnimation()"
               >
-                Reset
+                Zurücksetzen
               </v-btn>
           </span>
           <span class="float-element">
@@ -386,6 +400,7 @@ export default {
     },
     // Method tries to run the userwritten code and throws errors if needed
     runfunction() {
+      this.resetPaintedFields();
       this.errorMessage = '';
       this.checkWhichSolutionUsed(this.codeToRun);
       // Since the userwritten code is string that becomes a function without outside scope we need to insert the methods paint and checkParamValue as String into the code

@@ -207,7 +207,7 @@ export default {
   animation: typewriter 1s steps(44) 4s 1 normal both,
              blinkTextCursor 500ms steps(44) 4s infinite normal;
 }
-.anim-typewriter5{
+.anim-typewriter6{
   animation: typewriter 1s steps(44) 5s 1 normal both,
              blinkTextCursor 500ms steps(44) 5s infinite normal;
 }
