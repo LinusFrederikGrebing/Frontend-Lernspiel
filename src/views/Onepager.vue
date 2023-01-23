@@ -126,9 +126,9 @@ export default {
 }
 
 .arrows path {
-	stroke: #252525;
+	stroke: #80ba24;
 	fill: transparent;
-	stroke-width: 3px;	
+	stroke-width: 5px;	
 	animation: arrow 2s infinite;
 	-webkit-animation: arrow 2s infinite; 
 }

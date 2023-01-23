@@ -3,7 +3,7 @@
     <v-system-bar class="d-flex mb-6 header" 
     short dense color="rgb(74, 92, 102)" app>
       <transition appear @enter="enterHeader">
-        <h2 class="mx-16" id="background">Draw IT!</h2>
+        <h2 class="mx-16" id="background"  @click="home()">Draw IT!</h2>
       </transition>
       <v-btn class="pa-2 ml-auto" @click="moveDrawer()" icon>
         <transition appear @enter="enterMenu">
@@ -81,6 +81,9 @@ export default {
     };
   },
   methods: {
+    home(){
+      this.$router.push({ path: '/' });
+    },
     moveDrawer() {
       let sidebar = document.querySelector("#sidebar");
       this.drawer = !this.drawer;
