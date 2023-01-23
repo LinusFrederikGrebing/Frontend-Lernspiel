@@ -205,11 +205,11 @@ export default {
 }
 .anim-typewriter5{
   animation: typewriter 1s steps(44) 4s 1 normal both,
-             blinkTextCursor 500ms steps(44) 4s infinite normal;
+             blinkTextCursor 500ms steps(44) 4s normal;
 }
 .anim-typewriter6{
   animation: typewriter 1s steps(44) 5s 1 normal both,
-             blinkTextCursor 500ms steps(44) 5s infinite normal;
+             blinkTextCursor 500ms steps(44) 5s normal;
 }
 @keyframes typewriter{
   from{width: 0;}

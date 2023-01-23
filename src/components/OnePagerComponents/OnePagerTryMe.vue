@@ -7,14 +7,14 @@
            block
            x-large
            color="#4a5c66"
-           @click="navigateToLevelSelect">
-           Try Me
+           @click="setLevel">
+           Schnellstart
     </v-btn>
     <v-btn id="tryBtnFAB" class="white--text hide"
            elevation="24"
            fab
            color="#4a5c66"
-          @click="navigateToLevelSelect">
+          @click="setLevel">
           <svg fill="#FFFFFF" class="ml-2" height="30px" width="30px" version="1.1" id="Capa_1" viewBox="0 0 210 210" xml:space="preserve">
           <path d="M179.07,105L30.93,210V0L179.07,105z"/>
          </svg>
@@ -32,10 +32,34 @@ export default {
   data() {
     return {
       tryBtn: null,
-      tryBtnFAB: null
+      tryBtnFAB: null,
+      lastAccessibleLevel: null,
+      accessibleLevels: []
     }
   },
   methods: {
+    setLevel() {
+      // Get the last accessible level from local storage
+      this.accessibleLevels = JSON.parse(localStorage.getItem("accessibleLevels")) || [];
+      if (this.accessibleLevels.length > 0) {
+        this.lastAccessibleLevel = this.accessibleLevels[this.accessibleLevels.length - 1];
+      } else {
+        this.lastAccessibleLevel = JSON.parse(localStorage.getItem("levels"))[0];
+      }
+
+      // Navigate to the GameView page with the last accessible level as a parameter
+      this.$router.push({
+        name: "GameView",
+        params: {
+          level: {
+            ...this.lastAccessibleLevel
+          }
+        }
+      });
+
+      // Save the current level to local storage
+      localStorage.setItem("currentLevel", JSON.stringify(this.lastAccessibleLevel));
+    },
     navigateToLevelSelect() {
       this.$router.push({ path: '/LevelSelect' });
     },
