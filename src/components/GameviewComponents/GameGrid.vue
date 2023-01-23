@@ -1,16 +1,13 @@
 <template>
-  <div>
-    <v-container class="container">
-      <v-row no-gutters v-for="y in 10" :key="y">
+  <div class="mt-6 mb-6">
+      <v-row class="test" no-gutters v-for="y in 10" :key="y">
         <v-col no-gutters v-for="x in 10" :key="x">
           <transition appear @enter="enterGrid">
             <v-card class="grid-card" elevation="4" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
-              
             </v-card>
           </transition>
         </v-col>
       </v-row>
-    </v-container>
   </div>
 </template>
 
@@ -123,17 +120,20 @@ export default {
 </script>
 <style scoped>
 .v-card {
-  width: 4vw;
-  height: 4vw;
+  width: 3.8vw;
+  height: 3.8vw;
 }
-
+.row.no-gutters {
+    justify-content: center;
+}
 .col {
   flex-basis: 0 !important;
   flex-grow: 0 !important;
   /* max-width: 100%; */
 }
-
-.container {
-  margin: auto;
+.test{
+  position: relative;
+  right: 0;
+  margin-right: 1em;
 }
 </style>

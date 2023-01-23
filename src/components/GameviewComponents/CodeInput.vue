@@ -1,5 +1,5 @@
 <template>
-  <div id="container" class="d-f">
+  <div id="container" class="d-f mb-4">
     <transition appear @enter="enter">
       <v-btn
         depressed
@@ -342,6 +342,8 @@ export default {
         allowOutsideClick: false, }).then((result) => {
         if (!result.isConfirmed) {
           this.$router.push({ path: '/LevelSelect' });
+        } else {
+          this.$emit("startPopup");
         }
       }
       );

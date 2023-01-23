@@ -1,25 +1,26 @@
 <template>
-  <div>
-    <img id="mouse-cursor" src="../assets/mouse-cursor.png">
-    <v-container class="bg-color1">
+  <div class=""> 
+    <v-card elevation="24" outlined shaped width="90%" class="ml-auto mr-auto mt-3 gv-card">
       <v-row no-gutters>
-        <v-col cols="12" sm="6" md="8">
+        <v-col cols="12" sm="8" md="8" xl="7">
           <GameGrid :color="color"/>
         </v-col>
-        <v-col cols="6" md="4">
-          <TemplateGrid :currentLevel="currentLevel" :color="color" />
-          <h3>- Level {{ currentLevel.id }} -</h3>
-          <h5>Anforderung: {{ currentLevel.loesungsweg }} </h5>
-          <CodeInput
-            @success="
-              nextLevel(currentLevelId);"
-            @timer="setTime(currentLevelId)"
-            @change-color="changeColor"
-          />
+        <v-col cols="7" md="4">
+          <div class="d-flex flex-column justify-center align-center mt-8">
+            <TemplateGrid :currentLevel="currentLevel" :color="color" />
+            <h3 class="mt-8">- Level {{ currentLevel.id }} -</h3>
+            <h5>Anforderung: {{ currentLevel.loesungsweg }} </h5>
+            <CodeInput
+              @success=" nextLevel(currentLevelId);"
+              @timer="setTime(currentLevelId)"
+              @startPopup="nextLevelStarted(currentLevelId)"
+              @change-color="changeColor"
+            />
+         </div>
         </v-col>
-      </v-row>
-    </v-container>
-  </div>
+      </v-row> 
+    </v-card>
+  </div> 
 </template>
 <script>
 import CodeInput from "../components/GameviewComponents/CodeInput.vue";
@@ -69,7 +70,6 @@ export default {
       );
       this.nextLevel(indexNextLevel)
     },
-
     nextLevel(indexNextLevel) {
       this.startTime = new Date();
       this.levels[indexNextLevel - 1].completed = true;
@@ -80,7 +80,6 @@ export default {
         JSON.stringify(this.currentLevel)
       );
       eval(this.currentLevel.patternCode);
-      console.log(this.levels);
       localStorage.setItem(
         "levels", 
         JSON.stringify(this.levels)
@@ -95,7 +94,9 @@ export default {
           el.style.backgroundColor = '#ffffff';
         } else el.style.backgroundColor = this.color;
       });
-      this.startPopUp(this.levels[indexNextLevel]);
+    },
+    nextLevelStarted(indexNextLevel){
+      this.startPopUp(this.levels[indexNextLevel-1]);
     },
     startPopUp(level){
       this.$swal({
@@ -172,7 +173,9 @@ export default {
 </script>
 
 <style>
-
+.gv-card{
+  background-color: rgb(236, 236, 236) !important;
+}
 .line-1{
     border-right: 2px solid rgba(255,255,255,.75);
     white-space: nowrap;
