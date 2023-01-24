@@ -236,7 +236,6 @@ export default {
 }
 
 #background {
-  
   font-family: Arial, Helvetica, sans-serif;
   margin-top: 1.5em;
   margin-left: 5em;

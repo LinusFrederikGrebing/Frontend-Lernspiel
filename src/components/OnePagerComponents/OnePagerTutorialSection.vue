@@ -12,7 +12,6 @@
     <h1 class="h1 font-weight-black"> - Tutorial - </h1>
   </v-card>
   <v-card
-    class=""
     elevation="10"
     outlined
     height="100%"

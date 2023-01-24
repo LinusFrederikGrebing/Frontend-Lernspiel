@@ -28,7 +28,7 @@
                       <div class="container-image-chapter-open">
                         <div class="image">
                           <v-img :src="item.src" contain></v-img>
-                          <h2 style="position: absolute; top:50%; left:25%; transform: translate(-25%, -50%)" class="white--text text-h4 text-md-h3"><i>{{ item.name }}!</i></h2>
+                          <h2 class="h2pop white--text text-h4 text-md-h3"><i>{{ item.name }}!</i></h2>
                         </div>
                       </div>
                       <v-card-title>
@@ -217,6 +217,12 @@ export default {
   max-height: 8em;
 }
 
+.h2pop {
+  position: absolute;
+  top:50%;
+  left:25%;
+  transform: translate(-25%, -50%);
+}
 
 @keyframes sTransition {
   0% {

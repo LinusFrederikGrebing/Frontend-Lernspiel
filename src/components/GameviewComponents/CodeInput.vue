@@ -626,6 +626,7 @@ export default {
     opacity: 1;
   }
 }
+
 @keyframes come-in {
   0% {
     -webkit-transform: translatey(100px);
@@ -649,8 +650,8 @@ export default {
 
 .floating-container {
   position: fixed;
-  width: 100px;
-  height: 100px;
+  height: 300px;
+  width:  100px;
   bottom: 0;
   right: 0;
   margin: 5em 6em;
@@ -695,25 +696,38 @@ export default {
   z-index: 100;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  -webkit-transform: translatey(5px);
+  transform: translatey(5px);
 }
+
 .floating-container .float-element {
   position: relative;
   display: block;
-
   margin-top: 2em;
   opacity: 0;
   -webkit-transform: translateY(100px);
-          transform: translateY(100px);
+  transform: translateY(100px);
 }
 
 .closedFAB .float-element {
   display: none;
 }
 
-.floating-container .float-element .material-icons {
-  vertical-align: middle;
-  font-size: 16px;
+.floating-container .element-container .float-element:nth-child(1) {
+  -webkit-animation: come-in 0.4s forwards 0.2s;
+          animation: come-in 0.4s forwards 0.2s;
 }
+
+.floating-container .element-container .float-element:nth-child(2) {
+  -webkit-animation: come-in 0.4s forwards 0.4s;
+          animation: come-in 0.4s forwards 0.4s;
+}
+
+.floating-container .element-container .float-element:nth-child(3) {
+  -webkit-animation: come-in 0.4s forwards 0.6s;
+          animation: come-in 0.4s forwards 0.6s;
+}
+
 .consoleArea {
   width: 70%;
   background-color: white;
