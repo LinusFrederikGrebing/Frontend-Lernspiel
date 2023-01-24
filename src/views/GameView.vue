@@ -1,5 +1,6 @@
 <template>
-  <div class=""> 
+  <div class="">
+    <img id="mouse-cursor" src="../assets/mouse-cursor.png"> 
     <v-card elevation="24" outlined shaped width="90%" class="ml-auto mr-auto mt-3 gv-card">
       <v-row no-gutters>
         <v-col cols="12" sm="8" md="8" xl="7">
@@ -15,7 +16,11 @@
               @timer="setTime(currentLevelId)"
               @startPopup="nextLevelStarted(currentLevelId)"
               @change-color="changeColor"
+              @show-help="isHelpOpen = true"
             />
+            <v-dialog v-model="isHelpOpen" fullscreen>
+              <HelpTemplateDesktop @hide-help="isHelpOpen = false" :openHelpFromGame="isHelpOpen" ref="HelpTemplateDesktop"></HelpTemplateDesktop>
+            </v-dialog>
          </div>
         </v-col>
       </v-row> 
@@ -27,6 +32,7 @@ import CodeInput from "../components/GameviewComponents/CodeInput.vue";
 import GameGrid from "../components/GameviewComponents/GameGrid.vue";
 import TemplateGrid from "../components/GameviewComponents/TemplateGrid.vue";
 import levels from "../../data/levels.json";
+import HelpTemplateDesktop from "../components/HelpComponents/HelpTemplateDesktop.vue";
 
 export default {
   name: "GameView",
@@ -34,6 +40,7 @@ export default {
     GameGrid,
     CodeInput,
     TemplateGrid,
+    HelpTemplateDesktop,
   },
 
   data: () => ({
@@ -45,6 +52,7 @@ export default {
     currentLevelId: null,
     hilfenTemp: false,
     accessibleLevels: [],
+    isHelpOpen: false,
   }),
   methods: {
     changeColor(clr) {
@@ -52,6 +60,10 @@ export default {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = clr;
       });
+    },
+
+    showHelp() {
+      this.isHelpOpen = true;
     },
 
     paint(first, second) {

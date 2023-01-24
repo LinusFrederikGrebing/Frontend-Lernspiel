@@ -1,5 +1,6 @@
 <template>
   <v-container class="containerpadding">
+    <img id="mouse-cursor-op" src="../../assets/mouse-cursor.png">
   <v-card
     class="header"
     elevation="24"
@@ -53,8 +54,8 @@
           width="100%"
           v-model="actualCodeToRun"
         ></CodeEditor>
-        <v-btn color="warning" depressed elevation="2">Validieren</v-btn>
-        <v-btn color="success" depressed elevation="2">Ausführen</v-btn>
+        <v-btn id="finished-btn" color="warning" depressed elevation="2">Validieren</v-btn>
+        <v-btn id="validate-btn" color="success" depressed elevation="2">Ausführen</v-btn>
       </div>
     </div>
   </v-card>
@@ -77,7 +78,8 @@ export default {
       codeToRun: "paint(1,1);",
       actualCodeToRun: "",
       timerTutorialAnimation: null,
-      paintTutorialAnimation: null
+      paintTutorialAnimation: null,
+      cursorTutorialAnimation: null,
 
     };
   },
@@ -86,7 +88,39 @@ export default {
     for (let i = 0; i <= this.codeToRun.length; i++) {
       this.timerTutorialAnimation = setTimeout(() => this.actualCodeToRun = this.codeToRun.substring(0, i), i * 250);
     }
-      this.paintTutorialAnimation = setTimeout(() => this.paintTutorialField(1, 1), 3500);
+      this.cursorTutorialAnimation = setTimeout(() => this.cursorAnimation(), 3500);
+    },
+
+    cursorAnimation() {
+      let timelineToButton = gsap.timeline({repeat: 0, repeatDelay: 0, });
+      let finishedButton = document.querySelector("#finished-btn");
+      let finishedButtonRect = finishedButton.getBoundingClientRect();
+      let header = document.querySelector('.header');
+      let sidebar = document.querySelector('#sidebar');
+      let headerHeight = parseInt(header.offsetHeight);
+      let sidebarWidth = 0;
+      let padding = parseInt(document.querySelector('.v-parallax__content').offsetWidth) - parseInt(document.querySelector('.containerpadding').offsetWidth);
+      let yOffset = finishedButtonRect.bottom;
+      if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
+
+      //Reset Mouse-Cursor Start Position
+      gsap.to("#mouse-cursor-op", {duration: 0, x: 0, y: 0});
+      //Calculate Absolute x,y Coordinates
+      let x =  parseInt(finishedButton.offsetWidth) / 2 - sidebarWidth + padding * 2;
+      let y =  parseInt(finishedButton.offsetHeight) / 2 - headerHeight - scrollY;
+      while (finishedButton && !isNaN(finishedButton.offsetLeft) && !isNaN(finishedButton.offsetTop)) {
+      x += finishedButton.offsetLeft - finishedButton.scrollLeft;
+      y += finishedButton.offsetTop - finishedButton.scrollTop;
+      finishedButton = finishedButton.offsetParent;
+      }
+      //Animate the Cursor
+      timelineToButton.to("#mouse-cursor-op", {duration: 3, x: x, y: y, visibility: "visible", zIndex: 4});
+      timelineToButton.to("#mouse-cursor-op", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
+      timelineToButton.eventCallback("onComplete", () => {
+        this.paintTutorialField(1, 1);
+        document.querySelector("#mouse-cursor-op").style.visibility = "hidden";
+      })
+
     },
 
     paintTutorialField(first, second) {
@@ -144,6 +178,14 @@ export default {
 </script>
 
 <style scoped>
+
+#mouse-cursor-op {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  visibility: hidden;
+  z-index: 20;
+}
 .test{
   margin:0 auto !important;
 }

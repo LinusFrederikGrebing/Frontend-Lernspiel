@@ -3,6 +3,14 @@
   <div>
     <v-card elevation="24" height="55em" outlined shaped class="container">
       <h1 class="h1 font-weight-black"> - Hilfen - </h1>
+      <v-btn
+        class="back-btn"
+        depressed
+        elevation="2"
+        @click="hideHelp"
+        v-if="openHelpFromGame">
+          Zurück zum Spiel
+      </v-btn>
       <v-container>
         <div class="general-content js-general-content">
           <div class="general-component">
@@ -48,7 +56,7 @@
                       </div>
                       <hr class="divider mt-8"/>
                       <v-card-actions>
-                        <v-btn color="orange lighten-2 my-2 mr-8" @click="openInNewTab($event, item.documentation)">
+                        <v-btn color="orange lighten-2 my-2 mr-8" @click="openInNewTab($event, item.documentation)" @click.middle="openInNewTab($event, item.documentation)">
                           W3schools Dokumentation 
                         </v-btn>
                       </v-card-actions>
@@ -72,6 +80,9 @@
 <script>
 export default {
   name: "HelptemplateDesktop",
+  props: {
+    openHelpFromGame: Boolean
+  },
   data() {
     return {
       informations: [
@@ -151,6 +162,10 @@ export default {
         win.focus();
       }, 100);
     },
+
+    hideHelp() {
+      this.$emit('hide-help');
+    }
   },
   mounted() {
     var generalcontent = document.querySelector(".general-content");
@@ -180,6 +195,11 @@ export default {
 <style scoped>
 * {
   overflow: hidden;
+}
+
+.back-btn {
+  max-width: 10vw;
+  background-color: red !important;
 }
 
 .container-image-chapter-open {
