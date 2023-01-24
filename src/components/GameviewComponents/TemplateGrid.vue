@@ -1,11 +1,7 @@
 <template>
-  <div>
-    <div>
-      <v-container>
-        <v-row no-gutters>
-          <v-col cols="col-10" md="10">
-            <v-container id="template_grid"  @click="openOrCloseFullscreen()">
-              <div class="template-zoom-bg" id="template-zoom-bg-id">
+  <div>     
+    <div id="template_grid" class="template-container d-flex">
+        <div class="template-zoom-bg" id="template-zoom-bg-id" @click="openOrCloseFullscreen()">
               <v-row no-gutters v-for="y in 10" :key="y">
                 <v-col no-gutters v-for="x in 10" :key="x">
                   <transition appear @enter="enterTemplateGrid">
@@ -17,9 +13,6 @@
                 </v-col>
               </v-row> 
             </div>
-            </v-container>
-          </v-col>
-          <v-col cols="col-2" md="2">
             <transition
               appear
               @enter="enterTemplateGrid"
@@ -32,10 +25,7 @@
               </v-btn>
               </transition
             >
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
+      </div>        
   </div>
 </template>
 
@@ -138,14 +128,18 @@ export default {
 };
 </script>
 <style scoped>
+.template-container {
+  width: 30em !important;
+}
 .coords-btn{
-  margin-left: -1em;
+  margin-right: -6em;
+  margin-left: 1em;
   margin-bottom: -3em;
 }
 
 #template_grid{
   margin-left: -1em;
-  width: 22em;
+  width: 26em;
   padding: 1em;
   border-radius: 18px;
 }
@@ -166,7 +160,7 @@ export default {
 
 .coords-text {
   text-align: center;
-  font-size: 0.6vw;
+  font-size: 1em;
 }
 
 .col {

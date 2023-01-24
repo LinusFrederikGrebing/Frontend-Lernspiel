@@ -1,12 +1,24 @@
 <template>
-  <div id="tryBtn" class="my-16">
-    <v-btn class="white--text"
+  <div class="my-16">
+    <div id="tryContainer"></div>
+    <v-btn id="tryBtn" class="white--text show"
            elevation="24"
            rounded
            block
            x-large
            color="#4a5c66"
-    @click="lvlSelect">Try Me</v-btn>
+           @click="setLevel">
+           Schnellstart
+    </v-btn>
+    <v-btn id="tryBtnFAB" class="white--text hide"
+           elevation="24"
+           fab
+           color="#4a5c66"
+          @click="setLevel">
+          <svg fill="#FFFFFF" class="ml-2" height="30px" width="30px" version="1.1" id="Capa_1" viewBox="0 0 210 210" xml:space="preserve">
+          <path d="M179.07,105L30.93,210V0L179.07,105z"/>
+         </svg>
+    </v-btn>
   </div>
 </template>
 
@@ -17,27 +29,98 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "OnePagerTryMe",
+  data() {
+    return {
+      tryBtn: null,
+      tryBtnFAB: null,
+      lastAccessibleLevel: null,
+      accessibleLevels: []
+    }
+  },
   methods: {
-    lvlSelect(){
+    setLevel() {
+      // Get the last accessible level from local storage
+      this.accessibleLevels = JSON.parse(localStorage.getItem("accessibleLevels")) || [];
+      if (this.accessibleLevels.length > 0) {
+        this.lastAccessibleLevel = this.accessibleLevels[this.accessibleLevels.length - 1];
+      } else {
+        this.lastAccessibleLevel = JSON.parse(localStorage.getItem("levels"))[0];
+      }
+
+      // Navigate to the GameView page with the last accessible level as a parameter
+      this.$router.push({
+        name: "GameView",
+        params: {
+          level: {
+            ...this.lastAccessibleLevel
+          }
+        }
+      });
+
+      // Save the current level to local storage
+      localStorage.setItem("currentLevel", JSON.stringify(this.lastAccessibleLevel));
+    },
+    navigateToLevelSelect() {
       this.$router.push({ path: '/LevelSelect' });
+    },
+    enter() {
+      this.tryBtn = document.getElementById("tryBtn"); 
+      this.tryBtnFAB = document.getElementById("tryBtnFAB"); 
+      this.tryBtn.classList.add("show");
+      this.tryBtn.classList.remove("hidden");
+      this.tryBtnFAB.classList.add("hide");
+      this.tryBtnFAB.classList.remove("show");
+
+      gsap.to("#tryBtn", {
+        scaleX: 1,
+        duration: 0,
+        y: 0,
+        x: 0,
+      });
+    },
+    leave() {
+      gsap.to(this.tryBtn, {
+        scaleX: 0.05,
+        duration: 0.1,
+        y: 950,
+        x: 850,
+      });
+      setTimeout(() => this.toggleVisibleBtn(), 250);
+    },
+    enterback() {
+      setTimeout(() => this.toggleVisibleBtn(), 10);
+      gsap.to("#tryBtn", {
+        scaleX: 1,
+        duration: 0,
+        y: 0,
+        x: 0,
+      });
+    },
+    leaveBack() {
+      console.log("leaveBack");
+    },
+    toggleVisibleBtn() {
+      this.tryBtn.classList.toggle("show");
+      this.tryBtn.classList.toggle("hidden");
+      this.tryBtnFAB.classList.toggle("hide");
+      this.tryBtnFAB.classList.toggle("show");
     }
   },
   mounted() {
-  /*  gsap.to(
-      "#tryBtn",
-        {
-          duration: 2,
-          scrollTrigger: {
-            trigger:  "#tryBtn",
-            onEnter: this.tutorialAnimation,
-            onLeave: this.resetPaintedFields,
-            onEnterBack:  this.tutorialAnimation,
-            onLeaveBack:  this.resetPaintedFields
-          },
-        }
-      );*/
+    this.enter();
+    setTimeout(() => 
+      gsap.to("#tryContainer", {
+        duration: 2,
+        scrollTrigger: {
+          trigger: "#tryContainer",
+          onEnter: this.enter,
+          onLeave: this.leave,
+          onEnterBack: this.enterback,
+          onLeaveBack: this.leaveBack
+        },
+      })
+    , 100);
   }
-  
 }
 
 </script>
@@ -46,5 +129,30 @@ export default {
 div {
   width: 80%;
   margin: auto;
+}
+
+.hide {
+  display: none;
+}
+.hidden {
+  visibility: hidden;
+}
+.show {
+  display: block;
+}
+#tryBtn{
+  position: relative;
+  z-index: 2;
+}
+#tryBtnFAB{
+  position: fixed;
+  right: 4em;
+  bottom: 6em;
+  width: 6em;
+  height: 6em;
+  z-index: 2;
+}
+.button-FAB{
+  position: fixed !important;
 }
 </style>

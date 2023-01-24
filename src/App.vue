@@ -28,7 +28,7 @@ export default {
 <style scoped>
 
 .bg-color {
-  background-color: rgb(236, 236, 236) !important;
+  background-image: url(../src/assets/Hexagon3.svg);
 }
 
 </style>

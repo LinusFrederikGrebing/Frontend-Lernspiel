@@ -49,6 +49,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import HelpTemplateMobile from "@/components/HelpComponents/HelpTemplateMobile";
 import HelpTemplateDesktop from "@/components/HelpComponents/HelpTemplateDesktop";
+import levels from "../../data/levels.json";
 
 gsap.registerPlugin(ScrollTrigger);
 export default {
@@ -61,9 +62,19 @@ export default {
     OnePagerIntroduction,
     OnePagerWhy,
     LevelSelect,
-    OnePagerGoals
+    OnePagerGoals,
+    levels: []
   },
   mounted() {
+    if (localStorage.getItem("levels") !== null) {
+      this.levels = JSON.parse(localStorage.getItem("levels"));
+    } else {
+      this.levels = Object.values(Object.values(levels)[0]);
+    }
+    localStorage.setItem(
+        "levels", 
+        JSON.stringify(this.levels)
+    );
     gsap.fromTo(
       ".lvl_select",
         {
@@ -126,9 +137,9 @@ export default {
 }
 
 .arrows path {
-	stroke: #252525;
+	stroke: #80ba24;
 	fill: transparent;
-	stroke-width: 3px;	
+	stroke-width: 5px;	
 	animation: arrow 2s infinite;
 	-webkit-animation: arrow 2s infinite; 
 }
