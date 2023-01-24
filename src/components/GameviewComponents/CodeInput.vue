@@ -675,6 +675,7 @@ export default {
           animation: come-in 0.4s forwards 0.6s;
 }
 .floating-container .element-container .float-element:nth-child(4) {
+  margin-bottom: 2em;
   -webkit-animation: come-in 0.4s forwards 0.8s;
           animation: come-in 0.4s forwards 0.8s;
 }
@@ -710,7 +711,7 @@ export default {
 }
 
 .consoleArea {
-  width: 70%;
+  width: 22vw;
   background-color: white;
 }
 
