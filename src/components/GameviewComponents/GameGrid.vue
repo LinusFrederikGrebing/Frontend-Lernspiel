@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-6 mb-6">
+  <div class="mt-16 mb-16">
       <v-row class="test" no-gutters v-for="y in 10" :key="y">
         <v-col no-gutters v-for="x in 10" :key="x">
           <transition appear @enter="enterGrid">
@@ -107,7 +107,7 @@ export default {
               from: "center",
             },
             repeat: -1,
-            repeatDelay: 20,
+            repeatDelay: 100,
           });
         }
       }
@@ -120,8 +120,8 @@ export default {
 </script>
 <style scoped>
 .v-card {
-  width: 3.8vw;
-  height: 3.8vw;
+  width: 3.7vw;
+  height: 3.7vw;
 }
 .row.no-gutters {
     justify-content: center;

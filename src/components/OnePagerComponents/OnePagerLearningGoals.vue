@@ -1,5 +1,5 @@
 <template>
-  <v-container class="content-section">
+  <v-container>
     <v-card elevation="24" outlined shaped height="5em" class="header">
       <h1 class="h1 font-weight-black">- Lernziele -</h1>
     </v-card>
@@ -29,7 +29,7 @@
 import gsap from "gsap";
 
 export default {
-  name: "OnePagerGoals",
+  name: "OnePagerLearninggGoals",
   components: {
 
   },
@@ -41,22 +41,22 @@ export default {
       items: [
         {
           title: "Programmierskills",
-          text: "Mit DrawIT kannst du du Programmierungsskills in der Skriptsprache JavaScript vertiefen und deine Programmierungskenntnisse erweitern!",
+          text: "Mit DrawIT kannst Du du Programmierungsskills in der Skriptsprache JavaScript vertiefen und Deine Programmierungskenntnisse erweitern!",
           img: require("../../assets/programmierung.png"),
         },
         {
           title: 'Genauigkeit',
-          text: 'Es gibt mehrere eingefärbte Kästchen auf dem Kachelfeld. Dein Ziel ist es diese Form präzise nachzubauen.',
+          text: 'In der Programmierung sind nicht nur Programmierskills gefragt. Als Programmierer musst Du genau zuhören und Anforderungen präzise und Gewissenhaft umsetzen können. DrawIT gibt dir Aufgaben vor, die einer präzisen Bearbeitung bedarf!',
           img: require("../../assets/genauigkeit.png"),
         },
         {
           title: 'Analytisches Denkvermögen',
-          text: 'Es sind "nur" einige Kästchen die ein Problem darstellen, aber es gibt einen Haufen Lösungen um an das Ziel zu gelangen!',
+          text: 'Mit DrawIT kannst Du Deine Fähigkeit verbessern, Probleme zu erkennen, in einzelne Teilaspekte zu untergliedern und selbstständig Lösungswege zu finden!',
           img: require("../../assets/analytischesdenken.png"),
         },
         {
           title: 'Problemlösungskompetenz',
-          text: 'Der einfachste Weg ist nicht immer der Beste! Gebe dich nicht mit einer simplen Lösung für ein Problem zufrieden.',
+          text: 'DrawIT hilft Dir dabei, Deine Fähigkeiten zu steigern, komplexe Problemsituationen oder Schwierigkeiten wahrzunehmen, zu verstehen und anschließend zu lösen. Der einfachste Weg muss nicht immer der geforderte oder beste sein!',
           img: require("../../assets/problemlösung.png"),
         },
       ],

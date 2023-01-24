@@ -31,8 +31,7 @@
               <a
                 v-for="link in menuLinks"
                 :key="link.title"
-                :href="link.path"
-                :target="link.target"
+                @click="setLink(link.path)"
               >
                 <v-icon :title="link.title" class="icon">
                   mdi-{{ link.icon }}
@@ -41,7 +40,6 @@
                   <div
                     class="link-title"
                     v-show="menuCompact.hidden"
-                    @click="setLink(link)"
                   >
                     {{ link.title }}
                   </div>
@@ -73,10 +71,10 @@ export default {
         hidden: true,
       },
       menuLinks: [
-        { title: "Level-Auswahl", icon: "home", path: "/LevelSelect", target: "_self"},
-        { title: "Tutorial", icon: "information-variant", path: "#", target: "_self"},
-        { title: "Hilfen", icon: "email", path: "/Help", target: "_blank"},
-        { title: "Back to Homepage", icon: "logout-variant", path: "/", target: "_self"},
+        { title: "Level-Auswahl", icon: "home", path: "lvl", target: "_self"},
+        { title: "Tutorial", icon: "information-variant", path: "tutorial", target: "_self"},
+        { title: "Hilfen", icon: "email", path: "help", target: "_blank"},
+        { title: "Back to Homepage", icon: "logout-variant", path: "home", target: "_self"},
       ],
     };
   },
@@ -104,29 +102,10 @@ export default {
         { delay: 1, duration: 2, x: 50, opacity: 1, ease: "back.out(2)" }
       );
     },
-    // Momentan nicht in Benutzung, war evtl. als Übergang zur Levelübersicht gedacht
-    levelAnimation(link) {
-      for (let i = 0; i < 10; i++) {
-        for (let j = 0; j < 10; j++) {
-          let element = document.getElementById("x" + i + "y" + j);
-          gsap.to(element, {
-            duration: 0.5,
-            scale: 0.2,
-            y: 60,
-            yoyo: true,
-            ease: "power1.inOut",
-            delay: 0.5,
-            stagger: {
-              amount: 1.5,
-              grid: "auto",
-              from: "center",
-            },
-            repeatDelay: 1,
-            onComplete: () => this.setLink(link),
-          });
-        }
-      }
-    },
+    setLink(path){
+      console.log("test");
+      this.$router.push({ path: '/', query: { section: path }})
+    }
   },
 };
 </script>
@@ -134,7 +113,7 @@ export default {
 <style scoped>
 
 .header {
-  height: 7vh !important;
+  height: 4em !important;
   box-shadow: 0em 0.3em 0.3em rgba(255, 255, 255, 0.4);
   z-index: 7;
 }

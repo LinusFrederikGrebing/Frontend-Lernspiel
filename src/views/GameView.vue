@@ -1,21 +1,30 @@
 <template>
-  <div class=""> 
-    <v-card elevation="24" outlined shaped width="90%" class="ml-auto mr-auto mt-3 gv-card">
+  <div> 
+    <v-card elevation="24" outlined shaped width="90%" class="ml-auto mr-auto gv-card">
       <v-row no-gutters>
-        <v-col cols="12" sm="8" md="8" xl="7">
-          <GameGrid :color="color"/>
+        <v-col cols="12" sm="8" md="8" lg="7" xl="6">
+            <GameGrid :color="color"/>
         </v-col>
-        <v-col cols="7" md="4">
+        <v-col cols="7" md="4" xl="6">
           <div class="d-flex flex-column justify-center align-center mt-8">
             <TemplateGrid :currentLevel="currentLevel" :color="color" />
-            <h3 class="mt-8">- Level {{ currentLevel.id }} -</h3>
-            <h5>Anforderung: {{ currentLevel.loesungsweg }} </h5>
-            <CodeInput
+            <div>
+              <hr class="divider mb-2 mt-2" />
+                <div class="d-flex flex-column align-center">
+                  <h3 class="">- Level {{ currentLevel.id }} -</h3>
+                  <h5>Anforderung: {{ currentLevel.loesungsweg }} </h5>
+               
+                </div>
+              <hr class="divider mt-2 mb-2" />
+            </div>
+            <div class="">
+                <CodeInput
               @success=" nextLevel(currentLevelId);"
               @timer="setTime(currentLevelId)"
               @startPopup="nextLevelStarted(currentLevelId)"
               @change-color="changeColor"
             />
+            </div>
          </div>
         </v-col>
       </v-row> 
@@ -173,6 +182,21 @@ export default {
 </script>
 
 <style>
+.green{
+  background-color: green;
+}
+.red{
+  background-color: red;
+}
+.yellow{
+  background-color: yellow;
+  width: 100%;
+}
+.divider {
+  opacity: 1;
+  width: 30em;
+  border-radius: 100%;
+}
 .gv-card{
   background-color: rgb(236, 236, 236) !important;
 }

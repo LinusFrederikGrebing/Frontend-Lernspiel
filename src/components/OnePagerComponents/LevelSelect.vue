@@ -1,5 +1,5 @@
 <template>
-  <v-container class="content-section">
+  <v-container>
     <v-card elevation="24" outlined shaped class="">
       <h1 class="h1 font-weight-black">- Level-Auswahl -</h1>
       <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">

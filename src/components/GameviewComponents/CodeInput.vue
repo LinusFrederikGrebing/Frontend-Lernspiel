@@ -1,5 +1,6 @@
 <template>
-  <div id="container" class="d-f mb-4">
+  <div class="d-f mb-4 d-flex">
+    <div>
     <transition appear @enter="enter">
       <v-btn
         depressed
@@ -33,7 +34,8 @@
     <v-textarea 
     :readonly=true
     v-if="consoleActive" v-model="errorMessage"
-      :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}]"></v-textarea>
+      :class="['consoleArea', { 'redText': errorMessage !== 'Keine Fehlermeldung!'}, { 'greenText': errorMessage === 'Keine Fehlermeldung!'}]">
+    </v-textarea>
     </transition>
     <div>
         <v-tooltip bottom color="warning">
@@ -79,7 +81,9 @@
           swatches-max-height="250"
           ></v-color-picker>  
         </div> 
-        <div class="floating-container">
+      </div>
+    </div>  
+    <div class="floating-container">
       <v-btn class="floating-button" @click="openFAB()">+</v-btn>
         <div id="fab-items" class="closedFAB">
             <span class="float-element tooltip-left">
@@ -112,9 +116,7 @@
               </v-btn>
           </span>
         </div>
-      </div>       
     </div>
-   
   </div>
 </template>
 
@@ -341,7 +343,7 @@ export default {
         cancelButtonText: 'Zur Levelauswahl!',
         allowOutsideClick: false, }).then((result) => {
         if (!result.isConfirmed) {
-          this.$router.push({ path: '/LevelSelect' });
+          this.$router.push({ path: '/', query: { section: 'lvl' }})
         } else {
           this.$emit("startPopup");
         }
@@ -351,12 +353,12 @@ export default {
     // Method builds the Failure Alert, depending on the failure cause (Wrong Painted Fields or Wrong Used Solution or Both)
     showAlertFailure(requiredSolution, correctResult) {
       let alertTxt = "";
-      if (!correctResult) alertTxt += "Leider hast du die Aufgabe nicht richtig bearbeitet! \n"
-      if (requiredSolution !== this.solution) alertTxt += "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt!\nLöse die Aufgabe mit dem folgenden: " + requiredSolution + ".";
+      if (!correctResult) alertTxt += "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt! \n"
+      if (requiredSolution !== this.solution) alertTxt += "Löse die Aufgabe mit dem folgenden: <b>" + requiredSolution + "</b>.";
       // Use sweetalert2
       this.$swal({
         title: 'Beim nächsten Mal...!',
-        text: alertTxt,
+        html: alertTxt,
         icon: 'error',
         showCancelButton: true,
         confirmButtonColor: '#6D9E1F',
@@ -369,7 +371,7 @@ export default {
           this.$emit("failure");
           this.resetAnimation();
         } else {
-          this.$router.push({ path: '/LevelSelect' });
+          this.$router.push({ path: '/', query: { section: 'lvl' }})
         }
       }
       );
@@ -639,55 +641,48 @@ export default {
 }
 
 .floating-container {
-  position: fixed;
-  width: 100px;
-  height: 100px;
-  bottom: 0;
-  right: 0;
-  margin: 5em 6em;
-}
-.floating-container {
-  height: 300px;
-  width:  100px;
+  position: relative;
 }
 .floating-container .floating-button {
-  -webkit-transform: translatey(5px);
-          transform: translatey(5px);
+  -webkit-transform: translatey(1px);
+          transform: translatey(1px);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
 .floating-container .element-container .float-element:nth-child(1) {
+  margin-bottom: 11em;
   -webkit-animation: come-in 0.4s forwards 0.2s;
           animation: come-in 0.4s forwards 0.2s;
 }
 .floating-container .element-container .float-element:nth-child(2) {
+  margin-bottom: 8em;
   -webkit-animation: come-in 0.4s forwards 0.4s;
           animation: come-in 0.4s forwards 0.4s;
 }
 .floating-container .element-container .float-element:nth-child(3) {
+  margin-bottom: 5em;
   -webkit-animation: come-in 0.4s forwards 0.6s;
           animation: come-in 0.4s forwards 0.6s;
 }
 .floating-container .floating-button {
   position: absolute;
+  bottom: 0;
   width: 65px;
   height: 65px;
   background: #80ba24;
-  bottom: 0;
+  left: 1em;
   border-radius: 50%;
   color: white;
-  line-height: 65px;
-  text-align: center;
   font-size: 23px;
-  z-index: 100;
+  z-index: 1;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 }
 .floating-container .float-element {
-  position: relative;
+  position: absolute;
   display: block;
-
-  margin-top: 2em;
+  bottom: 0;
+  left: 1em;
   opacity: 0;
   -webkit-transform: translateY(100px);
           transform: translateY(100px);
@@ -697,10 +692,6 @@ export default {
   display: none;
 }
 
-.floating-container .float-element .material-icons {
-  vertical-align: middle;
-  font-size: 16px;
-}
 .consoleArea {
   width: 70%;
   background-color: white;
@@ -724,5 +715,15 @@ export default {
   50% {
     opacity: 0;
   }
+}
+.green{
+  background-color: green;
+}
+.red{
+  background-color: red;
+}
+.yellow{
+  background-color: yellow;
+  width: 100%;
 }
 </style>

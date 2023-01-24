@@ -19,7 +19,7 @@
             >
               <v-btn
                 class="coords-btn"
-                @click="swapButtonText();coordsVisible = !coordsVisible;"
+                @click="swapButtonText();"
               >
               Koordinaten <br> {{btnText}} 
               </v-btn>
@@ -56,6 +56,7 @@ export default {
     swapButtonText() {
       if (this.btnText == "anzeigen") this.btnText = "verstecken";
       else this.btnText = "anzeigen";
+      this.coordsVisible = !this.coordsVisible;
     },
     enterTemplateGrid(element) {
       let zoomBg = document.getElementById("template-zoom-bg-id");
@@ -129,7 +130,8 @@ export default {
 </script>
 <style scoped>
 .template-container {
-  width: 30em !important;
+  width: 32em !important;
+  margin-right: -11.5em;
 }
 .coords-btn{
   margin-right: -6em;

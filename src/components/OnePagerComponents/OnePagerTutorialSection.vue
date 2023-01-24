@@ -1,7 +1,6 @@
 <template>
-  <v-container class="containerpadding">
+  <v-container>
   <v-card
-    class="header"
     elevation="24"
     outlined
     shaped
@@ -14,7 +13,6 @@
     class=""
     elevation="10"
     outlined
-    height="100%"
     width="100%"
   >
     <div class="d-lg-flex justify-lg-center tutorial text-center">
@@ -146,9 +144,6 @@ export default {
 <style scoped>
 .test{
   margin:0 auto !important;
-}
-.header {
-  margin-top: 10em;
 }
 .tutorial {
   margin-top: 5em;

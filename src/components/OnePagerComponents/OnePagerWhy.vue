@@ -1,5 +1,5 @@
 <template>
-  <v-container class="containerpadding">
+  <v-container>
     <v-row>
       <v-col class="text-center my-4">
         <v-card

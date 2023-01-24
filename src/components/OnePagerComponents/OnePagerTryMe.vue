@@ -1,5 +1,5 @@
 <template>
-  <div class="my-16">
+  <div class="my-16" >
     <div id="tryContainer"></div>
     <v-btn id="tryBtn" class="white--text show"
            elevation="24"
@@ -59,9 +59,6 @@ export default {
 
       // Save the current level to local storage
       localStorage.setItem("currentLevel", JSON.stringify(this.lastAccessibleLevel));
-    },
-    navigateToLevelSelect() {
-      this.$router.push({ path: '/LevelSelect' });
     },
     enter() {
       this.tryBtn = document.getElementById("tryBtn"); 

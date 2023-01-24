@@ -1,10 +1,7 @@
 <template>
   <div class="sec">
     <v-parallax :height="height" :src="`${require(`@/assets/Hexagon4.svg`)}`">
-      <div>
-
-      
-      <div class="learning_goals">
+      <div id="start" class="pt-12">
         <OnePagerWhy />
       </div>
       <svg class="arrows">
@@ -12,18 +9,16 @@
 					<path class="a2" d="M0 15 L30 45 L60 15"></path>
 					<path class="a3" d="M0 30 L30 60 L60 30"></path>
 			</svg>
-      <div class="page_section lvl_select">
+      <div id="lvl_select" class="pt-16 mt-16 mb-16" >
         <LevelSelect />
       </div>
-
-      <div class="page_section tutorial">
+      <div id="tutorial" class="pt-16 mt-16 mb-16">
         <OnePagerTutorialSection />
       </div>
-
-      <div class="page_section goals">
+      <div class="pt-16 mt-16 mb-16">
         <OnePagerGoals />
       </div>
-      <div class="help_template">
+      <div id="help_template" class="pt-8 mt-16">
         <div :class="[{'desktop_invisible' : $vuetify.breakpoint.mdAndDown}]">
             <HelpTemplateDesktop  />
         </div>
@@ -31,9 +26,6 @@
             <HelpTemplateMobile  />
         </div>
       </div>
-       
-     
-    </div>
     </v-parallax>
   </div>
 </template>
@@ -42,7 +34,7 @@
 import OnePagerIntroduction from "@/components/OnePagerComponents/OnePagerIntroduction";
 import OnePagerTutorialSection from "@/components/OnePagerComponents/OnePagerTutorialSection";
 import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
-import OnePagerGoals from "@/components/OnePagerComponents/OnePagerGoals";
+import OnePagerGoals from "@/components/OnePagerComponents/OnePagerLearningGoals";
 import OnePagerWhy from "@/components/OnePagerComponents/OnePagerWhy";
 import LevelSelect from "@/components/OnePagerComponents/LevelSelect";
 import gsap from "gsap";
@@ -65,7 +57,40 @@ export default {
     OnePagerGoals,
     levels: []
   },
-  mounted() {
+ 
+  methods: {
+  scrollToElement(elementId) {
+    let element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  },
+  checkRoute(section) {
+    const elementIds = {
+      help: 'help_template',
+      lvl: 'lvl_select',
+      tutorial: 'tutorial',
+    };
+
+    const elementId = elementIds[section] || 'start';
+    setTimeout(() => {
+      this.scrollToElement(elementId);
+    }, 300);
+  },
+  },
+  watch: {
+    '$route': {
+      immediate: true,
+      deep: true,
+      handler(route) {
+        if (route.query.section) {
+          this.checkRoute(route.query.section);
+        }
+      }
+    }
+  },
+  mounted() {   
+    
     if (localStorage.getItem("levels") !== null) {
       this.levels = JSON.parse(localStorage.getItem("levels"));
     } else {
@@ -76,7 +101,7 @@ export default {
         JSON.stringify(this.levels)
     );
     gsap.fromTo(
-      ".lvl_select",
+      "#lvl_select",
         {
           y: 0,
           x: -1000,
@@ -86,14 +111,13 @@ export default {
           opacity: 1,
           x: 0,
           scrollTrigger: {
-            trigger: ".lvl_select",
-            start: "top 90%",
-            end: "bottom 50%",
-             toggleActions: "restart pause pause reset"
+            trigger: "#lvl_select",
+            start: "top 100%",
+            end: "bottom 0%",
+            toggleActions: "play reset play reset "
           },
         }
       );
-
 
     gsap.from(".help_template", {
       opacity: 0,
@@ -107,11 +131,6 @@ export default {
       },
     });
   },
-  watch: {
-      height(){
-        console.log(this.$vuetify.breakpoint.name)
-      }
-  },
   computed: {
       height () {
         console.log(this.$vuetify.breakpoint.name);
@@ -120,7 +139,7 @@ export default {
           case 'sm': return 6550
           case 'md': return 6650
           case 'lg': return 5650
-          case 'xl': return 5225
+          case 'xl': return 5250
         }
       },
     },
@@ -129,11 +148,10 @@ export default {
 <style scoped>
 .arrows {
 	width: 60px;
-	height: 72px;
 	position: relative;
 	left: 50%;
 	margin-left: -30px;
-	bottom: 40px;
+	bottom: 0px;
 }
 
 .arrows path {
@@ -178,9 +196,7 @@ export default {
 .sec{
   background: rgba(255, 255, 255, 0.7)   
 }
-.content-section {
-  margin-top: 10em;
-}
+
 .header {
   margin: 1em 2em;
   color: black;
