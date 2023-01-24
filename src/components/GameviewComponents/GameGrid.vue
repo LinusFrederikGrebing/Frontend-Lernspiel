@@ -130,7 +130,6 @@ export default {
 .col {
   flex-basis: 0 !important;
   flex-grow: 0 !important;
-  /* max-width: 100%; */
 }
 
 .container {

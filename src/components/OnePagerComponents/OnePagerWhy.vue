@@ -27,7 +27,7 @@
       >
         <v-card
           :id="'goal' + index"
-          style="min-height: 25em"
+          min-height="25em"
           elevation="24"
           outlined
           shaped
@@ -39,7 +39,7 @@
             <v-img :src="item.link"></v-img>
           </v-avatar>
           <div class="title text-uppercase ma-4" v-text="item.title"></div>
-          <p v-text="item.text" class="text-caption mx-6"></p>
+          <p v-text="item.text" class="text-body-2 mx-6"></p>
         </v-card>
       </v-col>
      </v-row>
@@ -106,11 +106,7 @@ mounted() {
 </script>
 
 <style scoped>
-
-.test{
-  margin-top: 20em;
-}
-h2, p, *{
+* {
   color: #000000;
   z-index: 1;
 }

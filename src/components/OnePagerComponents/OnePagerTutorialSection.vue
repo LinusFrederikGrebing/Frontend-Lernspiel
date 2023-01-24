@@ -1,5 +1,5 @@
 <template>
-  <v-container class="containerpadding">
+  <v-container>
   <v-card
     class="header"
     elevation="24"
@@ -11,7 +11,6 @@
     <h1 class="h1 font-weight-black"> - Tutorial - </h1>
   </v-card>
   <v-card
-    class=""
     elevation="10"
     outlined
     height="100%"
@@ -144,9 +143,6 @@ export default {
 </script>
 
 <style scoped>
-.test{
-  margin:0 auto !important;
-}
 .header {
   margin-top: 10em;
 }
