@@ -166,5 +166,3 @@ export default {
     -moz-border-radius: 200px;
     -webkit-border-radius: 200px;
   }
-
-</style>

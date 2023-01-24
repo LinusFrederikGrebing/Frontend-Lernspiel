@@ -3,6 +3,14 @@
   <div>
     <v-card elevation="24" height="55em" outlined shaped class="container">
       <h1 class="h1 font-weight-black"> - Hilfen - </h1>
+      <v-btn
+        class="back-btn"
+        depressed
+        elevation="2"
+        @click="hideHelp"
+        v-if="openHelpFromGame">
+          Zurück zum Spiel
+      </v-btn>
       <v-container>
         <div class="general-content js-general-content">
           <div class="general-component">
@@ -20,7 +28,7 @@
                       <div class="container-image-chapter-open">
                         <div class="image">
                           <v-img :src="item.src" contain></v-img>
-                          <h2 style="position: absolute; top:50%; left:25%; transform: translate(-25%, -50%)" class="white--text text-h4 text-md-h3"><i>{{ item.name }}!</i></h2>
+                          <h2 class="h2pop white--text text-h4 text-md-h3"><i>{{ item.name }}!</i></h2>
                         </div>
                       </div>
                       <v-card-title>
@@ -48,7 +56,7 @@
                       </div>
                       <hr class="divider mt-8"/>
                       <v-card-actions>
-                        <v-btn color="orange lighten-2 my-2 mr-8" @click="openInNewTab($event, item.documentation)">
+                        <v-btn color="orange lighten-2 my-2 mr-8" @click="openInNewTab($event, item.documentation)" @click.middle="openInNewTab($event, item.documentation)">
                           W3schools Dokumentation 
                         </v-btn>
                       </v-card-actions>
@@ -72,6 +80,9 @@
 <script>
 export default {
   name: "HelptemplateDesktop",
+  props: {
+    openHelpFromGame: Boolean
+  },
   data() {
     return {
       informations: [
@@ -151,6 +162,10 @@ export default {
         win.focus();
       }, 100);
     },
+
+    hideHelp() {
+      this.$emit('hide-help');
+    }
   },
   mounted() {
     var generalcontent = document.querySelector(".general-content");
@@ -182,6 +197,11 @@ export default {
   overflow: hidden;
 }
 
+.back-btn {
+  max-width: 10vw;
+  background-color: red !important;
+}
+
 .container-image-chapter-open {
   position: relative;
   text-align: center;
@@ -197,6 +217,12 @@ export default {
   max-height: 8em;
 }
 
+.h2pop {
+  position: absolute;
+  top:50%;
+  left:25%;
+  transform: translate(-25%, -50%);
+}
 
 @keyframes sTransition {
   0% {

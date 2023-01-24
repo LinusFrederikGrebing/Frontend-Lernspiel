@@ -115,6 +115,14 @@
                 Farbenauswahl
               </v-btn>
           </span>
+          <span class="float-element">
+            <v-btn
+              depressed
+              elevation="2"
+              @click="showHelp">
+              Hilfen
+            </v-btn>  
+          </span>
         </div>
     </div>
   </div>
@@ -141,7 +149,7 @@ export default {
       consoleActive: false,
       gotUnreadErrors: false,
       codeToRun: "/*Type your own code!*/",
-      fab: false
+      fab: false,
     };
   },
 
@@ -157,6 +165,9 @@ export default {
         element.classList.remove("element-container");
         this.fab = false;
       }
+    },
+    showHelp() {
+      this.$emit("show-help");
     },
     animateTutorial() {
       document.body.style.pointerEvents = "none";
@@ -438,9 +449,7 @@ export default {
     checkIfCodeFilled() {
       if (this.codeToRun === "/*Type your own code!*/") {
         this.codeToRun = "";
-        console.log("ADSAD1");
       }
-      console.log("ADSAD2");
     },
     // Alot of complicated String manipulation to detect the position of a for-loop, dissect the for-loop and insert a maximum number of allowed iterations
     InsertForLoopInfinitySafety(code) {
@@ -610,8 +619,8 @@ export default {
             transform: translateX(-50px) scale(0.4);
   }
   70% {
-    -webkit-transform: translateX(0px) scale(1.2);
-            transform: translateX(0px) scale(1.2);
+    -webkit-transform: translateX(-50px) scale(1.2);
+            transform: translateX(-50px) scale(1.2);
   }
   100% {
     -webkit-transform: translatey(0px) scale(1);
@@ -619,6 +628,7 @@ export default {
     opacity: 1;
   }
 }
+
 @keyframes come-in {
   0% {
     -webkit-transform: translatey(100px);
@@ -634,8 +644,8 @@ export default {
             transform: translateX(0px) scale(1.2);
   }
   100% {
-    -webkit-transform: translatey(0px) scale(1);
-            transform: translatey(0px) scale(1);
+    -webkit-transform: translatey(-50px) scale(1);
+            transform: translatey(-50px) scale(1);
     opacity: 1;
   }
 }
@@ -664,6 +674,10 @@ export default {
   -webkit-animation: come-in 0.4s forwards 0.6s;
           animation: come-in 0.4s forwards 0.6s;
 }
+.floating-container .element-container .float-element:nth-child(4) {
+  -webkit-animation: come-in 0.4s forwards 0.8s;
+          animation: come-in 0.4s forwards 0.8s;
+}
 .floating-container .floating-button {
   position: absolute;
   bottom: 0;
@@ -677,7 +691,10 @@ export default {
   z-index: 1;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  -webkit-transform: translatey(5px);
+  transform: translatey(5px);
 }
+
 .floating-container .float-element {
   position: absolute;
   display: block;
@@ -685,7 +702,7 @@ export default {
   left: 1em;
   opacity: 0;
   -webkit-transform: translateY(100px);
-          transform: translateY(100px);
+  transform: translateY(100px);
 }
 
 .closedFAB .float-element {
