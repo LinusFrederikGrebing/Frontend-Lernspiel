@@ -14,22 +14,29 @@
               <hr class="divider mb-2 mt-2" />
                 <div class="d-flex flex-column align-center">
                   <h3 class="">- Level {{ currentLevel.id }} -</h3>
-                  <h5>Anforderung: {{ currentLevel.loesungsweg }} </h5>
-               
+                  <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">  
+                    <h5 v-bind="attrs"
+                      v-on="on">Anforderung: {{ currentLevel.loesungsweg }} </h5>
+                  </template>
+                  <span>Du musst eine {{ currentLevel.loesungsweg }} benutzen, um das Level {{ currentLevel.id }} abzuschließen!</span>
+                </v-tooltip>
                 </div>
               <hr class="divider mt-2 mb-2" />
             </div>
             <div class="">
                 <CodeInput
-              @success=" nextLevel(currentLevelId);"
-              @timer="setTime(currentLevelId)"
-              @startPopup="nextLevelStarted(currentLevelId)"
-              @change-color="changeColor"
-              @show-help="isHelpOpen = true"
-            />
+                  @success=" nextLevel(currentLevelId);"
+                  @timer="setTime(currentLevelId)"
+                  @startPopup="nextLevelStarted(currentLevelId)"
+                  @change-color="changeColor"
+                  @show-help="isHelpOpen = true"
+                />
             </div>
             <v-dialog v-model="isHelpOpen" fullscreen>
-              <HelpTemplateDesktop @hide-help="isHelpOpen = false" :openHelpFromGame="isHelpOpen" ref="HelpTemplateDesktop"></HelpTemplateDesktop>
+              <div class="mt-10">
+                <HelpTemplateDesktop @hide-help="isHelpOpen = false" :openHelpFromGame="isHelpOpen" ref="HelpTemplateDesktop"></HelpTemplateDesktop>
+              </div>
             </v-dialog>
 
          </div>

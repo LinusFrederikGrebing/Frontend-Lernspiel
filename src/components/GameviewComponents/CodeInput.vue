@@ -24,7 +24,7 @@
         v-if="editorActive"
         id="code-editor"
         height="25vh"
-        width="22vw"
+        width="20vw"
         v-model="codeToRun"
       >
       </CodeEditor>
@@ -84,7 +84,7 @@
       </div>
     </div>  
     <div class="floating-container">
-      <v-btn class="floating-button" @click="openFAB()">+</v-btn>
+      <v-btn class="floating-button" @click="openFAB()"><b>{{btnText}}</b></v-btn>
         <div id="fab-items" class="closedFAB">
             <span class="float-element tooltip-left">
               <v-btn
@@ -117,10 +117,10 @@
           </span>
           <span class="float-element">
             <v-btn
-              depressed
-              elevation="2"
-              @click="showHelp">
-              Hilfen
+                depressed
+                elevation="2"
+                @click="showHelp">
+                Hilfen
             </v-btn>  
           </span>
         </div>
@@ -139,6 +139,7 @@ export default {
   },
   data: () => {
     return {
+      btnText: "+",
       solution: "",
       color: '#80ba24',
       levelElements: [],
@@ -159,10 +160,14 @@ export default {
       if(this.fab == false){
         element.classList.add("element-container");
         element.classList.remove("closedFAB");
+        setTimeout(() => {
+          this.btnText = "-"
+        }, 300);
         this.fab = true;
       } else {
         element.classList.add("closedFAB");
         element.classList.remove("element-container");
+        this.btnText = "+"
         this.fab = false;
       }
     },
@@ -658,6 +663,7 @@ export default {
           transform: translatey(1px);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  animation: pulse 5s infinite;
 }
 .floating-container .element-container .float-element:nth-child(1) {
   margin-bottom: 11em;
@@ -679,13 +685,31 @@ export default {
   -webkit-animation: come-in 0.4s forwards 0.8s;
           animation: come-in 0.4s forwards 0.8s;
 }
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(128, 186, 36, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(128, 186, 36, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(128, 186, 36, 0);
+  }
+}
+
 .floating-container .floating-button {
   position: absolute;
   bottom: 0;
   width: 65px;
   height: 65px;
   background: #80ba24;
-  left: 1em;
+  left: 0.5em;
   border-radius: 50%;
   color: white;
   font-size: 23px;
@@ -700,7 +724,7 @@ export default {
   position: absolute;
   display: block;
   bottom: 0;
-  left: 1em;
+  left: 0.5em;
   opacity: 0;
   -webkit-transform: translateY(100px);
   transform: translateY(100px);
@@ -711,7 +735,7 @@ export default {
 }
 
 .consoleArea {
-  width: 22vw;
+  width: 20vw;
   background-color: white;
 }
 
