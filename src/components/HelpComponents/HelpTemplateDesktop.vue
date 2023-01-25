@@ -193,10 +193,10 @@ export default {
 };
 </script>
 <style scoped>
+/* CSS only for HelpDesktop-Template */
 * {
   overflow: hidden;
 }
-
 .back-btn {
   width: 4em;
   height: 4em !important;
@@ -207,29 +207,24 @@ export default {
   color: white;
   background-color:  rgb(174, 4, 4) !important;
 }
-
 .container-image-chapter-open {
   position: relative;
   text-align: center;
 }
-
 .card {
   box-shadow: 3em 3em 3em rgba(0, 0, 0, 0.7) !important;
   overflow: scroll;
   max-height: 35em;
 }
-
 .image {
   max-height: 8em;
 }
-
 .h2pop {
   position: absolute;
   top:50%;
   left:25%;
   transform: translate(-25%, -50%);
 }
-
 @keyframes sTransition {
   0% {
     background-position: 0%;
@@ -239,13 +234,6 @@ export default {
     background-position: 400%;
   }
 }
-
-.divider {
-  opacity: 1;
-  border-radius: 100%;
-  background-color: rgba(128, 186, 36, 1);
-}
-
 .component {
   cursor: pointer;
   justify-content: space-between;
@@ -260,7 +248,6 @@ export default {
   height: 45em;
   margin-top: 5em;
 }
-
 .initial-visual-component {
   z-index: 2;
   display: flex;
@@ -270,7 +257,6 @@ export default {
   position: absolute;
   width: 100%;
 }
-
 .component-content {
   z-index: -1;
   position: absolute;
@@ -281,13 +267,11 @@ export default {
   opacity: 0;
   transition: all 0.1s;
 }
-
 .component.component-active .component-content {
   z-index: 2;
   opacity: 1;
   transition: all 0.5s 1.4s;
 }
-
 .component-close-button {
   position: absolute;
   right: 2em;
@@ -297,13 +281,9 @@ export default {
   opacity: 0;
   transition: all 0s 0.45s;
 }
-
-.component-close-button:before,
-.component-close-button:after {
+.component-close-button:before,.component-close-button:after {
   content: "";
   position: absolute;
-  /*Sinn von diesen werten? Ziemlich unnötig soweit ich das sehe.*/
-  left: 0;
   top: 50%;
   width: 100%;
   height: 8px;
@@ -312,36 +292,27 @@ export default {
   opacity: 0;
   transition: opacity 0s;
 }
-
 .component.component-active .component-close-button {
   z-index: 5;
   opacity: 1;
-
 }
-
-.component.component-active .component-close-button:before,
-.component.component-active .component-close-button:after {
+.component.component-active .component-close-button:before,.component.component-active .component-close-button:after {
   opacity: 1;
 }
-
 .component-close-button:before {
   transform: rotate(45deg) translateX(100%);
 }
-
 .component.component-active .component-close-button:before {
   transition: all 0.3s 1.4s cubic-bezier(0.72, 0.09, 0.32, 1.57);
   transform: rotate(45deg) translateX(0);
 }
-
 .component-close-button:after {
   transform: rotate(-45deg) translateX(100%);
 }
-
 .component.component-active .component-close-button:after {
   transition: all 0.3s 1.55s cubic-bezier(0.72, 0.09, 0.32, 1.57);
   transform: rotate(-45deg) translateX(0);
 }
-
 .component-index {
   position: relative;
   top: 30px;
@@ -351,80 +322,64 @@ export default {
   font-size: 15em;
   font-weight: bold;
 }
-
 .general-content.component--active .component-index {
   opacity: 0;
 }
-
 .component-index-front {
   position: absolute;
   left: 30px;
   top: -15px;
 }
-
 .component-index-back {
   color: #80ba24;
   opacity: 0.25;
   transition: opacity 0.25s 0.25s;
 }
-
 .component:hover .component-index-back {
   transition: opacity 1.25s;
   opacity: 1;
 }
-
 .component:nth-child(2) {
   transform: translate3d(105.2083333333%, 0, 0);
 }
-
 .general-content.component--active .component:nth-child(2):not(.component-active) {
   transform: scale(0.5) translate3d(105.2083333333%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
-
 .component:nth-child(2) .component-internal {
   transition-delay: 0.1s;
 }
-
 .component:nth-child(3) {
   transform: translate3d(210.4166666667%, 0, 0);
   transform-origin: 260.4166666667% 50%;
 }
-
 .general-content.component--active .component:nth-child(3):not(.component-active) {
   transform: scale(0.5) translate3d(210.4166666667%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
-
 .component:nth-child(4) {
   transform: translate3d(315.625%, 0, 0);
   transform-origin: 365.625% 50%;
 }
-
 .general-content.component--active .component:nth-child(4):not(.component-active) {
   transform: scale(0.5) translate3d(315.625%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
-
 .component:nth-child(4) .component-internal {
   transition-delay: 0.3s;
 }
-
 .component:nth-child(5) {
   transform: translate3d(420.8333333333%, 0, 0);
   transform-origin: 470.8333333333% 50%;
 }
-
 .general-content.component--active .component:nth-child(5):not(.component-active) {
   transform: scale(0.5) translate3d(420.8333333333%, 0, 0);
   opacity: 0;
   transition: transform 0.95s, opacity 0.95s;
 }
-
-
 .component.component-active {
   z-index: 1;
   width: 100%;

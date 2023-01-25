@@ -16,9 +16,5 @@ export default {
 </script>
 
 <style scoped>
-
-.footerText{
-   color: white;
-   font-size: 0.8em;
-}
+/* CSS only for Footer-Template */
 </style>

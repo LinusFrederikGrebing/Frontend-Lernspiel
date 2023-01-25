@@ -1,6 +1,9 @@
 <template>
-  <div class="sec">
-    <v-parallax :height="height" :src="`${require(`@/assets/Hexagon4.svg`)}`">
+    <v-parallax
+      class="no-padding"
+      :height="height"
+      :src="`${require(`@/assets/Hexagon4.svg`)}`"
+    >
       <header id="start" class="pt-12">
         <OnePagerWhy />
       </header>
@@ -19,7 +22,7 @@
         <div class="pt-16 mt-16 mb-16">
           <OnePagerGoals />
         </div>
-        <div id="help_template" class="pt-8 mt-16">
+        <div id="help_template" class="pt-16 mt-16">
           <div :class="[{ desktop_invisible: $vuetify.breakpoint.mdAndDown }]">
             <HelpTemplateDesktop />
           </div>
@@ -29,11 +32,9 @@
         </div>
       </main>
     </v-parallax>
-  </div>
 </template>
 
 <script>
-import OnePagerIntroduction from "@/components/OnePagerComponents/OnePagerIntroduction";
 import OnePagerTutorialSection from "@/components/OnePagerComponents/OnePagerTutorialSection";
 import OnePagerTryMe from "@/components/OnePagerComponents/OnePagerTryMe";
 import OnePagerGoals from "@/components/OnePagerComponents/OnePagerLearningGoals";
@@ -53,7 +54,6 @@ export default {
     HelpTemplateDesktop,
     OnePagerTutorialSection,
     OnePagerTryMe,
-    OnePagerIntroduction,
     OnePagerWhy,
     LevelSelect,
     OnePagerGoals,
@@ -149,6 +149,8 @@ export default {
 };
 </script>
 <style scoped>
+/* CSS only for OnePager-Template */
+/* CSS for Arrow-Animation in OnePager */
 .arrows {
   width: 60px;
   position: relative;
@@ -156,7 +158,6 @@ export default {
   margin-left: -30px;
   bottom: 0px;
 }
-
 .arrows path {
   stroke: #80ba24;
   fill: transparent;
@@ -164,7 +165,6 @@ export default {
   animation: arrow 2s infinite;
   -webkit-animation: arrow 2s infinite;
 }
-
 @keyframes arrow {
   0% {
     opacity: 0;
@@ -179,7 +179,6 @@ export default {
     opacity: 0;
   }
 }
-
 @-webkit-keyframes arrow {
   0% {
     opacity: 0;
@@ -194,44 +193,16 @@ export default {
     opacity: 0;
   }
 }
-
 .arrows path.a1 {
   animation-delay: -2s;
   -webkit-animation-delay: -1s;
 }
-
 .arrows path.a2 {
   animation-delay: -1s;
   -webkit-animation-delay: -0.5s;
 }
-
 .arrows path.a3 {
   animation-delay: 0s;
   -webkit-animation-delay: 0s;
-}
-
-.sec {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.header {
-  margin: 1em 2em;
-  color: black;
-}
-
-.divider {
-  opacity: 1;
-  border-radius: 100%;
-  background-color: rgba(128, 186, 36, 1);
-}
-.v-parallax__image {
-  transform: none !important;
-  width: 100% !important;
-}
-.desktop_invisible {
-  display: none !important;
-}
-.container {
-  max-width: 1900px;
 }
 </style>

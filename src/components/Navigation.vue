@@ -111,13 +111,12 @@ export default {
 </script>
 
 <style scoped>
-
+/* CSS only for Navigation */
 .header {
   height: 4em !important;
   box-shadow: 0em 0.3em 0.3em rgba(255, 255, 255, 0.4);
   z-index: 7;
 }
-
 #sidebar {
   margin: 0;
   top: 0;
@@ -130,29 +129,24 @@ export default {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
   user-select: none;
 }
-
 .sidebar-links {
   padding-inline: 15px;
 }
-
 .sidebar-links small {
   color: rgba(255, 255, 255, 0.6);
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 12px;
 }
-
 .divider {
   opacity: 0.25;
   border-radius: 100%;
   margin-bottom: 25px;
 }
-
 .sidebar-links .links {
   display: flex;
   flex-direction: column;
 }
-
 .sidebar-links a {
   text-decoration: none;
   background-color: rgba(255, 255, 255, 0.75);
@@ -164,7 +158,6 @@ export default {
   border: 1px solid rgba(255, 255, 255, 0.85);
   transition: 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 .sidebar-links a:hover {
   transform: scale(1.08);
   background-image: linear-gradient(
@@ -175,43 +168,24 @@ export default {
   box-shadow: 0px 0px 8px rgba(128, 186, 36, 0.85);
   border-color: rgb(198, 246, 121);
 }
-
 .sidebar-links a:nth-last-of-type(1):hover {
   background-image: linear-gradient(to right, red, rgb(100, 0, 0));
   box-shadow: 0px 0px 8px red;
   border-color: red;
 }
-
 .sidebar-links .links a {
   display: flex;
   flex-direction: row;
   align-items: center;
   color: rgba(0, 0, 0, 1);
 }
-
 .sidebar-links .link-title {
   margin-left: 10px;
 }
-
 .sidebar-links .icon {
   color: rgba(0, 0, 0, 0.9);
   margin-top: -1px;
   margin-left: 3px;
-}
-
-.app-bar-content {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: space-between;
-}
-
-.app-bar-content h2 {
-  color: rgba(255, 255, 255, 1);
-}
-
-.app-bar-content h2:hover {
-  color: rgba(128, 186, 36, 1);
 }
 
 #background {

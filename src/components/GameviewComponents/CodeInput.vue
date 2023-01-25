@@ -613,48 +613,8 @@ export default {
 
 
 <style scoped>
-@-webkit-keyframes come-in {
-  0% {
-    -webkit-transform: translatey(100px);
-            transform: translatey(100px);
-    opacity: 0;
-  }
-  30% {
-    -webkit-transform: translateX(-50px) scale(0.4);
-            transform: translateX(-50px) scale(0.4);
-  }
-  70% {
-    -webkit-transform: translateX(-50px) scale(1.2);
-            transform: translateX(-50px) scale(1.2);
-  }
-  100% {
-    -webkit-transform: translatey(0px) scale(1);
-            transform: translatey(0px) scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes come-in {
-  0% {
-    -webkit-transform: translatey(100px);
-            transform: translatey(100px);
-    opacity: 0;
-  }
-  30% {
-    -webkit-transform: translateX(-50px) scale(0.4);
-            transform: translateX(-50px) scale(0.4);
-  }
-  70% {
-    -webkit-transform: translateX(0px) scale(1.2);
-            transform: translateX(0px) scale(1.2);
-  }
-  100% {
-    -webkit-transform: translatey(-50px) scale(1);
-            transform: translatey(-50px) scale(1);
-    opacity: 1;
-  }
-}
-
+/* CSS only for CodeInput-Template */
+/* CSS for FAB-Animation (inkl. pulsing-Animation) */
 .floating-container {
   position: relative;
 }
@@ -734,6 +694,49 @@ export default {
   display: none;
 }
 
+@-webkit-keyframes come-in {
+  0% {
+    -webkit-transform: translatey(100px);
+            transform: translatey(100px);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: translateX(-50px) scale(0.4);
+            transform: translateX(-50px) scale(0.4);
+  }
+  70% {
+    -webkit-transform: translateX(-50px) scale(1.2);
+            transform: translateX(-50px) scale(1.2);
+  }
+  100% {
+    -webkit-transform: translatey(0px) scale(1);
+            transform: translatey(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes come-in {
+  0% {
+    -webkit-transform: translatey(100px);
+            transform: translatey(100px);
+    opacity: 0;
+  }
+  30% {
+    -webkit-transform: translateX(-50px) scale(0.4);
+            transform: translateX(-50px) scale(0.4);
+  }
+  70% {
+    -webkit-transform: translateX(0px) scale(1.2);
+            transform: translateX(0px) scale(1.2);
+  }
+  100% {
+    -webkit-transform: translatey(-50px) scale(1);
+            transform: translatey(-50px) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Classes for Editor + Console */
 .consoleArea {
   width: 20vw;
   background-color: white;
@@ -746,6 +749,7 @@ export default {
 
 .redText {
   background-color: rgba(255, 0, 0, 0.2) !important;
+  color: rgba(248, 6, 6, 0.4) !important;
 }
 
 .console_warning {
@@ -757,15 +761,5 @@ export default {
   50% {
     opacity: 0;
   }
-}
-.green{
-  background-color: green;
-}
-.red{
-  background-color: red;
-}
-.yellow{
-  background-color: yellow;
-  width: 100%;
 }
 </style>

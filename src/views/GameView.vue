@@ -11,7 +11,7 @@
           <div class="d-flex flex-column justify-center align-center mt-8">
             <TemplateGrid :currentLevel="currentLevel" :color="color" />
             <div>
-              <hr class="divider mb-2 mt-2" />
+              <hr class="dividerW30 mb-2 mt-2" />
                 <div class="d-flex flex-column align-center">
                   <h3 class="">- Level {{ currentLevel.id }} -</h3>
                   <v-tooltip bottom>
@@ -22,7 +22,7 @@
                   <span>Du musst eine {{ currentLevel.loesungsweg }} benutzen, um das Level {{ currentLevel.id }} abzuschließen!</span>
                 </v-tooltip>
                 </div>
-              <hr class="divider mt-2 mb-2" />
+              <hr class="dividerW30 mt-2 mb-2" />
             </div>
             <div class="">
                 <CodeInput
@@ -203,67 +203,10 @@ export default {
 </script>
 
 <style>
-.green{
-  background-color: green;
-}
-.red{
-  background-color: red;
-}
-.yellow{
-  background-color: yellow;
-  width: 100%;
-}
-.divider {
-  opacity: 1;
-  width: 30em;
-  border-radius: 100%;
-}
-.gv-card{
-  background-color: rgb(236, 236, 236) !important;
-}
-.line-1{
-    border-right: 2px solid rgba(255,255,255,.75);
-    white-space: nowrap;
-    overflow: hidden;
-}
-
 #mouse-cursor {
   position: absolute;
   height: 3vh;
   width: 3vh;
   visibility: hidden;
 }
-
-/* Animation */
-.anim-typewriter1{
-  animation: typewriter 1s steps(44) 0s 1 normal both,
-             blinkTextCursor 500ms steps(44) 0s normal;
-}
-.anim-typewriter2{
-  animation: typewriter 1s steps(44) 1s 1 normal both,
-             blinkTextCursor 500ms steps(44) 1s normal;
-}
-.anim-typewriter3{
-  animation: typewriter 1s steps(44) 2s 1 normal both,
-             blinkTextCursor 500ms steps(44) 2s normal;
-}
-.anim-typewriter4{
-  animation: typewriter 1s steps(44) 3s 1 normal both,
-             blinkTextCursor 500ms steps(44) 3s normal;
-}
-.anim-typewriter5{
-  animation: typewriter 1s steps(44) 4s 1 normal both,
-             blinkTextCursor 500ms steps(44) 4s normal;
-}
-.anim-typewriter6{
-  animation: typewriter 1s steps(44) 5s 1 normal both,
-             blinkTextCursor 500ms steps(44) 5s normal;
-}
-@keyframes typewriter{
-  from{width: 0;}
-  to{width: 27em;}
-}
-@keyframes blinkTextCursor{
-  from{border-right-color: rgba(0, 0, 0, 0.75);}
-  to{border-right-color: transparent;}
-}</style>
+</style>

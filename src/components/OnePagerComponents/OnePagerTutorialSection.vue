@@ -42,7 +42,7 @@
           </v-row>
         </v-card>
       </div>
-      <div class="editor">
+      <div class="editor_in_Tutorial">
         <CodeEditor
           :read_only="true"
           font_size="37px"
@@ -157,11 +157,11 @@ export default {
       );
 
       gsap.to(
-       ".editor",
+       ".editor_in_Tutorial",
         {
           duration: 2,
           scrollTrigger: {
-            trigger:  ".editor",
+            trigger:  ".editor_in_Tutorial",
             onEnter: this.tutorialAnimation,
             onLeave: this.resetPaintedFields,
             onEnterBack:  this.tutorialAnimation,
@@ -174,7 +174,7 @@ export default {
 </script>
 
 <style scoped>
-
+/* CSS only fpr Tutorial-Section */
 #mouse-cursor-op {
   position: absolute;
   height: 3vh;
@@ -182,41 +182,26 @@ export default {
   visibility: hidden;
   z-index: 20;
 }
-.test{
-  margin:0 auto !important;
-}
 .tutorial {
   margin-top: 5em;
   margin-bottom: 10em;
 }
-.container{
-  height: 100% !important;
-}
-.editor{
+.editor_in_Tutorial{
   margin-left: 1em;
   width: 95%;
 }
-.col {
-  flex-basis: 0.1 !important;
-  flex-grow: 0 !important;
-  /* max-width: 100%; */
-}
-
 .cardgrid_mdAndUp {
   width: 7.5em;
   height: 7.5em;
 }
-
 .cardgrid_container_mdAndUp {
   width: 30em;
   height: 30em;
 }
-
 .cardgrid_sm {
   width: 5.5em;
   height: 5.5em;
 }
-
 .cardgrid_container_sm {
   width: 22em;
   height: 22em;

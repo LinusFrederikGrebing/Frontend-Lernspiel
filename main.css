@@ -1,5 +1,149 @@
+/* Colors */
 .painted {
-    background-color: rgba(128,186,36, 1);
-  }
+  background-color: #80ba24;
+}
+.divider, .green {
+  background-color: #80ba24;
+}
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
 
+/* Container */
+.container {
+  max-width: 1900px;
+  padding: 0 !important;
+}
 
+/* Dividers */
+.divider {
+  opacity: 1;
+  border-radius: 100%;
+}
+.dividerW30 {
+  opacity: 1;
+  width: 30em;
+  border-radius: 100%;
+}
+
+/* Visibility Classes */
+.desktop_invisible {
+  display: none !important;
+}
+.hide {
+  display: none;
+}
+.hidden {
+  visibility: hidden;
+}
+.show {
+  display: block;
+}
+
+/* Typewriter Animation */
+.line-1 {
+  border-right: 2px solid rgba(255,255,255,.75);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.anim-typewriter1,
+.anim-typewriter2,
+.anim-typewriter3,
+.anim-typewriter4,
+.anim-typewriter5,
+.anim-typewriter6 {
+  animation: typewriter 1s steps(44) 0s 1 normal both,
+             blinkTextCursor 500ms steps(44) 0s normal;
+}
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 27em; }
+}
+@keyframes blinkTextCursor {
+  from { border-right-color: rgba(0, 0, 0, 0.75); }
+  to { border-right-color: transparent; }
+}
+/* Animation end */
+
+/* Elements */
+.gv-card {
+  background-color: rgb(236, 236, 236) !important;
+}
+.footerText {
+  color: white;
+  font-size: 0.8em;
+}
+/* Section */
+h1, p {
+  color: black;
+}
+.goalscontainer {
+  text-align: center;
+  margin-top: 1.5em;
+}
+
+/* Text */
+.text {
+  width: 40em;
+  padding: 2em;
+  position: absolute;
+  top: 1em;
+}
+.text_xs {
+  padding: 2em;
+  top: 1em;
+}
+
+/* Section */
+.section {
+  display: inline-block;
+  position: relative;
+  width: 40em;
+}
+.left {
+  right: 28em;
+}
+.right {
+  right: -28em;
+}
+.mobile_right {
+  right: 0em;
+}
+
+/* Item */
+.item {
+  background-color: #252525;
+  padding: 2em;
+}
+
+/* Rounded */
+.rund {
+  border-radius: 200px;
+}
+
+.h1 {
+  position: absolute;
+  margin-top: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.locked {
+  opacity: 0.7;
+}
+
+.zentriert {
+  position: absolute;
+  margin: 5em;
+  width: 10em;
+  top: 2em;
+  left: -0.5em;
+  opacity: 1 !important;
+  scale: 10;
+}

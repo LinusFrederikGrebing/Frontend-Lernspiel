@@ -190,13 +190,14 @@ export default {
 };
 </script>
 <style>
+/* CSS only for Lvl-Select */
+/* CSS for flickity Component */ 
 .flickity-button {
   background: #4a5c66;
 }
 .flickity-button:hover {
   background: #80ba24;
 }
-
 .flickity-prev-next-button {
   width: 5em;
   height: 5em;
@@ -213,57 +214,29 @@ export default {
 .flickity-prev-next-button.next {
   right: 40px;
 }
-
-.h1 {
-  position: absolute;
-  margin-top: 0.5em;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-}
-
 .flickity-page-dots {
   bottom: -22px;
 }
-
 .flickity-page-dots .dot {
   background-color: #4a5c66;
 }
-
 .flickity-page-dots .dot.is-selected {
   background: #80ba24;
   scale: 1.5;
 }
-
-.locked {
-  opacity: 0.7;
-}
-
-.zentriert {
-  position: absolute;
-  margin: 5em;
-  width: 10em;
-  top: 2em;
-  left: -0.5em;
-  opacity: 1 !important;
-  scale: 10;
-}
-
+/* CSS for flickity Cells */ 
 .carousel-cell {
   height: 35em !important;
   border-radius: 5px;
   padding: 0 !important;
   counter-increment: carousel-cell;
 }
-
 .styledDiv.carousel-cell.pa-5.mx-8.v-card.v-sheet.theme--light.elevation-12.mx-auto.my-8 {
   margin-left: 1em !important;
   margin-right: 1em !important;
 }
-
 .carousel-cell.is-selected {
   box-shadow: 1em 1em 1em rgba(51, 42, 42, 0.7) !important;
 }
 </style>
+

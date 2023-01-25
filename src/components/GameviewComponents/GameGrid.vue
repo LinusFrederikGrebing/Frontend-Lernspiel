@@ -119,20 +119,13 @@ export default {
 };
 </script>
 <style scoped>
+/* CSS only for GameGrid-Template */
 .v-card {
   width: 3.7vw;
   height: 3.7vw;
 }
-.row.no-gutters {
-    justify-content: center;
-}
 .col {
   flex-basis: 0 !important;
   flex-grow: 0 !important;
-}
-.test{
-  position: relative;
-  right: 0;
-  margin-right: 1em;
 }
 </style>

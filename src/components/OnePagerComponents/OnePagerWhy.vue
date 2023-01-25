@@ -106,8 +106,5 @@ mounted() {
 </script>
 
 <style scoped>
-* {
-  color: #000000;
-  z-index: 1;
-}
+/* CSS only for OnePagerWhy-Template */
 </style>

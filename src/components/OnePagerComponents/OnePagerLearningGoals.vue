@@ -5,7 +5,7 @@
     </v-card>
     <v-card elevation="10" outlined :height="height">
       <div :class="[{'flex_container' : !$vuetify.breakpoint.lgAndDown}]" v-for="(item, index) in items" :key="index">
-        <div :class="[{'seccontainer' : !$vuetify.breakpoint.lgAndDown}]" >
+        <div :class="[{'goalscontainer' : !$vuetify.breakpoint.lgAndDown}]" >
           <div :id="'section' + index" :class="[{'section' : !$vuetify.breakpoint.lgAndDown}]" class="">
             <img class="mr-auto ml-auto d-block mt-8 rund item" :src="item.img" width="200px" alt="" />
             <v-card
@@ -114,56 +114,5 @@ export default {
 </script>
 
 <style scoped>
-  .header {
-    padding-bottom: 5em;
-  }
-  .sec {
-    background: rgba(255, 255, 255, 0); /*  40% opaque green */
-  }
-  h1,
-  p {
-    color: black;
-  }
-  .seccontainer {
-    text-align: center;
-    margin-top: 1.5em;
-  }
-
-  .text {
-    width: 40em;
-    padding: 2em;
-    position: absolute;
-    top: 1em;
-  }
-  .text_xs {
-    padding: 2em;
-    top: 1em;
-  }
-
-  .section {
-    display: inline-block;
-    position: relative;
-    width: 40em;
-  }
-  .left {
-    right: 28em;
-  }
-  .right {
-    right: -28em;
-  }
-
-  .mobile_right{
-    right: 0em;
-  }
-
-  .item {
-    background-color: #252525;
-    padding: 2em;
-  }
-
-  .rund {
-    border-radius: 200px;
-    -moz-border-radius: 200px;
-    -webkit-border-radius: 200px;
-  }
+/* CSS only for LearningGoals-Template */
 </style>

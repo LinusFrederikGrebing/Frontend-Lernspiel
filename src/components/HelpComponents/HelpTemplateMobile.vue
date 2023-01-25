@@ -1,6 +1,6 @@
 <template>
     <v-container>
-      <div class="mobile">
+      <div class="mb-16">
         <v-expansion-panels>
           <v-expansion-panel
             v-for="item in informations" :key="item.id"
@@ -8,7 +8,8 @@
             <v-expansion-panel-header class="text-h6 text-sm-h5 my-4">
               {{ item.label }}
             </v-expansion-panel-header>
-            <v-expansion-panel-content>
+            <v-expansion-panel-content class="">
+              <v-card class="panel_item">
                 <v-img :src="item.src" max-height="5em"></v-img>
                 <v-card-title>
                   {{ item.subheader }}
@@ -39,13 +40,13 @@
                     W3schools Dokumentation
                   </v-btn>
                 </v-card-actions>
+              </v-card>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
       </div>
     </v-container>
 </template>
-
 <script>
 
 export default {
@@ -134,24 +135,9 @@ methods: {
 }
 </script>
 <style scoped>
-.container {
-  width: 100%;
-  min-width: 450px;
-  margin: 0 auto;
-}
-.mobile {
-  margin-bottom: 10em;
-}
-.container-image-chapter-open {
-  position: relative;
-  text-align: center;
-}
-
-.card {
+/* CSS only for HelpMobile-Template */
+.panel_item {
+  max-height: 20em;
   overflow: scroll;
-}
-
-.image {
-  max-height: 8em;
 }
 </style>

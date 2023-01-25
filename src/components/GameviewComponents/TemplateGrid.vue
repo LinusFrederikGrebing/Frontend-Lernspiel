@@ -129,44 +129,36 @@ export default {
 };
 </script>
 <style scoped>
+/* CSS only for TemplateGrid-Template */
 .template-container {
   width: 32em !important;
   margin-right: -11.5em;
 }
-.coords-btn{
+.coords-btn {
   margin-right: -6em;
   margin-left: 1em;
   margin-bottom: -3em;
 }
-
-#template_grid{
+#template_grid {
   margin-left: -1em;
   width: 26em;
   padding: 1em;
   border-radius: 18px;
 }
-.template_grid{
+.template_grid {
   position: relative;
   z-index: 1;
 }
-
 .template-card {
   width: 2em;
   height: 2em;
 }
-
 .template-zoom-bg {
   background-size: 75%;
   background-position: center;
 }
-
 .coords-text {
   text-align: center;
   font-size: 1em;
-}
-
-.col {
-  flex-basis: 0 !important;
-  flex-grow: 0 !important;
 }
 </style>

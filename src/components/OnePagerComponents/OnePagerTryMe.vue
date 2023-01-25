@@ -4,7 +4,6 @@
     <v-btn id="tryBtn" class="white--text show"
            elevation="24"
            rounded
-           block
            x-large
            color="#4a5c66"
            @click="setLevel">
@@ -123,21 +122,11 @@ export default {
 </script>
 
 <style scoped>
-div {
-  width: 80%;
-  margin: auto;
-}
-
-.hide {
-  display: none;
-}
-.hidden {
-  visibility: hidden;
-}
-.show {
-  display: block;
-}
+/* CSS only for TryMeButton-Template */
 #tryBtn{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
   z-index: 2;
 }
