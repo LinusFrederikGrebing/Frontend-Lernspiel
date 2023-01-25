@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <img id="mouse-cursor-op" src="../../assets/mouse-cursor.png">
   <v-card
     elevation="24"
     outlined
@@ -50,8 +51,8 @@
           width="100%"
           v-model="actualCodeToRun"
         ></CodeEditor>
-        <v-btn id="finished-btn" color="warning" depressed elevation="2">Validieren</v-btn>
-        <v-btn id="validate-btn" color="success" depressed elevation="2">Ausführen</v-btn>
+        <v-btn id="validate-btn" color="warning" depressed elevation="2">Validieren</v-btn>
+        <v-btn id="finished-btn" color="success" depressed elevation="2">Ausführen</v-btn>
       </div>
     </div>
   </v-card>
@@ -95,15 +96,15 @@ export default {
       let sidebar = document.querySelector('#sidebar');
       let headerHeight = parseInt(header.offsetHeight);
       let sidebarWidth = 0;
-      let padding = parseInt(document.querySelector('.v-parallax__content').offsetWidth) - parseInt(document.querySelector('.containerpadding').offsetWidth);
-      let yOffset = finishedButtonRect.bottom;
+      let yOffset = 701 - finishedButtonRect.bottom;
+      console.log(yOffset)
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
 
       //Reset Mouse-Cursor Start Position
       gsap.to("#mouse-cursor-op", {duration: 0, x: 0, y: 0});
       //Calculate Absolute x,y Coordinates
-      let x =  parseInt(finishedButton.offsetWidth) / 2 - sidebarWidth + padding * 2;
-      let y =  parseInt(finishedButton.offsetHeight) / 2 - headerHeight - scrollY;
+      let x =  parseInt(finishedButton.offsetWidth) / 2 - sidebarWidth;
+      let y =  parseInt(finishedButton.offsetHeight) / 2 - headerHeight - scrollY + yOffset;
       while (finishedButton && !isNaN(finishedButton.offsetLeft) && !isNaN(finishedButton.offsetTop)) {
       x += finishedButton.offsetLeft - finishedButton.scrollLeft;
       y += finishedButton.offsetTop - finishedButton.scrollTop;
@@ -127,7 +128,7 @@ export default {
 
     resetPaintedFields() {
         clearTimeout(this.timerTutorialAnimation);
-        clearTimeout(this.paintTutorialAnimation);
+        clearTimeout(this.cursorAnimation);
         this.actualCodeToRun = "";
         let paintedElements = document.querySelectorAll('.painted');
         paintedElements.forEach(el => {
