@@ -46,9 +46,11 @@ import HelpTemplateMobile from "@/components/HelpComponents/HelpTemplateMobile";
 import HelpTemplateDesktop from "@/components/HelpComponents/HelpTemplateDesktop";
 import levels from "../../data/levels.json";
 
+// Register the ScrollTrigger plugin for GSAP
 gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "Onepager",
+  // Declare the components used in this component
   components: {
     HelpTemplateMobile,
     HelpTemplateDesktop,
@@ -57,29 +59,39 @@ export default {
     OnePagerWhy,
     LevelSelect,
     OnePagerGoals,
-    levels: [],
   },
-
+  // Initialize an empty array to store the levels
+  data: () => ({
+    levels: [],
+  }),
   methods: {
+    // Scroll to the element with the given id
     scrollToElement(elementId) {
+      // Get the element by its id
       let element = document.getElementById(elementId);
+      // If the element exists, scroll to it smoothly
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
       }
     },
+    // Check the route and scroll to the appropriate section
     checkRoute(section) {
+      // Object containing the element ids for each section
       const elementIds = {
         help: "help_template",
         lvl: "lvl_select",
         tutorial: "tutorial",
       };
 
+      // Get the element id for the current section, or default to "start"
       const elementId = elementIds[section] || "start";
+      // Scroll to the element after a delay of 300ms
       setTimeout(() => {
         this.scrollToElement(elementId);
       }, 300);
     },
   },
+  // Watch for changes in the route and call the checkRoute method
   watch: {
     $route: {
       immediate: true,
@@ -92,13 +104,16 @@ export default {
     },
   },
   mounted() {
+    // Check local storage for levels, otherwise set them to the default values
     if (localStorage.getItem("levels") !== null) {
       this.levels = JSON.parse(localStorage.getItem("levels"));
     } else {
       this.levels = Object.values(Object.values(levels)[0]);
     }
+    // Store the levels in local storage
     localStorage.setItem("levels", JSON.stringify(this.levels));
 
+    // Use GSAP library to animate the lvl_select element
     gsap.fromTo(
       "#lvl_select",
       {
@@ -118,6 +133,7 @@ export default {
       }
     );
 
+    // Use GSAP library to animate the help_template element
     gsap.from("#help_template", {
       opacity: 0,
       x: "-50em",
@@ -131,6 +147,7 @@ export default {
     });
   },
   computed: {
+    // Compute the height value based on the current breakpoint
     height() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
@@ -145,7 +162,7 @@ export default {
           return 5070;
       }
     },
-  },
+  }
 };
 </script>
 <style scoped>

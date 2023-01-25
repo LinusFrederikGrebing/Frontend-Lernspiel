@@ -28,6 +28,7 @@ export default {
   },
   methods: {
     hoverAnimation(obj) {
+      console.log(obj);
       let element = document.getElementById(obj.target.id); 
       let scale = element.getBoundingClientRect().width / element.offsetWidth;
       let returnColor = '#ffffff';

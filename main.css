@@ -1,7 +1,4 @@
 /* Colors */
-.painted {
-  background-color: #80ba24;
-}
 .divider, .green {
   background-color: #80ba24;
 }
@@ -11,13 +8,11 @@
 .yellow {
   background-color: yellow;
 }
-
 /* Container */
 .container {
   max-width: 1900px;
   padding: 0 !important;
 }
-
 /* Dividers */
 .divider {
   opacity: 1;

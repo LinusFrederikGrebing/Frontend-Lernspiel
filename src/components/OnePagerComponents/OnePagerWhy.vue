@@ -57,8 +57,8 @@ export default {
     OnePagerTryMe
   },
   methods: {
+    // It uses the gsap library to animate the targeted object by increasing its scale, y position, x position and opacity
       hoverEnter(obj) {
-        console.log(obj);
         gsap.to(obj.target, {duration: 0.2, scale: 1.05, y: 0, x: 0, opacity: 1});
       },
       hoverLeave(obj) {
@@ -86,7 +86,9 @@ export default {
       ],
     }
 },
+// function that triggers when the component is mounted on the page.
 mounted() {
+  // It uses the gsap library to animate each item in the "items" array by scaling it up and increasing its opacity with a delay, making them appear one after the other.
   this.items.forEach((_, i) => {
     const element = document.getElementById(`goal${i}`);
     gsap.fromTo(element, {

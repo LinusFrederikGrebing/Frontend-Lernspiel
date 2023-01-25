@@ -1,13 +1,20 @@
 <template>
   <div>
-    <v-system-bar class="d-flex mb-6 header" 
-    short dense color="rgb(74, 92, 102)" app>
+    <v-system-bar
+      class="d-flex mb-6 header"
+      short
+      dense
+      color="rgb(74, 92, 102)"
+      app
+    >
       <transition appear @enter="enterHeader">
-        <h2 class="mx-16" id="background"  @click="home()">Draw IT!</h2>
+        <h2 class="mx-16" id="background" @click="home()">Draw IT!</h2>
       </transition>
       <v-btn class="pa-2 ml-auto" @click="moveDrawer()" icon>
         <transition appear @enter="enterMenu">
-          <v-icon class="white--text text-body-2 text-md-h5" title="Menu">mdi-menu</v-icon>
+          <v-icon class="white--text text-body-2 text-md-h5" title="Menu"
+            >mdi-menu</v-icon
+          >
         </transition>
         <transition appear @enter="enterMenu">
           <div class="white--text text-body-2 text-md-body-1">Menu</div>
@@ -37,10 +44,7 @@
                   mdi-{{ link.icon }}
                 </v-icon>
                 <v-slide-x-transition mode="in-out" leave-absolute>
-                  <div
-                    class="link-title"
-                    v-show="menuCompact.hidden"
-                  >
+                  <div class="link-title" v-show="menuCompact.hidden">
                     {{ link.title }}
                   </div>
                 </v-slide-x-transition>
@@ -55,44 +59,39 @@
   
 <script>
 import gsap from "gsap";
-
 export default {
   name: "SideBar",
-  props: {
-    currentLevelId: {
-      Type: Number,
-      default: 1,
-    },
-  },
   data: () => {
     return {
-      drawer: false,
+      drawer: false, // variable to control the drawer open/close state
       menuCompact: {
         hidden: true,
       },
       menuLinks: [
-        { title: "Level-Auswahl", icon: "home", path: "lvl", target: "_self"},
-        { title: "Tutorial", icon: "information-variant", path: "tutorial", target: "_self"},
-        { title: "Hilfen", icon: "email", path: "help", target: "_blank"},
-        { title: "Back to Homepage", icon: "logout-variant", path: "home", target: "_self"},
+        { title: "Level-Auswahl", icon: "home", path: "lvl"},
+        { title: "Tutorial",  icon: "information-variant", path: "tutorial"},
+        { title: "Hilfen", icon: "email", path: "help"},
+        { title: "Back to Homepage", icon: "logout-variant", path: "home"},
       ],
     };
   },
   methods: {
-    home(){
-      this.$router.push({ path: '/' });
+    // Navigate back to OnePagerHome
+    home() {
+      this.$router.push({ path: "/" });
     },
     moveDrawer() {
-      let sidebar = document.querySelector("#sidebar");
-      this.drawer = !this.drawer;
-      if (this.drawer) sidebar.classList.add("drawer-open");
-      else sidebar.classList.remove("drawer-open"); 
+      let sidebar = document.querySelector("#sidebar"); // select the sidebar element
+      this.drawer = !this.drawer; // toggle the state of the drawer
+      if (this.drawer) sidebar.classList.add("drawer-open"); // if drawer is open, add class
+      else sidebar.classList.remove("drawer-open"); // if drawer is closed, remove class
     },
+    // Use GSAP library to animate the given element
     enterMenu(element) {
       gsap.fromTo(
         element,
         { y: 0, x: +200 },
-        { delay:2, duration: 2, y: 0, x: -50, opacity: 1, ease: "back.out(3)" }
+        { delay: 2, duration: 2, y: 0, x: -50, opacity: 1, ease: "back.out(3)" }
       );
     },
     enterHeader(element) {
@@ -102,10 +101,10 @@ export default {
         { delay: 1, duration: 2, x: 50, opacity: 1, ease: "back.out(2)" }
       );
     },
-    setLink(path){
-      console.log("test");
-      this.$router.push({ path: '/', query: { section: path }})
-    }
+    // Set the Routing-Path based on the given Path
+    setLink(path) {
+      this.$router.push({ path: "/", query: { section: path } });
+    },
   },
 };
 </script>
