@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img id="mouse-cursor" src="../assets/mouse-cursor.png" />
     <v-card
       elevation="24"
       outlined
@@ -7,7 +8,6 @@
       width="90%"
       class="ml-auto mr-auto gv-card"
     >
-      <img id="mouse-cursor" src="../assets/mouse-cursor.png" />
 
       <v-row no-gutters>
         <v-col cols="12" sm="8" md="8" lg="7" xl="6">

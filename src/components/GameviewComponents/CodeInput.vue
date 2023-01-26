@@ -187,8 +187,8 @@ export default {
       //Reset Mouse-Cursor Start Position
       gsap.to("#mouse-cursor", {duration: 0, x: 0, y: 0});
       //Calculate Absolute x,y Coordinates
-      let x = window.pageXOffset + parseInt(codeEditor.offsetWidth) / 4 - sidebarWidth;
-      let y = window.pageXOffset + parseInt(codeEditor.offsetHeight) / 2 - headerHeight;
+      let x = parseInt(codeEditor.offsetWidth) / 4 - sidebarWidth;
+      let y = parseInt(codeEditor.offsetHeight) / 2 - headerHeight;
       while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
       x += codeEditor.offsetLeft - codeEditor.scrollLeft;
       y += codeEditor.offsetTop - codeEditor.scrollTop;
@@ -218,8 +218,8 @@ export default {
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
 
       //Calculate Absolute x,y Coordinates
-      let x = window.pageXOffset + parseInt(buttonFinished.offsetWidth) / 2 - sidebarWidth;
-      let y = window.pageYOffset + parseInt(buttonFinished.offsetHeight) / 2 - headerHeight;
+      let x = parseInt(buttonFinished.offsetWidth) / 2 - sidebarWidth;
+      let y = parseInt(buttonFinished.offsetHeight) / 2 - headerHeight;
       while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
         x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
         y += buttonFinished.offsetTop - buttonFinished.scrollTop;
