@@ -17,7 +17,7 @@
               <v-card-title class="black--text">Level {{ level.id }}</v-card-title>
             </v-img>
           </div>
-          <v-card-subtitle class="pb-0 font-weight-bold white--text">
+          <v-card-subtitle class="pb-0 font-weight-bold white--text d-flex flex-column align-center">
             Schwierigkeit:
               <v-rating 
               color="yellow darken-3" 
@@ -27,7 +27,7 @@
               hover 
               length="8" 
               readonly 
-              size="35" 
+              size="25" 
               :value="level.difficulty">
             </v-rating>
           </v-card-subtitle>
@@ -54,8 +54,8 @@
                 <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
               </span>
             </v-tooltip>
-            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text">
-              Bestzeit: {{ level.bestTimeinSek }} Sekunden
+            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text text-subtitle-1 text-sm-h6">
+              Bestzeit: {{Math.round(level.bestTimeinSek * 100) / 100  }} Sekunden
             </v-card-title>
             <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text">
               Bestzeit:
@@ -199,54 +199,11 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 /* CSS only for Lvl-Select */
-/* CSS for flickity Component */ 
-.flickity-button {
-  background: #4a5c66;
-}
-.flickity-button:hover {
-  background: #80ba24;
-}
-.flickity-prev-next-button {
-  width: 5em;
-  height: 5em;
-  border-radius: 5px;
-}
-/* icon color */
-.flickity-button-icon {
-  fill: white;
-}
-/* position outside */
-.flickity-prev-next-button.previous {
-  left: 40px;
-}
-.flickity-prev-next-button.next {
-  right: 40px;
-}
-.flickity-page-dots {
-  bottom: -22px;
-}
-.flickity-page-dots .dot {
-  background-color: #4a5c66;
-}
-.flickity-page-dots .dot.is-selected {
-  background: #80ba24;
-  scale: 1.5;
-}
-/* CSS for flickity Cells */ 
-.carousel-cell {
-  height: 35em !important;
-  border-radius: 5px;
-  padding: 0 !important;
-  counter-increment: carousel-cell;
-}
 .styledDiv.carousel-cell.pa-5.mx-8.v-card.v-sheet.theme--light.elevation-12.mx-auto.my-8 {
-  margin-left: 1em !important;
-  margin-right: 1em !important;
-}
-.carousel-cell.is-selected {
-  box-shadow: 1em 1em 1em rgba(51, 42, 42, 0.7) !important;
+  margin-left: 0.5em !important;
+  margin-right: 0.5em !important;
 }
 </style>
 

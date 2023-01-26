@@ -10,7 +10,7 @@
     >
 
       <v-row no-gutters>
-        <v-col cols="12" sm="8" md="8" lg="7" xl="6">
+        <v-col class="d-flex justify-end" cols="12" sm="8" md="8" lg="7" xl="6">
           <GameGrid :color="color" />
         </v-col>
         <v-col cols="7" md="4" xl="6">

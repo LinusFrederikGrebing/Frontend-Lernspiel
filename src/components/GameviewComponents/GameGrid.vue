@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-16 pb-8 mb-16">
+  <div class="mt-12 pb-4 pt-4 mb-12">
       <v-row class="test" no-gutters v-for="y in 10" :key="y">
         <v-col no-gutters v-for="x in 10" :key="x">
           <transition appear @enter="enterGrid">
