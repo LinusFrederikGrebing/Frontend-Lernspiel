@@ -17,6 +17,8 @@
           <LevelSelect />
         </div>
         <div id="tutorial" class="pt-16 mt-16 mb-16">
+          <img id="mouse-cursor-op" src="../assets/mouse-cursor.png">
+          <img id="alert-for-op-tutorial" src="../assets/success-for-op-tutorial.png">
           <OnePagerTutorialSection />
         </div>
         <div class="pt-16 mt-16 mb-16">
@@ -221,5 +223,24 @@ export default {
 .arrows path.a3 {
   animation-delay: 0s;
   -webkit-animation-delay: 0s;
+}
+
+#mouse-cursor-op {
+  position: absolute;
+  height: 3vh;
+  width: 3vh;
+  visibility: hidden;
+  z-index: 20;
+}
+
+#alert-for-op-tutorial {
+  position: absolute;
+  height: 14vw;
+  width: 28vw;
+  visibility: hidden;
+  z-index: 20;
+  border: 1em;
+  border-width: 1em;
+  border-color: black;
 }
 </style>
