@@ -323,7 +323,7 @@ export default {
       if (localStorage.getItem("currentLevel") !== null) {
        currentLevel = JSON.parse(localStorage.getItem("currentLevel"));
       }
-      let requiredSolution = currentLevel.loesungsweg;
+      let requiredSolution = currentLevel.solutionApproach;
 
       for (let i = 0; i < allElements.length; i++) {
         if (allElements[i].id.includes("v")) {

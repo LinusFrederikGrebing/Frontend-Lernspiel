@@ -87,7 +87,7 @@ export default {
           x: -150,
           y: 200,
           backgroundColor: '#4a5c66',
-        zIndex: 10 ,
+          zIndex: 10 ,
       onComplete: () => {document.body.addEventListener('click', this.openOrCloseFullscreen);}},
        );
        this.zoomedGrid = true
@@ -103,7 +103,7 @@ export default {
           x: 0,
           y: 0,
           backgroundColor: 'transparent',
-        zIndex: 10 ,
+          zIndex: 10 ,
         onComplete: () => {document.body.removeEventListener('click', this.openOrCloseFullscreen);}},
        )
        this.zoomedGrid = false
