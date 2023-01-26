@@ -142,3 +142,52 @@ h1, p {
   opacity: 1 !important;
   scale: 10;
 }
+
+.v-parallax__content {
+  padding: 0px !important;
+}
+
+/* CSS for flickity Component */ 
+.flickity-button {
+  background: #4a5c66;
+}
+.flickity-button:hover {
+  background: #80ba24;
+}
+.flickity-prev-next-button {
+  width: 5em;
+  height: 5em;
+  border-radius: 5px;
+}
+/* icon color */
+.flickity-button-icon {
+  fill: white;
+}
+/* position outside */
+.flickity-prev-next-button.previous {
+  left: 40px;
+}
+.flickity-prev-next-button.next {
+  right: 40px;
+}
+.flickity-page-dots {
+  bottom: -22px;
+}
+.flickity-page-dots .dot {
+  background-color: #4a5c66;
+}
+.flickity-page-dots .dot.is-selected {
+  background: #80ba24;
+  scale: 1.5;
+}
+/* CSS for flickity Cells */ 
+.carousel-cell {
+  height: 35em !important;
+  border-radius: 5px;
+  padding: 0 !important;
+  counter-increment: carousel-cell;
+}
+
+.carousel-cell.is-selected {
+  box-shadow: 1em 1em 1em rgba(51, 42, 42, 0.7) !important;
+}

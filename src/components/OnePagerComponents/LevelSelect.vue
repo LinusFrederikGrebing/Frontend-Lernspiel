@@ -17,7 +17,7 @@
               <v-card-title class="black--text">Level {{ level.id }}</v-card-title>
             </v-img>
           </div>
-          <v-card-subtitle class="pb-0 font-weight-bold white--text">
+          <v-card-subtitle class="pb-0 font-weight-bold white--text d-flex flex-column align-center">
             Schwierigkeit:
               <v-rating 
               color="yellow darken-3" 
@@ -27,7 +27,7 @@
               hover 
               length="8" 
               readonly 
-              size="35" 
+              size="25" 
               :value="level.difficulty">
             </v-rating>
           </v-card-subtitle>
@@ -54,8 +54,8 @@
                 <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
               </span>
             </v-tooltip>
-            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text">
-              Bestzeit: {{ level.bestTimeinSek }} Sekunden
+            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text text-subtitle-1 text-sm-h6">
+              Bestzeit: {{Math.round(level.bestTimeinSek * 100) / 100  }} Sekunden
             </v-card-title>
             <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text">
               Bestzeit:
@@ -79,6 +79,7 @@ export default {
     Flickity,
   },
   data: () => ({
+    //flickityOptions: Object that sets options for the Flickity carousel plugin.
     flickityOptions: {
       wrapAround: true,
       freeScroll: true,
@@ -89,6 +90,7 @@ export default {
   }),
 
   methods: {
+    // Using GSAP library to animate changes to the scale, position, and opacity of the given elements
     hoverEnter(obj) {
       gsap.fromTo(
         obj.target,
@@ -108,10 +110,12 @@ export default {
     hoverButtonLeave(obj) {
       gsap.fromTo(obj.target, { scale: 1.3 }, { duration: 0.2, scale: 1 });
     },
+    // This function paints a specific element in the DOM with the class "painted" by first creating a reference to the element of the templateGrid and then adding the "painted" class to it.
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
       element.classList.add("painted");
     },
+    // This function is used to remove the "painted" class from all elements in the DOM that have it, except those of the templateGrid.
     resetPaintedFields() {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         if (!el.id.includes("v")) {
@@ -119,6 +123,7 @@ export default {
         }
       });
     },
+    // This function sets the selected level and navigates to the GameView route if the level is accessible, otherwise it shows an alert message.
     setLevel(level) {
       if (this.levelIsAccessible(level)) {
         this.$router.push({
@@ -134,6 +139,7 @@ export default {
         this.showAlertFailure(level.id);
       }
     },
+    // The showAlertFailure function displays an error alert when the user tries to play a level that has not yet been unlocked
     showAlertFailure(level) {
       this.$swal({
         title: "Noch nicht freigeschaltet!",
@@ -149,6 +155,7 @@ export default {
         allowOutsideClick: false,
       });
     },
+    // checking if a given level is accessible by the user. If it doesn't find one, it returns false, indicating that the level is not accessible.
     levelIsAccessible(level) {
       let index = this.accessibleLevels.findIndex((accessibleLevel) => {
         return level.id === accessibleLevel.id;
@@ -159,6 +166,7 @@ export default {
         return true;
       }
     },
+    // Animate all lock icons that appear for levels that are not yet accessible to the player. The animation starts with a random delay between 0 and 3 seconds.
     lockedIconAnimation() {
       for (let i = 0; i < levels.levels.length; i++) {
         let element = document.getElementById("lockIcon" + i);
@@ -174,67 +182,27 @@ export default {
     },
   },
   mounted() {
+    // When the component is mounted, call the 'lockedIconAnimation' function
     this.lockedIconAnimation();
   },
 
   computed: {
+    //returns the levels data stored in local storage, or defaults the first level if local storage is empty
     levels() {
       return JSON.parse(localStorage.getItem("levels")) || Object.values(Object.values(levels)[0]);
     },
     accessibleLevels() {
+      //returns the accessible levels data stored in local storage, or defaults to the first level if local storage is empty
       return JSON.parse(localStorage.getItem("accessibleLevels")) || [this.levels[0]];
     },
   },
 };
 </script>
-<style>
+<style scoped>
 /* CSS only for Lvl-Select */
-/* CSS for flickity Component */ 
-.flickity-button {
-  background: #4a5c66;
-}
-.flickity-button:hover {
-  background: #80ba24;
-}
-.flickity-prev-next-button {
-  width: 5em;
-  height: 5em;
-  border-radius: 5px;
-}
-/* icon color */
-.flickity-button-icon {
-  fill: white;
-}
-/* position outside */
-.flickity-prev-next-button.previous {
-  left: 40px;
-}
-.flickity-prev-next-button.next {
-  right: 40px;
-}
-.flickity-page-dots {
-  bottom: -22px;
-}
-.flickity-page-dots .dot {
-  background-color: #4a5c66;
-}
-.flickity-page-dots .dot.is-selected {
-  background: #80ba24;
-  scale: 1.5;
-}
-/* CSS for flickity Cells */ 
-.carousel-cell {
-  height: 35em !important;
-  border-radius: 5px;
-  padding: 0 !important;
-  counter-increment: carousel-cell;
-}
 .styledDiv.carousel-cell.pa-5.mx-8.v-card.v-sheet.theme--light.elevation-12.mx-auto.my-8 {
-  margin-left: 1em !important;
-  margin-right: 1em !important;
-}
-.carousel-cell.is-selected {
-  box-shadow: 1em 1em 1em rgba(51, 42, 42, 0.7) !important;
+  margin-left: 0.5em !important;
+  margin-right: 0.5em !important;
 }
 </style>
 

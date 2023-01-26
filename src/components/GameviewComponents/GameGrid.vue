@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-16 pb-8 mb-16">
+  <div class="mt-12 pb-4 pt-4 mb-12">
       <v-row class="test" no-gutters v-for="y in 10" :key="y">
         <v-col no-gutters v-for="x in 10" :key="x">
           <transition appear @enter="enterGrid">
@@ -22,16 +22,17 @@ export default {
   data: () => {
     return {
       idArray: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-      timeLine: null,
-      i: 0,
     };
   },
   methods: {
     hoverAnimation(obj) {
-      console.log(obj);
+      // It selects the element with the id that matches the id of the object passed in.
       let element = document.getElementById(obj.target.id); 
+      // And calculates the scale of the element
       let scale = element.getBoundingClientRect().width / element.offsetWidth;
+      // Sets the default-value of the color.
       let returnColor = '#ffffff';
+      // If the element has the class "painted" it sets "returnColor" to the value of "this.color"
       if (element.classList.contains("painted")) returnColor = this.color;  
         gsap.fromTo(
         element,
@@ -50,6 +51,7 @@ export default {
         }
       );
     },
+    // It uses the gsap library the GameGrid while entering the Game. The animation starts randomly
     enterGrid(element) {
       gsap.fromTo(
         element,
@@ -68,7 +70,7 @@ export default {
         }
       );
     },
-
+    // Animation if level resettet
     levelAnimation() {
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
@@ -91,7 +93,7 @@ export default {
         }
       }
     },
-
+    // stagger-Animation of the GameGrid every 100sek
     changeGrid() { 
       for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
@@ -115,6 +117,7 @@ export default {
     },
   },
   mounted() {
+    // start the stagger-Animation on mount
     this.changeGrid();
   },
 };

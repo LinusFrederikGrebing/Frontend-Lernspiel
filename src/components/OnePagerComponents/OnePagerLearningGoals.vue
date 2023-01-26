@@ -30,14 +30,9 @@ import gsap from "gsap";
 
 export default {
   name: "OnePagerLearninggGoals",
-  components: {
-
-  },
-  methods: {
-  },
   data() {
     return {
-      index: 0,
+      // all informations for the Learning-Goals
       items: [
         {
           title: "Programmierskills",
@@ -63,10 +58,12 @@ export default {
     };
   },
   mounted() {
-    let start = 0;
+    // Loop through each item in the items array
     this.items.forEach((_, i) => {
+      // Get the element by its id, which is section${i}
       const element = document.getElementById(`section${i}`);
-      start = i % 2 === 0 ? -500 : 500;
+      // Set the start position of the element based on the index.
+      let start = i % 2 === 0 ? -500 : 500;
       gsap.fromTo(
         element,
         {
@@ -90,8 +87,10 @@ export default {
   },
   computed: {
     breakpoint() {
+     // Return the current breakpoint from vuetify
       return this.$vuetify.breakpoint
     },
+    // Return a class based on the current breakpoint
     textClass() {
       if (this.breakpoint.lgAndDown) {
         return "text_xs"
@@ -99,8 +98,8 @@ export default {
         return "text"
       }
     },
-
     height () {
+      // Return a height based on the current breakpoint
         switch (this.$vuetify.breakpoint.name) {
           case 'xs': return 2100
           case 'sm': return 1700
