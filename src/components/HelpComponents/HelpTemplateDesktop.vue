@@ -155,6 +155,7 @@ export default {
     };
   },
   methods: {
+     // The function openInNewTab opens a new tab with the given URL after 100 milliseconds and sets focus to it, while also preventing the default event from occurring.
     openInNewTab(event, url) {
       event.preventDefault();
       setTimeout(function(){
@@ -162,18 +163,20 @@ export default {
         win.focus();
       }, 100);
     },
-
+    // The function "hideHelp()" emits an event 'hide-help' to its parent component, which can listen for this event and hiding the help element from the view.
     hideHelp() {
       this.$emit('hide-help');
     }
   },
   mounted() {
+    // JS for HelpTemplate-Animation
     var generalcontent = document.querySelector(".general-content");
     var arraycontent = [].slice.call(document.querySelectorAll(".component"));
     var closebuttons = [].slice.call(document.querySelectorAll(".component-close-button"));
-
+    //Remove the class "js-general-content" from general content after 200ms
     setTimeout(function () { generalcontent.classList.remove("js-general-content") }, 200);
-
+    //Add click event listener to all components, when component is clicked
+    //add "component-active" class to component and "component--active" class to general content
     arraycontent.forEach(function (component) {
       component.addEventListener("click", function () {
         if (this.classList.contains("component-active")) return;
@@ -181,7 +184,8 @@ export default {
         this.classList.add("component-active");
       });
     });
-
+    // Add click event listener to all close buttons, when close button is clicked
+    // Remove "component--active" class from general content and "component-active" class from active component
     closebuttons.forEach(function (btn) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();

@@ -30,13 +30,14 @@ export default {
   name: "OnePagerTryMe",
   data() {
     return {
-      tryBtn: null,
-      tryBtnFAB: null,
-      lastAccessibleLevel: null,
-      accessibleLevels: []
+      tryBtn: null, // reference to the try button element
+      tryBtnFAB: null, // reference to the FAB try button element
+      lastAccessibleLevel: null, // the last level the user is able to access
+      accessibleLevels: [] // an array of levels that the user has accessed
     }
   },
   methods: {
+    // sets the last accessible level and navigates to the GameView page with that level as a parameter
     setLevel() {
       // Get the last accessible level from local storage
       this.accessibleLevels = JSON.parse(localStorage.getItem("accessibleLevels")) || [];
@@ -59,6 +60,7 @@ export default {
       // Save the current level to local storage
       localStorage.setItem("currentLevel", JSON.stringify(this.lastAccessibleLevel));
     },
+    // show the try button and move it to the correct position
     enter() {
       this.tryBtn = document.getElementById("tryBtn"); 
       this.tryBtnFAB = document.getElementById("tryBtnFAB"); 
@@ -74,6 +76,7 @@ export default {
         x: 0,
       });
     },
+    // hide the try button and move it out of view
     leave() {
       gsap.to(this.tryBtn, {
         scaleX: 0.05,
@@ -83,6 +86,7 @@ export default {
       });
       setTimeout(() => this.toggleVisibleBtn(), 250);
     },
+    // show the try button when the user scrolls back up
     enterback() {
       setTimeout(() => this.toggleVisibleBtn(), 10);
       gsap.to("#tryBtn", {
@@ -92,9 +96,7 @@ export default {
         x: 0,
       });
     },
-    leaveBack() {
-      console.log("leaveBack");
-    },
+    // toggle the visibility of the try button and FAB try button
     toggleVisibleBtn() {
       this.tryBtn.classList.toggle("show");
       this.tryBtn.classList.toggle("hidden");
@@ -103,6 +105,7 @@ export default {
     }
   },
   mounted() {
+    // show the try button and set up the scrollTrigger animation
     this.enter();
     setTimeout(() => 
       gsap.to("#tryContainer", {
@@ -111,8 +114,7 @@ export default {
           trigger: "#tryContainer",
           onEnter: this.enter,
           onLeave: this.leave,
-          onEnterBack: this.enterback,
-          onLeaveBack: this.leaveBack
+          onEnterBack: this.enterback
         },
       })
     , 100);

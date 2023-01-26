@@ -124,6 +124,7 @@ export default {
   };
   },
 methods: {
+  // The function openInNewTab opens a new tab with the given URL after 100 milliseconds and sets focus to it, while also preventing the default event from occurring.
   openInNewTab(event, url) {
       event.preventDefault();
       setTimeout(function(){

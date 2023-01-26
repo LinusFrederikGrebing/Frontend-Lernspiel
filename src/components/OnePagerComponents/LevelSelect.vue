@@ -79,6 +79,7 @@ export default {
     Flickity,
   },
   data: () => ({
+    //flickityOptions: Object that sets options for the Flickity carousel plugin.
     flickityOptions: {
       wrapAround: true,
       freeScroll: true,
@@ -89,6 +90,7 @@ export default {
   }),
 
   methods: {
+    // Using GSAP library to animate changes to the scale, position, and opacity of the given elements
     hoverEnter(obj) {
       gsap.fromTo(
         obj.target,
@@ -106,14 +108,15 @@ export default {
     hoverButtonEnter(obj) {
       gsap.fromTo(obj.target, { scale: 1 }, { duration: 0.01, scale: 1.3 });
     },
-
     hoverButtonLeave(obj) {
       gsap.fromTo(obj.target, { scale: 1.3 }, { duration: 0.2, scale: 1 });
     },
+    // This function paints a specific element in the DOM with the class "painted" by first creating a reference to the element of the templateGrid and then adding the "painted" class to it.
     paint(first, second) {
       let element = document.getElementById("vx" + first + "vy" + second);
       element.classList.add("painted");
     },
+    // This function is used to remove the "painted" class from all elements in the DOM that have it, except those of the templateGrid.
     resetPaintedFields() {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         if (!el.id.includes("v")) {
@@ -121,6 +124,7 @@ export default {
         }
       });
     },
+    // This function sets the selected level and navigates to the GameView route if the level is accessible, otherwise it shows an alert message.
     setLevel(level) {
       if (this.levelIsAccessible(level)) {
         this.$router.push({
@@ -136,6 +140,7 @@ export default {
         this.showAlertFailure(level.id);
       }
     },
+    // The showAlertFailure function displays an error alert when the user tries to play a level that has not yet been unlocked
     showAlertFailure(level) {
       this.$swal({
         title: "Noch nicht freigeschaltet!",
@@ -151,6 +156,7 @@ export default {
         allowOutsideClick: false,
       });
     },
+    // checking if a given level is accessible by the user. If it doesn't find one, it returns false, indicating that the level is not accessible.
     levelIsAccessible(level) {
       let index = this.accessibleLevels.findIndex((accessibleLevel) => {
         return level.id === accessibleLevel.id;
@@ -161,6 +167,7 @@ export default {
         return true;
       }
     },
+    // Animate all lock icons that appear for levels that are not yet accessible to the player. The animation starts with a random delay between 0 and 3 seconds.
     lockedIconAnimation() {
       for (let i = 0; i < levels.levels.length; i++) {
         let element = document.getElementById("lockIcon" + i);
@@ -176,14 +183,17 @@ export default {
     },
   },
   mounted() {
+    // When the component is mounted, call the 'lockedIconAnimation' function
     this.lockedIconAnimation();
   },
 
   computed: {
+    //returns the levels data stored in local storage, or defaults the first level if local storage is empty
     levels() {
       return JSON.parse(localStorage.getItem("levels")) || Object.values(Object.values(levels)[0]);
     },
     accessibleLevels() {
+      //returns the accessible levels data stored in local storage, or defaults to the first level if local storage is empty
       return JSON.parse(localStorage.getItem("accessibleLevels")) || [this.levels[0]];
     },
   },
