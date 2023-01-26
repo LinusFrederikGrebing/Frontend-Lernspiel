@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <img id="mouse-cursor-op" src="../../assets/mouse-cursor.png">
+    
   <v-card
     elevation="24"
     outlined
@@ -82,6 +82,7 @@ export default {
   },
   methods: {
     tutorialAnimation() {
+      document.querySelector("#alert-for-op-tutorial").style.visibility = "hidden";
     for (let i = 0; i <= this.codeToRun.length; i++) {
       this.timerTutorialAnimation = setTimeout(() => this.actualCodeToRun = this.codeToRun.substring(0, i), i * 250);
     }
@@ -114,7 +115,7 @@ export default {
       timelineToButton.to("#mouse-cursor-op", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
       timelineToButton.eventCallback("onComplete", () => {
         this.paintTutorialField(1, 1);
-        //this.cursorToValidateAnimation();
+        this.cursorToValidateAnimation();
       })
 
     },
@@ -128,11 +129,8 @@ export default {
       let headerHeight = parseInt(header.offsetHeight);
       let sidebarWidth = 0;
       let yOffset = 701 - validateButtonRect.bottom;
-      console.log(yOffset)
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
 
-      //Reset Mouse-Cursor Start Position
-      gsap.to("#mouse-cursor-op", {duration: 0, x: 0, y: 0});
       //Calculate Absolute x,y Coordinates
       let x =  parseInt(validateButton.offsetWidth) / 2 - sidebarWidth;
       let y =  parseInt(validateButton.offsetHeight) / 2 - headerHeight - scrollY + yOffset;
@@ -146,11 +144,28 @@ export default {
       timelineToButton.to("#mouse-cursor-op", {duration: 0.2, scale: 0.5, yoyo: true, repeat: 1, ease: "power1.inOut", delay: 0.5,});
       timelineToButton.eventCallback("onComplete", () => {
         document.querySelector("#mouse-cursor-op").style.visibility = "hidden";
+        this.showTutorialPopup();
       })
     },
 
     showTutorialPopup() {
-
+      let codeEditor = document.querySelector(".editor_in_Tutorial");
+      let codeEditorRect = codeEditor.getBoundingClientRect();
+      let header = document.querySelector('.header');
+      let sidebar = document.querySelector('#sidebar');
+      let headerHeight = parseInt(header.offsetHeight);
+      let sidebarWidth = 0;
+      let yOffset = 701 - codeEditorRect.bottom;
+      if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
+      let x =  parseInt(codeEditor.offsetWidth) / 2 - sidebarWidth;
+      let y =  parseInt(codeEditor.offsetHeight) / 2 - headerHeight - scrollY + yOffset;
+      while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
+      x += codeEditor.offsetLeft - codeEditor.scrollLeft;
+      y += codeEditor.offsetTop - codeEditor.scrollTop;
+      codeEditor = codeEditor.offsetParent;
+      }
+      let alert = document.querySelector("#alert-for-op-tutorial");
+      gsap.to("#alert-for-op-tutorial", {duration: 0, x: (x-(alert.width/2)), y: (y-(alert.height/2)), visibility: "visible", zIndex: 5});
     },
 
     paintTutorialField(first, second) {
@@ -209,13 +224,7 @@ export default {
 
 <style scoped>
 /* CSS only fpr Tutorial-Section */
-#mouse-cursor-op {
-  position: absolute;
-  height: 3vh;
-  width: 3vh;
-  visibility: hidden;
-  z-index: 20;
-}
+
 .tutorial {
   margin-top: 5em;
   margin-bottom: 10em;
