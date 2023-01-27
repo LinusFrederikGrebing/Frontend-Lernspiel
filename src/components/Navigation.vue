@@ -8,7 +8,7 @@
       app
     >
       <transition appear @enter="enterHeader">
-        <h2 class="mx-16" id="background" @click="home()">Draw IT!</h2>
+        <h2 class="mx-16" id="background" @click="home()">DrawIT!</h2>
       </transition>
       <v-btn class="pa-2 ml-auto" @click="moveDrawer()" icon>
         <transition appear @enter="enterMenu">

@@ -108,15 +108,14 @@ export default {
     hoverEnter(obj) {
       gsap.fromTo(
         obj.target,
-        { scale: 1, y: 0 },
-        { duration: 0.2, scale: 1.09, y: -10, opacity: 1 }
+          { scale: 1, y: 0 },
+          { duration: 0.2, scale: 1.09, y: -10, opacity: 1 }
       );
     },
     hoverLeave(obj) {
-      gsap.fromTo(
-        obj.target,
-        { scale: 1.09 },
-        { duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1 }
+      gsap.fromTo( obj.target,
+          { scale: 1.09 },
+          { duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1 }
       );
     },
     hoverButtonEnter(obj) {

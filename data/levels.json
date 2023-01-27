@@ -1,113 +1,143 @@
 {
-    "levels": [
-      {
-        "id":"1",
-        "img": "levelimgs/level1.jpg",
-        "bestTimeinSek": 0,
-        "difficulty": 1,
-        "patternCode":"this.paint(1,1);",
-        "completed": "false",
-        "description": "<h3>Hallo und Herzlich Wilkommen zum ersten Level von Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlage des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Rechts-Oben findest du die Vorlage. Deine Aufgabe ist es die</p> <p class=\"line-1 anim-typewriter3\">Vorlage mit bekannten Javascript-Operatoren ins linke Feld</p> <p class=\"line-1 anim-typewriter4\">nachzuzeichnen. Das Feld einzeichen kannst Du mit der Methode:</p><p class=\"line-1 anim-typewriter5\"> <b>paint(x, y)</b>.</p><p class=\"line-1 anim-typewriter6\"> <br /> Jetzt bist Du an der Reihe! Viel Spaß!</p>",
-        "loesungsweg": "PaintAufruf"
-      },
-      {
-        "id":"2",
-        "img": "levelimgs/level2.jpg",
-        "bestTimeinSek": 0,
-        "difficulty": 1.5,
-        "patternCode":"for(let i = 1; i<10; i++){ this.paint(5,i); }",
-        "completed": "false",
-        "description": "<h3>Level 2</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im zweiten Level benutzen wir eine For-Schleife. Viel Spaß!",
-        "loesungsweg":"ForSchleife"
-      },
-      {
-        "id":"3",
-        "img": "levelimgs/level3.jpg",
-        "difficulty": 1.5,
-        "patternCode":"let i = 0; while(i < 10) { this.paint(5,i); i+=2; }",
-        "bestTimeinSek": 0,
-        "completed": "false",
-        "description": "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">Ein bisschen Abstand dazwischen ist bestimmt nicht so schwer!</p> <p class=\"line-1 anim-typewriter2\">Nutze in dieser Aufgabe stattdessen die While-Schleife!</p>",
-        "loesungsweg":"WhileSchleife"
-      },
-      {
-        "id": "4",
-        "img": "levelimgs/level456.jpg",
-        "difficulty": 2,
-        "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i); }",
-        "bestTimeinSek": 0,
-        "completed": "false",
-        "description": "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Jetzt trau dich mal an eine Diagonale!</p> <p class=\"line-1 anim-typewriter2\">Nutze in dieser Aufgabe nochmal die For-Schleife!</p>",
-        "loesungsweg":"ForSchleife"
-      },
-      {
-        "id": "5",
-        "img": "levelimgs/level456.jpg",
-        "difficulty": 2.5,
-        "patternCode": "let i = 0; while(i <= 9) {this.paint(i, i);i++;}",
-        "bestTimeinSek": 0,
-        "completed": "false",
-        "description": "<h3>Level 5</h3> <br /> <p class=\"line-1 anim-typewriter1\">Es ist das selbe Muster!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür aber diesmal die While-Schleife!</p>",
-        "loesungsweg":"WhileSchleife"
-      },
-      {
-        "id": "6",
-        "img": "levelimgs/level456.jpg",
-        "difficulty": 3,
-        "patternCode": "let i = 0; do{ this.paint(i, i); i++;} while(i <= 9)",
-        "bestTimeinSek": 0,
-        "completed": "false",
-        "description": "<h3>Level 6</h3> <br /> <p class=\"line-1 anim-typewriter1\">Mach das selbe nochmal!!</p> <p class=\"line-1 anim-typewriter2\">Keine Sorge, nur noch einmal mit einer Do-While-Schleife!</p>",
-        "loesungsweg":"DoWhileSchleife"
-      },
-      {
-        "id":"7",
-        "img": "levelimgs/level7.jpg",
-        "bestTimeinSek": 0,
-        "difficulty": 4,
-        "patternCode":"for(let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
-        "completed": "false",
-        "description": "<h3>Level 7</h3> <br /><p class=\"line-1 anim-typewriter1\">Es ist garnicht so schwer wie es aus sieht!</p> <br />  <p class=\"line-1 anim-typewriter2\">Tipp: Du benötigst nur eine einzige For-Schleife!</p>",
-        "loesungsweg":"ForSchleife"
-      },
-      {
-        "id":"8",
-        "img": "levelimgs/level8.jpg",
-        "bestTimeinSek": 0,
-        "difficulty": 4,
-        "patternCode":"for(let x = 0; x <= 8; x += 2) { for(let y = 0; y <= x; y++){ this.paint(x, y); }}",
-        "completed": "false",
-        "description": "<h3>Level 8</h3> <br /><p class=\"line-1 anim-typewriter1\">Nach der vorherigen Aufgabe ist diese hier bestimmt ein Kinderspiel für dich.</p> <br /> <p class=\"line-1 anim-typewriter2\">Mach das bitte mit einer For-Schleife!</p>",
-        "loesungsweg":"ForSchleife"
-      },
-      {
-        "id":"9",
-        "img": "levelimgs/level9.jpg",
-        "difficulty": 6,
-        "patternCode":"for (let y = 2; y <= 7; y++) {  let x = y-1; for(let i = 0; i <= 2; i++) { this.paint(x + i, y); }} ",
-        "completed": "false",
-        "description": "<h3>Level 9</h3> <br /> <p class=\"line-1 anim-typewriter1\"> Du wirst immer besser und besser!</p> <p class=\"line-1 anim-typewriter2\">Du machst große Schritte!</p> <p class=\"line-1 anim-typewriter3\">Nutze nochmal die For-Schleife!</p>",
-        "loesungsweg":"ForSchleife"
-      },
-      {
-        "id":"10",
-        "img": "levelimgs/level10.jpg",
-        "bestTimeinSek": 0,
-        "difficulty": 3,
-        "patternCode":"for(let x = 0; x < 10; x++) { for(let y = 0; y < 10; y++){ this.paint(x, y); }}",
-        "completed": "false",
-        "description": "<h3>Level 10</h3> <br /> <p class=\"line-1 anim-typewriter1\">Färb doch mal alles hier ein!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür die For-Schleife!</p>",
-        "loesungsweg":"ForSchleife"
-      },
-      {
-        "id":"11",
-        "img": "levelimgs/level11.jpg",
-        "bestTimeinSek": 0,
-        "difficulty": 8,
-        "patternCode":"for(let i = 0; i < 10; i++){ for(let j = 0; j < 10; j++){ if(i % 2 == 0 || j % 2 == 0){ this.paint(i,j); }}}",
-        "completed": "false",
-        "description": "<h3>Level 11</h3> <br /><p class=\"line-1 anim-typewriter1\">Das Muster sieht doch schön aus!</p> <p class=\"line-1 anim-typewriter2\">Es ist wichtig selbst recherchieren zu können!</p> <p class=\"line-1 anim-typewriter3\">Informiere dich nun selbständig über if-Abfragen!</p> <p class=\"line-1 anim-typewriter4\">Die werden dir hier helfen!</p>  <p class=\"line-1 anim-typewriter5\">Nutze auch hier nochmal die For-Schleife!</p>",
-        "loesungsweg":"ForSchleife"
-      }
-    ]
+  "levels": [
+    {
+      "id": "1",
+      "img": "levelimgs/level1.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 1,
+      "patternCode": "this.paint(1,1);",
+      "completed": "false",
+      "description": "<h3>Hallo und Herzlich Wilkommen zum ersten Level von Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlagen des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Rechts-Oben findest du die Vorlage. Deine Aufgabe ist es die</p> <p class=\"line-1 anim-typewriter3\">Vorlage mit bekannten Javascript-Operatoren ins linke Feld</p> <p class=\"line-1 anim-typewriter4\">nachzuzeichnen. Du kannst das Feld mit der Methode:</p><p class=\"line-1 anim-typewriter5\"> <b>paint(x, y)</b> anmalen.</p><p class=\"line-1 anim-typewriter6\"> <br />Jetzt bist Du an der Reihe! Viel Spaß!</p>",
+      "solutionApproach": "PaintAufruf"
+    },
+    {
+      "id": "2",
+      "img": "levelimgs/level2.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 1.5,
+      "patternCode": "for(let i = 1; i<10; i++){ this.paint(5,i); }",
+      "completed": "false",
+      "description": "<h3>Level 2</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im zweiten Level benutzen wir eine For-Schleife. Viel Spaß!",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "3",
+      "img": "levelimgs/level3.jpg",
+      "difficulty": 1.5,
+      "patternCode": "let i = 0; while(i < 10) { this.paint(5,i); i+=2; }",
+      "bestTimeinSek": 0,
+      "completed": "false",
+      "description": "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">Ein bisschen Abstand dazwischen ist bestimmt nicht so schwer!</p> <p class=\"line-1 anim-typewriter2\">Nutze in dieser Aufgabe stattdessen die While-Schleife!</p>",
+      "solutionApproach": "WhileSchleife"
+    },
+    {
+      "id": "4",
+      "img": "levelimgs/level456.jpg",
+      "difficulty": 2,
+      "patternCode": "for(let i = 0; i < 10; i++) { this.paint(i, i); }",
+      "bestTimeinSek": 0,
+      "completed": "false",
+      "description": "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Jetzt trau dich mal an eine Diagonale!</p> <p class=\"line-1 anim-typewriter2\">Nutze in dieser Aufgabe nochmal die For-Schleife!</p>",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "5",
+      "img": "levelimgs/level456.jpg",
+      "difficulty": 2.5,
+      "patternCode": "let i = 0; while(i <= 9) {this.paint(i, i);i++;}",
+      "bestTimeinSek": 0,
+      "completed": "false",
+      "description": "<h3>Level 5</h3> <br /> <p class=\"line-1 anim-typewriter1\">Es ist das selbe Muster!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür aber diesmal die While-Schleife!</p>",
+      "solutionApproach": "WhileSchleife"
+    },
+    {
+      "id": "6",
+      "img": "levelimgs/level456.jpg",
+      "difficulty": 3,
+      "patternCode": "let i = 0; do{ this.paint(i, i); i++;} while(i <= 9)",
+      "bestTimeinSek": 0,
+      "completed": "false",
+      "description": "<h3>Level 6</h3> <br /> <p class=\"line-1 anim-typewriter1\">Mach das selbe nochmal!!</p> <p class=\"line-1 anim-typewriter2\">Keine Sorge, nur noch einmal mit einer Do-While-Schleife!</p>",
+      "solutionApproach": "DoWhileSchleife"
+    },
+    {
+      "id": "7",
+      "img": "levelimgs/level7.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 4,
+      "patternCode": "for(let i = 0; i <= 9; i++) {this.paint(i, 1); this.paint(1, i); this.paint(8, i);this.paint(i, 8);}",
+      "completed": "false",
+      "description": "<h3>Level 7</h3> <br /><p class=\"line-1 anim-typewriter1\">Es ist garnicht so schwer wie es aus sieht!</p> <br />  <p class=\"line-1 anim-typewriter2\">Tipp: Du benötigst nur eine einzige For-Schleife!</p>",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "8",
+      "img": "levelimgs/level8.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 4,
+      "patternCode": "for(let x = 0; x <= 8; x += 2) { for(let y = 0; y <= x; y++){ this.paint(x, y); }}",
+      "completed": "false",
+      "description": "<h3>Level 8</h3> <br /><p class=\"line-1 anim-typewriter1\">Nach der vorherigen Aufgabe ist diese hier bestimmt ein Kinderspiel für dich.</p> <br /> <p class=\"line-1 anim-typewriter2\">Mach das bitte mit einer For-Schleife!</p>",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "9",
+      "img": "levelimgs/level9.jpg",
+      "difficulty": 6,
+      "patternCode": "for (let y = 2; y <= 7; y++) {  let x = y-1; for(let i = 0; i <= 2; i++) { this.paint(x + i, y); }} ",
+      "completed": "false",
+      "description": "<h3>Level 9</h3> <br /> <p class=\"line-1 anim-typewriter1\"> Du wirst immer besser und besser!</p> <p class=\"line-1 anim-typewriter2\">Du machst große Schritte!</p> <p class=\"line-1 anim-typewriter3\">Nutze nochmal die For-Schleife!</p>",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "10",
+      "img": "levelimgs/level10.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 3,
+      "patternCode": "for(let x = 0; x < 10; x++) { for(let y = 0; y < 10; y++){ this.paint(x, y); }}",
+      "completed": "false",
+      "description": "<h3>Level 10</h3> <br /> <p class=\"line-1 anim-typewriter1\">Färb doch mal alles hier ein!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür die For-Schleife!</p>",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "11",
+      "img": "levelimgs/level11.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 8,
+      "patternCode": "for(let i = 0; i < 10; i++){ for(let j = 0; j < 10; j++){ if(i % 2 == 0 || j % 2 == 0){ this.paint(i,j); }}}",
+      "completed": "false",
+      "description": "<h3>Level 11</h3> <br /><p class=\"line-1 anim-typewriter1\">Das Muster sieht doch schön aus!</p> <p class=\"line-1 anim-typewriter2\">Es ist wichtig selbst recherchieren zu können!</p> <p class=\"line-1 anim-typewriter3\">Informiere dich nun selbständig über if-Abfragen!</p> <p class=\"line-1 anim-typewriter4\">Die werden dir hier helfen!</p>  <p class=\"line-1 anim-typewriter5\">Nutze auch hier nochmal die For-Schleife!</p>",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "12",
+      "img": "levelimgs/level12.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 8,
+      "patternCode": "for (let y = 0; y <= 9; y += 2) {  let x = y; for(let i = 0; i <= 1; i++) { this.paint(x + i, y); }}",
+      "completed": "false",
+      "description": "<h3>Level 12</h3> <br /><p class=\"line-1 anim-typewriter1\">Löse dieses Level bitte mit einer For-Schleife!</p> <p class=\"line-1 anim-typewriter2\">Viel Spaß!</p>",
+      "solutionApproach": "ForSchleife"
+    },
+    {
+      "id": "13",
+      "img": "levelimgs/level13.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 6,
+      "patternCode": "let x = 0; let y = 0; do{ this.paint(x, y); if(x < 6) { y++; } else { y--; } x++; } while(x < 10);",
+      "completed": "false",
+      "description": "<h3>Level 13</h3> <br /><p class=\"line-1 anim-typewriter1\">Löse dieses Level bitte mit einer do-while-Schleife!</p> <p class=\"line-1 anim-typewriter2\">Viel Spaß!</p>",
+      "solutionApproach": "DoWhileSchleife"
+    },
+    {
+      "id": "14",
+      "img": "levelimgs/level14.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 7,
+      "patternCode": "for(let x = 0; x < 10; x++) { for(let y = 0; y < 10; y++){ if((x+y) % 2 == 0) { this.paint(x, y); } } }",
+      "completed": "false",
+      "description": "<h3>Level 14</h3> <br /><p class=\"line-1 anim-typewriter1\">Bilde ein Schachbrettmuster mithilfe von For-Schleifen ab!</p> <p class=\"line-1 anim-typewriter2\">Tipp: Modulo hilft dir dabei!</p>",
+      "solutionApproach": "ForSchleife"
+    }
+  ]
 }

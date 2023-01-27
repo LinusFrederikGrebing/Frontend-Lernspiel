@@ -13,7 +13,7 @@
            elevation="24"
            fab
            color="#4a5c66"
-          @click="setLevel">
+           @click="setLevel">
           <svg fill="#FFFFFF" class="ml-2" height="30px" width="30px" version="1.1" id="Capa_1" viewBox="0 0 210 210" xml:space="preserve">
           <path d="M179.07,105L30.93,210V0L179.07,105z"/>
          </svg>
