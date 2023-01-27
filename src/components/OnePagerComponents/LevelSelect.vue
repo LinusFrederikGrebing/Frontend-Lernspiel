@@ -1,7 +1,18 @@
 <template>
   <v-container>
+    <v-card elevation="24" outlined shaped height="5em" class="header">
+      <h1 class="h1 font-weight-black">- Lernziele -</h1>
+    </v-card>
     <v-card elevation="24" outlined shaped class="">
-      <h1 class="h1 font-weight-black">- Level-Auswahl -</h1>
+      <v-btn class="h1 white--text"
+           elevation="4"
+           rounded
+           x-large
+           color="#4a5c66"
+           @click="freeMode()"
+          >
+           Freier Modus
+      </v-btn>
       <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
         <v-card v-for="(level, index) in levels" 
         class="styledDiv carousel-cell pa-5 mx-8" 
@@ -90,6 +101,9 @@ export default {
   }),
 
   methods: {
+    freeMode() {
+      this.$router.push({ path: "/GameViewFreeMode" });
+    },
     // Using GSAP library to animate changes to the scale, position, and opacity of the given elements
     hoverEnter(obj) {
       gsap.fromTo(

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import HelpTemplateDesktop from "@/components/HelpComponents/HelpTemplateDesktop";
 import VueRouter from 'vue-router'
 import GameView from '../views/GameView'
+import GameViewFreeMode from '../views/GameViewFreeMode'
 import Onepager from '../views/Onepager'
 import LevelSelect from '@/components/OnePagerComponents/LevelSelect';
 
@@ -22,6 +23,11 @@ const routes = [
     path: '/GameView',
     name: 'GameView',
     component: GameView
+  },
+  {
+    path: '/GameViewFreeMode',
+    name: 'GameViewFreeMode',
+    component: GameViewFreeMode
   },
   {
     path: '/Help',

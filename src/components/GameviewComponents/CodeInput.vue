@@ -63,6 +63,7 @@
                 depressed
                 elevation="2"
                 @click="checkResult"
+                v-if="hasLevel"
               >
                 Validieren
               </v-btn>
@@ -169,10 +170,12 @@ export default {
       gotUnreadErrors: false,
       codeToRun: "/*Type your own code!*/",
       fab: false,
+      hasLevel: true,
     };
   },
 
   methods: {
+  
     // CSS-FAB-Animation
     openOrCloseFAB() {
       let element = document.getElementById("fab-items");
@@ -686,6 +689,9 @@ export default {
           "Da stimmt etwas mit deiner Syntax nicht!\n" + error;
       else this.errorMessage = error;
     },
+    hideValidateButton(){
+      this.hasLevel = false;
+    }
   },
   computed: {
     // Load the current Level
@@ -698,12 +704,16 @@ export default {
   watch: {
     //The Watcher "color" makes sure the color property is update on change
     color(newVal, oldVal) {
-      console.log(this.color);
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         el.style.backgroundColor = this.color;
       });
     },
   },
+  mounted() {
+    if (this.$route.path === '/GameViewFreeMode') {
+      this.hideValidateButton();
+    }
+  }
 };
 </script>
 

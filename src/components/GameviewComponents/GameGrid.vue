@@ -1,13 +1,15 @@
 <template>
   <div class="mt-12 pb-4 pt-4 mb-12">
-      <v-row class="test" no-gutters v-for="y in 10" :key="y">
-        <v-col no-gutters v-for="x in 10" :key="x">
-          <transition appear @enter="enterGrid">
-            <v-card class="grid-card" elevation="4" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
-            </v-card>
-          </transition>
-        </v-col>
-      </v-row>
+    <div class="grid-container">
+    <v-row no-gutters v-for="y in gridSize" :key="y">
+      <v-col no-gutters v-for="x in gridSize" :key="x">
+        <transition appear @enter="enterGrid">
+         <v-card class="grid-card" elevation="4" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
+          </v-card>
+         </transition>
+       </v-col>
+    </v-row>
+  </div>
   </div>
 </template>
 
@@ -22,9 +24,20 @@ export default {
   data: () => {
     return {
       idArray: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+      gridSize: 10,
     };
   },
   methods: {
+    increaseGridSize() {
+        this.gridSize += 1
+        let newVal = this.idArray[0] + 1 || 0;
+        this.idArray.unshift(newVal);
+        console.log(this.idArray);
+    },
+    decreaseGridSize() {
+        this.gridSize -= 1
+        this.idArray.shift();
+    },
     hoverAnimation(obj) {
       // It selects the element with the id that matches the id of the object passed in.
       let element = document.getElementById(obj.target.id); 
@@ -72,8 +85,8 @@ export default {
     },
     // Animation if level resettet
     levelAnimation() {
-      for (let i = 0; i < 10; i++) {
-        for (let j = 0; j < 10; j++) {
+      for (let i = 0; i < this.gridSize; i++) {
+        for (let j = 0; j < this.gridSize; j++) {
           let element = document.getElementById("x" + i + "y" + j);
           gsap.to(element, {
             duration: 1,
@@ -95,8 +108,8 @@ export default {
     },
     // stagger-Animation of the GameGrid every 100sek
     changeGrid() { 
-      for (let i = 0; i < 10; i++) {
-        for (let j = 0; j < 10; j++) {
+      for (let i = 0; i < this.gridSize; i++) {
+        for (let j = 0; j < this.gridSize; j++) {
           let element = document.getElementById("x" + i + "y" + j);
           gsap.to(element, {
             duration: 1,
@@ -118,15 +131,31 @@ export default {
   },
   mounted() {
     // start the stagger-Animation on mount
-    this.changeGrid();
+    if (this.$route.path !== '/GameViewFreeMode') {
+      this.changeGrid();
+    }
+    document.documentElement.style.setProperty('--gridSize', this.gridSize);
   },
+  watch: {
+    gridSize: {
+      immediate: true,
+      handler(newValue) {
+        document.documentElement.style.setProperty('--gridSize', newValue);
+      }
+    }
+}
+
 };
 </script>
 <style scoped>
 /* CSS only for GameGrid-Template */
-.v-card {
-  width: 3.7vw;
-  height: 3.7vw;
+.grid-card {
+  width: calc(37vw / var(--gridSize));
+  height: calc(37vw / var(--gridSize));
+}
+.grid-container{
+  width: 37vw;
+  height: 37vw;
 }
 .col {
   flex-basis: 0 !important;
