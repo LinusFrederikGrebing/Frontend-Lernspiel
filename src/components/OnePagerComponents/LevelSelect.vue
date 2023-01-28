@@ -7,13 +7,13 @@
       <v-btn class="h1 white--text"
            elevation="4"
            rounded
-           x-large
+           width="20em"
            color="#4a5c66"
            @click="freeMode()"
           >
            Freier Modus
       </v-btn>
-      <flickity ref="flickity" :options="flickityOptions" class="carousel my-16">
+      <flickity ref="flickity" :options="flickityOptions" class="carousel mt-12 mb-16">
         <v-card v-for="(level, index) in levels" 
         class="styledDiv carousel-cell pa-5 mx-8" 
         elevation="12" 
