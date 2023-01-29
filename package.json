@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "dom-to-image": "^2.6.0",
     "gsap": "^3.11.3",
     "simple-code-editor": "^1.2.2",
     "vue": "^2.6.10",

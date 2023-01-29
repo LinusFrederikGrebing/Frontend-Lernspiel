@@ -9,13 +9,19 @@
       class="ml-auto mr-auto gv-card"
     >
       <v-row no-gutters>
-        <v-col class="d-flex justify-end" cols="12" sm="8" md="8" lg="7" xl="6">
-          <GameGrid :color="color" ref="gamegrid"/>
+        <v-col class="d-flex justify-end" xl="6">
+          <div id="grid">
+            <GameGrid :color="color" ref="gamegrid"/>
+          </div>
         </v-col>
-        <v-col cols="7" md="4" xl="6" class="d-flex flex-column justify-center align-center">
+        <v-col xl="6" class="d-flex flex-column justify-center align-center">
             <hr class="dividerW30 mb-2 mt-2 mb-4"  />
             <GameGridSize ref="sibling1" :gameSize="gameSize" @increaseGrid="increaseGrid" @decreaseGrid="decreaseGrid"/>
             <div class="d-flex flex-column align-center mt-4 mb-4">
+              <hr class="dividerW30 mb-2 mt-2"  />
+              <v-btn @click="saveToPng">
+                <v-icon width="505" height="500" color="#80ba24">mdi-download</v-icon>    Bild speichern!
+              </v-btn>
               <hr class="dividerW30 mb-2 mt-2 mb-4"  />
                 <div class="freeModeText d-flex flex-column align-center">
                   <h4>Freier Modus!</h4>
@@ -48,6 +54,7 @@ import CodeInput from "../components/GameviewComponents/CodeInput.vue";
 import GameGrid from "../components/GameviewComponents/GameGrid.vue";
 import GameGridSize from "../components/GameviewComponents/GameGridSize.vue";
 import HelpTemplateDesktop from "../components/HelpComponents/HelpTemplateDesktop.vue";
+import domtoimage from 'dom-to-image';
 
 export default {
   name: "GameViewFreeMode",
@@ -66,6 +73,18 @@ export default {
     gameSize: 0
   }),
   methods: {
+    saveToPng(){
+      domtoimage.toPng(document.getElementById('grid'))
+        .then(function (dataUrl) {
+          var link = document.createElement('a');
+          link.download = 'customPicture.png';
+          link.href = dataUrl;
+          link.click();
+        })
+        .catch(function (error) {
+          console.error('oops, something went wrong!', error);
+        });
+    },
     // method to change the color of the game
     changeColor(clr) {
       this.color = clr;

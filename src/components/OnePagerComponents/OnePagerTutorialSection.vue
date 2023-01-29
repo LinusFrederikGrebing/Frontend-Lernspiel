@@ -82,11 +82,13 @@ export default {
   },
   methods: {
     tutorialAnimation() {
-      document.querySelector("#alert-for-op-tutorial").style.visibility = "hidden";
-    for (let i = 0; i <= this.codeToRun.length; i++) {
-      this.timerTutorialAnimation = setTimeout(() => this.actualCodeToRun = this.codeToRun.substring(0, i), i * 250);
-    }
-      this.cursorTutorialAnimation = setTimeout(() => this.cursorToFinishedAnimation(), 3500);
+      if( document.querySelector("#alert-for-op-tutorial")){
+        document.querySelector("#alert-for-op-tutorial").style.visibility = "hidden";
+      }
+      for (let i = 0; i <= this.codeToRun.length; i++) {
+        this.timerTutorialAnimation = setTimeout(() => this.actualCodeToRun = this.codeToRun.substring(0, i), i * 250);
+      }
+        this.cursorTutorialAnimation = setTimeout(() => this.cursorToFinishedAnimation(), 3500);
     },
 
     cursorToFinishedAnimation() {

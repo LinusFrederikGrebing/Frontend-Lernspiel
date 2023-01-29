@@ -71,7 +71,7 @@ export default {
         { title: "Level-Auswahl", icon: "home", path: "lvl"},
         { title: "Tutorial",  icon: "information-variant", path: "tutorial"},
         { title: "Hilfen", icon: "email", path: "help"},
-        { title: "Back to Homepage", icon: "logout-variant", path: "home"},
+        { title: "Startseite", icon: "logout-variant", path: "home"},
       ],
     };
   },

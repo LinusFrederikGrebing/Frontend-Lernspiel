@@ -4,7 +4,7 @@
     <v-row no-gutters v-for="y in gridSize" :key="y">
       <v-col no-gutters v-for="x in gridSize" :key="x">
         <transition appear @enter="enterGrid">
-         <v-card class="grid-card" elevation="4" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
+         <v-card class="grid-card" elevation="2" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
           </v-card>
          </transition>
        </v-col>
@@ -51,7 +51,7 @@ export default {
         element,
         {
           y: 0,
-          x: 0,
+          x: -40,
           backgroundColor: this.color
         },
         {
@@ -59,7 +59,7 @@ export default {
           duration: 0.5,
           scale: scale,
           y: 0,
-          x: 40,
+          x: 0,
           opacity: 1,
         }
       );
@@ -78,7 +78,7 @@ export default {
           duration: 3,
           scale: 1,
           y: 0,
-          x: 40,
+          x: 0,
           opacity: 1,
         }
       );
@@ -156,9 +156,5 @@ export default {
 .grid-container{
   width: 37vw;
   height: 37vw;
-}
-.col {
-  flex-basis: 0 !important;
-  flex-grow: 0 !important;
 }
 </style>
