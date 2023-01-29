@@ -452,6 +452,18 @@ export default {
         }
       });
     },
+    alertMissingInput() {
+      // Use sweetalert2
+      this.$swal({
+        title: "Nichts eingetragen!",
+        text: "Klicke in das schwarze Code-Editor-Feld und benutze die Funktion paint(x, y), um ein Kästchen auf dem Kachelfeld einzuzeichen!",
+        icon: "info",
+        confirmButtonColor: "#6D9E1F",
+        confirmButtonText: "Okay!",
+       
+        allowOutsideClick: false,
+      })
+    },
     // Checks if two arrays are equals and returns Boolean
     areEqual(array1, array2) {
       if (array1.length === array2.length) {
@@ -478,8 +490,13 @@ export default {
       }
       return returnStr + restStr;
     },
+   
+   
     // Method tries to run the userwritten code and throws errors if needed
     runfunction() {
+      if(this.codeToRun == "" || this.codeToRun == "/*Type your own code!*/" ){
+        this.alertMissingInput()
+      }
       this.resetPaintedFields();
       this.errorMessage = "";
       this.checkWhichSolutionUsed(this.codeToRun);
