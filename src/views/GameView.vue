@@ -155,8 +155,6 @@ export default {
         confirmButtonText: " Weiter! ",
         backdrop: `
           rgba(0,0,0,0.5)
-          url(https://www.kennerblick.net/grafik/s/stift09.gif)
-          48vw 24vh
           no-repeat
         `,
       });
