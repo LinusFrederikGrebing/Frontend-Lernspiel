@@ -1,0 +1,3 @@
+[submodule "dist"]
+	path = dist
+	url = https://git.thm.de/akgl69/fd-team-6-dist
