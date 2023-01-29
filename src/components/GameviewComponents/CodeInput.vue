@@ -494,9 +494,6 @@ export default {
    
     // Method tries to run the userwritten code and throws errors if needed
     runfunction() {
-      if(this.codeToRun == "" || this.codeToRun == "/*Type your own code!*/" ){
-        this.alertMissingInput()
-      }
       this.resetPaintedFields();
       this.errorMessage = "";
       this.checkWhichSolutionUsed(this.codeToRun);
@@ -508,8 +505,9 @@ export default {
       let checkParamValueStr =
         'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n';
       let evalCode = this.codeToRun;
-      this.checkIfPaintCall(evalCode);
+
       try {
+        this.checkIfPaintCall(evalCode);
         this.checkPaintParams(evalCode);
         console.log(evalCode);
         evalCode = this.InsertForLoopInfinitySafety(evalCode);
@@ -643,8 +641,7 @@ export default {
     // Method checks if the essential method paint has been called, throws an Error if not (to help new players understand that this method is needed)
     checkIfPaintCall(code) {
       if (code.search("paint") == -1)
-        this.errorMessage +=
-          "Rufe die paint(x,y) Methode aus um Felder anzumalen!\n";
+        throw new Error("Rufe die paint(x,y) Methode aus um Felder anzumalen!\n");
     },
     // Helper Method takes a String and the position of a Bracket as Parameter and returns the content of given Bracket
     getBracket(str, pos) {
