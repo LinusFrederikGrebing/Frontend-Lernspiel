@@ -4,7 +4,7 @@
     <v-row no-gutters v-for="y in gridSize" :key="y">
       <v-col no-gutters v-for="x in gridSize" :key="x">
         <transition appear @enter="enterGrid">
-         <v-card class="grid-card" elevation="4" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
+         <v-card class="grid-card" elevation="2" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
           </v-card>
          </transition>
        </v-col>

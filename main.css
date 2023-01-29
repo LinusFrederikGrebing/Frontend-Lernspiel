@@ -44,14 +44,23 @@
   white-space: nowrap;
   overflow: hidden;
 }
-.anim-typewriter1,
-.anim-typewriter2,
-.anim-typewriter3,
-.anim-typewriter4,
-.anim-typewriter5,
+.anim-typewriter1 {
+  animation: typewriter 1s steps(44) 0.5s 1 normal both;
+}
+.anim-typewriter2 {
+  animation: typewriter 1s steps(44) 1.5s 1 normal both;
+}
+.anim-typewriter3 {
+  animation: typewriter 1s steps(44) 2.5s 1 normal both;
+}
+.anim-typewriter4 {
+  animation: typewriter 1s steps(44) 3.5s 1 normal both;
+}
+.anim-typewriter5 {
+  animation: typewriter 1s steps(44) 4.5s 1 normal both;
+}
 .anim-typewriter6 {
-  animation: typewriter 1s steps(44) 0s 1 normal both,
-             blinkTextCursor 500ms steps(44) 0s normal;
+  animation: typewriter 1s steps(44) 5.5s 1 normal both;
 }
 @keyframes typewriter {
   from { width: 0; }

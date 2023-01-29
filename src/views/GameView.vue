@@ -8,26 +8,25 @@
       width="90%"
       class="ml-auto mr-auto gv-card"
     >
-
       <v-row no-gutters>
-        <v-col class="d-flex justify-end" cols="12" sm="8" md="8" lg="7" xl="6">
+        <v-col class="d-flex justify-center" cols="12" sm="8" md="8" lg="7" xl="6">
           <GameGrid :color="color" />
         </v-col>
         <v-col cols="7" md="4" xl="6">
           <div class="d-flex flex-column justify-center align-center mt-8">
             <TemplateGrid :currentLevel="currentLevel" :color="color" />
-            <div>
+            <div v-if="currentLevel !== null">
               <hr class="dividerW30 mb-2 mt-2" />
               <div class="d-flex flex-column align-center">
-                <h3 class="">- Level {{ currentLevel.id }} -</h3>
+                <h3>- Level {{ currentLevel.id }} -</h3>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <h5 v-bind="attrs" v-on="on">
-                      Anforderung: {{ currentLevel.loesungsweg }}
+                      Anforderung: {{ currentLevel.solutionApproach }}
                     </h5>
                   </template>
                   <span
-                    >Du musst eine {{ currentLevel.loesungsweg }} benutzen, um
+                    >Du musst eine {{ currentLevel.solutionApproach }} benutzen, um
                     das Level {{ currentLevel.id }} abzuschließen!</span
                   >
                 </v-tooltip>
@@ -81,7 +80,6 @@ export default {
     color: "#80ba24", // default color for the game
     levels: [], // array to store all the levels
     currentLevel: null, // variable to store the current level
-    currentLevelId: null, // variable to store the ID of the current level
     hilfenTemp: false, // variable to store the state of the help template
     accessibleLevels: [], // array to store the levels that are accessible to the user
     isHelpOpen: false, // variable to store the state of the help
@@ -123,7 +121,6 @@ export default {
       this.levels[indexNextLevel - 1].completed = true;
       // set the current level to the next level
       this.currentLevel = this.levels[indexNextLevel];
-      this.currentLevelId = this.currentLevel.id;
       // save the current level in local storage
       localStorage.setItem("currentLevel", JSON.stringify(this.currentLevel));
       // execute the pattern code for the next level
@@ -167,6 +164,7 @@ export default {
   },
   // mounted function is called when the component is mounted to the DOM.
   mounted() {
+    console.log(this.currentLevel)
     // It sets the start time of the level to the current time
     this.startTime = new Date();
 
@@ -184,7 +182,6 @@ export default {
     } else {
       this.currentLevel = Object.values(Object.values(levels)[0]);
     }
-    this.currentLevelId = this.currentLevel.id;
     this.startPopUp(this.currentLevel);
   },
 
@@ -193,6 +190,7 @@ export default {
     // When the current level changes, it checks if the previous level was completed and if so, it updates the accessibleLevels data property accordingly.
     currentLevel(newVal, oldVal) {
       if (oldVal !== null && oldVal !== undefined) {
+        console.log(oldVal, newVal);
         if (JSON.parse(localStorage.getItem("accessibleLevels")) !== null) {
           this.accessibleLevels = JSON.parse(
             localStorage.getItem("accessibleLevels")

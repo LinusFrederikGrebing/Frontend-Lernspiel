@@ -18,8 +18,9 @@
             <hr class="dividerW30 mb-2 mt-2 mb-4"  />
             <GameGridSize ref="sibling1" :gameSize="gameSize" @increaseGrid="increaseGrid" @decreaseGrid="decreaseGrid"/>
             <div class="d-flex flex-column align-center mt-4 mb-4">
+              <hr class="dividerW30 mb-2 mt-2"  />
               <v-btn @click="saveToPng">
-                    Download
+                <v-icon width="505" height="500" color="#80ba24">mdi-download</v-icon>    Bild speichern!
               </v-btn>
               <hr class="dividerW30 mb-2 mt-2 mb-4"  />
                 <div class="freeModeText d-flex flex-column align-center">
