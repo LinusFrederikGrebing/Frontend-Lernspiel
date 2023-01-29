@@ -35,9 +35,9 @@
             </div>
             <div class="">
               <CodeInput
-                @success="nextLevel(currentLevelId)"
-                @timer="setTime(currentLevelId)"
-                @startPopup="nextLevelStarted(currentLevelId)"
+                @success="nextLevel(currentLevel.id)"
+                @timer="setTime(currentLevel.id)"
+                @startPopup="nextLevelStarted(currentLevel.id)"
                 @change-color="changeColor"
                 @show-help="isHelpOpen = true"
               />
@@ -153,18 +153,12 @@ export default {
         allowOutsideClick: false,
         confirmButtonColor: "#6D9E1F",
         confirmButtonText: " Weiter! ",
-        backdrop: `
-          rgba(0,0,0,0.5)
-          url(https://www.kennerblick.net/grafik/s/stift09.gif)
-          48vw 24vh
-          no-repeat
-        `,
       });
     },
   },
   // mounted function is called when the component is mounted to the DOM.
   mounted() {
-    console.log(this.currentLevel)
+   
     // It sets the start time of the level to the current time
     this.startTime = new Date();
 
@@ -182,6 +176,7 @@ export default {
     } else {
       this.currentLevel = Object.values(Object.values(levels)[0]);
     }
+    console.log(this.currentLevel)
     this.startPopUp(this.currentLevel);
   },
 
