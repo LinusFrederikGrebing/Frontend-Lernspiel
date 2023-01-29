@@ -5,6 +5,9 @@
       <v-col no-gutters v-for="x in gridSize" :key="x">
         <transition appear @enter="enterGrid">
          <v-card class="grid-card" elevation="2" :id="'x' + (x - 1) + 'y' + idArray[y-1]" @mouseover="hoverAnimation($event)">
+          <p v-if="coordsVisible" class="coords-text text-center">
+                  {{ x - 1 + "," + idArray[y - 1] }}
+          </p>
           </v-card>
          </transition>
        </v-col>
@@ -25,6 +28,7 @@ export default {
     return {
       idArray: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
       gridSize: 10,
+      coordsVisible: false,
     };
   },
   methods: {
