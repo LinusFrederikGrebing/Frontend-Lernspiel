@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card elevation="24" outlined shaped height="5em" class="header">
-      <h1 class="h1 font-weight-black">- Lernziele -</h1>
+      <h1 class="h1 font-weight-black">- Level Auswahl -</h1>
     </v-card>
     <v-card elevation="24" outlined shaped class="">
       <v-btn class="h1 white--text"
@@ -19,7 +19,7 @@
         elevation="12" 
         width="30em"
         color="#252525" 
-        :class="['mx-auto my-8',{ ' locked': levelIsAccessible(level) === false }]" :key="index">
+        :class="['mx-auto my-8', {' locked': levelIsAccessible(level) === false }]" :key="index">
           <div :id="'lvlselect' + index" @mouseenter="hoverEnter($event)" @mouseleave="hoverLeave($event)">
             <v-img class="white--text align-end" height="23em" :src="require(`@/assets/${level.img}`)">
               <div :id="'lockIcon' + index" class="zentriertLockIcon">
@@ -219,4 +219,3 @@ export default {
   margin-right: 0.5em !important;
 }
 </style>
-
