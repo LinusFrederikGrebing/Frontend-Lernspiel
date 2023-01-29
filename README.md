@@ -14,3 +14,8 @@ npm run serve
 ```
 npm run build
 ```
+
+### Pull submodule content
+```
+git submodule update --init
+```
