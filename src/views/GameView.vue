@@ -156,7 +156,7 @@ export default {
         backdrop: `
           rgba(0,0,0,0.5)
           url(https://www.kennerblick.net/grafik/s/stift09.gif)
-          5vw 5vh
+          48vw 24vh
           no-repeat
         `,
       });
