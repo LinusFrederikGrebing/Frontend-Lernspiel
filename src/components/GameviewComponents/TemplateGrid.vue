@@ -94,7 +94,6 @@ export default {
       //This function changes the background color of an element of the template grid
       // and adds the class "painted" to it.
       let element = document.getElementById("vx" + first + "vy" + second);
-      element.style.backgroundColor = "#80ba24";
       element.classList.add("painted");
     },
 

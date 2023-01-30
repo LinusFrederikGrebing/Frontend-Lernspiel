@@ -172,7 +172,6 @@ export default {
 
     paintTutorialField(first, second) {
       let element = document.getElementById("xTutorial" + first + "yTutorial" + second);
-      element.style.backgroundColor = '#80ba24';
       element.classList.add("painted");
     },
 
@@ -184,7 +183,6 @@ export default {
         paintedElements.forEach(el => {
             if (el.id.includes("Tutorial")) {
                 el.classList.remove("painted");
-                el.style.backgroundColor = '#ffffff';
             }
         });
   }

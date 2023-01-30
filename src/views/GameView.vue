@@ -38,7 +38,6 @@
                 @success="nextLevel(currentLevel.id)"
                 @timer="setTime(currentLevel.id)"
                 @startPopup="nextLevelStarted(currentLevel.id)"
-                @change-color="changeColor"
                 @show-help="isHelpOpen = true"
               />
             </div>
@@ -85,13 +84,6 @@ export default {
     isHelpOpen: false, // variable to store the state of the help
   }),
   methods: {
-    // method to change the color of the game
-    changeColor(clr) {
-      this.color = clr;
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        el.style.backgroundColor = clr;
-      });
-    },
     // method to show the help template
     showHelp() {
       this.isHelpOpen = true;
@@ -127,16 +119,7 @@ export default {
       eval(this.currentLevel.patternCode);
       localStorage.setItem("levels", JSON.stringify(this.levels));
       // reset the grid and template to their initial state
-      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
-        if (!el.classList.contains("painted")) {
-          el.style.backgroundColor = "#ffffff";
-        }
-      });
-      Array.from(document.querySelectorAll(".template-card")).forEach((el) => {
-        if (!el.classList.contains("painted")) {
-          el.style.backgroundColor = "#ffffff";
-        } else el.style.backgroundColor = this.color;
-      });
+  
     },
     // nextLevelStarted method is called when the user clicks on the next level button
     nextLevelStarted(indexNextLevel) {

@@ -31,7 +31,6 @@
             </div>
             <div class="">
               <CodeInput
-                @change-color="changeColor"
                 @show-help="isHelpOpen = true"
               />
             </div>
@@ -84,13 +83,6 @@ export default {
         .catch(function (error) {
           console.error('oops, something went wrong!', error);
         });
-    },
-    // method to change the color of the game
-    changeColor(clr) {
-      this.color = clr;
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        el.style.backgroundColor = clr;
-      });
     },
     // method to show the help template
     showHelp() {

@@ -95,10 +95,9 @@
             <h4>Klicke auf Ausführen um deinen Code zu zeichen!</h4>
           </span>
         </v-tooltip>
-        <div v-on:mouseout="changeColor(color)">
+        <div>
           <v-color-picker
             v-if="colorPicker"
-            @click="changeColor(color)"
             v-model="color"
             dot-size="6"
             mode="hexa"
@@ -306,11 +305,6 @@ export default {
           el.classList.remove("painted");
         }
       });
-      Array.from(document.querySelectorAll(".grid-card")).forEach((el) => {
-        if (!el.classList.contains("painted")) {
-          el.style.backgroundColor = "#ffffff";
-        }
-      });
     },
     //GSAP Animation when resetting
     resetAnimation() {
@@ -337,13 +331,6 @@ export default {
         }
       }
       this.delay(4000).then(() => resetBtn.removeAttribute("disabled"));
-    },
-    // Changes the Color of the Painted Cards and emits the Color-value to other Vue-Components that need to work with said value
-    changeColor(clr) {
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        el.style.backgroundColor = clr;
-      });
-      this.$emit("change-color", clr);
     },
     // Enter Animation for Certain HTML-Elements
     enter(el) {
@@ -501,7 +488,10 @@ export default {
       // Methode paint(first,second) paints a grid card with the given coordinates
       // Method checkParamValue(num) checks if the coordinates given in paint are in the range of the grid's length
       let paintStr =
-        'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\nelement.classList.add("painted");}\n';
+       // 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted");}\n';
+        'let index = 0; function paint(first, second) {\n setTimeout(() => { let element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted"); }, index);   index = index+20 } \n';
+
+
       let checkParamValueStr =
         'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n';
       let evalCode = this.codeToRun;
@@ -509,9 +499,7 @@ export default {
       try {
         this.checkIfPaintCall(evalCode);
         this.checkPaintParams(evalCode);
-        console.log(evalCode);
         evalCode = this.InsertForLoopInfinitySafety(evalCode);
-        console.log(evalCode);
         evalCode = this.InsertWhileInfinitySafety(evalCode);
         // Inserts a variable to count how many times a loop loops in case of an infinite loop
         evalCode = [
@@ -523,7 +511,6 @@ export default {
         let runCodeSafely = new Function(evalCode);
         runCodeSafely();
         this.gotUnreadErrors = false;
-        this.changeColor(this.color);
       } catch (error) {
         this.changeErrorMsg(error);
         // Boolean Variable gotUnreadErrors turn on the Console Notification blinking animation
@@ -705,6 +692,9 @@ export default {
     },
     hideValidateButton(){
       this.hasLevel = false;
+    },
+    updateBackgroundColor() {
+      document.documentElement.style.setProperty('--background-color', this.color);
     }
   },
   computed: {
@@ -717,20 +707,26 @@ export default {
   },
   watch: {
     //The Watcher "color" makes sure the color property is update on change
-    color(newVal, oldVal) {
-      Array.from(document.querySelectorAll(".painted")).forEach((el) => {
-        el.style.backgroundColor = this.color;
-      });
-    },
+    color() {
+      this.updateBackgroundColor();
+    }
   },
   mounted() {
     if (this.$route.path === '/GameViewFreeMode') {
       this.hideValidateButton();
     }
+    this.updateBackgroundColor();
   }
 };
 </script>
 
+
+<style>
+/* CSS only for all Templates */
+.painted {
+  background-color: var(--background-color) !important; 
+}
+</style>
 
 <style scoped>
 /* CSS only for CodeInput-Template */
