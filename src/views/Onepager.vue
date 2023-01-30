@@ -23,7 +23,7 @@
           </div>
           <img id="alert-for-op-tutorial" src="../assets/successpopup.png">
         </div>
-        <div class="pt-16 mt-16 mb-16">
+        <div id="goals" class="pt-16 mt-16 mb-16">
           <OnePagerGoals />
         </div>
         <div id="help_template" class="pt-16 mt-16">
@@ -85,6 +85,7 @@ export default {
         help: "help_template",
         lvl: "lvl_select",
         tutorial: "tutorial",
+        goals: "goals",
       };
 
       // Get the element id for the current section, or default to "start"
@@ -155,15 +156,15 @@ export default {
     height() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          return 6850;
+          return 7200;
         case "sm":
-          return 6550;
+          return 7100;
         case "md":
-          return 6650;
+          return 7000;
         case "lg":
-          return 5650;
+          return 5900;
         case "xl":
-          return 5070;
+          return 5340;
       }
     },
   }
@@ -177,7 +178,7 @@ export default {
   position: relative;
   left: 50%;
   margin-left: -30px;
-  bottom: 0px;
+  bottom: 20px;
 }
 .arrows path {
   stroke: #80ba24;

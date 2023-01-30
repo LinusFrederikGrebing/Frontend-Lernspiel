@@ -70,7 +70,8 @@ export default {
       menuLinks: [
         { title: "Level-Auswahl", icon: "home", path: "lvl"},
         { title: "Tutorial",  icon: "information-variant", path: "tutorial"},
-        { title: "Hilfen", icon: "email", path: "help"},
+        { title: "Lernziele", icon: "checkbox-multiple-marked-outline", path: "goals"},
+        { title: "Hilfen", icon: "help", path: "help"},
         { title: "Startseite", icon: "logout-variant", path: "home"},
       ],
     };

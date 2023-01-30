@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col class="text-center my-4">
+      <v-col class="text-center">
         <v-card
           elevation="24"
           outlined

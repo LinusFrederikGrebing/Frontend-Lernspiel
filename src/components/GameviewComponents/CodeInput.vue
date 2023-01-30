@@ -109,8 +109,9 @@
       </div>
     </div>
     <div class="floating-container">
-      <v-btn class="floating-button" @click="openOrCloseFAB()"
-        ><b>{{ btnText }}</b></v-btn
+      <v-btn class="floating-button" @click="openOrCloseFAB()"> 
+        <v-icon size="30" color="#80ba45">{{ btnText }}</v-icon>
+      </v-btn
       >
       <div id="fab-items" class="closedFAB">
         <span class="float-element tooltip-left">
@@ -157,7 +158,7 @@ export default {
   },
   data: () => {
     return {
-      btnText: "+",
+      btnText: "mdi-plus",
       solution: "",
       color: "#80ba24",
       levelElements: [],
@@ -189,14 +190,14 @@ export default {
         element.classList.remove("closedFAB");
         // change the btnIcon after 300millis
         setTimeout(() => {
-          this.btnText = "-";
+          this.btnText = "mdi-minus";
         }, 300);
         this.fab = true;
     },
     closeFAB(element){
        element.classList.add("closedFAB");
         element.classList.remove("element-container");
-        this.btnText = "+";
+        this.btnText = "mdi-plus";
         this.fab = false;
     },
     showHelp() {
@@ -785,10 +786,9 @@ export default {
   bottom: 0;
   width: 65px;
   height: 65px;
-  background: #80ba24;
+  background: #ffffff;
   left: 0.5em;
   border-radius: 50%;
-  color: white;
   font-size: 23px;
   z-index: 1;
   -webkit-transition: all 0.3s;

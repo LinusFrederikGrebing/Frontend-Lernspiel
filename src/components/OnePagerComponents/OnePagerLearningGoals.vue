@@ -3,7 +3,7 @@
     <v-card elevation="24" outlined shaped height="5em" class="header">
       <h1 class="section_header font-weight-black">- Lernziele -</h1>
     </v-card>
-    <v-card elevation="10" outlined :height="height">
+    <v-card elevation="10" outlined class="pb-16">
       <div :class="[{'flex_container' : !$vuetify.breakpoint.lgAndDown}]" v-for="(item, index) in items" :key="index">
         <div :class="[{'goalscontainer' : !$vuetify.breakpoint.lgAndDown}]" >
           <div :id="'section' + index" :class="[{'section' : !$vuetify.breakpoint.lgAndDown}]" class="">
@@ -54,6 +54,11 @@ export default {
           text: 'DrawIT hilft Dir dabei, Deine Fähigkeiten zu steigern, komplexe Problemsituationen oder Schwierigkeiten wahrzunehmen, zu verstehen und anschließend zu lösen. Der einfachste Weg muss nicht immer der geforderte oder beste sein!',
           img: require("../../assets/problemlösung.png"),
         },
+        {
+          title: 'Effektivität',
+          text: 'Durch DrawIT wird die Fähigkeit vertieft, Code-Lösungen auf einfache und effiziente Weise zu implementieren und verschiedene Lösungsansätze aufgezeigt!',
+          img: require("../../assets/effektivicon.png"),
+        }
       ],
     };
   },
@@ -97,17 +102,7 @@ export default {
       } else {
         return "text"
       }
-    },
-    height () {
-      // Return a height based on the current breakpoint
-        switch (this.$vuetify.breakpoint.name) {
-          case 'xs': return 2100
-          case 'sm': return 1700
-          case 'md': return 1650
-          case 'lg': return 1600
-          case 'xl': return 1100
-        }
-      },  
+    }
   },      
 };
 </script>

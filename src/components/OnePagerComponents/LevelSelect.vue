@@ -46,13 +46,11 @@
 
           <v-card-actions class="my-4">
             <v-btn 
-              :id="'button' + index" 
               color="primary" 
               depressed 
               elevation="2" 
               @click="setLevel(level)"
-              @mouseover="hoverButtonEnter($event)" 
-              @mouseleave="hoverButtonLeave($event)">
+            >
               Start
             </v-btn>
             <v-tooltip bottom color="success">
@@ -118,12 +116,6 @@ export default {
           { scale: 1.09 },
           { duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1 }
       );
-    },
-    hoverButtonEnter(obj) {
-      gsap.fromTo(obj.target, { scale: 1 }, { duration: 0.01, scale: 1.3 });
-    },
-    hoverButtonLeave(obj) {
-      gsap.fromTo(obj.target, { scale: 1.3 }, { duration: 0.2, scale: 1 });
     },
     // This function paints a specific element in the DOM with the class "painted" by first creating a reference to the element of the templateGrid and then adding the "painted" class to it.
     paint(first, second) {

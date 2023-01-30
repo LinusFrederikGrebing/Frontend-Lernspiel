@@ -83,6 +83,7 @@
     {
       "id": "9",
       "img": "levelimgs/level9.jpg",
+      "bestTimeinSek": 0,
       "difficulty": 6,
       "patternCode": "for (let y = 2; y <= 7; y++) {  let x = y-1; for(let i = 0; i <= 2; i++) { this.paint(x + i, y); }} ",
       "completed": "false",
