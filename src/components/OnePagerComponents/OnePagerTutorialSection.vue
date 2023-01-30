@@ -8,7 +8,7 @@
     width="120em"
     height="5em"
   >
-    <h1 class="h1 font-weight-black"> - Tutorial - </h1>
+    <h1 class="section_header font-weight-black"> - Tutorial - </h1>
   </v-card>
   <v-card
     elevation="10"
@@ -16,7 +16,7 @@
     width="100%"
   >
     <div class="d-lg-flex justify-lg-center tutorial text-center">
-      <div>
+      <div class="ml-16">
         <v-card
           class="text-center mr-auto ml-auto"
           elevation="24"
@@ -43,7 +43,7 @@
           </v-row>
         </v-card>
       </div>
-      <div class="editor_in_Tutorial">
+      <div class="editor_in_Tutorial mr-16">
         <CodeEditor
           :read_only="true"
           font_size="37px"
@@ -77,7 +77,6 @@ export default {
       timerTutorialAnimation: null,
       paintTutorialAnimation: null,
       cursorTutorialAnimation: null,
-
     };
   },
   methods: {
@@ -85,6 +84,10 @@ export default {
       if( document.querySelector("#alert-for-op-tutorial")){
         document.querySelector("#alert-for-op-tutorial").style.visibility = "hidden";
       }
+      let tutorial = document.getElementById("popupContainer");
+      tutorial.classList.remove("test");
+        console.log(tutorial)
+
       for (let i = 0; i <= this.codeToRun.length; i++) {
         this.timerTutorialAnimation = setTimeout(() => this.actualCodeToRun = this.codeToRun.substring(0, i), i * 250);
       }
@@ -158,6 +161,8 @@ export default {
       let headerHeight = parseInt(header.offsetHeight);
       let sidebarWidth = 0;
       let yOffset = 701 - codeEditorRect.bottom;
+      let tutorial = document.getElementById("popupContainer");
+      tutorial.classList.add("test");
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
       let x =  parseInt(codeEditor.offsetWidth) / 2 - sidebarWidth;
       let y =  parseInt(codeEditor.offsetHeight) / 2 - headerHeight - scrollY + yOffset;
@@ -167,7 +172,14 @@ export default {
       codeEditor = codeEditor.offsetParent;
       }
       let alert = document.querySelector("#alert-for-op-tutorial");
-      gsap.to("#alert-for-op-tutorial", {duration: 0, x: (x-(alert.width/2)), y: (y-(alert.height/2)), visibility: "visible", zIndex: 5});
+      gsap.to("#alert-for-op-tutorial", {duration: 0, x: (x-(alert.width)), y: (y-(alert.height/2)), visibility: "visible", zIndex: 5});
+
+      setTimeout(() => {
+         this.resetPaintedFields(); 
+        }, 1500);
+     setTimeout(() => {
+         this.tutorialAnimation(); 
+        }, 1550);
     },
 
     paintTutorialField(first, second) {
@@ -224,7 +236,6 @@ export default {
 
 <style scoped>
 /* CSS only fpr Tutorial-Section */
-
 .tutorial {
   margin-top: 5em;
   margin-bottom: 10em;

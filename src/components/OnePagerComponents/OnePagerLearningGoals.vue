@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card elevation="24" outlined shaped height="5em" class="header">
-      <h1 class="h1 font-weight-black">- Lernziele -</h1>
+      <h1 class="section_header font-weight-black">- Lernziele -</h1>
     </v-card>
     <v-card elevation="10" outlined :height="height">
       <div :class="[{'flex_container' : !$vuetify.breakpoint.lgAndDown}]" v-for="(item, index) in items" :key="index">

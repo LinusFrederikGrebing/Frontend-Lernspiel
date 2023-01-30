@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-card elevation="24" outlined shaped height="5em" class="header">
-      <h1 class="h1 font-weight-black">- Level Auswahl -</h1>
+      <h1 class="section_header font-weight-black">- Level Auswahl -</h1>
     </v-card>
     <v-card elevation="24" outlined shaped class="">
-      <v-btn class="h1 white--text"
+      <v-btn class="free-btn white--text"
            elevation="4"
            rounded
            width="20em"
@@ -13,6 +13,7 @@
           >
            Freier Modus
       </v-btn>
+    
       <flickity ref="flickity" :options="flickityOptions" class="carousel mt-12 mb-16">
         <v-card v-for="(level, index) in levels" 
         class="styledDiv carousel-cell pa-5 mx-8" 
@@ -65,10 +66,10 @@
                 <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
               </span>
             </v-tooltip>
-            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text text-subtitle-1 text-sm-h6">
+            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text text-subtitle-1">
               Bestzeit: {{Math.round(level.bestTimeinSek * 100) / 100  }} Sekunden
             </v-card-title>
-            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text">
+            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text text-subtitle-1">
               Bestzeit:
               {{ Math.round((level.bestTimeinSek / 60) * 100) / 100 }} Minuten
             </v-card-title>

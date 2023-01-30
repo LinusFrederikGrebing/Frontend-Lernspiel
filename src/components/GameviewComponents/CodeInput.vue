@@ -303,6 +303,8 @@ export default {
       Array.from(document.querySelectorAll(".painted")).forEach((el) => {
         if (!el.id.includes("v")) {
           el.classList.remove("painted");
+          // make sure to reset the Color change of the hover animation
+          el.style.backgroundColor ="#ffffff"
         }
       });
     },
@@ -435,7 +437,7 @@ export default {
           this.$emit("failure");
           this.resetAnimation();
         } else {
-          this.$router.push({ path: "/", query: { section: "lvl" } });
+          this.$router.push({ path: "/", query: { section: 'lvl' } });
         }
       });
     },
@@ -490,7 +492,6 @@ export default {
       let paintStr =
        // 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted");}\n';
         'let index = 0; function paint(first, second) {\n setTimeout(() => { let element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted"); }, index);   index = index+20 } \n';
-
 
       let checkParamValueStr =
         'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n';
@@ -724,7 +725,7 @@ export default {
 <style>
 /* CSS only for all Templates */
 .painted {
-  background-color: var(--background-color) !important; 
+  background-color: var(--background-color, rgba(128, 186, 36, 0.7)) !important; 
 }
 </style>
 

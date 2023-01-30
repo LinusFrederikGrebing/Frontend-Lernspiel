@@ -2,7 +2,7 @@
   <v-container class="">
   <div>
     <v-card elevation="24" height="55em" outlined shaped class="container">
-      <h1 class="h1 font-weight-black"> - Hilfen - </h1>
+      <h1 class="section_header font-weight-black"> - Hilfen - </h1>
       <v-btn
         class="back-btn"
         depressed

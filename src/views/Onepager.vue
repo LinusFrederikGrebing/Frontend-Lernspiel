@@ -16,10 +16,12 @@
         <div id="lvl_select" class="pt-16 mt-16 mb-16">
           <LevelSelect />
         </div>
-        <div id="tutorial" class="pt-16 mt-16 mb-16">
-          <img id="mouse-cursor-op" src="../assets/mouse-cursor.png">
-          <img id="alert-for-op-tutorial" src="../assets/success-for-op-tutorial.png">
-          <OnePagerTutorialSection />
+        <div id="tutorial" class=" pt-16 mt-16 mb-16">
+          <div id="popupContainer" class="test">
+             <img id="mouse-cursor-op" src="../assets/mouse-cursor.png">
+             <OnePagerTutorialSection />
+          </div>
+          <img id="alert-for-op-tutorial" src="../assets/successpopup.png">
         </div>
         <div class="pt-16 mt-16 mb-16">
           <OnePagerGoals />
@@ -90,7 +92,7 @@ export default {
       // Scroll to the element after a delay of 300ms
       setTimeout(() => {
         this.scrollToElement(elementId);
-      }, 300);
+      }, 350);
     },
   },
   // Watch for changes in the route and call the checkRoute method
@@ -184,6 +186,9 @@ export default {
   animation: arrow 2s infinite;
   -webkit-animation: arrow 2s infinite;
 }
+.test {
+  filter: blur(5px) brightness(90%);
+}
 @keyframes arrow {
   0% {
     opacity: 0;
@@ -235,10 +240,11 @@ export default {
 
 #alert-for-op-tutorial {
   position: absolute;
-  height: 14vw;
-  width: 28vw;
-  visibility: hidden;
+  height: 20em;
+  width: 30em;
+  visibility: visible;
   z-index: 20;
+  margin-top: -50em;
   border: 1em;
   border-width: 1em;
   border-color: black;
