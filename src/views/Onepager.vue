@@ -241,7 +241,7 @@ export default {
 
 #alert-for-op-tutorial {
   position: absolute;
-  height: 20em;
+  height: auto;
   width: 30em;
   visibility: visible;
   z-index: 20;

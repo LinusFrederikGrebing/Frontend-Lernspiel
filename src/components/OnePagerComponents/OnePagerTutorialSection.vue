@@ -19,6 +19,7 @@
       <div class="ml-16">
         <v-card
           class="text-center mr-auto ml-auto"
+          id="cardgrid-container-tutorial-op"
           elevation="24"
           :class="[
             { 'cardgrid_container_mdAndUp': $vuetify.breakpoint.mdAndUp },
@@ -105,11 +106,16 @@ export default {
       let yOffset = 701 - finishedButtonRect.bottom;
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
 
+      let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
+      let codeEditor = document.querySelector(".editor_in_Tutorial");
+
       //Reset Mouse-Cursor Start Position
       gsap.to("#mouse-cursor-op", {duration: 0, x: 0, y: 0});
       //Calculate Absolute x,y Coordinates
       let x =  parseInt(finishedButton.offsetWidth) / 2 - sidebarWidth;
       let y =  parseInt(finishedButton.offsetHeight) / 2 - headerHeight - scrollY + yOffset;
+      //Check if Grid-Container is placed over the code-editor
+      if (gridContainer.getBoundingClientRect().top < codeEditor.getBoundingClientRect().top) y += codeEditor.getBoundingClientRect().top - gridContainer.getBoundingClientRect().top;
       while (finishedButton && !isNaN(finishedButton.offsetLeft) && !isNaN(finishedButton.offsetTop)) {
       x += finishedButton.offsetLeft - finishedButton.scrollLeft;
       y += finishedButton.offsetTop - finishedButton.scrollTop;
@@ -136,9 +142,13 @@ export default {
       let yOffset = 701 - validateButtonRect.bottom;
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
 
+      let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
+      let codeEditor = document.querySelector(".editor_in_Tutorial");
+      
       //Calculate Absolute x,y Coordinates
       let x =  parseInt(validateButton.offsetWidth) / 2 - sidebarWidth;
       let y =  parseInt(validateButton.offsetHeight) / 2 - headerHeight - scrollY + yOffset;
+      if (gridContainer.getBoundingClientRect().top < codeEditor.getBoundingClientRect().top) y += codeEditor.getBoundingClientRect().top - gridContainer.getBoundingClientRect().top;
       while (validateButton && !isNaN(validateButton.offsetLeft) && !isNaN(validateButton.offsetTop)) {
       x += validateButton.offsetLeft - validateButton.scrollLeft;
       y += validateButton.offsetTop - validateButton.scrollTop;
@@ -154,6 +164,7 @@ export default {
     },
 
     showTutorialPopup() {
+      let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
       let codeEditor = document.querySelector(".editor_in_Tutorial");
       let codeEditorRect = codeEditor.getBoundingClientRect();
       let header = document.querySelector('.header');
@@ -172,7 +183,8 @@ export default {
       codeEditor = codeEditor.offsetParent;
       }
       let alert = document.querySelector("#alert-for-op-tutorial");
-      gsap.to("#alert-for-op-tutorial", {duration: 0, x: (x-(alert.width)), y: (y-(alert.height/2)), visibility: "visible", zIndex: 5});
+      if (gridContainer.classList.contains("cardgrid_container_xs")) alert.style.width = "70vw";
+      gsap.to("#alert-for-op-tutorial", {duration: 0, x: (x-(alert.width/2)), y: (y-(alert.height/2)), visibility: "visible", zIndex: 5});
 
       setTimeout(() => {
          this.resetPaintedFields(); 

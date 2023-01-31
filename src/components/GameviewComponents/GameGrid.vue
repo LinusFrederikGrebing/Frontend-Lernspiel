@@ -39,8 +39,10 @@ export default {
         console.log(this.idArray);
     },
     decreaseGridSize() {
+        if (this.gridSize > 1) {
         this.gridSize -= 1
         this.idArray.shift();
+        }
     },
     hoverAnimation(obj) {
       // It selects the element with the id that matches the id of the object passed in.
