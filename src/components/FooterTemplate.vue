@@ -4,7 +4,7 @@
         class="text-center footerText"
         cols="12"
       >
-        {{ new Date().getFullYear() }} —  Ein Projekt aus dem Fachbereich IEM-Medieninformatik! 
+        {{ new Date().getFullYear() }} —  {{ $t("footer.footerText") }} 
       </v-col>
     </v-footer>
 </template>

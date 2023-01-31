@@ -22,12 +22,11 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <h5 v-bind="attrs" v-on="on">
-                      Anforderung: {{ currentLevel.solutionApproach }}
+                      {{ $t("gameView.requirement") }}: {{ currentLevel.solutionApproach }}
                     </h5>
                   </template>
                   <span
-                    >Du musst eine {{ currentLevel.solutionApproach }} benutzen, um
-                    das Level {{ currentLevel.id }} abzuschließen!</span
+                    >{{ $t("gameView.requirementTipV1") }} {{ currentLevel.solutionApproach }} {{ $t("gameView.requirementTipV2") }} {{ currentLevel.id }} {{ $t("gameView.requirementTipV3") }}!</span
                   >
                 </v-tooltip>
               </div>

@@ -20,12 +20,12 @@
             <div class="d-flex flex-column align-center mt-4 mb-4">
               <hr class="dividerW30 mb-2 mt-2"  />
               <v-btn @click="saveToPng">
-                <v-icon width="505" height="500" color="#80ba24">mdi-download</v-icon>    Bild speichern!
+                <v-icon width="505" height="500" color="#80ba24">mdi-download</v-icon> {{ $t("gameViewFreeMode.savepng") }}
               </v-btn>
               <hr class="dividerW30 mb-2 mt-2 mb-4"  />
                 <div class="freeModeText d-flex flex-column align-center">
-                  <h4>Freier Modus!</h4>
-                  <span class="caption">Du befindest dich im freien Modus. Hier kannst du ganz nach Belieben deine eigenen Muster zusammenstellen, Schleifen ausprobieren, Funktionen testen oder dich auf kommende Level vorbereiten. Viel Spaß!</span>
+                  <h4>{{ $t("gameViewFreeMode.title") }}</h4>
+                  <span class="caption">{{ $t("gameViewFreeMode.infotext") }}</span>
                 </div>
                <hr class="dividerW30 mt-2 mb-2 mt-4" />
             </div>

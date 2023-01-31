@@ -8,7 +8,7 @@
           shaped
         >
           <h2 class="text-center text-lg-h2 text-md-h3 text-sm-h4 my-4">
-            Warum DrawIT?
+            {{ $t('message.whyDrawIT') }} 
           </h2>
         </v-card>
       </v-col>
@@ -64,28 +64,53 @@ export default {
       hoverLeave(obj) {
         gsap.to(obj.target, {duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1});
       },
+
   },
   data() {
     return {
       items: [
         {
-          title: 'Spielerisches Vertiefen',
-          text: 'Draw IT ermöglicht dir einen spaßigen Einstieg in die Programmierwelt. Dadurch wirst du zwar gefordert, allerdings nicht überfordet. Bunte Farben und Rätsel bringen dich immer wieder ins Grübeln!',
+          title: this.$t('message.whyHeader1') ,
+          text:  this.$t('message.whyText1'),
           link: require("../../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
         },
         {
-          title: 'Übersichtlich',
-          text: 'Programmierung kann (nicht nur) für Neulinge ziemlich monoton und kompliziert aussehen. Um das einzudämmen zeigen wir dir deine Codeeingaben auf der Stelle und geben dir ggf. Tipps und Hilfestellungen.',
+          title: this.$t('message.whyHeader2') ,
+          text:  this.$t('message.whyText2'),
           link: require("../../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
         },
         {
-          title: 'Schnell nutzbar',
-          text: 'Draw IT ist auf einer vielzahl von Geräten nutzbar und es ist keine Installation nötig! Lediglich Internet solltest du haben.',
+          title: this.$t('message.whyHeader3') ,
+          text:  this.$t('message.whyText3'),
           link: require("../../assets/play-button-svgrepo-com (1).svg"),
         },
       ],
     }
-},
+}, 
+watch: {
+  '$i18n.locale': {
+     handler() {
+      this.items= [
+          {
+            title: this.$t('message.whyHeader1'),
+             text:  this.$t('message.whyText1'),
+            link: require("../../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
+          },
+          {
+            title: this.$t('message.whyHeader2') ,
+            text:  this.$t('message.whyText2'),
+            link: require("../../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
+          },
+          {
+            title: this.$t('message.whyHeader3') ,
+            text:  this.$t('message.whyText3'),
+            link: require("../../assets/play-button-svgrepo-com (1).svg"),
+            },
+        ];
+      },
+      deep: true
+    } 
+  },
 // function that triggers when the component is mounted on the page.
 mounted() {
   // It uses the gsap library to animate each item in the "items" array by scaling it up and increasing its opacity with a delay, making them appear one after the other.
@@ -104,6 +129,7 @@ mounted() {
 });  
 }
 }
+
 
 </script>
 

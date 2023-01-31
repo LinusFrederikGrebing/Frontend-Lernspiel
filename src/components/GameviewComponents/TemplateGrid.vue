@@ -24,7 +24,7 @@
     </div>
     <transition appear @enter="enterTemplateGrid">
       <v-btn class="coords-btn" @click="swapButtonText()">
-        Koordinaten <br />
+        {{ $t("template.coords") }} <br />
         {{ btnText }}
       </v-btn>
     </transition>
@@ -40,12 +40,14 @@ export default {
   props: {
     color: String,
   },
-  data: () => ({
-    idArray: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
-    btnText: "anzeigen",
-    coordsVisible: false,
-    zoomedGrid: false,
-  }),
+  data () {
+    return {
+      idArray: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
+      btnText: this.$t("template.coordsShow"),
+      coordsVisible: false,
+      zoomedGrid: false,
+    };
+  },
   methods: {
     showZoomOption() {
       // This function increases the opacity of the element with class "template-zoom-bg" to 0.75, and sets its background image to the value of the variable "zoomBgImg".
@@ -66,8 +68,8 @@ export default {
     swapButtonText() {
       // This function swaps the value of the variable "btnText" between "anzeigen" and "verstecken"
       // and also toggles the value of "coordsVisible" between true and false.
-      if (this.btnText == "anzeigen") this.btnText = "verstecken";
-      else this.btnText = "anzeigen";
+      if (this.btnText == this.$t("template.coordsShow")) this.btnText = this.$t("template.coordsHide");
+      else this.btnText = this.$t("template.coordsShow");
       this.coordsVisible = !this.coordsVisible;
     },
     enterTemplateGrid(element) {
@@ -154,6 +156,14 @@ export default {
     if (this.currentLevel !== null) {
       eval(this.currentLevel.patternCode);
     }
+  },
+  watch: {
+    '$i18n.locale': {
+       handler() {
+        this.btnText = this.$t("template.coordsShow")
+      },
+      deep: true
+    } 
   },
   computed: {
     // Retrieves the current level from local storage and returns it as a parsed JSON object, or returns null if it does not exist in local storage.

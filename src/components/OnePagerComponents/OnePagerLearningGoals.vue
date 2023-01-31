@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card elevation="24" outlined shaped height="5em" class="header">
-      <h1 class="section_header font-weight-black">- Lernziele -</h1>
+      <h1 class="section_header font-weight-black">- {{ $t("navigation.learningGoals") }} -</h1>
     </v-card>
     <v-card elevation="10" outlined class="pb-16">
       <div :class="[{'flex_container' : !$vuetify.breakpoint.lgAndDown}]" v-for="(item, index) in items" :key="index">
@@ -35,32 +35,66 @@ export default {
       // all informations for the Learning-Goals
       items: [
         {
-          title: "Programmierskills",
-          text: "Mit DrawIT kannst Du du Programmierungsskills in der Skriptsprache JavaScript vertiefen und Deine Programmierungskenntnisse erweitern!",
+          title: this.$t('goals.programmingSkills'),
+          text: this.$t('goals.programmingSkillsText'),
           img: require("../../assets/programmierung.png"),
         },
         {
-          title: 'Genauigkeit',
-          text: 'In der Programmierung sind nicht nur Programmierskills gefragt. Als Programmierer musst Du genau zuhören und Anforderungen präzise und Gewissenhaft umsetzen können. DrawIT gibt dir Aufgaben vor, die einer präzisen Bearbeitung bedarf!',
+          title: this.$t('goals.accuracy'),
+          text: this.$t('goals.accuracyText'),
           img: require("../../assets/genauigkeit.png"),
         },
         {
-          title: 'Analytisches Denkvermögen',
-          text: 'Mit DrawIT kannst Du Deine Fähigkeit verbessern, Probleme zu erkennen, in einzelne Teilaspekte zu untergliedern und selbstständig Lösungswege zu finden!',
+          title: this.$t('goals.analyticalThinking'),
+          text: this.$t('goals.analyticalThinkingText'),
           img: require("../../assets/analytischesdenken.png"),
         },
         {
-          title: 'Problemlösungskompetenz',
-          text: 'DrawIT hilft Dir dabei, Deine Fähigkeiten zu steigern, komplexe Problemsituationen oder Schwierigkeiten wahrzunehmen, zu verstehen und anschließend zu lösen. Der einfachste Weg muss nicht immer der geforderte oder beste sein!',
+          title: this.$t('goals.problemSolving'),
+          text: this.$t('goals.problemSolvingText'),
           img: require("../../assets/problemlösung.png"),
         },
         {
-          title: 'Effektivität',
-          text: 'Durch DrawIT wird die Fähigkeit vertieft, Code-Lösungen auf einfache und effiziente Weise zu implementieren und verschiedene Lösungsansätze aufgezeigt!',
+          title:  this.$t('goals.effectiveness'),
+          text:  this.$t('goals.effectivenessText'),
           img: require("../../assets/effektivicon.png"),
         }
       ],
     };
+  },
+  watch: {
+  '$i18n.locale': {
+     handler() {
+      this.items = [
+        {
+          title: this.$t('goals.programmingSkills'),
+          text: this.$t('goals.programmingSkillsText'),
+          img: require("../../assets/programmierung.png"),
+        },
+        {
+          title: this.$t('goals.accuracy'),
+          text: this.$t('goals.accuracyText'),
+          img: require("../../assets/genauigkeit.png"),
+        },
+        {
+          title: this.$t('goals.analyticalThinking'),
+          text: this.$t('goals.analyticalThinkingText'),
+          img: require("../../assets/analytischesdenken.png"),
+        },
+        {
+          title: this.$t('goals.problemSolving'),
+          text: this.$t('goals.problemSolvingText'),
+          img: require("../../assets/problemlösung.png"),
+        },
+        {
+          title:  this.$t('goals.effectiveness'),
+          text:  this.$t('goals.effectivenessText'),
+          img: require("../../assets/effektivicon.png"),
+        }
+      ];
+      },
+      deep: true
+    } 
   },
   mounted() {
     // Loop through each item in the items array

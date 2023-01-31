@@ -17,14 +17,12 @@
 </template>
 
 <script>
+
 import gsap from "gsap";
 
 export default {
   name: "GameGrid",
-  props: {
-    color: String
-  },
-  data: () => {
+  data () {
     return {
       idArray: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
       gridSize: 10,
@@ -51,14 +49,19 @@ export default {
       let scale = element.getBoundingClientRect().width / element.offsetWidth;
       // Sets the default-value of the color.
       let returnColor = '#ffffff';
+      let card = document.querySelector(".painted");
+      let color = "#80ba24";
+      if (card) {
+        color = window.getComputedStyle(card).getPropertyValue("background-color");
+      }
       // If the element has the class "painted" it sets "returnColor" to the value of "this.color"
-      if (element.classList.contains("painted")) returnColor = this.color;  
+      if (element.classList.contains("painted")) returnColor = color;  
         gsap.fromTo(
         element,
         {
           y: 0,
           x: -40,
-          backgroundColor: this.color
+          backgroundColor: color
         },
         {
           backgroundColor: returnColor,

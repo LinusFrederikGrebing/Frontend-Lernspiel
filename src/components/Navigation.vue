@@ -33,6 +33,7 @@
         <div class="sidebar-body">
           <div class="sidebar-links">
             <small class="my-8">Menu</small>
+            <v-btn @click="changeLanguage">Wechsel Sprache</v-btn>
             <hr class="divider" />
             <div class="links">
               <a
@@ -61,22 +62,43 @@
 import gsap from "gsap";
 export default {
   name: "SideBar",
-  data: () => {
+  data() {
     return {
       drawer: false, // variable to control the drawer open/close state
       menuCompact: {
         hidden: true,
       },
       menuLinks: [
-        { title: "Level-Auswahl", icon: "home", path: "lvl"},
-        { title: "Tutorial",  icon: "information-variant", path: "tutorial"},
-        { title: "Lernziele", icon: "checkbox-multiple-marked-outline", path: "goals"},
-        { title: "Hilfen", icon: "help", path: "help"},
-        { title: "Startseite", icon: "logout-variant", path: "home"},
+        { title: this.$t('navigation.lvlSelect'), icon: "logout-variant", path: "lvl"},
+        { title: this.$t('navigation.tutorial'),  icon: "information-variant", path: "tutorial"},
+        { title: this.$t('navigation.learningGoals'), icon: "checkbox-multiple-marked-outline", path: "goals"},
+        { title: this.$t('navigation.helpHeader'), icon: "help", path: "help"},
+        { title: this.$t('navigation.homepage'), icon: "home", path: "home"},
       ],
     };
   },
+  watch: {
+  '$i18n.locale': {
+     handler() {
+      this.menuLinks = [
+        { title: this.$t('navigation.lvlSelect'), icon: "logout-variant", path: "lvl"},
+        { title: this.$t('navigation.tutorial'),  icon: "information-variant", path: "tutorial"},
+        { title: this.$t('navigation.learningGoals'), icon: "checkbox-multiple-marked-outline", path: "goals"},
+        { title: this.$t('navigation.helpHeader'), icon: "help", path: "help"},
+        { title: this.$t('navigation.homepage'), icon: "home", path: "home"},
+      ]
+      },
+      deep: true
+    } 
+  },
   methods: {
+    changeLanguage() {
+      if (this.$i18n.locale === 'en') {
+        this.$i18n.locale = 'de'
+      } else {
+        this.$i18n.locale = 'en'
+      }
+    },
     // Navigate back to OnePagerHome
     home() {
       this.$router.push({ path: "/" });

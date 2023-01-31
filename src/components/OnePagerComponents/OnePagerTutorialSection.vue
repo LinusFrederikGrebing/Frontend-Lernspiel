@@ -8,7 +8,7 @@
     width="120em"
     height="5em"
   >
-    <h1 class="section_header font-weight-black"> - Tutorial - </h1>
+    <h1 class="section_header font-weight-black"> - {{ $t("navigation.tutorial") }} - </h1>
   </v-card>
   <v-card
     elevation="10"
@@ -52,8 +52,8 @@
           width="100%"
           v-model="actualCodeToRun"
         ></CodeEditor>
-        <v-btn id="validate-btn" color="warning" depressed elevation="2">Validieren</v-btn>
-        <v-btn id="finished-btn" color="success" depressed elevation="2">Ausführen</v-btn>
+        <v-btn id="validate-btn" color="warning" depressed elevation="2">{{ $t("message.validate") }}</v-btn>
+        <v-btn id="finished-btn" color="success" depressed elevation="2">{{ $t("message.run") }}</v-btn>
       </div>
     </div>
   </v-card>

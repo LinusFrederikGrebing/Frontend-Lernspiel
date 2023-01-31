@@ -10,7 +10,7 @@
             consoleActive = false;
           "
         >
-          Editor
+        {{ $t("codeInput.editor") }}
         </v-btn>
       </transition>
       <transition appear @enter="enter">
@@ -24,7 +24,7 @@
             gotUnreadErrors = false;
           "
         >
-          Konsole
+        {{ $t("codeInput.console") }}
         </v-btn>
       </transition>
       <transition appear @enter="enterInput">
@@ -65,13 +65,13 @@
                 @click="checkResult"
                 v-if="hasLevel"
               >
-                Validieren
+              {{ $t("codeInput.validate") }}
               </v-btn>
             </transition>
           </template>
           <span>
             <h4>
-              Klicke auf Validieren um zu sehen ob deine Lösung richtig ist!
+              {{ $t("codeInput.validateTip") }}
             </h4>
           </span>
         </v-tooltip>
@@ -87,12 +87,12 @@
                 elevation="2"
                 @click="runfunction"
               >
-                Ausführen
+              {{ $t("codeInput.run") }}
               </v-btn>
             </transition>
           </template>
           <span>
-            <h4>Klicke auf Ausführen um deinen Code zu zeichen!</h4>
+            <h4> {{ $t("codeInput.runTip") }}</h4>
           </span>
         </v-tooltip>
         <div>
@@ -116,7 +116,7 @@
       <div id="fab-items" class="closedFAB">
         <span class="float-element tooltip-left">
           <v-btn depressed elevation="2" @click="animateTutorial()">
-            Wie zeichne ich?
+            {{ $t("codeInput.howToDraw") }}
           </v-btn>
         </span>
         <span class="float-element">
@@ -126,7 +126,7 @@
             elevation="2"
             @click="resetAnimation()"
           >
-            Zurücksetzen
+          {{ $t("codeInput.reset") }}
           </v-btn>
         </span>
         <span class="float-element">
@@ -136,11 +136,11 @@
             elevation="2"
             @click="colorPicker ? (colorPicker = false) : (colorPicker = true)"
           >
-            Farbenauswahl
+          {{ $t("codeInput.color") }}
           </v-btn>
         </span>
         <span class="float-element">
-          <v-btn depressed elevation="2" @click="showHelp"> Hilfen </v-btn>
+          <v-btn depressed elevation="2" @click="showHelp"> {{ $t("codeInput.help") }} </v-btn>
         </span>
       </div>
     </div>
@@ -156,7 +156,7 @@ export default {
   components: {
     CodeEditor,
   },
-  data: () => {
+  data () {
     return {
       btnText: "mdi-plus",
       solution: "",
@@ -165,10 +165,10 @@ export default {
       paintedElements: [],
       colorPicker: false,
       editorActive: true,
-      errorMessage: "Keine Fehlermeldung!",
+      errorMessage: this.$t('codeInput.errorMessages.correct'),
       consoleActive: false,
       gotUnreadErrors: false,
-      codeToRun: "/*Type your own code!*/",
+      codeToRun:  this.$t('codeInput.codeToRun'),
       fab: false,
       hasLevel: true,
     };
@@ -394,14 +394,14 @@ export default {
     showAlertSuccess() {
       // Use sweetalert2
       this.$swal({
-        title: "Hervorragend!",
-        text: "Du hast das Level gemeistert! Nun kannst du dich an an dem nächsten Level versuchen!",
+        title: this.$t('alerts.succes.successTitle'),
+        text: this.$t('alerts.succes.successText'),
         icon: "success",
         showCancelButton: true,
         confirmButtonColor: "#6D9E1F",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Nächstes Level!",
-        cancelButtonText: "Zur Levelauswahl!",
+        confirmButtonText: this.$t('alerts.succes.successConfirm'),
+        cancelButtonText: this.$t('alerts.succes.successCancel'),
         allowOutsideClick: false,
       }).then((result) => {
         if (!result.isConfirmed) {
@@ -416,22 +416,22 @@ export default {
       let alertTxt = "";
       if (!correctResult)
         alertTxt +=
-          "Leider hast du die Aufgabe nicht der Anforderungen entsprechend erfüllt! \n";
+        this.$t('alerts.failure.failureText') + "\n";
       if (requiredSolution !== this.solution)
         alertTxt +=
-          "Löse die Aufgabe mit dem folgenden: <b>" +
+         this.$t('alerts.failure.failureTextFalseSol')  +
           requiredSolution +
           "</b>.";
       // Use sweetalert2
       this.$swal({
-        title: "Beim nächsten Mal...!",
+        title: this.$t('alerts.failure.failureTitle'),
         html: alertTxt,
         icon: "error",
         showCancelButton: true,
         confirmButtonColor: "#6D9E1F",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Level wiederholen!",
-        cancelButtonText: "Zur Levelauswahl!",
+        confirmButtonText: this.$t('alerts.failure.failureConfirm'),
+        cancelButtonText: this.$t('alerts.failure.failureCancel'),
         allowOutsideClick: false,
       }).then((result) => {
         if (result.isConfirmed) {
@@ -445,12 +445,11 @@ export default {
     alertMissingInput() {
       // Use sweetalert2
       this.$swal({
-        title: "Nichts eingetragen!",
-        text: "Klicke in das schwarze Code-Editor-Feld und benutze die Funktion paint(x, y), um ein Kästchen auf dem Kachelfeld einzuzeichen!",
+        title: this.$t('alerts.missing.missingTitle'),
+        text: this.$t('alerts.missing.missingText'),
         icon: "info",
         confirmButtonColor: "#6D9E1F",
         confirmButtonText: "Okay!",
-       
         allowOutsideClick: false,
       })
     },
@@ -518,11 +517,11 @@ export default {
         // Boolean Variable gotUnreadErrors turn on the Console Notification blinking animation
         this.gotUnreadErrors = true;
       }
-      if (this.errorMessage == "") this.errorMessage = "Keine Fehlermeldung!";
+      if (this.errorMessage == "") this.errorMessage = this.$t('codeInput.errorMessages.correct');
     },
     //Placeholder for the Code Editor
     checkIfCodeFilled() {
-      if (this.codeToRun === "/*Type your own code!*/") {
+      if (this.codeToRun === "/*Type your own code!*/" || this.codeToRun === "/*Geben Deinen eigenen Code ein!*/" ) {
         this.codeToRun = "";
       }
     },
@@ -556,7 +555,7 @@ export default {
       var doCount = (code.match(/do/g) || []).length;
       var whileCount = (code.match(/while/g) || []).length;
       let infCheck =
-        '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Diese Schleife ist zu lang oder unendlich!");';
+        '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error(Diese Schleife ist zu lang oder unendlich!");';
       let returnStr = "";
       let restCode = code;
       if (doCount == 0 && whileCount == 0) {
@@ -607,7 +606,7 @@ export default {
         return returnStr + restCode;
       } else
         throw new Error(
-          "Kein korrekter Aufbau einer While oder Do..While Schleife!"
+          this.$t('codeInput.errorMessages.falseLoop')
         );
     },
     // Method checks which kind of loop has been used if any, and saves the value in the "solution"-property
@@ -630,7 +629,7 @@ export default {
     // Method checks if the essential method paint has been called, throws an Error if not (to help new players understand that this method is needed)
     checkIfPaintCall(code) {
       if (code.search("paint") == -1)
-        throw new Error("Rufe die paint(x,y) Methode aus um Felder anzumalen!\n");
+        throw new Error(this.$t('codeInput.errorMessages.missingPaint')+"\n");
     },
     // Helper Method takes a String and the position of a Bracket as Parameter and returns the content of given Bracket
     getBracket(str, pos) {
@@ -667,7 +666,7 @@ export default {
     // Method throws an Error if a paint-call has more or less than 2 parameters.
     checkPaintParams(code) {
       let error = new Error(
-        "Zu viele Parameter angegeben für die Methode paint."
+        this.$t('codeInput.errorMessages.tooMuchParameters')
       );
       let restCode = code;
       while (restCode.search("paint") > -1) {
@@ -682,14 +681,14 @@ export default {
     changeErrorMsg(error) {
       if (error instanceof ReferenceError)
         this.errorMessage +=
-          "Folgender Ausdruck ist nicht definiert:\n" + error;
+        this.$t('codeInput.errorMessages.reference')+"\n" + error;
       else if (error instanceof TypeError)
         this.errorMessage +=
-          "Ein oder Mehrere Parameter wurden nicht übergeben oder sind vom falschen Typ:\n" +
+        this.$t('codeInput.errorMessages.type')+"\n" +
           error;
       else if (error instanceof SyntaxError)
         this.errorMessage +=
-          "Da stimmt etwas mit deiner Syntax nicht!\n" + error;
+        this.$t('codeInput.errorMessages.syntax')+"\n" + error;
       else this.errorMessage = error;
     },
     hideValidateButton(){
@@ -711,7 +710,13 @@ export default {
     //The Watcher "color" makes sure the color property is update on change
     color() {
       this.updateBackgroundColor();
-    }
+    },
+    '$i18n.locale': {
+     handler() {
+       this.codeToRun = this.$t('codeInput.codeToRun');
+      },
+      deep: true
+    } 
   },
   mounted() {
     if (this.$route.path === '/GameViewFreeMode') {

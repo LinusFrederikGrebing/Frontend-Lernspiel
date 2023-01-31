@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card elevation="24" outlined shaped height="5em" class="header">
-      <h1 class="section_header font-weight-black">- Level Auswahl -</h1>
+      <h1 class="section_header font-weight-black">- {{ $t("navigation.lvlSelect") }} -</h1>
     </v-card>
     <v-card elevation="24" outlined shaped class="">
       <v-btn class="free-btn white--text"
@@ -11,7 +11,7 @@
            color="#4a5c66"
            @click="freeMode()"
           >
-           Freier Modus
+          {{ $t("message.freeMode") }}
       </v-btn>
     
       <flickity ref="flickity" :options="flickityOptions" class="carousel mt-12 mb-16">
@@ -30,7 +30,7 @@
             </v-img>
           </div>
           <v-card-subtitle class="pb-0 font-weight-bold white--text d-flex flex-column align-center">
-            Schwierigkeit:
+            {{ $t("message.difficulty") }}:
               <v-rating 
               color="yellow darken-3" 
               background-color="white darken-1" 
@@ -51,7 +51,7 @@
               elevation="2" 
               @click="setLevel(level)"
             >
-              Start
+            {{ $t("message.start") }}
             </v-btn>
             <v-tooltip bottom color="success">
               <template v-slot:activator="{ on, attrs }">
