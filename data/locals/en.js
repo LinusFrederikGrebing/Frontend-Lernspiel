@@ -79,7 +79,7 @@ export default {
     howToDraw: 'How to draw?',
     reset: 'Restart',
     color: 'Color selection',
-    help: 'Support',
+    help: 'Help',
     codeToRun: '/*Type your own code!*/',
     errorMessages: {
       syntax: "There is something wrong with your syntax!",
@@ -114,7 +114,7 @@ export default {
     homepage: 'Homepage',
     lvlSelect: 'Level Selection',
     tutorial: 'Tutorial',
-    helpHeader: 'Support',
+    helpHeader: 'Help',
     learningGoals: 'Learning Goals',
   },
   footer: {
@@ -133,7 +133,7 @@ export default {
   },
   whyDrawIT: {
     whyDrawIT: 'Why DrawIT?',
-    whyHeader1: 'PLAYFUL DEEPENING',
+    whyHeader1: 'Playing and Learning',
     whyHeader2: 'CLEAR',
     whyHeader3: 'FAST TO USE',
     whyText1: 'Draw IT gives you a fun introduction to the world of programming. You will be challenged, but not overwhelmed. Bright colors and puzzles keep you thinking!',
@@ -145,7 +145,7 @@ export default {
     accuracy: 'Accuracy',
     analyticalThinking: 'Analytical thinking',
     problemSolving: 'Problem-solving skills',
-    effectiveness: 'Eeffectiveness',
+    effectiveness: 'Effectiveness',
     programmingSkillsText: 'With DrawIT you can deepen your programming skills in the scripting language JavaScript and expand your programming knowledge!',
     accuracyText: 'Programming is not just about programming skills. As a programmer, you have to listen carefully and be able to implement requirements precisely and conscientiously. DrawIT gives you tasks that require precise processing!',
     analyticalThinkingText: 'With DrawIT you can improve your ability to recognize problems, to break them down into individual aspects and to find solutions independently!',
@@ -155,7 +155,7 @@ export default {
   help: {
     example: 'Example',
     variables: {
-      var: 'variables',
+      var: 'Variables',
       varTitle: 'What are variables?',
       varTextSec1: 'A variable is best compared to a container that can hold exactly one value. The container is a logical storage space with a (unchangeable) name and a value that can be changed.',
       varSubHeader: 'Different types of variables',
@@ -163,7 +163,7 @@ export default {
       varExampleText: 'The constant PI is declared in the first declaration. This constant cannot be changed during runtime, but can be used anywhere. After declaring a variable with let or var, the variable can be changed during runtime and used anywhere.',  
     },
     function: {
-      function: 'functions',
+      function: 'Functions',
       functionTitle: 'What are functions?',
       functionTextSec1: 'Functions are a block of statements under a name. The function block is defined once, then the JavaScript commands of the function can be called several times in the program via the name. Grouping commands into a function improves the readability of the script and prevents errors.',
       functionSubHeader: 'Flow of functions and function calls',
@@ -171,7 +171,7 @@ export default {
       functionExampleText: 'The element can be determined using the parameters passed to the function and the class "painted" can be assigned to the respective element. The function is called using the name of the function and appropriate parameter transfer.',  
     },
     for: {
-      for: 'for-loop',
+      for: 'For-loop',
       forTitle: 'What are for loops?',
       forTextSec1: 'The for loop is used when a certain number of iterations is required. The loop header summarizes the preparation of the whole loop, the loop condition, and the calculations needed to continue the loop.',
       forSubHeader: 'Syntax of a for loop',
@@ -179,7 +179,7 @@ export default {
       forExampleText: 'A result variable is declared in the example. The for loop starts at 0 and runs until the initial value i is less than 5. i is increased by one point each time the loop is run through. In this example, the loop is executed 4 times. If the loop is also to carry out the 5th step, then the termination condition must have a <=.',
     },
     while: {
-      while: 'while loops',
+      while: 'While loops',
       whileTitle: 'What are while loops?',
       whileTextSec1: "The while loop first evaluates the loop condition. If the result is true (or a truthy value), the loop body is executed. Then the process starts again from the beginning. This type of loop is suitable when you don't know in advance how many times the loop will be executed.",
       whileSubHeader: "Syntax of a while loop",
