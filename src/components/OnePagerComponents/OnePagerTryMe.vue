@@ -1,26 +1,8 @@
 <template>
   <div class="my-16">
     <div id="tryContainer"></div>
-<<<<<<< HEAD
-    <v-btn id="try-btn" class="white--text show"
-           elevation="24"
-           rounded
-           x-large
-           color="#4a5c66"
-           @click="setLevel">
-           {{ $t("lvlSelect.quickStart") }}
-    </v-btn>
-    <v-btn id="try-btn-fab" class="white--text hide"
-           elevation="24"
-           fab
-           color="#4a5c66"
-           @click="setLevel">
-          <svg fill="#FFFFFF" class="ml-2" height="30px" width="30px" version="1.1" id="Capa_1" viewBox="0 0 210 210" xml:space="preserve">
-          <path d="M179.07,105L30.93,210V0L179.07,105z"/>
-         </svg>
-=======
     <v-btn
-      id="tryBtn"
+      id="try-btn"
       class="white--text show"
       elevation="24"
       rounded
@@ -31,7 +13,7 @@
       {{ $t("lvlSelect.quickStart") }}
     </v-btn>
     <v-btn
-      id="tryBtnFAB"
+      id="try-btn-fab"
       class="white--text hide"
       elevation="24"
       fab
@@ -50,7 +32,6 @@
       >
         <path d="M179.07,105L30.93,210V0L179.07,105z" />
       </svg>
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
     </v-btn>
   </div>
 </template>
@@ -103,13 +84,8 @@ export default {
     },
     // show the try button and move it to the correct position
     enter() {
-<<<<<<< HEAD
       this.tryBtn = document.getElementById("try-btn"); 
       this.tryBtnFAB = document.getElementById("try-btn-fab"); 
-=======
-      this.tryBtn = document.getElementById("tryBtn");
-      this.tryBtnFAB = document.getElementById("tryBtnFAB");
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
       this.tryBtn.classList.add("show");
       this.tryBtn.classList.remove("hidden");
       this.tryBtnFAB.classList.add("hide");
@@ -172,22 +148,14 @@ export default {
 
 <style scoped>
 /* CSS only for TryMeButton-Template */
-<<<<<<< HEAD
-#try-btn{
-=======
-#tryBtn {
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
+#try-btn {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   z-index: 2;
 }
-<<<<<<< HEAD
-#try-btn-fab{
-=======
-#tryBtnFAB {
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
+#try-btn-fab {
   position: fixed;
   right: 4em;
   bottom: 6em;

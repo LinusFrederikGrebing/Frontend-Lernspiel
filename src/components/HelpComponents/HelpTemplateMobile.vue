@@ -1,23 +1,4 @@
 <template>
-<<<<<<< HEAD
-    <v-container>
-      <div class="mb-16">
-        <v-expansion-panels>
-          <v-expansion-panel
-            v-for="item in informations" :key="item.id"
-          >
-            <v-expansion-panel-header class="text-h6 text-sm-h5 my-4">
-              {{ item.label }}
-            </v-expansion-panel-header>
-            <v-expansion-panel-content class="">
-              <v-card class="panel-item">
-                <v-img :src="item.src" max-height="5em"></v-img>
-                <v-card-title>
-                  {{ item.title }}
-                </v-card-title>
-                <v-card-text class="black--text">
-                  {{ item.textSection }}
-=======
   <v-container>
     <div class="mb-16">
       <v-expansion-panels>
@@ -26,7 +7,7 @@
             {{ item.label }}
           </v-expansion-panel-header>
           <v-expansion-panel-content class="">
-            <v-card class="panel_item">
+            <v-card class="panel-item">
               <v-img :src="item.src" max-height="5em"></v-img>
               <v-card-title>
                 {{ item.title }}
@@ -52,7 +33,6 @@
                 ></v-img>
                 <v-card-text class="black--text mr-8">
                   {{ item.exampleText }}
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
                 </v-card-text>
               </div>
               <hr class="divider mt-8" />

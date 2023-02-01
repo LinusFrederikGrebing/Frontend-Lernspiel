@@ -35,7 +35,7 @@
             </v-row>
           </v-card>
         </div>
-        <div class="editor_in_Tutorial mr-16">
+        <div class="editor-in-tutorial mr-16">
           <CodeEditor
             :read_only="true"
             font_size="37px"
@@ -51,25 +51,8 @@
           }}</v-btn>
         </div>
       </div>
-<<<<<<< HEAD
-      <div class="editor-in-tutorial mr-16">
-        <CodeEditor
-          :read_only="true"
-          font_size="37px"
-          height="440px"
-          width="100%"
-          v-model="actualCodeToRun"
-        ></CodeEditor>
-        <v-btn id="validate-btn" color="warning" depressed elevation="2">{{ $t("codeInput.validate") }}</v-btn>
-        <v-btn id="finished-btn" color="success" depressed elevation="2">{{ $t("codeInput.run") }}</v-btn>
-      </div>
-    </div>
-  </v-card>
-</v-container>
-=======
     </v-card>
   </v-container>
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
 </template>
 
 <script>
@@ -125,15 +108,10 @@ export default {
       if (sidebar.classList.contains("drawer-open"))
         sidebarWidth = parseInt(sidebar.offsetWidth);
 
-<<<<<<< HEAD
-      let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
-      let codeEditor = document.querySelector(".editor-in-tutorial");
-=======
       let gridContainer = document.querySelector(
         "#cardgrid-container-tutorial-op"
       );
-      let codeEditor = document.querySelector(".editor_in_Tutorial");
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
+      let codeEditor = document.querySelector(".editor-in-tutorial");
 
       //Reset Mouse-Cursor Start Position
       gsap.to("#mouse-cursor-op", { duration: 0, x: 0, y: 0 });
@@ -195,17 +173,11 @@ export default {
       if (sidebar.classList.contains("drawer-open"))
         sidebarWidth = parseInt(sidebar.offsetWidth);
 
-<<<<<<< HEAD
-      let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
-      let codeEditor = document.querySelector(".editor-in-tutorial");
-      
-=======
       let gridContainer = document.querySelector(
         "#cardgrid-container-tutorial-op"
       );
-      let codeEditor = document.querySelector(".editor_in_Tutorial");
+      let codeEditor = document.querySelector(".editor-in-tutorial");
 
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
       //Calculate Absolute x,y Coordinates
       let x = parseInt(validateButton.offsetWidth) / 2 - sidebarWidth;
       let y =
@@ -252,15 +224,10 @@ export default {
     },
 
     showTutorialPopup() {
-<<<<<<< HEAD
-      let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
-      let codeEditor = document.querySelector(".editor-in-tutorial");
-=======
       let gridContainer = document.querySelector(
         "#cardgrid-container-tutorial-op"
       );
-      let codeEditor = document.querySelector(".editor_in_Tutorial");
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
+      let codeEditor = document.querySelector(".editor-in-tutorial");
       let codeEditorRect = codeEditor.getBoundingClientRect();
       let header = document.querySelector(".header");
       let sidebar = document.querySelector("#sidebar");
@@ -342,27 +309,10 @@ export default {
       }
     );
 
-<<<<<<< HEAD
-      gsap.to(
-       ".editor-in-tutorial",
-        {
-          duration: 2,
-          scrollTrigger: {
-            trigger:  ".editor-in-tutorial",
-            onEnter: this.tutorialAnimation,
-            onLeave: this.resetPaintedFields,
-            onEnterBack:  this.tutorialAnimation,
-            onLeaveBack:  this.resetPaintedFields
-          },
-        }
-      );
-  }
-}
-=======
-    gsap.to(".editor_in_Tutorial", {
+    gsap.to(".editor-in-tutorial", {
       duration: 2,
       scrollTrigger: {
-        trigger: ".editor_in_Tutorial",
+        trigger: ".editor-in-tutorial",
         onEnter: this.tutorialAnimation,
         onLeave: this.resetPaintedFields,
         onEnterBack: this.tutorialAnimation,
@@ -371,7 +321,6 @@ export default {
     });
   },
 };
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
 </script>
 
 <style scoped>
@@ -380,11 +329,7 @@ export default {
   margin-top: 5em;
   margin-bottom: 10em;
 }
-<<<<<<< HEAD
-.editor-in-tutorial{
-=======
-.editor_in_Tutorial {
->>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
+.editor-in-tutorial {
   margin-left: 1em;
   width: 95%;
 }
