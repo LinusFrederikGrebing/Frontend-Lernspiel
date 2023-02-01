@@ -15,6 +15,21 @@
           </div>
         </v-col>
         <v-col xl="6" class="d-flex flex-column justify-center align-center">
+<<<<<<< HEAD
+            <hr class="dividerW30 mb-2 mt-2 mb-4"  />
+            <GameGridSize ref="sibling1" :gameSize="gameSize" @increaseGrid="increaseGrid" @decreaseGrid="decreaseGrid"/>
+            <div class="d-flex flex-column align-center mt-4 mb-4">
+              <hr class="dividerW30 mb-2 mt-2"  />
+              <v-btn @click="saveToPng">
+                <v-icon width="505" height="500" color="#80ba24">mdi-download</v-icon> {{ $t("gameViewFreeMode.savepng") }}
+              </v-btn>
+              <hr class="dividerW30 mb-2 mt-2 mb-4"  />
+                <div class="free-mode-text d-flex flex-column align-center">
+                  <h4>{{ $t("gameViewFreeMode.title") }}</h4>
+                  <span class="caption">{{ $t("gameViewFreeMode.infotext") }}</span>
+                </div>
+               <hr class="dividerW30 mt-2 mb-2 mt-4" />
+=======
           <hr class="dividerW30 mb-2 mt-2 mb-4" />
           <GameGridSize
             ref="sibling1"
@@ -34,6 +49,7 @@
             <div class="freeModeText d-flex flex-column align-center">
               <h4>{{ $t("gameViewFreeMode.title") }}</h4>
               <span class="caption">{{ $t("gameViewFreeMode.infotext") }}</span>
+>>>>>>> e4e47f6d46eedf1e212218a246f813771d00713e
             </div>
             <hr class="dividerW30 mt-2 mb-2 mt-4" />
           </div>
@@ -126,7 +142,7 @@ export default {
   visibility: hidden;
 }
 
-.freeModeText {
+.free-mode-text {
   width: 25em;
   text-align: center;
 }
