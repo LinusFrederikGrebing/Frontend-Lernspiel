@@ -22,11 +22,15 @@
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <h5 v-bind="attrs" v-on="on">
-                      {{ $t("gameView.requirement") }}: {{ currentLevel.solutionApproach }}
+                      {{ $t("gameView.requirement") }}:
+                      {{ currentLevel.solutionApproach }}
                     </h5>
                   </template>
                   <span
-                    >{{ $t("gameView.requirementTipV1") }} {{ currentLevel.solutionApproach }} {{ $t("gameView.requirementTipV2") }} {{ currentLevel.id }} {{ $t("gameView.requirementTipV3") }}!</span
+                    >{{ $t("gameView.requirementTipV1") }}
+                    {{ currentLevel.solutionApproach }}
+                    {{ $t("gameView.requirementTipV2") }} {{ currentLevel.id }}
+                    {{ $t("gameView.requirementTipV3") }}!</span
                   >
                 </v-tooltip>
               </div>
@@ -84,7 +88,7 @@ export default {
     isHelpOpen: false, // variable to store the state of the help
   }),
   methods: {
-    restartLevel(){
+    restartLevel() {
       this.startTime = new Date();
       this.startPopUp(this.currentLevel);
     },
@@ -104,7 +108,7 @@ export default {
         this.currentLevel.bestTimeinSek == 0 ||
         this.currentLevel.bestTimeinSek > this.time
       ) {
-        this.levels[indexNextLevel-1].bestTimeinSek = this.time;
+        this.levels[indexNextLevel - 1].bestTimeinSek = this.time;
       }
       localStorage.setItem("levels", JSON.stringify(this.levels));
       this.nextLevel(indexNextLevel);
@@ -123,7 +127,6 @@ export default {
       eval(this.currentLevel.patternCode);
       localStorage.setItem("levels", JSON.stringify(this.levels));
       // reset the grid and template to their initial state
-  
     },
     // nextLevelStarted method is called when the user clicks on the next level button
     nextLevelStarted(indexNextLevel) {
@@ -139,13 +142,12 @@ export default {
         color: "#000000",
         allowOutsideClick: false,
         confirmButtonColor: "#6D9E1F",
-        confirmButtonText: this.$t('alerts.continue'),
+        confirmButtonText: this.$t("alerts.continue"),
       });
     },
   },
   // mounted function is called when the component is mounted to the DOM.
   mounted() {
-   
     // It sets the start time of the level to the current time
     this.startTime = new Date();
 

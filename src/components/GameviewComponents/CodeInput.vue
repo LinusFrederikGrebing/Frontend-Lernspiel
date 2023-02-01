@@ -317,10 +317,9 @@ export default {
         }
       });
     },
-    resetLevel(){
+    resetLevel() {
       this.resetAnimation();
       this.$emit("restart");
-     
     },
 
     //GSAP Animation when resetting

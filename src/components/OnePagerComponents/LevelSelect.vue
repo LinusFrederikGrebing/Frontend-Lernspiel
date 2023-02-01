@@ -1,61 +1,106 @@
 <template>
   <v-container>
     <v-card elevation="24" outlined shaped height="5em" class="header">
-      <h1 class="section_header font-weight-black">- {{ $t("navigation.lvlSelect") }} -</h1>
+      <h1 class="section_header font-weight-black">
+        - {{ $t("navigation.lvlSelect") }} -
+      </h1>
     </v-card>
     <v-card elevation="24" outlined shaped class="">
-      <v-btn class="free-btn white--text"
-           elevation="4"
-           rounded
-           width="20em"
-           color="#4a5c66"
-           @click="freeMode()"
-          >
-          {{ $t("lvlSelect.freeMode") }}
+      <v-btn
+        class="free-btn white--text"
+        elevation="4"
+        rounded
+        width="20em"
+        color="#4a5c66"
+        @click="freeMode()"
+      >
+        {{ $t("lvlSelect.freeMode") }}
       </v-btn>
-    
-      <flickity ref="flickity" :options="flickityOptions" class="carousel mt-12 mb-16">
-        <v-card v-for="(level, index) in levels" 
-        class="styledDiv carousel-cell pa-5 mx-8" 
-        elevation="12" 
-        width="30em"
-        color="#252525" 
-        :class="['mx-auto my-8', {' locked': levelIsAccessible(level) === false }]" :key="index">
-          <div :id="'lvlselect' + index" @mouseenter="hoverEnter($event)" @mouseleave="hoverLeave($event)">
-            <v-img class="white--text align-end" height="23em" :src="require(`@/assets/${level.img}`)">
+
+      <flickity
+        ref="flickity"
+        :options="flickityOptions"
+        class="carousel mt-12 mb-16"
+      >
+        <v-card
+          v-for="(level, index) in levels"
+          class="styledDiv carousel-cell pa-5 mx-8"
+          elevation="12"
+          width="30em"
+          color="#252525"
+          :class="[
+            'mx-auto my-8',
+            { ' locked': levelIsAccessible(level) === false },
+          ]"
+          :key="index"
+        >
+          <div
+            :id="'lvlselect' + index"
+            @mouseenter="hoverEnter($event)"
+            @mouseleave="hoverLeave($event)"
+          >
+            <v-img
+              class="white--text align-end"
+              height="23em"
+              :src="require(`@/assets/${level.img}`)"
+            >
               <div :id="'lockIcon' + index" class="zentriertLockIcon">
-                <v-icon v-if="levelIsAccessible(level) === false" class="zentriert"> mdi-lock </v-icon>
+                <v-icon
+                  v-if="levelIsAccessible(level) === false"
+                  class="zentriert"
+                >
+                  mdi-lock
+                </v-icon>
               </div>
-              <v-card-title class="black--text">Level {{ level.id }}</v-card-title>
+              <v-card-title class="black--text"
+                >Level {{ level.id }}</v-card-title
+              >
             </v-img>
           </div>
-          <v-card-subtitle class="pb-0 font-weight-bold white--text d-flex flex-column align-center">
+          <v-card-subtitle
+            class="
+              pb-0
+              font-weight-bold
+              white--text
+              d-flex
+              flex-column
+              align-center
+            "
+          >
             {{ $t("lvlSelect.difficulty") }}:
-              <v-rating 
-              color="yellow darken-3" 
-              background-color="white darken-1" 
-              empty-icon="$ratingFull" 
+            <v-rating
+              color="yellow darken-3"
+              background-color="white darken-1"
+              empty-icon="$ratingFull"
               half-increments
-              hover 
-              length="8" 
-              readonly 
-              size="25" 
-              :value="level.difficulty">
+              hover
+              length="8"
+              readonly
+              size="25"
+              :value="level.difficulty"
+            >
             </v-rating>
           </v-card-subtitle>
 
           <v-card-actions class="my-4">
-            <v-btn 
-              color="primary" 
-              depressed 
-              elevation="2" 
+            <v-btn
+              color="primary"
+              depressed
+              elevation="2"
               @click="setLevel(level)"
             >
-            {{ $t("lvlSelect.start") }}
+              {{ $t("lvlSelect.start") }}
             </v-btn>
             <v-tooltip bottom color="success">
               <template v-slot:activator="{ on, attrs }">
-                <v-icon color="success" dark v-bind="attrs" v-on="on" v-if="level.completed === true" right>
+                <v-icon
+                  color="success"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                  v-if="level.completed === true"
+                  right
+                >
                   mdi-checkbox-marked-circle
                 </v-icon>
               </template>
@@ -64,12 +109,21 @@
                 <h5>{{ $t("lvlSelect.lvlCompletedText") }}</h5>
               </span>
             </v-tooltip>
-            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text text-subtitle-1">
-              {{ $t("lvlSelect.bestTime") }}: {{Math.round(level.bestTimeinSek * 100) / 100  }}  {{ $t("lvlSelect.seconds") }}
-            </v-card-title>
-            <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text text-subtitle-1">
+            <v-card-title
+              v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60"
+              class="white--text text-subtitle-1"
+            >
               {{ $t("lvlSelect.bestTime") }}:
-              {{ Math.round((level.bestTimeinSek / 60) * 100) / 100 }}  {{ $t("lvlSelect.minutes") }}
+              {{ Math.round(level.bestTimeinSek * 100) / 100 }}
+              {{ $t("lvlSelect.seconds") }}
+            </v-card-title>
+            <v-card-title
+              v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60"
+              class="white--text text-subtitle-1"
+            >
+              {{ $t("lvlSelect.bestTime") }}:
+              {{ Math.round((level.bestTimeinSek / 60) * 100) / 100 }}
+              {{ $t("lvlSelect.minutes") }}
             </v-card-title>
           </v-card-actions>
         </v-card>
@@ -107,14 +161,15 @@ export default {
     hoverEnter(obj) {
       gsap.fromTo(
         obj.target,
-          { scale: 1, y: 0 },
-          { duration: 0.2, scale: 1.09, y: -10, opacity: 1 }
+        { scale: 1, y: 0 },
+        { duration: 0.2, scale: 1.09, y: -10, opacity: 1 }
       );
     },
     hoverLeave(obj) {
-      gsap.fromTo( obj.target,
-          { scale: 1.09 },
-          { duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1 }
+      gsap.fromTo(
+        obj.target,
+        { scale: 1.09 },
+        { duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1 }
       );
     },
     // This function paints a specific element in the DOM with the class "painted" by first creating a reference to the element of the templateGrid and then adding the "painted" class to it.
@@ -149,13 +204,13 @@ export default {
     // The showAlertFailure function displays an error alert when the user tries to play a level that has not yet been unlocked
     showAlertFailure(level) {
       this.$swal({
-        title: this.$t('alerts.locked.title'),
+        title: this.$t("alerts.locked.title"),
         html:
-        this.$t('alerts.locked.textV1') +
+          this.$t("alerts.locked.textV1") +
           (level - 1) +
-          this.$t('alerts.locked.textV2') +
+          this.$t("alerts.locked.textV2") +
           level +
-          this.$t('alerts.locked.textV3'),
+          this.$t("alerts.locked.textV3"),
         icon: "error",
         confirmButtonColor: "#6D9E1F",
         confirmButtonText: "Okay!",
@@ -196,11 +251,16 @@ export default {
   computed: {
     //returns the levels data stored in local storage, or defaults the first level if local storage is empty
     levels() {
-      return JSON.parse(localStorage.getItem("levels")) || Object.values(Object.values(levels)[0]);
+      return (
+        JSON.parse(localStorage.getItem("levels")) ||
+        Object.values(Object.values(levels)[0])
+      );
     },
     accessibleLevels() {
       //returns the accessible levels data stored in local storage, or defaults to the first level if local storage is empty
-      return JSON.parse(localStorage.getItem("accessibleLevels")) || [this.levels[0]];
+      return (
+        JSON.parse(localStorage.getItem("accessibleLevels")) || [this.levels[0]]
+      );
     },
   },
 };
