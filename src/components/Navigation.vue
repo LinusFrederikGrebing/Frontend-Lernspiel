@@ -168,7 +168,8 @@ export default {
     // Navigate back to OnePagerHome
     home() {
       if (this.$route.path !== "/") {
-        this.$router.push({ path: "/" });
+        this.$router.push({ path: "/" })
+        .then(() => { window.location.reload(); })
       }
     },
     moveDrawer() {
@@ -196,7 +197,8 @@ export default {
     // Set the Routing-Path based on the given Path
     setLink(path) {
       if (this.$route.query.section !== path) {
-        this.$router.push({ path: "/", query: { section: path } });
+        this.$router.push({ path: "/", query: { section: path } })
+        .then(() => { window.location.reload(); });
       }
     },
   },

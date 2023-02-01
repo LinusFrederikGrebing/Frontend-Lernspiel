@@ -18,7 +18,7 @@ i.v-icon.notranslate.mdi.mdi-menu-down.theme--light {
     border-color: rgb(255 255 255 / 42%);
 }
 .bg-color {
-  background-image: url(../src/assets/Hexagon3.svg);
+  background-image: url("./src/assets/Hexagon3.svg");
 }
 /* Container */
 .container {

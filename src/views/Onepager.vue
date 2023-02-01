@@ -103,6 +103,7 @@ export default {
       deep: true,
       handler(route) {
         if (route.query.section) {
+          
           this.checkRoute(route.query.section);
         }
       },
