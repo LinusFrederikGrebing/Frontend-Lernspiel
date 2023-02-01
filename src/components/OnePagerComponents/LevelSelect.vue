@@ -11,7 +11,7 @@
            color="#4a5c66"
            @click="freeMode()"
           >
-          {{ $t("message.freeMode") }}
+          {{ $t("lvlSelect.freeMode") }}
       </v-btn>
     
       <flickity ref="flickity" :options="flickityOptions" class="carousel mt-12 mb-16">
@@ -30,7 +30,7 @@
             </v-img>
           </div>
           <v-card-subtitle class="pb-0 font-weight-bold white--text d-flex flex-column align-center">
-            {{ $t("message.difficulty") }}:
+            {{ $t("lvlSelect.difficulty") }}:
               <v-rating 
               color="yellow darken-3" 
               background-color="white darken-1" 
@@ -51,7 +51,7 @@
               elevation="2" 
               @click="setLevel(level)"
             >
-            {{ $t("message.start") }}
+            {{ $t("lvlSelect.start") }}
             </v-btn>
             <v-tooltip bottom color="success">
               <template v-slot:activator="{ on, attrs }">
@@ -60,16 +60,16 @@
                 </v-icon>
               </template>
               <span>
-                <h4>Du hast das Level bereits gemeistert!</h4>
-                <h5>Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!</h5>
+                <h4>{{ $t("lvlSelect.lvlCompletedTitle") }}</h4>
+                <h5>{{ $t("lvlSelect.lvlCompletedText") }}</h5>
               </span>
             </v-tooltip>
             <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek < 60" class="white--text text-subtitle-1">
-              Bestzeit: {{Math.round(level.bestTimeinSek * 100) / 100  }} Sekunden
+              {{ $t("lvlSelect.bestTime") }}: {{Math.round(level.bestTimeinSek * 100) / 100  }}  {{ $t("lvlSelect.seconds") }}
             </v-card-title>
             <v-card-title v-if="level.bestTimeinSek > 0 && level.bestTimeinSek >= 60" class="white--text text-subtitle-1">
-              Bestzeit:
-              {{ Math.round((level.bestTimeinSek / 60) * 100) / 100 }} Minuten
+              {{ $t("lvlSelect.bestTime") }}:
+              {{ Math.round((level.bestTimeinSek / 60) * 100) / 100 }}  {{ $t("lvlSelect.minutes") }}
             </v-card-title>
           </v-card-actions>
         </v-card>
@@ -149,13 +149,13 @@ export default {
     // The showAlertFailure function displays an error alert when the user tries to play a level that has not yet been unlocked
     showAlertFailure(level) {
       this.$swal({
-        title: "Noch nicht freigeschaltet!",
+        title: this.$t('alerts.locked.title'),
         html:
-          "Schließe erst Level " +
+        this.$t('alerts.locked.textV1') +
           (level - 1) +
-          " ab, um das <b>Level " +
+          this.$t('alerts.locked.textV2') +
           level +
-          "</b> spielen zu können!",
+          this.$t('alerts.locked.textV3'),
         icon: "error",
         confirmButtonColor: "#6D9E1F",
         confirmButtonText: "Okay!",

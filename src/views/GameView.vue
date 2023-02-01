@@ -128,13 +128,13 @@ export default {
     // startPopUp method shows the pop-up for the current level
     startPopUp(level) {
       this.$swal({
-        html: level.description,
+        html: eval(level.description),
         width: 650,
         padding: "3em",
         color: "#000000",
         allowOutsideClick: false,
         confirmButtonColor: "#6D9E1F",
-        confirmButtonText: " Weiter! ",
+        confirmButtonText: this.$t('alerts.continue'),
       });
     },
   },

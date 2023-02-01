@@ -8,6 +8,15 @@
 .yellow {
   background-color: yellow;
 }
+i.v-icon.notranslate.mdi.mdi-menu-down.theme--light {
+  color: rgb(255 255 255 / 92%);
+}
+.v-select__selection.v-select__selection--comma {
+  color: rgb(255 255 255 / 92%);
+}
+.theme--light.v-text-field > .v-input__control > .v-input__slot:before {
+    border-color: rgb(255 255 255 / 42%);
+}
 /* Container */
 .container {
   max-width: 1900px;

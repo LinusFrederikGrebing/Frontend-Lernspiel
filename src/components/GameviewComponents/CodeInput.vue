@@ -10,7 +10,7 @@
             consoleActive = false;
           "
         >
-        {{ $t("codeInput.editor") }}
+          {{ $t("codeInput.editor") }}
         </v-btn>
       </transition>
       <transition appear @enter="enter">
@@ -24,7 +24,7 @@
             gotUnreadErrors = false;
           "
         >
-        {{ $t("codeInput.console") }}
+          {{ $t("codeInput.console") }}
         </v-btn>
       </transition>
       <transition appear @enter="enterInput">
@@ -65,7 +65,7 @@
                 @click="checkResult"
                 v-if="hasLevel"
               >
-              {{ $t("codeInput.validate") }}
+                {{ $t("codeInput.validate") }}
               </v-btn>
             </transition>
           </template>
@@ -87,12 +87,12 @@
                 elevation="2"
                 @click="runfunction"
               >
-              {{ $t("codeInput.run") }}
+                {{ $t("codeInput.run") }}
               </v-btn>
             </transition>
           </template>
           <span>
-            <h4> {{ $t("codeInput.runTip") }}</h4>
+            <h4>{{ $t("codeInput.runTip") }}</h4>
           </span>
         </v-tooltip>
         <div>
@@ -109,10 +109,9 @@
       </div>
     </div>
     <div class="floating-container">
-      <v-btn class="floating-button" @click="openOrCloseFAB()"> 
+      <v-btn class="floating-button" @click="openOrCloseFAB()">
         <v-icon size="30" color="#80ba45">{{ btnText }}</v-icon>
-      </v-btn
-      >
+      </v-btn>
       <div id="fab-items" class="closedFAB">
         <span class="float-element tooltip-left">
           <v-btn depressed elevation="2" @click="animateTutorial()">
@@ -126,7 +125,7 @@
             elevation="2"
             @click="resetAnimation()"
           >
-          {{ $t("codeInput.reset") }}
+            {{ $t("codeInput.reset") }}
           </v-btn>
         </span>
         <span class="float-element">
@@ -136,11 +135,13 @@
             elevation="2"
             @click="colorPicker ? (colorPicker = false) : (colorPicker = true)"
           >
-          {{ $t("codeInput.color") }}
+            {{ $t("codeInput.color") }}
           </v-btn>
         </span>
         <span class="float-element">
-          <v-btn depressed elevation="2" @click="showHelp"> {{ $t("codeInput.help") }} </v-btn>
+          <v-btn depressed elevation="2" @click="showHelp">
+            {{ $t("codeInput.help") }}
+          </v-btn>
         </span>
       </div>
     </div>
@@ -156,7 +157,7 @@ export default {
   components: {
     CodeEditor,
   },
-  data () {
+  data() {
     return {
       btnText: "mdi-plus",
       solution: "",
@@ -165,40 +166,39 @@ export default {
       paintedElements: [],
       colorPicker: false,
       editorActive: true,
-      errorMessage: this.$t('codeInput.errorMessages.correct'),
+      errorMessage: this.$t("codeInput.errorMessages.correct"),
       consoleActive: false,
       gotUnreadErrors: false,
-      codeToRun:  this.$t('codeInput.codeToRun'),
+      codeToRun: this.$t("codeInput.codeToRun"),
       fab: false,
       hasLevel: true,
     };
   },
 
   methods: {
-  
     // CSS-FAB-Animation
     openOrCloseFAB() {
       let element = document.getElementById("fab-items");
       if (this.fab == false) {
-        this.openFAB(element)
+        this.openFAB(element);
       } else {
-        this.closeFAB(element)
+        this.closeFAB(element);
       }
     },
-    openFAB(element){
+    openFAB(element) {
       element.classList.add("element-container");
-        element.classList.remove("closedFAB");
-        // change the btnIcon after 300millis
-        setTimeout(() => {
-          this.btnText = "mdi-minus";
-        }, 300);
-        this.fab = true;
+      element.classList.remove("closedFAB");
+      // change the btnIcon after 300millis
+      setTimeout(() => {
+        this.btnText = "mdi-minus";
+      }, 300);
+      this.fab = true;
     },
-    closeFAB(element){
-       element.classList.add("closedFAB");
-        element.classList.remove("element-container");
-        this.btnText = "mdi-plus";
-        this.fab = false;
+    closeFAB(element) {
+      element.classList.add("closedFAB");
+      element.classList.remove("element-container");
+      this.btnText = "mdi-plus";
+      this.fab = false;
     },
     showHelp() {
       this.$emit("show-help");
@@ -219,10 +219,14 @@ export default {
       //Calculate Absolute x,y Coordinates
       let x = parseInt(codeEditor.offsetWidth) / 4 - sidebarWidth;
       let y = parseInt(codeEditor.offsetHeight) / 2 - headerHeight;
-      while (codeEditor && !isNaN(codeEditor.offsetLeft) && !isNaN(codeEditor.offsetTop)) {
-      x += codeEditor.offsetLeft - codeEditor.scrollLeft;
-      y += codeEditor.offsetTop - codeEditor.scrollTop;
-      codeEditor = codeEditor.offsetParent;
+      while (
+        codeEditor &&
+        !isNaN(codeEditor.offsetLeft) &&
+        !isNaN(codeEditor.offsetTop)
+      ) {
+        x += codeEditor.offsetLeft - codeEditor.scrollLeft;
+        y += codeEditor.offsetTop - codeEditor.scrollTop;
+        codeEditor = codeEditor.offsetParent;
       }
 
       //Animate the Cursor
@@ -264,7 +268,11 @@ export default {
       //Calculate Absolute x,y Coordinates
       let x = parseInt(buttonFinished.offsetWidth) / 2 - sidebarWidth;
       let y = parseInt(buttonFinished.offsetHeight) / 2 - headerHeight;
-      while (buttonFinished && !isNaN(buttonFinished.offsetLeft) && !isNaN(buttonFinished.offsetTop)) {
+      while (
+        buttonFinished &&
+        !isNaN(buttonFinished.offsetLeft) &&
+        !isNaN(buttonFinished.offsetTop)
+      ) {
         x += buttonFinished.offsetLeft - buttonFinished.scrollLeft;
         y += buttonFinished.offsetTop - buttonFinished.scrollTop;
         buttonFinished = buttonFinished.offsetParent;
@@ -305,7 +313,7 @@ export default {
         if (!el.id.includes("v")) {
           el.classList.remove("painted");
           // make sure to reset the Color change of the hover animation
-          el.style.backgroundColor ="#ffffff"
+          el.style.backgroundColor = "#ffffff";
         }
       });
     },
@@ -394,14 +402,14 @@ export default {
     showAlertSuccess() {
       // Use sweetalert2
       this.$swal({
-        title: this.$t('alerts.succes.successTitle'),
-        text: this.$t('alerts.succes.successText'),
+        title: this.$t("alerts.succes.successTitle"),
+        text: this.$t("alerts.succes.successText"),
         icon: "success",
         showCancelButton: true,
         confirmButtonColor: "#6D9E1F",
         cancelButtonColor: "#d33",
-        confirmButtonText: this.$t('alerts.succes.successConfirm'),
-        cancelButtonText: this.$t('alerts.succes.successCancel'),
+        confirmButtonText: this.$t("alerts.succes.successConfirm"),
+        cancelButtonText: this.$t("alerts.succes.successCancel"),
         allowOutsideClick: false,
       }).then((result) => {
         if (!result.isConfirmed) {
@@ -415,43 +423,42 @@ export default {
     showAlertFailure(requiredSolution, correctResult) {
       let alertTxt = "";
       if (!correctResult)
-        alertTxt +=
-        this.$t('alerts.failure.failureText') + "\n";
+        alertTxt += this.$t("alerts.failure.failureText") + "\n";
       if (requiredSolution !== this.solution)
         alertTxt +=
-         this.$t('alerts.failure.failureTextFalseSol')  +
+          this.$t("alerts.failure.failureTextFalseSol") +
           requiredSolution +
           "</b>.";
       // Use sweetalert2
       this.$swal({
-        title: this.$t('alerts.failure.failureTitle'),
+        title: this.$t("alerts.failure.failureTitle"),
         html: alertTxt,
         icon: "error",
         showCancelButton: true,
         confirmButtonColor: "#6D9E1F",
         cancelButtonColor: "#d33",
-        confirmButtonText: this.$t('alerts.failure.failureConfirm'),
-        cancelButtonText: this.$t('alerts.failure.failureCancel'),
+        confirmButtonText: this.$t("alerts.failure.failureConfirm"),
+        cancelButtonText: this.$t("alerts.failure.failureCancel"),
         allowOutsideClick: false,
       }).then((result) => {
         if (result.isConfirmed) {
           this.$emit("failure");
           this.resetAnimation();
         } else {
-          this.$router.push({ path: "/", query: { section: 'lvl' } });
+          this.$router.push({ path: "/", query: { section: "lvl" } });
         }
       });
     },
     alertMissingInput() {
       // Use sweetalert2
       this.$swal({
-        title: this.$t('alerts.missing.missingTitle'),
-        text: this.$t('alerts.missing.missingText'),
+        title: this.$t("alerts.missing.missingTitle"),
+        text: this.$t("alerts.missing.missingText"),
         icon: "info",
         confirmButtonColor: "#6D9E1F",
         confirmButtonText: "Okay!",
         allowOutsideClick: false,
-      })
+      });
     },
     // Checks if two arrays are equals and returns Boolean
     areEqual(array1, array2) {
@@ -479,8 +486,7 @@ export default {
       }
       return returnStr + restStr;
     },
-   
-   
+
     // Method tries to run the userwritten code and throws errors if needed
     runfunction() {
       this.resetPaintedFields();
@@ -490,7 +496,7 @@ export default {
       // Methode paint(first,second) paints a grid card with the given coordinates
       // Method checkParamValue(num) checks if the coordinates given in paint are in the range of the grid's length
       let paintStr =
-       // 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted");}\n';
+        // 'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted");}\n';
         'let index = 0; function paint(first, second) {\n setTimeout(() => { let element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted"); }, index);   index = index+20 } \n';
 
       let checkParamValueStr =
@@ -517,11 +523,15 @@ export default {
         // Boolean Variable gotUnreadErrors turn on the Console Notification blinking animation
         this.gotUnreadErrors = true;
       }
-      if (this.errorMessage == "") this.errorMessage = this.$t('codeInput.errorMessages.correct');
+      if (this.errorMessage == "")
+        this.errorMessage = this.$t("codeInput.errorMessages.correct");
     },
     //Placeholder for the Code Editor
     checkIfCodeFilled() {
-      if (this.codeToRun === "/*Type your own code!*/" || this.codeToRun === "/*Geben Deinen eigenen Code ein!*/" ) {
+      if (
+        this.codeToRun === "/*Type your own code!*/" ||
+        this.codeToRun === "/*Geben Deinen eigenen Code ein!*/"
+      ) {
         this.codeToRun = "";
       }
     },
@@ -604,10 +614,7 @@ export default {
           }
         }
         return returnStr + restCode;
-      } else
-        throw new Error(
-          this.$t('codeInput.errorMessages.falseLoop')
-        );
+      } else throw new Error(this.$t("codeInput.errorMessages.falseLoop"));
     },
     // Method checks which kind of loop has been used if any, and saves the value in the "solution"-property
     checkWhichSolutionUsed(code) {
@@ -629,7 +636,7 @@ export default {
     // Method checks if the essential method paint has been called, throws an Error if not (to help new players understand that this method is needed)
     checkIfPaintCall(code) {
       if (code.search("paint") == -1)
-        throw new Error(this.$t('codeInput.errorMessages.missingPaint')+"\n");
+        throw new Error(this.$t("codeInput.errorMessages.missingPaint") + "\n");
     },
     // Helper Method takes a String and the position of a Bracket as Parameter and returns the content of given Bracket
     getBracket(str, pos) {
@@ -666,7 +673,7 @@ export default {
     // Method throws an Error if a paint-call has more or less than 2 parameters.
     checkPaintParams(code) {
       let error = new Error(
-        this.$t('codeInput.errorMessages.tooMuchParameters')
+        this.$t("codeInput.errorMessages.tooMuchParameters")
       );
       let restCode = code;
       while (restCode.search("paint") > -1) {
@@ -681,22 +688,24 @@ export default {
     changeErrorMsg(error) {
       if (error instanceof ReferenceError)
         this.errorMessage +=
-        this.$t('codeInput.errorMessages.reference')+"\n" + error;
+          this.$t("codeInput.errorMessages.reference") + "\n" + error;
       else if (error instanceof TypeError)
         this.errorMessage +=
-        this.$t('codeInput.errorMessages.type')+"\n" +
-          error;
+          this.$t("codeInput.errorMessages.type") + "\n" + error;
       else if (error instanceof SyntaxError)
         this.errorMessage +=
-        this.$t('codeInput.errorMessages.syntax')+"\n" + error;
+          this.$t("codeInput.errorMessages.syntax") + "\n" + error;
       else this.errorMessage = error;
     },
-    hideValidateButton(){
+    hideValidateButton() {
       this.hasLevel = false;
     },
     updateBackgroundColor() {
-      document.documentElement.style.setProperty('--background-color', this.color);
-    }
+      document.documentElement.style.setProperty(
+        "--background-color",
+        this.color
+      );
+    },
   },
   computed: {
     // Load the current Level
@@ -711,19 +720,19 @@ export default {
     color() {
       this.updateBackgroundColor();
     },
-    '$i18n.locale': {
-     handler() {
-       this.codeToRun = this.$t('codeInput.codeToRun');
+    "$i18n.locale": {
+      handler() {
+        this.codeToRun = this.$t("codeInput.codeToRun");
       },
-      deep: true
-    } 
+      deep: true,
+    },
   },
   mounted() {
-    if (this.$route.path === '/GameViewFreeMode') {
+    if (this.$route.path === "/GameViewFreeMode") {
       this.hideValidateButton();
     }
     this.updateBackgroundColor();
-  }
+  },
 };
 </script>
 
@@ -731,7 +740,7 @@ export default {
 <style>
 /* CSS only for all Templates */
 .painted {
-  background-color: var(--background-color, rgba(128, 186, 36, 0.7)) !important; 
+  background-color: var(--background-color, rgba(128, 186, 36, 0.7)) !important;
 }
 </style>
 

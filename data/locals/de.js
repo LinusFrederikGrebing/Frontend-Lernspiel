@@ -1,5 +1,50 @@
 export default { 
+  levels: {
+    level1: {
+      description: '<h3>Hallo und Herzlich Wilkommen zum ersten Level von Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im ersten Level wirst Du die Grundlagen des Spiels erlernen.</p> <p class=\"line-1 anim-typewriter2\"> Rechts-Oben findest du die Vorlage. Deine Aufgabe ist es die</p> <p class=\"line-1 anim-typewriter3\">Vorlage mit bekannten Javascript-Operatoren ins linke Feld</p> <p class=\"line-1 anim-typewriter4\">nachzuzeichnen. Du kannst das Feld mit der Methode:</p><p class=\"line-1 anim-typewriter5\"> <b>paint(x, y)</b> anmalen.</p><br /><p class=\"line-1 anim-typewriter6\">Jetzt bist Du an der Reihe! Viel Spaß!</p>'
+    },
+    level2: {
+      description: '<h3>Level 2</h3> <br /> <p class=\"line-1 anim-typewriter1\">Im zweiten Level benutzen wir eine For-Schleife. Viel Spaß!'
+    },
+    level3: {
+      description: "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">Ein bisschen Abstand dazwischen ist bestimmt nicht so schwer!</p> <p class=\"line-1 anim-typewriter2\">Nutze in dieser Aufgabe stattdessen die While-Schleife!</p>",
+    },
+    level4: {
+      description: "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Jetzt trau dich mal an eine Diagonale!</p> <p class=\"line-1 anim-typewriter2\">Nutze in dieser Aufgabe nochmal die For-Schleife!</p>",
+    },
+    level5: {
+      description: "<h3>Level 5</h3> <br /> <p class=\"line-1 anim-typewriter1\">Es ist das selbe Muster!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür aber diesmal die While-Schleife!</p>"
+    },
+    level6: {
+      description: "<h3>Level 6</h3> <br /> <p class=\"line-1 anim-typewriter1\">Mach das selbe nochmal!!</p> <p class=\"line-1 anim-typewriter2\">Keine Sorge, nur noch einmal mit einer Do-While-Schleife!</p> <p class=\"line-1 anim-typewriter3\">Was fällt dir auf?</p>"
+    },
+    level7: {
+      description: "<h3>Level 7</h3> <br /><p class=\"line-1 anim-typewriter1\">Es ist garnicht so schwer wie es aus sieht!</p> <br />  <p class=\"line-1 anim-typewriter2\">Tipp: Du benötigst nur eine einzige For-Schleife!</p>"
+    },
+    level8: {
+      description: "<h3>Level 8</h3> <br /><p class=\"line-1 anim-typewriter1\">Nach der vorherigen Aufgabe ist diese hier bestimmt ein Kinderspiel für dich.</p> <br /> <p class=\"line-1 anim-typewriter2\">Mach das bitte mit einer For-Schleife!</p>"
+    },
+    level9: {
+      description: "<h3>Level 9</h3> <br /> <p class=\"line-1 anim-typewriter1\"> Du wirst immer besser und besser!</p> <p class=\"line-1 anim-typewriter2\">Du machst große Schritte!</p> <p class=\"line-1 anim-typewriter3\">Nutze nochmal die For-Schleife!</p>"
+    },
+    level10: {
+      description: "<h3>Level 10</h3> <br /> <p class=\"line-1 anim-typewriter1\">Färb doch mal alles hier ein!</p> <p class=\"line-1 anim-typewriter2\">Nutze dafür die For-Schleife!</p>"
+    },
+    level11: {
+      description: "<h3>Level 11</h3> <br /><p class=\"line-1 anim-typewriter1\">Das Muster sieht doch schön aus!</p> <p class=\"line-1 anim-typewriter2\">Es ist wichtig selbst recherchieren zu können!</p> <p class=\"line-1 anim-typewriter3\">Informiere dich nun selbständig über if-Abfragen!</p> <p class=\"line-1 anim-typewriter4\">Die werden dir hier helfen!</p>  <p class=\"line-1 anim-typewriter5\">Nutze auch hier nochmal die For-Schleife!</p>"
+    },
+    level12: {
+      description: "<h3>Level 12</h3> <br /><p class=\"line-1 anim-typewriter1\">Löse dieses Level bitte mit einer For-Schleife!</p> <p class=\"line-1 anim-typewriter2\">Viel Spaß!</p>"
+    },
+    level13: {
+      description: "<h3>Level 13</h3> <br /><p class=\"line-1 anim-typewriter1\">Löse dieses Level bitte mit einer do-while-Schleife!</p> <p class=\"line-1 anim-typewriter2\">Viel Spaß!</p>"
+    },
+    level14: {
+      description: "<h3>Level 14</h3> <br /><p class=\"line-1 anim-typewriter1\">Bilde ein Schachbrettmuster mithilfe von For-Schleifen ab!</p> <p class=\"line-1 anim-typewriter2\">Tipp: Modulo hilft dir dabei!</p>"
+    },
+  },
   alerts: {
+    continue: 'Weiter!',
     succes: {
       successTitle: 'Hervorragend!',
       successText: 'Du hast das Level gemeistert! Nun kannst du dich an an dem nächsten Level versuchen!',
@@ -16,6 +61,12 @@ export default {
     missing: {
       missingTitle: 'Nichts eingetragen!',
       missingText: 'Klicke in das schwarze Code-Editor-Feld und benutze die Funktion paint(x, y), um ein Kästchen auf dem Kachelfeld einzuzeichen!',
+    },
+    locked: {
+      title: 'Noch nicht freigeschaltet!',
+      textV1: 'Schließe erst Level ',
+      textV2: ' ab, um das <b>Level ',
+      textV3: '</b> spielen zu können!'
     }
   },
   codeInput: {
@@ -69,8 +120,18 @@ export default {
   footer: {
     footerText: 'Ein Projekt aus dem Fachbereich IEM-Medieninformatik!'
   },
-  message: {
+  lvlSelect: {
+    freeMode: 'Freier Modus',
+    difficulty: 'Schwierigkeit',
+    start: 'Start',
     quickStart: 'Schnellstart',
+    minutes: 'Minuten',
+    seconds: 'Sekunden',
+    bestTime: 'Bestzeit',
+    lvlCompletedTitle: 'Du hast das Level bereits gemeistert!',
+    lvlCompletedText: 'Spiele es gerne erneut, um deine Fähigkeiten zu verbessern!'
+  },
+  whyDrawIT: {
     whyDrawIT: 'Warum DrawIT?',
     whyHeader1: 'SPIELERISCHES VERTIEFEN',
     whyHeader2: 'ÜBERSICHTLICH',
@@ -78,9 +139,6 @@ export default {
     whyText1: 'Draw IT ermöglicht dir einen spaßigen Einstieg in die Programmierwelt. Dadurch wirst du zwar gefordert, allerdings nicht überfordet. Bunte Farben und Rätsel bringen dich immer wieder ins Grübeln!',
     whyText2: 'Programmierung kann (nicht nur) für Neulinge ziemlich monoton und kompliziert aussehen. Um das einzudämmen zeigen wir dir deine Codeeingaben auf der Stelle und geben dir ggf. Tipps und Hilfestellungen.',
     whyText3: 'Draw IT ist auf einer vielzahl von Geräten nutzbar und es ist keine Installation nötig! Lediglich Internet solltest du haben.',
-    freeMode: 'Freier Modus',
-    difficulty: 'Schwierigkeit',
-    start: 'Start',
   },
   goals: {
     programmingSkills: 'Programmierskills',

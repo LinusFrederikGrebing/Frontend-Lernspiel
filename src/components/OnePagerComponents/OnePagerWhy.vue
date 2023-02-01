@@ -8,7 +8,7 @@
           shaped
         >
           <h2 class="text-center text-lg-h2 text-md-h3 text-sm-h4 my-4">
-            {{ $t('message.whyDrawIT') }} 
+            {{ $t('whyDrawIT.whyDrawIT') }} 
           </h2>
         </v-card>
       </v-col>
@@ -70,18 +70,18 @@ export default {
     return {
       items: [
         {
-          title: this.$t('message.whyHeader1') ,
-          text:  this.$t('message.whyText1'),
+          title: this.$t('whyDrawIT.whyHeader1') ,
+          text:  this.$t('whyDrawIT.whyText1'),
           link: require("../../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
         },
         {
-          title: this.$t('message.whyHeader2') ,
-          text:  this.$t('message.whyText2'),
+          title: this.$t('whyDrawIT.whyHeader2') ,
+          text:  this.$t('whyDrawIT.whyText2'),
           link: require("../../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
         },
         {
-          title: this.$t('message.whyHeader3') ,
-          text:  this.$t('message.whyText3'),
+          title: this.$t('whyDrawIT.whyHeader3') ,
+          text:  this.$t('whyDrawIT.whyText3'),
           link: require("../../assets/play-button-svgrepo-com (1).svg"),
         },
       ],
@@ -92,18 +92,18 @@ watch: {
      handler() {
       this.items= [
           {
-            title: this.$t('message.whyHeader1'),
-             text:  this.$t('message.whyText1'),
+            title: this.$t('whyDrawIT.whyHeader1'),
+             text:  this.$t('whyDrawIT.whyText1'),
             link: require("../../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
           },
           {
-            title: this.$t('message.whyHeader2') ,
-            text:  this.$t('message.whyText2'),
+            title: this.$t('whyDrawIT.whyHeader2') ,
+            text:  this.$t('whyDrawIT.whyText2'),
             link: require("../../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
           },
           {
-            title: this.$t('message.whyHeader3') ,
-            text:  this.$t('message.whyText3'),
+            title: this.$t('whyDrawIT.whyHeader3') ,
+            text:  this.$t('whyDrawIT.whyText3'),
             link: require("../../assets/play-button-svgrepo-com (1).svg"),
             },
         ];

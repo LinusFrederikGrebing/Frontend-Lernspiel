@@ -52,8 +52,8 @@
           width="100%"
           v-model="actualCodeToRun"
         ></CodeEditor>
-        <v-btn id="validate-btn" color="warning" depressed elevation="2">{{ $t("message.validate") }}</v-btn>
-        <v-btn id="finished-btn" color="success" depressed elevation="2">{{ $t("message.run") }}</v-btn>
+        <v-btn id="validate-btn" color="warning" depressed elevation="2">{{ $t("codeInput.validate") }}</v-btn>
+        <v-btn id="finished-btn" color="success" depressed elevation="2">{{ $t("codeInput.run") }}</v-btn>
       </div>
     </div>
   </v-card>

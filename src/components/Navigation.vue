@@ -32,8 +32,21 @@
       <div class="py-8" id="sidebar">
         <div class="sidebar-body">
           <div class="sidebar-links">
-            <small class="my-8">Menu</small>
-            <v-btn @click="changeLanguage">Wechsel Sprache</v-btn>
+            <small class="mt-8 mb-4">Menu</small>
+            <hr class="divider" />
+              <div class="d-flex mx-4"
+              >
+              <flag class="mb-1 mr-4 lang-icon" :iso="selectedLanguage" />
+               <v-select
+                v-model="selectedLanguage"
+                :items="languages"
+                :item-text="languageText"
+                :item-value="languageValue"
+                background-color="#4a5c66" color="#ffffff"
+              >
+              </v-select>
+            </div>
+    
             <hr class="divider" />
             <div class="links">
               <a
@@ -56,10 +69,12 @@
       </div>
     </v-navigation-drawer>
   </div>
+  
 </template>
   
 <script>
 import gsap from "gsap";
+
 export default {
   name: "SideBar",
   data() {
@@ -68,6 +83,11 @@ export default {
       menuCompact: {
         hidden: true,
       },
+      selectedLanguage: "de",
+      languages: [
+        { value: 'de', text: 'Deutsch' },
+        { value: 'us', text: 'English' }
+      ],
       menuLinks: [
         { title: this.$t('navigation.lvlSelect'), icon: "logout-variant", path: "lvl"},
         { title: this.$t('navigation.tutorial'),  icon: "information-variant", path: "tutorial"},
@@ -89,9 +109,19 @@ export default {
       ]
       },
       deep: true
-    } 
+    },
+    selectedLanguage(){
+      this.changeLanguage()
+    }
+
   },
   methods: {
+    languageText(language) {
+      return language.text
+    },
+    languageValue(language) {
+      return language.value
+    },
     changeLanguage() {
       if (this.$i18n.locale === 'en') {
         this.$i18n.locale = 'de'
@@ -134,6 +164,11 @@ export default {
 
 <style scoped>
 /* CSS only for Navigation */
+
+.lang-icon {
+ scale: 2;
+}
+
 .header {
   height: 4em !important;
   box-shadow: 0em 0.3em 0.3em rgba(255, 255, 255, 0.4);

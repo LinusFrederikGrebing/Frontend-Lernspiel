@@ -1,5 +1,50 @@
-export default { 
+export default {
+  levels: {
+    level1: {
+      description: '<h3>Hello and welcome to the first level of Draw IT!</h3> <br /> <p class=\"line-1 anim-typewriter1\">In the first level you will learn the basics of the game.</p> <p class=\"line-1 anim-typewriter2\"> You can find the template at the top right. Your task is to </p> <p class=\"line-1 anim-typewriter3\">trace the template into the left field using known JavaScript</p> <p class=\"line-1 anim-typewriter4\">operators. You can paint the box using the:</p><p class=\"line-1 anim-typewriter5\"> <b>paint(x, y)</b> method.</p><br /><p class=\"line-1 anim-typewriter6\">Now it is your turn! Have fun!</p>'
+    },
+    level2: {
+      description: '<h3>Level 2</h3> <br /> <p class=\"line-1 anim-typewriter1\">In the second level we use a for loop. Have fun!'
+    },
+    level3: {
+      description: "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">A bit of distance in between is definitely not that difficult!</p> <p class=\"line-1 anim-typewriter2\">In this exercise, use the while loop instead!</p>",
+    },
+    level4: {
+      description: "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Now dare to do a diagonal!</p> <p class=\"line-1 anim-typewriter2\">Use the for loop again in this exercise!</p>",
+    },
+    level5: {
+      description: "<h3>Level 5</h3> <br /> <p class=\"line-1 anim-typewriter1\">It's the same pattern!</p> <p class=\"line-1 anim-typewriter2\">But this time use the while loop!</p>"
+    },
+    level6: {
+      description: "<h3>Level 6</h3> <br /> <p class=\"line-1 anim-typewriter1\">Do the same again!</p> <p class=\"line-1 anim-typewriter2\">Don't worry, just do it again with a do-while loop!</p> <p class=\"line-1 anim-typewriter3\">What do you notice?</p>"
+    },
+    level7: {
+      description: "<h3>Level 7</h3> <br /><p class=\"line-1 anim-typewriter1\">It's not as hard as it looks!</p> <br />  <p class=\"line-1 anim-typewriter2\">Tip: You only need one for loop!</p>"
+    },
+    level8: {
+      description: "<h3>Level 8</h3> <br /><p class=\"line-1 anim-typewriter1\">After the previous task, this one will be a piece of cake for you.</p> <br /> <p class=\"line-1 anim-typewriter2\">Please do this with a for loop!</p>"
+    },
+    level9: {
+      description: "<h3>Level 9</h3> <br /> <p class=\"line-1 anim-typewriter1\"> You keep getting better and better!</p> <p class=\"line-1 anim-typewriter2\">You're taking big steps!</p> <p class=\"line-1 anim-typewriter3\">Use the for loop again!</p>"
+    },
+    level10: {
+      description: "<h3>Level 10</h3> <br /> <p class=\"line-1 anim-typewriter1\">Color everything here!</p> <p class=\"line-1 anim-typewriter2\">Use the for loop for that!</p>"
+    },
+    level11: {
+      description: "<h3>Level 11</h3> <br /><p class=\"line-1 anim-typewriter1\">The pattern looks nice!</p> <p class=\"line-1 anim-typewriter2\">It is important to be able to do your own research!</p> <p class=\"line-1 anim-typewriter3\">Find out for yourself now about if queries!</p> <p class=\"line-1 anim-typewriter4\">They will help you here!</p>  <p class=\"line-1 anim-typewriter5\">Again, use the for loop!</p>"
+    },
+    level12: {
+      description: "<h3>Level 12</h3> <br /><p class=\"line-1 anim-typewriter1\">Please solve this level with a for loop!</p> <p class=\"line-1 anim-typewriter2\">Have fun!</p>"
+    },
+    level13: {
+      description: "<h3>Level 13</h3> <br /><p class=\"line-1 anim-typewriter1\">Please solve this level with a do-while loop!</p> <p class=\"line-1 anim-typewriter2\">Have fun!</p>"
+    },
+    level14: {
+      description: "<h3>Level 14</h3> <br /><p class=\"line-1 anim-typewriter1\">Map a checkerboard pattern using for loops!</p> <p class=\"line-1 anim-typewriter2\">Tip: Modulo will help you!</p>"
+    },
+  }, 
   alerts: {
+    continue: 'Continue!',
     succes: {
       successTitle: 'Excellent!',
       successText: 'You have mastered the level! Now you can try your hand at the next level!',
@@ -16,6 +61,12 @@ export default {
     missing: {
       missingTitle: 'Nothing entered!',
       missingText: 'Click in the black code editor box and use the paint(x, y) function to draw a box on the tile field!',
+    },
+    locked: {
+      title: 'Not yet unlocked!',
+      textV1: 'Complete level ',
+      textV2: ' first to be able to play <b>level ',
+      textV3: '</br>!'
     }
   },
   codeInput: {
@@ -69,8 +120,18 @@ export default {
   footer: {
     footerText: 'A project from the IEM media informatics department!'
   },
-  message: {
+  lvlSelect: {
+    freeMode: 'Free Mode',
+    difficulty: 'Difficulty',
+    start: 'Start',
     quickStart: 'Quick Start',
+    minutes: 'Minutes',
+    seconds: 'Seconds',
+    bestTime: 'Best Time',
+    lvlCompletedTitle: 'You have already mastered the level!',
+    lvlCompletedText: 'Feel free to play it again to improve your skills!'
+  },
+  whyDrawIT: {
     whyDrawIT: 'Why DrawIT?',
     whyHeader1: 'PLAYFUL DEEPENING',
     whyHeader2: 'CLEAR',
@@ -78,9 +139,6 @@ export default {
     whyText1: 'Draw IT gives you a fun introduction to the world of programming. You will be challenged, but not overwhelmed. Bright colors and puzzles keep you thinking!',
     whyText2: 'Programming can look pretty monotonous and complicated (not only) for newbies. In order to contain this, we show you your code entries on the spot and give you tips and assistance if necessary.',
     whyText3: 'Draw IT can be used on a variety of devices and no installation is required! All you should have is internet.',
-    freeMode: 'Free Mode',
-    difficulty: 'Difficulty',
-    start: 'Start', 
   },
   goals: {
     programmingSkills: 'Programming skills',

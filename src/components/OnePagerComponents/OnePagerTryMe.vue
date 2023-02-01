@@ -7,7 +7,7 @@
            x-large
            color="#4a5c66"
            @click="setLevel">
-           {{ $t("message.quickStart") }}
+           {{ $t("lvlSelect.quickStart") }}
     </v-btn>
     <v-btn id="tryBtnFAB" class="white--text hide"
            elevation="24"
