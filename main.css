@@ -17,6 +17,9 @@ i.v-icon.notranslate.mdi.mdi-menu-down.theme--light {
 .theme--light.v-text-field > .v-input__control > .v-input__slot:before {
     border-color: rgb(255 255 255 / 42%);
 }
+.bg-color {
+  background-image: url(../src/assets/Hexagon3.svg);
+}
 /* Container */
 .container {
   max-width: 1900px;

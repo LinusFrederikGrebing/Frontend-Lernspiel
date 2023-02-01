@@ -1,41 +1,41 @@
 <template>
-    <v-parallax
-      class="no-padding"
-      :height="height"
-      :src="`${require(`@/assets/Hexagon4.svg`)}`"
-    >
-      <header id="start" class="pt-12">
-        <OnePagerWhy />
-      </header>
-      <svg class="arrows">
-        <path class="a1" d="M0 0 L30 30 L60 0"></path>
-        <path class="a2" d="M0 15 L30 45 L60 15"></path>
-        <path class="a3" d="M0 30 L30 60 L60 30"></path>
-      </svg>
-      <main>
-        <div id="lvl_select" class="pt-16 mt-16 mb-16">
-          <LevelSelect />
+  <v-parallax
+    class="no-padding"
+    :height="height"
+    :src="`${require(`@/assets/Hexagon4.svg`)}`"
+  >
+    <header id="start" class="pt-12">
+      <OnePagerWhy />
+    </header>
+    <svg class="arrows">
+      <path class="a1" d="M0 0 L30 30 L60 0"></path>
+      <path class="a2" d="M0 15 L30 45 L60 15"></path>
+      <path class="a3" d="M0 30 L30 60 L60 30"></path>
+    </svg>
+    <main>
+      <div id="lvl_select" class="pt-16 mt-16 mb-16">
+        <LevelSelect />
+      </div>
+      <div id="tutorial" class="pt-16 mt-16 mb-16">
+        <div id="popupContainer" class="test">
+          <img id="mouse-cursor-op" src="../assets/mouse-cursor.png" />
+          <OnePagerTutorialSection />
         </div>
-        <div id="tutorial" class=" pt-16 mt-16 mb-16">
-          <div id="popupContainer" class="test">
-             <img id="mouse-cursor-op" src="../assets/mouse-cursor.png">
-             <OnePagerTutorialSection />
-          </div>
-          <img id="alert-for-op-tutorial" src="../assets/successpopup.png">
+        <img id="alert-for-op-tutorial" src="../assets/successpopup.png" />
+      </div>
+      <div id="goals" class="pt-16 mt-16 mb-16">
+        <OnePagerGoals />
+      </div>
+      <div id="help_template" class="pt-16 mt-16">
+        <div :class="[{ desktop_invisible: $vuetify.breakpoint.mdAndDown }]">
+          <HelpTemplateDesktop />
         </div>
-        <div id="goals" class="pt-16 mt-16 mb-16">
-          <OnePagerGoals />
+        <div :class="[{ desktop_invisible: $vuetify.breakpoint.lgAndUp }]">
+          <HelpTemplateMobile />
         </div>
-        <div id="help_template" class="pt-16 mt-16">
-          <div :class="[{ desktop_invisible: $vuetify.breakpoint.mdAndDown }]">
-            <HelpTemplateDesktop />
-          </div>
-          <div :class="[{ desktop_invisible: $vuetify.breakpoint.lgAndUp }]">
-            <HelpTemplateMobile />
-          </div>
-        </div>
-      </main>
-    </v-parallax>
+      </div>
+    </main>
+  </v-parallax>
 </template>
 
 <script>
@@ -167,7 +167,7 @@ export default {
           return 5340;
       }
     },
-  }
+  },
 };
 </script>
 <style scoped>

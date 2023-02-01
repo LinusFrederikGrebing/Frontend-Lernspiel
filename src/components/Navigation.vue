@@ -34,19 +34,19 @@
           <div class="sidebar-links">
             <small class="mt-8 mb-4">Menu</small>
             <hr class="divider" />
-              <div class="d-flex mx-4"
-              >
+            <div class="d-flex mx-4">
               <flag class="mb-1 mr-4 lang-icon" :iso="selectedLanguage" />
-               <v-select
+              <v-select
                 v-model="selectedLanguage"
                 :items="languages"
                 :item-text="languageText"
                 :item-value="languageValue"
-                background-color="#4a5c66" color="#ffffff"
+                background-color="#4a5c66"
+                color="#ffffff"
               >
               </v-select>
             </div>
-    
+
             <hr class="divider" />
             <div class="links">
               <a
@@ -69,7 +69,6 @@
       </div>
     </v-navigation-drawer>
   </div>
-  
 </template>
   
 <script>
@@ -85,58 +84,98 @@ export default {
       },
       selectedLanguage: "de",
       languages: [
-        { value: 'de', text: 'Deutsch' },
-        { value: 'us', text: 'English' }
+        { value: "de", text: "Deutsch" },
+        { value: "us", text: "English" },
       ],
       menuLinks: [
-        { title: this.$t('navigation.lvlSelect'), icon: "logout-variant", path: "lvl"},
-        { title: this.$t('navigation.tutorial'),  icon: "information-variant", path: "tutorial"},
-        { title: this.$t('navigation.learningGoals'), icon: "checkbox-multiple-marked-outline", path: "goals"},
-        { title: this.$t('navigation.helpHeader'), icon: "help", path: "help"},
-        { title: this.$t('navigation.homepage'), icon: "home", path: "home"},
+        {
+          title: this.$t("navigation.lvlSelect"),
+          icon: "logout-variant",
+          path: "lvl",
+        },
+        {
+          title: this.$t("navigation.tutorial"),
+          icon: "information-variant",
+          path: "tutorial",
+        },
+        {
+          title: this.$t("navigation.learningGoals"),
+          icon: "checkbox-multiple-marked-outline",
+          path: "goals",
+        },
+        { title: this.$t("navigation.helpHeader"), icon: "help", path: "help" },
+        { title: this.$t("navigation.homepage"), icon: "home", path: "home" },
       ],
     };
   },
   watch: {
-  '$i18n.locale': {
-     handler() {
-      this.menuLinks = [
-        { title: this.$t('navigation.lvlSelect'), icon: "logout-variant", path: "lvl"},
-        { title: this.$t('navigation.tutorial'),  icon: "information-variant", path: "tutorial"},
-        { title: this.$t('navigation.learningGoals'), icon: "checkbox-multiple-marked-outline", path: "goals"},
-        { title: this.$t('navigation.helpHeader'), icon: "help", path: "help"},
-        { title: this.$t('navigation.homepage'), icon: "home", path: "home"},
-      ]
+    "$i18n.locale": {
+      handler() {
+        this.menuLinks = [
+          {
+            title: this.$t("navigation.lvlSelect"),
+            icon: "logout-variant",
+            path: "lvl",
+          },
+          {
+            title: this.$t("navigation.tutorial"),
+            icon: "information-variant",
+            path: "tutorial",
+          },
+          {
+            title: this.$t("navigation.learningGoals"),
+            icon: "checkbox-multiple-marked-outline",
+            path: "goals",
+          },
+          {
+            title: this.$t("navigation.helpHeader"),
+            icon: "help",
+            path: "help",
+          },
+          { title: this.$t("navigation.homepage"), icon: "home", path: "home" },
+        ];
       },
-      deep: true
+      deep: true,
     },
-    selectedLanguage(){
-      this.changeLanguage()
+    selectedLanguage() {
+      this.changeLanguage();
+    },
+  },
+  mounted() {
+    if (localStorage.getItem("language") !== null) {
+      this.selectedLanguage = localStorage.getItem("language");
+      if (this.selectedLanguage == "en") this.selectedLanguage = "us";
+    } else {
+      this.selectedLanguage = "de";
     }
-
   },
   methods: {
     languageText(language) {
-      return language.text
+      return language.text;
     },
     languageValue(language) {
-      return language.value
+      return language.value;
     },
     changeLanguage() {
-      if (this.$i18n.locale === 'en') {
-        this.$i18n.locale = 'de'
+      if (this.$i18n.locale === "en") {
+        this.$i18n.locale = "de";
+        localStorage.setItem("language", this.$i18n.locale);
       } else {
-        this.$i18n.locale = 'en'
+        this.$i18n.locale = "en";
+        localStorage.setItem("language", this.$i18n.locale);
       }
     },
     // Navigate back to OnePagerHome
     home() {
-      this.$router.push({ path: "/" });
+      if (this.$route.path !== "/") {
+        this.$router.push({ path: "/" });
+      }
     },
     moveDrawer() {
       let sidebar = document.querySelector("#sidebar"); // select the sidebar element
       this.drawer = !this.drawer; // toggle the state of the drawer
-      if (this.drawer) sidebar.classList.add("drawer-open"); // if drawer is open, add class
+      if (this.drawer) sidebar.classList.add("drawer-open");
+      // if drawer is open, add class
       else sidebar.classList.remove("drawer-open"); // if drawer is closed, remove class
     },
     // Use GSAP library to animate the given element
@@ -156,7 +195,9 @@ export default {
     },
     // Set the Routing-Path based on the given Path
     setLink(path) {
-      this.$router.push({ path: "/", query: { section: path } });
+      if (this.$route.query.section !== path) {
+        this.$router.push({ path: "/", query: { section: path } });
+      }
     },
   },
 };
@@ -164,11 +205,9 @@ export default {
 
 <style scoped>
 /* CSS only for Navigation */
-
 .lang-icon {
- scale: 2;
+  scale: 2;
 }
-
 .header {
   height: 4em !important;
   box-shadow: 0em 0.3em 0.3em rgba(255, 255, 255, 0.4);
