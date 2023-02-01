@@ -23,7 +23,7 @@
                 <v-icon width="505" height="500" color="#80ba24">mdi-download</v-icon> {{ $t("gameViewFreeMode.savepng") }}
               </v-btn>
               <hr class="dividerW30 mb-2 mt-2 mb-4"  />
-                <div class="freeModeText d-flex flex-column align-center">
+                <div class="free-mode-text d-flex flex-column align-center">
                   <h4>{{ $t("gameViewFreeMode.title") }}</h4>
                   <span class="caption">{{ $t("gameViewFreeMode.infotext") }}</span>
                 </div>
@@ -121,7 +121,7 @@ export default {
   visibility: hidden;
 }
 
-.freeModeText {
+.free-mode-text {
   width: 25em;
   text-align: center;
 }

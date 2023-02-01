@@ -93,7 +93,7 @@ export default {
       // Scroll to the element after a delay of 300ms
       setTimeout(() => {
         this.scrollToElement(elementId);
-      }, 350);
+      }, 600);
     },
   },
   // Watch for changes in the route and call the checkRoute method

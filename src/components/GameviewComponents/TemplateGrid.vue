@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex">
-    <div id="template_grid">
+    <div id="template-grid">
       <div
         class="template-zoom-bg"
         id="template-zoom-bg-id"
@@ -99,23 +99,23 @@ export default {
       element.classList.add("painted");
     },
 
-    // openOrCloseFullscreen() function is used to toggle between fullscreen and normal mode of the grid element. It toggles the class "template_grid" and changes the scale, x, y, background color and z-index of the grid element using gsap library.
+    // openOrCloseFullscreen() function is used to toggle between fullscreen and normal mode of the grid element. It toggles the class "template-grid" and changes the scale, x, y, background color and z-index of the grid element using gsap library.
     // It also handles the mouse events on the zoom background element to show and hide the zoom option.
     openOrCloseFullscreen() {
-      let element = document.getElementById("template_grid");
+      let element = document.getElementById("template-grid");
       let zoomBg = document.getElementById("template-zoom-bg-id");
       if (this.zoomedGrid == false) {
-        // Add template_grid class to element and animate it
+        // Add template-grid class to element and animate it
         this.zoomIn(element, zoomBg);
       } else {
-        // Remove template_grid class from element and animate it
+        // Remove template-grid class from element and animate it
         this.zoomOut(element, zoomBg);
       }
     },
 
     zoomIn(element, zoomBg) {
-      element.classList.add("template_grid");
-      gsap.to("#template_grid", {
+      element.classList.add("template-grid");
+      gsap.to("#template-grid", {
         scale: 2,
         x: -20,
         y: 200,
@@ -131,14 +131,14 @@ export default {
       this.hideZoomOption();
     },
     zoomOut(element, zoomBg) {
-      element.classList.remove("template_grid");
+      element.classList.remove("template-grid");
       document.body.removeEventListener("click", this.openOrCloseFullscreen);
-      gsap.to("#template_grid", {
+      gsap.to("#template-grid", {
         scale: 1,
         x: 0,
         y: 0,
         backgroundColor: "transparent",
-        zIndex: 10,
+        zIndex: 1,
         onComplete: () => {
           document.body.removeEventListener(
             "click",
@@ -183,12 +183,12 @@ export default {
   margin-left: 1em;
   margin-top: 1em;
 }
-#template_grid {
+#template-grid {
   margin-left: -1em;
   padding: 1em;
   border-radius: 18px;
 }
-.template_grid {
+.template-grid {
   position: relative;
   z-index: 1;
 }

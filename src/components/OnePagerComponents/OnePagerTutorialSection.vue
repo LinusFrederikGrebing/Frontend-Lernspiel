@@ -44,7 +44,7 @@
           </v-row>
         </v-card>
       </div>
-      <div class="editor_in_Tutorial mr-16">
+      <div class="editor-in-tutorial mr-16">
         <CodeEditor
           :read_only="true"
           font_size="37px"
@@ -107,7 +107,7 @@ export default {
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
 
       let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
-      let codeEditor = document.querySelector(".editor_in_Tutorial");
+      let codeEditor = document.querySelector(".editor-in-tutorial");
 
       //Reset Mouse-Cursor Start Position
       gsap.to("#mouse-cursor-op", {duration: 0, x: 0, y: 0});
@@ -143,7 +143,7 @@ export default {
       if (sidebar.classList.contains("drawer-open")) sidebarWidth = parseInt(sidebar.offsetWidth);
 
       let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
-      let codeEditor = document.querySelector(".editor_in_Tutorial");
+      let codeEditor = document.querySelector(".editor-in-tutorial");
       
       //Calculate Absolute x,y Coordinates
       let x =  parseInt(validateButton.offsetWidth) / 2 - sidebarWidth;
@@ -165,7 +165,7 @@ export default {
 
     showTutorialPopup() {
       let gridContainer = document.querySelector("#cardgrid-container-tutorial-op");
-      let codeEditor = document.querySelector(".editor_in_Tutorial");
+      let codeEditor = document.querySelector(".editor-in-tutorial");
       let codeEditorRect = codeEditor.getBoundingClientRect();
       let header = document.querySelector('.header');
       let sidebar = document.querySelector('#sidebar');
@@ -230,11 +230,11 @@ export default {
       );
 
       gsap.to(
-       ".editor_in_Tutorial",
+       ".editor-in-tutorial",
         {
           duration: 2,
           scrollTrigger: {
-            trigger:  ".editor_in_Tutorial",
+            trigger:  ".editor-in-tutorial",
             onEnter: this.tutorialAnimation,
             onLeave: this.resetPaintedFields,
             onEnterBack:  this.tutorialAnimation,
@@ -252,7 +252,7 @@ export default {
   margin-top: 5em;
   margin-bottom: 10em;
 }
-.editor_in_Tutorial{
+.editor-in-tutorial{
   margin-left: 1em;
   width: 95%;
 }

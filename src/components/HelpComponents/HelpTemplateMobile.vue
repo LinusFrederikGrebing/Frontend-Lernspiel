@@ -9,7 +9,7 @@
               {{ item.label }}
             </v-expansion-panel-header>
             <v-expansion-panel-content class="">
-              <v-card class="panel_item">
+              <v-card class="panel-item">
                 <v-img :src="item.src" max-height="5em"></v-img>
                 <v-card-title>
                   {{ item.title }}
@@ -200,7 +200,7 @@ methods: {
 </script>
 <style scoped>
 /* CSS only for HelpMobile-Template */
-.panel_item {
+.panel-item {
   max-height: 20em;
   overflow: scroll;
 }
