@@ -7,7 +7,7 @@ export default {
       description: '<h3>Level 2</h3> <br /> <p class=\"line-1 anim-typewriter1\">In the second level we use a for loop. Have fun!'
     },
     level3: {
-      description: "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">A bit of distance in between is definitely not that difficult!</p> <p class=\"line-1 anim-typewriter2\">In this exercise, use the while loop instead!</p>",
+      description: "<h3>Level 3</h3> <br /> <p class=\"line-1 anim-typewriter1\">A bit of distance in between that loop is definitely not that difficult!</p> <p class=\"line-1 anim-typewriter2\">In this exercise, use the while loop instead!</p>",
     },
     level4: {
       description: "<h3>Level 4</h3> <br /> <p class=\"line-1 anim-typewriter1\">Now dare to do a diagonal!</p> <p class=\"line-1 anim-typewriter2\">Use the for loop again in this exercise!</p>",
@@ -40,15 +40,15 @@ export default {
       description: "<h3>Level 13</h3> <br /><p class=\"line-1 anim-typewriter1\">Please solve this level with a do-while loop!</p> <p class=\"line-1 anim-typewriter2\">Have fun!</p>"
     },
     level14: {
-      description: "<h3>Level 14</h3> <br /><p class=\"line-1 anim-typewriter1\">Map a checkerboard pattern using for loops!</p> <p class=\"line-1 anim-typewriter2\">Tip: Modulo will help you!</p>"
+      description: "<h3>Level 14</h3> <br /><p class=\"line-1 anim-typewriter1\">Draw a checkerboard pattern using for loops!</p> <p class=\"line-1 anim-typewriter2\">Tip: Modulo will help you!</p>"
     },
   }, 
   alerts: {
     continue: 'Continue!',
     succes: {
       successTitle: 'Excellent!',
-      successText: 'You have mastered the level! Now you can try your hand at the next level!',
-      successConfirm: 'next level!',
+      successText: 'You have mastered the level! Now you can try your best at the next level!',
+      successConfirm: 'Next level!',
       successCancel: 'To the level selection!',
     },
     failure: {
@@ -76,13 +76,13 @@ export default {
     validate: 'validate',
     validateTip: 'Click Validate to see if your solution is correct!',
     runTip: 'Click Run to draw your code!',
-    howToDraw: 'how to draw?',
+    howToDraw: 'How to draw?',
     reset: 'Restart',
-    color: 'color selection',
+    color: 'Color selection',
     help: 'Support',
     codeToRun: '/*Type your own code!*/',
     errorMessages: {
-      syntax: "There's something wrong with your syntax!",
+      syntax: "There is something wrong with your syntax!",
       type: "One or more parameters were not passed or are of the wrong type:",
       reference: "The following expression is not defined:",
       tooManyParameters: "Too many parameters were given for the paint method.",
@@ -103,7 +103,7 @@ export default {
     gridSize: 'Change the size of the field:',
     savepng: 'Save image!',
     title: 'Free mode',
-    infotext: 'You are in free mode. Here you can put together your own patterns as you like, try loops, test functions or prepare for upcoming levels. Have fun!' 
+    infotext: 'You are in free mode. Here you can pratice your own skills as you like, try loops, test functions or prepare for upcoming levels. Have fun!'
   },
    template: {
     coords: 'coordinates',
