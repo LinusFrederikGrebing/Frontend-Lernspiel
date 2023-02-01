@@ -34,7 +34,6 @@ export default {
         this.gridSize += 1
         let newVal = this.idArray[0] + 1 || 0;
         this.idArray.unshift(newVal);
-        console.log(this.idArray);
     },
     decreaseGridSize() {
         if (this.gridSize > 1) {

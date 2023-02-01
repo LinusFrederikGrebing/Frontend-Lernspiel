@@ -34,6 +34,7 @@
             </div>
             <div class="">
               <CodeInput
+                @restart="restartLevel(currentLevel.id)"
                 @success="nextLevel(currentLevel.id)"
                 @timer="setTime(currentLevel.id)"
                 @startPopup="nextLevelStarted(currentLevel.id)"
@@ -83,6 +84,10 @@ export default {
     isHelpOpen: false, // variable to store the state of the help
   }),
   methods: {
+    restartLevel(){
+      this.startTime = new Date();
+      this.startPopUp(this.currentLevel);
+    },
     // method to show the help template
     showHelp() {
       this.isHelpOpen = true;
@@ -97,9 +102,9 @@ export default {
       this.time = (new Date() - this.startTime) / 1000;
       if (
         this.currentLevel.bestTimeinSek == 0 ||
-        this.currentLevel.bestTimeinSek == 0 > this.time
+        this.currentLevel.bestTimeinSek > this.time
       ) {
-        this.levels[indexNextLevel - 1].bestTimeinSek = this.time;
+        this.levels[indexNextLevel-1].bestTimeinSek = this.time;
       }
       localStorage.setItem("levels", JSON.stringify(this.levels));
       this.nextLevel(indexNextLevel);
@@ -158,7 +163,6 @@ export default {
     } else {
       this.currentLevel = Object.values(Object.values(levels)[0]);
     }
-    console.log(this.currentLevel)
     this.startPopUp(this.currentLevel);
   },
 
@@ -167,7 +171,6 @@ export default {
     // When the current level changes, it checks if the previous level was completed and if so, it updates the accessibleLevels data property accordingly.
     currentLevel(newVal, oldVal) {
       if (oldVal !== null && oldVal !== undefined) {
-        console.log(oldVal, newVal);
         if (JSON.parse(localStorage.getItem("accessibleLevels")) !== null) {
           this.accessibleLevels = JSON.parse(
             localStorage.getItem("accessibleLevels")

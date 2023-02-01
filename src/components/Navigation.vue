@@ -115,8 +115,17 @@ export default {
     }
 
   },
+  mounted() {
+    if (localStorage.getItem("language") !== null) {
+      this.selectedLanguage = localStorage.getItem("language");
+      if(this.selectedLanguage == "en") this.selectedLanguage = "us"
+    } else {
+      this.selectedLanguage = "de";
+    }
+  },
   methods: {
     languageText(language) {
+
       return language.text
     },
     languageValue(language) {
@@ -125,13 +134,17 @@ export default {
     changeLanguage() {
       if (this.$i18n.locale === 'en') {
         this.$i18n.locale = 'de'
+        localStorage.setItem("language", this.$i18n.locale);
       } else {
         this.$i18n.locale = 'en'
+        localStorage.setItem("language", this.$i18n.locale);
       }
     },
     // Navigate back to OnePagerHome
     home() {
-      this.$router.push({ path: "/" });
+      if (this.$route.path !== '/') {
+         this.$router.push({ path: "/" });
+      }
     },
     moveDrawer() {
       let sidebar = document.querySelector("#sidebar"); // select the sidebar element
@@ -156,7 +169,9 @@ export default {
     },
     // Set the Routing-Path based on the given Path
     setLink(path) {
-      this.$router.push({ path: "/", query: { section: path } });
+      if (this.$route.query.section !== path) {
+        this.$router.push({ path: "/", query: { section: path } });
+      }
     },
   },
 };
@@ -164,11 +179,9 @@ export default {
 
 <style scoped>
 /* CSS only for Navigation */
-
 .lang-icon {
  scale: 2;
 }
-
 .header {
   height: 4em !important;
   box-shadow: 0em 0.3em 0.3em rgba(255, 255, 255, 0.4);

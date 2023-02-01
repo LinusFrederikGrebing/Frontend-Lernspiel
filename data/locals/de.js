@@ -77,7 +77,7 @@ export default {
     validateTip: 'Klicke auf Validieren um zu sehen ob deine Lösung richtig ist!',
     runTip: 'Klicke auf Ausführen um deinen Code zu zeichen!',
     howToDraw: 'Wie zeichne ich?',
-    reset: 'Zurücksetzen',
+    reset: 'Neustart',
     color: 'Farbenauswahl',
     help: 'Hilfen',
     codeToRun: '/*Geben Deinen eigenen Code ein!*/',

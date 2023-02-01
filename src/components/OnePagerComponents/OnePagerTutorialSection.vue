@@ -87,8 +87,7 @@ export default {
       }
       let tutorial = document.getElementById("popupContainer");
       tutorial.classList.remove("test");
-        console.log(tutorial)
-
+      
       for (let i = 0; i <= this.codeToRun.length; i++) {
         this.timerTutorialAnimation = setTimeout(() => this.actualCodeToRun = this.codeToRun.substring(0, i), i * 250);
       }

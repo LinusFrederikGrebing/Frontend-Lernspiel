@@ -123,7 +123,7 @@
             class="reset-btn"
             depressed
             elevation="2"
-            @click="resetAnimation()"
+            @click="resetLevel()"
           >
             {{ $t("codeInput.reset") }}
           </v-btn>
@@ -317,6 +317,12 @@ export default {
         }
       });
     },
+    resetLevel(){
+      this.resetAnimation();
+      this.$emit("restart");
+     
+    },
+
     //GSAP Animation when resetting
     resetAnimation() {
       const resetBtn = document.querySelector(".reset-btn");
