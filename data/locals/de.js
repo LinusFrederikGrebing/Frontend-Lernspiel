@@ -85,7 +85,7 @@ export default {
       syntax: 'Da stimmt etwas mit deiner Syntax nicht!',
       type: 'Ein oder Mehrere Parameter wurden nicht übergeben oder sind vom falschen Typ:',
       reference: 'Folgender Ausdruck ist nicht definiert:',
-      tooMuchParameters: 'Zu viele Parameter angegeben für die Methode paint.',
+      tooManyParameters: 'Falsche Anzahl an Parametern angegeben für die Methode paint.',
       missingPaint: 'Rufe die paint(x,y) Methode aus um Felder anzumalen!',
       falseLoop: 'Kein korrekter Aufbau einer While oder Do..While Schleife!',
       infinityError: 'Diese Schleife ist zu lang oder unendlich!',

@@ -528,6 +528,7 @@ export default {
         this.changeErrorMsg(error);
         // Boolean Variable gotUnreadErrors turn on the Console Notification blinking animation
         this.gotUnreadErrors = true;
+        this.resetPaintedFields();
       }
       if (this.errorMessage == "")
         this.errorMessage = this.$t("codeInput.errorMessages.correct");
@@ -679,7 +680,7 @@ export default {
     // Method throws an Error if a paint-call has more or less than 2 parameters.
     checkPaintParams(code) {
       let error = new Error(
-        this.$t("codeInput.errorMessages.tooMuchParameters")
+        this.$t("codeInput.errorMessages.tooManyParameters")
       );
       let restCode = code;
       while (restCode.search("paint") > -1) {

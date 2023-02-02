@@ -85,7 +85,7 @@ export default {
       syntax: "There is something wrong with your syntax!",
       type: "One or more parameters were not passed or are of the wrong type:",
       reference: "The following expression is not defined:",
-      tooManyParameters: "Too many parameters were given for the paint method.",
+      tooManyParameters: "Wrong parameter quantity for the paint method.",
       missingPaint: "Call the paint(x,y) method to paint fields!",
       falseLoop: "No correct structure of a while or do..while loop!",
       infinityError: "This loop is too long or infinite!",

@@ -73,10 +73,12 @@ export default {
       timerTutorialAnimation: null,
       paintTutorialAnimation: null,
       cursorTutorialAnimation: null,
+      timelineToButton: null,
     };
   },
   methods: {
     tutorialAnimation() {
+      this.actualCodeToRun = "";
       if (document.querySelector("#alert-for-op-tutorial")) {
         document.querySelector("#alert-for-op-tutorial").style.visibility =
           "hidden";
@@ -97,7 +99,7 @@ export default {
     },
 
     cursorToFinishedAnimation() {
-      let timelineToButton = gsap.timeline({ repeat: 0, repeatDelay: 0 });
+      this.timelineToButton = gsap.timeline({ repeat: 0, repeatDelay: 0 });
       let finishedButton = document.querySelector("#finished-btn");
       let finishedButtonRect = finishedButton.getBoundingClientRect();
       let header = document.querySelector(".header");
@@ -140,14 +142,14 @@ export default {
         finishedButton = finishedButton.offsetParent;
       }
       //Animate the Cursor
-      timelineToButton.to("#mouse-cursor-op", {
+      this.timelineToButton.to("#mouse-cursor-op", {
         duration: 3,
         x: x,
         y: y,
         visibility: "visible",
         zIndex: 4,
       });
-      timelineToButton.to("#mouse-cursor-op", {
+      this.timelineToButton.to("#mouse-cursor-op", {
         duration: 0.2,
         scale: 0.5,
         yoyo: true,
@@ -155,14 +157,14 @@ export default {
         ease: "power1.inOut",
         delay: 0.5,
       });
-      timelineToButton.eventCallback("onComplete", () => {
+      this.timelineToButton.eventCallback("onComplete", () => {
         this.paintTutorialField(1, 1);
         this.cursorToValidateAnimation();
       });
     },
 
     cursorToValidateAnimation() {
-      let timelineToButton = gsap.timeline({ repeat: 0, repeatDelay: 0 });
+      this.timelineToButton = gsap.timeline({ repeat: 0, repeatDelay: 0 });
       let validateButton = document.querySelector("#validate-btn");
       let validateButtonRect = validateButton.getBoundingClientRect();
       let header = document.querySelector(".header");
@@ -202,14 +204,14 @@ export default {
         validateButton = validateButton.offsetParent;
       }
       //Animate the Cursor
-      timelineToButton.to("#mouse-cursor-op", {
+      this.timelineToButton.to("#mouse-cursor-op", {
         duration: 1,
         x: x,
         y: y,
         visibility: "visible",
         zIndex: 4,
       });
-      timelineToButton.to("#mouse-cursor-op", {
+      this.timelineToButton.to("#mouse-cursor-op", {
         duration: 0.2,
         scale: 0.5,
         yoyo: true,
@@ -217,7 +219,7 @@ export default {
         ease: "power1.inOut",
         delay: 0.5,
       });
-      timelineToButton.eventCallback("onComplete", () => {
+      this.timelineToButton.eventCallback("onComplete", () => {
         document.querySelector("#mouse-cursor-op").style.visibility = "hidden";
         this.showTutorialPopup();
       });
@@ -282,6 +284,9 @@ export default {
     resetPaintedFields() {
       clearTimeout(this.timerTutorialAnimation);
       clearTimeout(this.cursorTutorialAnimation);
+      this.timelineToButton.kill();
+      document.querySelector("#mouse-cursor-op").style.visibility = "hidden";
+      document.querySelector("#alert-for-op-tutorial").style.visibility = "hidden";
       this.actualCodeToRun = "";
       let paintedElements = document.querySelectorAll(".painted");
       paintedElements.forEach((el) => {
