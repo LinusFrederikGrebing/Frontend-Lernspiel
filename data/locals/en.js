@@ -28,10 +28,10 @@ export default {
       description: "<h3>Level 9</h3> <br /> <p class=\"line-1 anim-typewriter1\"> You keep getting better and better!</p> <p class=\"line-1 anim-typewriter2\">You're taking big steps!</p> <p class=\"line-1 anim-typewriter3\">Use the for loop again!</p>"
     },
     level10: {
-      description: "<h3>Level 10</h3> <br /> <p class=\"line-1 anim-typewriter1\">Color everything here!</p> <p class=\"line-1 anim-typewriter2\">Use the for loop for that!</p>"
+      description: "<h3>Level 10</h3> <br /> <p class=\"line-1 anim-typewriter1\">Color every block!</p> <p class=\"line-1 anim-typewriter2\">Use the for loop for that!</p>"
     },
     level11: {
-      description: "<h3>Level 11</h3> <br /><p class=\"line-1 anim-typewriter1\">The pattern looks nice!</p> <p class=\"line-1 anim-typewriter2\">It is important to be able to do your own research!</p> <p class=\"line-1 anim-typewriter3\">Find out for yourself now about if queries!</p> <p class=\"line-1 anim-typewriter4\">They will help you here!</p>  <p class=\"line-1 anim-typewriter5\">Again, use the for loop!</p>"
+      description: "<h3>Level 11</h3> <br /><p class=\"line-1 anim-typewriter1\">The pattern looks nice!</p> <p class=\"line-1 anim-typewriter2\">It is important to be able to do your own research!</p> <p class=\"line-1 anim-typewriter3\">Now find out for yourself about if statements!</p> <p class=\"line-1 anim-typewriter4\">They will help you here!</p>  <p class=\"line-1 anim-typewriter5\">Again, use the for loop!</p>"
     },
     level12: {
       description: "<h3>Level 12</h3> <br /><p class=\"line-1 anim-typewriter1\">Please solve this level with a for loop!</p> <p class=\"line-1 anim-typewriter2\">Have fun!</p>"
@@ -134,8 +134,8 @@ export default {
   whyDrawIT: {
     whyDrawIT: 'Why DrawIT?',
     whyHeader1: 'Playing and Learning',
-    whyHeader2: 'CLEAR',
-    whyHeader3: 'FAST TO USE',
+    whyHeader2: 'Understandable',
+    whyHeader3: 'Fast to use',
     whyText1: 'Draw IT gives you a fun introduction to the world of programming. You will be challenged, but not overwhelmed. Bright colors and puzzles keep you thinking!',
     whyText2: 'Programming can look pretty monotonous and complicated (not only) for newbies. In order to contain this, we show you your code entries on the spot and give you tips and assistance if necessary.',
     whyText3: 'Draw IT can be used on a variety of devices and no installation is required! All you should have is internet.',
@@ -149,7 +149,7 @@ export default {
     programmingSkillsText: 'With DrawIT you can deepen your programming skills in the scripting language JavaScript and expand your programming knowledge!',
     accuracyText: 'Programming is not just about programming skills. As a programmer, you have to listen carefully and be able to implement requirements precisely and conscientiously. DrawIT gives you tasks that require precise processing!',
     analyticalThinkingText: 'With DrawIT you can improve your ability to recognize problems, to break them down into individual aspects and to find solutions independently!',
-    problemSolvingText: 'DrawIT helps you to increase your abilities to perceive, understand and then solve complex problem situations or difficulties. The easiest way does not always have to be the required or the best!',
+    problemSolvingText: 'DrawIT helps you to increase your abilities to perceive, understand and then solve complex problem situations or difficulties. The easiest way does not always have to be the best!',
     effectivenessText: 'DrawIT deepens the ability to implement code solutions in a simple and efficient way and shows different approaches!',
   },
   help: {
@@ -183,7 +183,7 @@ export default {
       whileTitle: 'What are while loops?',
       whileTextSec1: "The while loop first evaluates the loop condition. If the result is true (or a truthy value), the loop body is executed. Then the process starts again from the beginning. This type of loop is suitable when you don't know in advance how many times the loop will be executed.",
       whileSubHeader: "Syntax of a while loop",
-      whileSubText: "A while loop begins with the keyword while (while = while). Behind it, in round brackets ( and ), is the loop condition. To formulate a condition, you need, for example, comparison operators or logical operators. Then follows the loop body, which can be a single JavaScript statement or a block of multiple statements, placed in curly braces { and }.",
+      whileSubText: "A while loop begins with the keyword while. Behind it, in round brackets ( and ), is the loop condition. To formulate a condition, you need, for example, comparison operators or logical operators. Then follows the loop body, which can be a single JavaScript statement or a block of multiple statements, placed in curly braces { and }.",
       whileExampleText: "Unlike the for loop, the loop variable i must be declared outside the loop here and contribute to the termination condition within the loop. Within the loop block, the desired code is executed. Especially with a while loop, caution must be exercised, as the relationships for the termination conditions are less clear than with the for loop, making it easier to end up in an infinite loop.",
     },
     dowhile: {
