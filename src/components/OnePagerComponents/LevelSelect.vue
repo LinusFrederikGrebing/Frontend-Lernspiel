@@ -16,7 +16,7 @@
       >
         {{ $t("lvlSelect.freeMode") }}
       </v-btn>
-
+      
       <flickity
         ref="flickity"
         :options="flickityOptions"
@@ -151,6 +151,7 @@ export default {
       pauseAutoPlayOnHover: false,
       groupCells: 1,
     },
+    counterText: 0,
   }),
 
   methods: {

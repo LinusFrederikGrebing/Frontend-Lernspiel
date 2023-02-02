@@ -49,9 +49,9 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import HelpTemplateMobile from "@/components/HelpComponents/HelpTemplateMobile";
 import HelpTemplateDesktop from "@/components/HelpComponents/HelpTemplateDesktop";
 import levels from "../../data/levels.json";
+import { helpScrollTrigger } from "../components/OnePagerComponents/gsapScrolltrigger";
+import { lvlSelectScrollTrigger } from "../components/OnePagerComponents/gsapScrolltrigger";
 
-// Register the ScrollTrigger plugin for GSAP
-gsap.registerPlugin(ScrollTrigger);
 export default {
   name: "Onepager",
   // Declare the components used in this component
@@ -67,6 +67,7 @@ export default {
   // Initialize an empty array to store the levels
   data: () => ({
     levels: [],
+    trigger: null,
   }),
   methods: {
     // Scroll to the element with the given id
@@ -93,7 +94,7 @@ export default {
       // Scroll to the element after a delay of 300ms
       setTimeout(() => {
         this.scrollToElement(elementId);
-      }, 600);
+      }, 300);
     },
   },
   // Watch for changes in the route and call the checkRoute method
@@ -103,13 +104,18 @@ export default {
       deep: true,
       handler(route) {
         if (route.query.section) {
-          
-          this.checkRoute(route.query.section);
+          this.$nextTick(() => {
+             ScrollTrigger.getAll()
+             ScrollTrigger.refresh(); 
+             this.checkRoute(route.query.section);
+          });
         }
       },
     },
   },
   mounted() {
+    // Register the ScrollTrigger plugin for GSAP
+    gsap.registerPlugin(ScrollTrigger);
     // Check local storage for levels, otherwise set them to the default values
     if (localStorage.getItem("levels") !== null) {
       this.levels = JSON.parse(localStorage.getItem("levels"));
@@ -119,38 +125,8 @@ export default {
     // Store the levels in local storage
     localStorage.setItem("levels", JSON.stringify(this.levels));
 
-    // Use GSAP library to animate the lvl_select element
-    gsap.fromTo(
-      "#lvl_select",
-      {
-        y: 0,
-        x: -1000,
-        opacity: 0,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        scrollTrigger: {
-          trigger: "#lvl_select",
-          start: "top 100%",
-          end: "bottom 0%",
-          toggleActions: "play reset play reset ",
-        },
-      }
-    );
-
-    // Use GSAP library to animate the help_template element
-    gsap.from("#help_template", {
-      opacity: 0,
-      x: "-50em",
-      ease: "linear",
-      scrollTrigger: {
-        trigger: "#help_template",
-        start: "top 90%",
-        end: "bottom 50%",
-        toggleActions: "restart complete reverse reset",
-      },
-    });
+    lvlSelectScrollTrigger()
+    helpScrollTrigger()
   },
   computed: {
     // Compute the height value based on the current breakpoint

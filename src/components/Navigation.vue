@@ -169,7 +169,6 @@ export default {
     home() {
       if (this.$route.path !== "/") {
         this.$router.push({ path: "/" })
-        .then(() => { window.location.reload(); })
       }
     },
     moveDrawer() {
@@ -195,10 +194,18 @@ export default {
       );
     },
     // Set the Routing-Path based on the given Path
-    setLink(path) {
+    /* setLink(path) {
       if (this.$route.query.section !== path) {
-        this.$router.push({ path: "/", query: { section: path } })
-        .then(() => { window.location.reload(); });
+        if (this.$route.path !== "/") {
+        this.$router.push({ path: "/", query: { section: path } }).then(() => { window.location.reload()});
+        } else {
+          this.$router.push({ path: "/", query: { section: path } })
+        }
+      }
+    }, */
+     setLink(path) {
+      if (this.$route.query.section !== path) {
+          this.$router.push({ path: "/", query: { section: path } })
       }
     },
   },
