@@ -83,8 +83,9 @@ export default {
         document.querySelector("#alert-for-op-tutorial").style.visibility =
           "hidden";
       }
+      
       let tutorial = document.getElementById("popupContainer");
-      tutorial.classList.remove("test");
+      tutorial.classList.remove("blur");
 
       for (let i = 0; i <= this.codeToRun.length; i++) {
         this.timerTutorialAnimation = setTimeout(
@@ -237,7 +238,7 @@ export default {
       let sidebarWidth = 0;
       let yOffset = 701 - codeEditorRect.bottom;
       let tutorial = document.getElementById("popupContainer");
-      tutorial.classList.add("test");
+      tutorial.classList.add("blur");
       if (sidebar.classList.contains("drawer-open"))
         sidebarWidth = parseInt(sidebar.offsetWidth);
       let x = parseInt(codeEditor.offsetWidth) / 2 - sidebarWidth;
@@ -284,7 +285,7 @@ export default {
     resetPaintedFields() {
       clearTimeout(this.timerTutorialAnimation);
       clearTimeout(this.cursorTutorialAnimation);
-      this.timelineToButton.kill();
+      if (this.timelineToButton != null) this.timelineToButton.kill();
       document.querySelector("#mouse-cursor-op").style.visibility = "hidden";
       document.querySelector("#alert-for-op-tutorial").style.visibility = "hidden";
       this.actualCodeToRun = "";

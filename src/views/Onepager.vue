@@ -17,7 +17,7 @@
         <LevelSelect />
       </div>
       <div id="tutorial" class="pt-16 mt-16 mb-16">
-        <div id="popupContainer" class="test">
+        <div id="popupContainer" class="blur">
           <img id="mouse-cursor-op" src="../assets/mouse-cursor.png" />
           <OnePagerTutorialSection />
         </div>
@@ -164,7 +164,7 @@ export default {
   animation: arrow 2s infinite;
   -webkit-animation: arrow 2s infinite;
 }
-.test {
+.blur {
   filter: blur(5px) brightness(90%);
 }
 @keyframes arrow {
