@@ -114,8 +114,6 @@ export default {
     },
   },
   mounted() {
-    // Register the ScrollTrigger plugin for GSAP
-    gsap.registerPlugin(ScrollTrigger);
     // Check local storage for levels, otherwise set them to the default values
     if (localStorage.getItem("levels") !== null) {
       this.levels = JSON.parse(localStorage.getItem("levels"));

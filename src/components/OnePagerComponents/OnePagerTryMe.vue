@@ -55,15 +55,11 @@ export default {
     // sets the last accessible level and navigates to the GameView page with that level as a parameter
     setLevel() {
       // Get the last accessible level from local storage
-      this.accessibleLevels =
-        JSON.parse(localStorage.getItem("accessibleLevels")) || [];
+      this.accessibleLevels = JSON.parse(localStorage.getItem("accessibleLevels")) || [];
       if (this.accessibleLevels.length > 0) {
-        this.lastAccessibleLevel =
-          this.accessibleLevels[this.accessibleLevels.length - 1];
+        this.lastAccessibleLevel = this.accessibleLevels[this.accessibleLevels.length - 1];
       } else {
-        this.lastAccessibleLevel = JSON.parse(
-          localStorage.getItem("levels")
-        )[0];
+        this.lastAccessibleLevel = JSON.parse(localStorage.getItem("levels"))[0];
       }
 
       // Navigate to the GameView page with the last accessible level as a parameter
@@ -84,8 +80,8 @@ export default {
     },
     // show the try button and move it to the correct position
     enter() {
-      this.tryBtn = document.getElementById("try-btn"); 
-      this.tryBtnFAB = document.getElementById("try-btn-fab"); 
+      this.tryBtn = document.getElementById("try-btn");
+      this.tryBtnFAB = document.getElementById("try-btn-fab");
       this.tryBtn.classList.add("show");
       this.tryBtn.classList.remove("hidden");
       this.tryBtnFAB.classList.add("hide");
@@ -131,16 +127,16 @@ export default {
     this.enter();
     setTimeout(
       () =>
-        gsap.to("#tryContainer", {
-          duration: 2,
-          scrollTrigger: {
-            trigger: "#tryContainer",
-            onEnter: this.enter,
-            onLeave: this.leave,
-            onEnterBack: this.enterback,
-          },
-        }),
-      100
+    gsap.to("#tryContainer", {
+      duration: 2,
+      scrollTrigger: {
+        trigger: "#tryContainer",
+        onEnter: this.enter,
+        onLeave: this.leave,
+        onEnterBack: this.enterback,
+      },
+    }),
+    100
     );
   },
 };

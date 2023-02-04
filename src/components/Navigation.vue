@@ -87,31 +87,33 @@ export default {
         { value: "de", text: "Deutsch" },
         { value: "us", text: "English" },
       ],
-      menuLinks: [
-        {
-          title: this.$t("navigation.lvlSelect"),
-          icon: "logout-variant",
-          path: "lvl",
-        },
-        {
-          title: this.$t("navigation.tutorial"),
-          icon: "information-variant",
-          path: "tutorial",
-        },
-        {
-          title: this.$t("navigation.learningGoals"),
-          icon: "checkbox-multiple-marked-outline",
-          path: "goals",
-        },
-        { title: this.$t("navigation.helpHeader"), icon: "help", path: "help" },
-        { title: this.$t("navigation.homepage"), icon: "home", path: "home" },
-      ],
+      menuLinks: this.getMenuLinksContent()
     };
   },
+  // watch the language and reinitialize content items when language changes
   watch: {
     "$i18n.locale": {
       handler() {
-        this.menuLinks = [
+        this.menuLinks = this.getMenuLinksContent()
+      },
+      deep: true,
+    },
+    selectedLanguage() {
+      this.changeLanguage();
+    },
+  },
+  // If a language is saved in the local storage, take this, otherwise leave the default (de)
+  mounted() {
+    if (localStorage.getItem("language") !== null) {
+      this.selectedLanguage = localStorage.getItem("language");
+      // if it is en, set the selectedLanguage to us because the icon requires us for en
+      if (this.selectedLanguage == "en") this.selectedLanguage = "us";
+    }
+  },
+  methods: {
+    // All informations for the Menu-Links based on the selected language
+    getMenuLinksContent(){
+      return [
           {
             title: this.$t("navigation.lvlSelect"),
             icon: "logout-variant",
@@ -134,28 +136,14 @@ export default {
           },
           { title: this.$t("navigation.homepage"), icon: "home", path: "home" },
         ];
-      },
-      deep: true,
     },
-    selectedLanguage() {
-      this.changeLanguage();
-    },
-  },
-  mounted() {
-    if (localStorage.getItem("language") !== null) {
-      this.selectedLanguage = localStorage.getItem("language");
-      if (this.selectedLanguage == "en") this.selectedLanguage = "us";
-    } else {
-      this.selectedLanguage = "de";
-    }
-  },
-  methods: {
     languageText(language) {
       return language.text;
     },
     languageValue(language) {
       return language.value;
     },
+    // change the language and store the new language in the local Storage
     changeLanguage() {
       if (this.$i18n.locale === "en") {
         this.$i18n.locale = "de";
@@ -193,16 +181,7 @@ export default {
         { delay: 1, duration: 2, x: 50, opacity: 1, ease: "back.out(2)" }
       );
     },
-    // Set the Routing-Path based on the given Path
-    /* setLink(path) {
-      if (this.$route.query.section !== path) {
-        if (this.$route.path !== "/") {
-        this.$router.push({ path: "/", query: { section: path } }).then(() => { window.location.reload()});
-        } else {
-          this.$router.push({ path: "/", query: { section: path } })
-        }
-      }
-    }, */
+    // Navigate to the submitting area of ​​the page
      setLink(path) {
       if (this.$route.query.section !== path) {
           this.$router.push({ path: "/", query: { section: path } })

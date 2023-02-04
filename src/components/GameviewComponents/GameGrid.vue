@@ -144,12 +144,14 @@ export default {
     },
   },
   mounted() {
-    // start the stagger-Animation on mount
+    // start the stagger-Animation on mount, when playing a level
     if (this.$route.path !== "/GameViewFreeMode") {
       this.changeGrid();
     }
+    // initialize the css variable based on the size of the playing field
     document.documentElement.style.setProperty("--gridSize", this.gridSize);
   },
+  // watch the gridSize and reinitialize the css prob with the new gridSize-value
   watch: {
     gridSize: {
       immediate: true,

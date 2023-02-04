@@ -58,6 +58,7 @@
 <script>
 import CodeEditor from "simple-code-editor";
 import gsap from "gsap";
+import { tutorialScrollTrigger } from "../OnePagerComponents/gsapScrolltrigger";
 import ScrollTrigger from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -298,22 +299,7 @@ export default {
     },
   },
   mounted() {
-    gsap.fromTo(
-      ".tutorial",
-      {
-        x: 1900,
-      },
-      {
-        duration: 2,
-        x: 0,
-        scrollTrigger: {
-          trigger: ".tutorial",
-          start: "top 100%",
-          end: "bottom 0%",
-          toggleActions: "play reset play reset ",
-        },
-      }
-    );
+    tutorialScrollTrigger()
 
     gsap.to(".editor-in-tutorial", {
       duration: 2,

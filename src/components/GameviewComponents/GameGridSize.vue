@@ -17,11 +17,12 @@ export default {
   name: "GameGridSize",
   components: {},
   props: { gameSize: Number },
-  data: () => ({}),
   methods: {
+    // trigger the increaseGrid event
     increaseGrid() {
       this.$emit("increaseGrid");
     },
+    // trigger the decreaseGrid event
     decreaseGrid() {
       this.$emit("decreaseGrid");
     },

@@ -113,9 +113,9 @@ export default {
         this.zoomOut(element, zoomBg);
       }
     },
-
     zoomIn(element, zoomBg) {
       element.classList.add("template-grid");
+      // ZoomIn-Animation
       gsap.to("#template-grid", {
         scale: 2,
         x: -20,
@@ -134,6 +134,7 @@ export default {
     zoomOut(element, zoomBg) {
       element.classList.remove("template-grid");
       document.body.removeEventListener("click", this.openOrCloseFullscreen);
+      //ZoomOut-Animation
       gsap.to("#template-grid", {
         scale: 1,
         x: 0,
@@ -158,6 +159,7 @@ export default {
       eval(this.currentLevel.patternCode);
     }
   },
+  // watch the language and reinitialize content when language changes
   watch: {
     "$i18n.locale": {
       handler() {
@@ -178,7 +180,6 @@ export default {
 </script>
 <style scoped>
 /* CSS only for TemplateGrid-Template */
-
 .coords-btn {
   margin-right: -13em;
   margin-left: 1em;

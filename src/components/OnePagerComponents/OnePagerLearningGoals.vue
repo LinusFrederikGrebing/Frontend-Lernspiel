@@ -51,69 +51,49 @@ export default {
   name: "OnePagerLearninggGoals",
   data() {
     return {
-      // all informations for the Learning-Goals
-      items: [
-        {
-          title: this.$t("goals.programmingSkills"),
-          text: this.$t("goals.programmingSkillsText"),
-          img: require("../../assets/programmierung.png"),
-        },
-        {
-          title: this.$t("goals.accuracy"),
-          text: this.$t("goals.accuracyText"),
-          img: require("../../assets/genauigkeit.png"),
-        },
-        {
-          title: this.$t("goals.analyticalThinking"),
-          text: this.$t("goals.analyticalThinkingText"),
-          img: require("../../assets/analytischesdenken.png"),
-        },
-        {
-          title: this.$t("goals.problemSolving"),
-          text: this.$t("goals.problemSolvingText"),
-          img: require("../../assets/problemlösung.png"),
-        },
-        {
-          title: this.$t("goals.effectiveness"),
-          text: this.$t("goals.effectivenessText"),
-          img: require("../../assets/effektivicon.png"),
-        },
-      ],
-    };
+      items: this.setItemContent(),
+    }
   },
+  // watch the language and reinitialize content items when language changes
   watch: {
     "$i18n.locale": {
       handler() {
-        this.items = [
-          {
-            title: this.$t("goals.programmingSkills"),
-            text: this.$t("goals.programmingSkillsText"),
-            img: require("../../assets/programmierung.png"),
-          },
-          {
-            title: this.$t("goals.accuracy"),
-            text: this.$t("goals.accuracyText"),
-            img: require("../../assets/genauigkeit.png"),
-          },
-          {
-            title: this.$t("goals.analyticalThinking"),
-            text: this.$t("goals.analyticalThinkingText"),
-            img: require("../../assets/analytischesdenken.png"),
-          },
-          {
-            title: this.$t("goals.problemSolving"),
-            text: this.$t("goals.problemSolvingText"),
-            img: require("../../assets/problemlösung.png"),
-          },
-          {
-            title: this.$t("goals.effectiveness"),
-            text: this.$t("goals.effectivenessText"),
-            img: require("../../assets/effektivicon.png"),
-          },
-        ];
+        this.items = this.setItemContent();
       },
       deep: true,
     },
+  },
+  methods: {
+    // All informations for the Learning-Goals based on the selected language
+    setItemContent(){ 
+        return [
+            {
+              title: this.$t("goals.programmingSkills"),
+              text: this.$t("goals.programmingSkillsText"),
+              img: require("../../assets/programmierung.png"),
+            },
+            {
+              title: this.$t("goals.accuracy"),
+              text: this.$t("goals.accuracyText"),
+              img: require("../../assets/genauigkeit.png"),
+            },
+            {
+              title: this.$t("goals.analyticalThinking"),
+              text: this.$t("goals.analyticalThinkingText"),
+              img: require("../../assets/analytischesdenken.png"),
+            },
+            {
+              title: this.$t("goals.problemSolving"),
+              text: this.$t("goals.problemSolvingText"),
+              img: require("../../assets/problemlösung.png"),
+            },
+            {
+              title: this.$t("goals.effectiveness"),
+              text: this.$t("goals.effectivenessText"),
+              img: require("../../assets/effektivicon.png"),
+            },
+          ];
+     }
   },
   mounted() {
     // Loop through each item in the items array

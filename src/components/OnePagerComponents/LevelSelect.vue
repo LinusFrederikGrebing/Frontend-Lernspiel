@@ -150,11 +150,11 @@ export default {
       prevNextButtons: true,
       pauseAutoPlayOnHover: false,
       groupCells: 1,
-    },
-    counterText: 0,
+    }
   }),
 
   methods: {
+    // Navigate to the Free-GameMode 
     freeMode() {
       this.$router.push({ path: "/GameViewFreeMode" });
     },

@@ -78,13 +78,12 @@ export default {
   },
   // Initialize data properties
   data: () => ({
-    startTime: null, // variable to store the starting time of the level
+    startTime: null, 
     time: null, // variable to store the time taken to complete the level
-    color: "#80ba24", // default color for the game
-    levels: [], // array to store all the levels
-    currentLevel: null, // variable to store the current level
-    hilfenTemp: false, // variable to store the state of the help template
-    accessibleLevels: [], // array to store the levels that are accessible to the user
+    color: "#80ba24", 
+    levels: [], 
+    currentLevel: null, 
+    accessibleLevels: [], // array to store the levels that are accessible to the user -> all completed levels + the next level
     isHelpOpen: false, // variable to store the state of the help
   }),
   methods: {
@@ -117,20 +116,17 @@ export default {
     nextLevel(indexNextLevel) {
       // set the start time for the next level
       this.startTime = new Date();
-      // mark the previous level as completed
       this.levels[indexNextLevel - 1].completed = true;
-      // set the current level to the next level
       this.currentLevel = this.levels[indexNextLevel];
       // save the current level in local storage
       localStorage.setItem("currentLevel", JSON.stringify(this.currentLevel));
       // execute the pattern code for the next level
       eval(this.currentLevel.patternCode);
       localStorage.setItem("levels", JSON.stringify(this.levels));
-      // reset the grid and template to their initial state
     },
+
     // nextLevelStarted method is called when the user clicks on the next level button
     nextLevelStarted(indexNextLevel) {
-      // show the pop-up for the next level
       this.startPopUp(this.levels[indexNextLevel - 1]);
     },
     // startPopUp method shows the pop-up for the current level
@@ -148,7 +144,7 @@ export default {
   },
   // mounted function is called when the component is mounted to the DOM.
   mounted() {
-    // It sets the start time of the level to the current time
+    // It sets the start time of the level to the current time to calculate the besttime
     this.startTime = new Date();
 
     // check if levels data is present in local storage, if yes, use it

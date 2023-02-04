@@ -12,11 +12,10 @@ import en from '../data/locals/en';
 import FlagIcon from 'vue-flag-icon'
 
 Vue.use(FlagIcon);
-Vue.directive("scrollanimation", scrollanimation);
-
-Vue.config.productionTip = false
 Vue.use(VueSweetalert2);
-Vue.use(VueI18n)
+Vue.use(VueI18n);
+Vue.directive("scrollanimation", scrollanimation);
+Vue.config.productionTip = false
 
 const i18n = new VueI18n({
   locale: 'de',

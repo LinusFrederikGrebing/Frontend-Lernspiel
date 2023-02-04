@@ -57,74 +57,21 @@ export default {
   props: { levels: Array },
   data() {
     return {
-      informations: [
-        {
-          id: 1,
-          label: this.$t("help.variables.var"),
-          title: this.$t("help.variables.varTitle"),
-          src: require("../../assets/helpTemplateBackground.png"),
-          textSection: this.$t("help.variables.varTextSec1"),
-          subHeader: this.$t("help.variables.varSubHeader"),
-          subText: this.$t("help.variables.varSubText"),
-          example: require("../../assets/varExample.png"),
-          exampleText: this.$t("help.variables.varExampleText"),
-          documentation: "https://www.w3schools.com/js/js_variables.asp",
-        },
-        {
-          id: 2,
-          label: this.$t("help.function.function"),
-          title: this.$t("help.function.functionTitle"),
-          src: require("../../assets/helpTemplateBackground.png"),
-          textSection: this.$t("help.function.functionTextSec1"),
-          subHeader: this.$t("help.function.functionSubHeader"),
-          subText: this.$t("help.function.functionSubText"),
-          example: require("../../assets/functionExample.jpg"),
-          exampleText: this.$t("help.function.functionExampleText"),
-          documentation: "https://www.w3schools.com/js/js_functions.asp",
-        },
-        {
-          id: 3,
-          label: this.$t("help.for.for"),
-          title: this.$t("help.for.forTitle"),
-          src: require("../../assets/helpTemplateBackground.png"),
-          textSection: this.$t("help.for.forTextSec1"),
-          subHeader: this.$t("help.for.forSubHeader"),
-          subText: this.$t("help.for.forSubText"),
-          example: require("../../assets/forExample.jpg"),
-          exampleText: this.$t("help.for.forExampleText"),
-          documentation: "https://www.w3schools.com/js/js_loop_for.asp",
-        },
-        {
-          id: 4,
-          label: this.$t("help.while.while"),
-          title: this.$t("help.while.whileTitle"),
-          src: require("../../assets/helpTemplateBackground.png"),
-          textSection: this.$t("help.while.whileTextSec1"),
-          subHeader: this.$t("help.while.whileSubHeader"),
-          subText: this.$t("help.while.whileSubText"),
-          example: require("../../assets/whileExample.jpg"),
-          exampleText: this.$t("help.while.whileExampleText"),
-          documentation: "https://www.w3schools.com/js/js_loop_while.asp",
-        },
-        {
-          id: 5,
-          label: this.$t("help.dowhile.do"),
-          title: this.$t("help.dowhile.doTitle"),
-          src: require("../../assets/helpTemplateBackground.png"),
-          textSection: this.$t("help.dowhile.doTextSec1"),
-          subHeader: this.$t("help.dowhile.doSubHeader"),
-          subText: this.$t("help.dowhile.doSubText"),
-          example: require("../../assets/dowhileExample.jpg"),
-          exampleText: this.$t("help.dowhile.doExampleText"),
-          documentation: "https://www.w3schools.com/jsref/jsref_dowhile.asp",
-        },
-      ],
+      informations: this.getInformationContent()
     };
   },
+  // watch the language and reinitialize content items when language changes
   watch: {
     "$i18n.locale": {
       handler() {
-        this.informations = [
+        this.informations = this.getInformationContent()
+      },
+    },
+  },
+  methods: {
+    // All informations for the Help-Section based on the selected language
+    getInformationContent(){
+      return [
           {
             id: 1,
             label: this.$t("help.variables.var"),
@@ -186,10 +133,7 @@ export default {
             documentation: "https://www.w3schools.com/jsref/jsref_dowhile.asp",
           },
         ];
-      },
     },
-  },
-  methods: {
     // The function openInNewTab opens a new tab with the given URL after 100 milliseconds and sets focus to it, while also preventing the default event from occurring.
     openInNewTab(event, url) {
       event.preventDefault();

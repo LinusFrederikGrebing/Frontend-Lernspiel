@@ -52,6 +52,11 @@ export default {
   components: {
     OnePagerTryMe,
   },
+  data() {
+    return {
+      items: this.setItemContent()
+    };
+  },
   methods: {
     // It uses the gsap library to animate the targeted object by increasing its scale, y position, x position and opacity
     hoverEnter(obj) {
@@ -66,10 +71,9 @@ export default {
     hoverLeave(obj) {
       gsap.to(obj.target, { duration: 0.2, scale: 1, y: 0, x: 0, opacity: 1 });
     },
-  },
-  data() {
-    return {
-      items: [
+    // All informations for the Why-Section based on the selected language
+    setItemContent(){
+      return [
         {
           title: this.$t("whyDrawIT.whyHeader1"),
           text: this.$t("whyDrawIT.whyText1"),
@@ -85,29 +89,14 @@ export default {
           text: this.$t("whyDrawIT.whyText3"),
           link: require("../../assets/play-button-svgrepo-com (1).svg"),
         },
-      ],
-    };
+      ]
+    }
   },
+  // watch the language and reinitialize content items when language changes
   watch: {
     "$i18n.locale": {
       handler() {
-        this.items = [
-          {
-            title: this.$t("whyDrawIT.whyHeader1"),
-            text: this.$t("whyDrawIT.whyText1"),
-            link: require("../../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
-          },
-          {
-            title: this.$t("whyDrawIT.whyHeader2"),
-            text: this.$t("whyDrawIT.whyText2"),
-            link: require("../../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
-          },
-          {
-            title: this.$t("whyDrawIT.whyHeader3"),
-            text: this.$t("whyDrawIT.whyText3"),
-            link: require("../../assets/play-button-svgrepo-com (1).svg"),
-          },
-        ];
+        this.items = this.setItemContent()
       },
       deep: true,
     },
