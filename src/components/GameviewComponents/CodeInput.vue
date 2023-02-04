@@ -501,11 +501,9 @@ export default {
       // Methode paint(first,second) paints a grid card with the given coordinates
       // Method checkParamValue(num) checks if the coordinates given in paint are in the range of the grid's length
       let paintStr =
-         'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted");}\n';
-        //'let index = 0; function paint(first, second) {\n setTimeout(() => { let element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted"); }, index);   index = index+20 } \n';
-
+         'function paint(first, second) {\nlet element = document.getElementById("x" + first + "y" + second);\ncheckParamValue(first);\ncheckParamValue(second);\n element.classList.add("painted");}\n';     
       let checkParamValueStr =
-        'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("Der/Die angegebene Parameter entsprechen nicht der Feldgröße");}\n';
+        'function checkParamValue(num) {\nconst gridElems = document.querySelectorAll(".grid-card");\nlet maxValue = Math.sqrt(gridElems.length) - 1;\nif (num > maxValue || num < 0) throw new Error("' + this.$t("codeInput.errorMessages.paramValue") + '");}\n';
       let evalCode = this.codeToRun;
 
       try {
@@ -554,7 +552,7 @@ export default {
         let restStr = code.slice(posAfterHead);
         let bodyPos = restStr.indexOf("{");
         let infCheck =
-          '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Diese Schleife ist zu lang oder unendlich!");';
+          '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("' + this.$t("codeInput.errorMessages.infinityError") + '");';
         let newReturnCode = [
           code.slice(0, startPos),
           code.slice(startPos, bodyPos + posAfterHead + 1),
@@ -572,7 +570,7 @@ export default {
       var doCount = (code.match(/do/g) || []).length;
       var whileCount = (code.match(/while/g) || []).length;
       let infCheck =
-        '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("Diese Schleife ist zu lang oder unendlich!");';
+        '\ninfinitySafetyCounter++;\nif (infinitySafetyCounter > 500) throw new Error("' + this.$t("codeInput.errorMessages.infinityError") + '");';
       let returnStr = "";
       let restCode = code;
       if (doCount == 0 && whileCount == 0) {
@@ -630,7 +628,7 @@ export default {
       let whileCall = (code.match(/while/g) || []).length;
       let doCall = (code.match(/do/g) || []).length;
       let functionCall = (code.match(/function/g) || []).length;
-      if (functionCall > 0) this.result = "Funktion";
+      if (functionCall > 0) this.solution = "Funktion";
       else if (whileCall > 0 && whileCall == doCall && forCall == 0)
         this.solution = "DoWhileSchleife";
       else if (whileCall > 0 && doCall == 0 && forCall == 0)

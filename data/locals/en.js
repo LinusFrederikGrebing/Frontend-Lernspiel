@@ -42,6 +42,9 @@ export default {
     level14: {
       description: "<h3>Level 14</h3> <br /><p class=\"line-1 anim-typewriter1\">Draw a checkerboard pattern using for loops!</p> <p class=\"line-1 anim-typewriter2\">Tip: Modulo will help you!</p>"
     },
+    level15: {
+      description: "<h3>Level 15</h3> <br /><p class=\"line-1 anim-typewriter1\">Write a function that will help you</p> <p class=\"line-1 anim-typewriter2\">to solve this level!</p>"
+    },
   }, 
   alerts: {
     continue: 'Continue!',
