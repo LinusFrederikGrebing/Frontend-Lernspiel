@@ -139,6 +139,15 @@
       "completed": "false",
       "description": "this.$t('levels.level14.description')",
       "solutionApproach": "ForSchleife"
+    },{
+      "id": "15",
+      "img": "levelimgs/level15.jpg",
+      "bestTimeinSek": 0,
+      "difficulty": 8,
+      "patternCode": "for(let i = 0; i < 7;i++) {this.paint(0,i);}for(let j = 4; j < 10;j++) {this.paint(4,j);}for(let k = 1; k < 6;k++) {this.paint(8,k);}",
+      "completed": "false",
+      "description": "this.$t('levels.level15.description')",
+      "solutionApproach": "Funktion"
     }
   ]
 }

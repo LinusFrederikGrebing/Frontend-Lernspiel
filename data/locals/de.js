@@ -42,6 +42,9 @@ export default {
     level14: {
       description: "<h3>Level 14</h3> <br /><p class=\"line-1 anim-typewriter1\">Bilde ein Schachbrettmuster mithilfe von For-Schleifen ab!</p> <p class=\"line-1 anim-typewriter2\">Tipp: Modulo hilft dir dabei!</p>"
     },
+    level15: {
+      description: "<h3>Level 15</h3> <br /><p class=\"line-1 anim-typewriter1\">Schreibe eine Funktion die dir bei der</p> <p class=\"line-1 anim-typewriter2\">Lösung der Aufgabe helfen wird!</p>"
+    },
   },
   alerts: {
     continue: 'Weiter!',
