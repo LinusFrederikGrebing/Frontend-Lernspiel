@@ -21,7 +21,7 @@
           <img id="mouse-cursor-op" src="../assets/mouse-cursor.png" />
           <OnePagerTutorialSection />
         </div>
-        <img id="alert-for-op-tutorial" src="../assets/successpopup.png" />
+        <img id="alert-for-op-tutorial" :src="require(`@/assets/${tutorialAlertSrc}`)" />
       </div>
       <div id="goals" class="pt-16 mt-16 mb-16">
         <OnePagerGoals />
@@ -65,10 +65,13 @@ export default {
     OnePagerGoals,
   },
   // Initialize an empty array to store the levels
-  data: () => ({
+  data() {
+    return {
     levels: [],
     trigger: null,
-  }),
+    tutorialAlertSrc: this.$t("alerts.succes.successAlertTutorial"),
+    }
+  },
   methods: {
     // Scroll to the element with the given id
     scrollToElement(elementId) {
@@ -111,6 +114,12 @@ export default {
           });
         }
       },
+    },
+    "$i18n.locale": {
+      handler() {
+        this.tutorialAlertSrc = this.$t("alerts.succes.successAlertTutorial");
+      },
+      deep: true,
     },
   },
   mounted() {
