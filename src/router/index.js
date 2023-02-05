@@ -15,6 +15,10 @@ const routes = [
     component: Onepager
   },
   {
+    path: '*',
+    redirect: '/'
+  },
+  {
     path:'/LevelSelect',
     name:'LevelSelect',
     component: LevelSelect

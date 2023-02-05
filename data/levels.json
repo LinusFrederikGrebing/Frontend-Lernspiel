@@ -139,7 +139,8 @@
       "completed": "false",
       "description": "this.$t('levels.level14.description')",
       "solutionApproach": "ForSchleife"
-    },{
+    },
+    {
       "id": "15",
       "img": "levelimgs/level15.jpg",
       "bestTimeinSek": 0,
