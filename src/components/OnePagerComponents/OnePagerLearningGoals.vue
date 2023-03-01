@@ -15,7 +15,6 @@
           <div
             :id="'section' + index"
             :class="[{ section: !$vuetify.breakpoint.lgAndDown }]"
-            class=""
           >
             <img
               class="mr-auto ml-auto d-block mt-8 rund item"
@@ -70,27 +69,27 @@ export default {
             {
               title: this.$t("goals.programmingSkills"),
               text: this.$t("goals.programmingSkillsText"),
-              img: require("../../assets/programmierung.png"),
+              img: require("@/assets/programmierung.png"),
             },
             {
               title: this.$t("goals.accuracy"),
               text: this.$t("goals.accuracyText"),
-              img: require("../../assets/genauigkeit.png"),
+              img: require("@/assets/genauigkeit.png"),
             },
             {
               title: this.$t("goals.analyticalThinking"),
               text: this.$t("goals.analyticalThinkingText"),
-              img: require("../../assets/analytischesdenken.png"),
+              img: require("@/assets/analytischesdenken.png"),
             },
             {
               title: this.$t("goals.problemSolving"),
               text: this.$t("goals.problemSolvingText"),
-              img: require("../../assets/problemlösung.png"),
+              img: require("@/assets/problemlösung.png"),
             },
             {
               title: this.$t("goals.effectiveness"),
               text: this.$t("goals.effectivenessText"),
-              img: require("../../assets/effektivicon.png"),
+              img: require("@/assets/effektivicon.png"),
             },
           ];
      }

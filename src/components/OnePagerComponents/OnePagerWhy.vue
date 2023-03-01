@@ -77,17 +77,17 @@ export default {
         {
           title: this.$t("whyDrawIT.whyHeader1"),
           text: this.$t("whyDrawIT.whyText1"),
-          link: require("../../assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
+          link: require("@/assets/dice_httpswww.pngwing.comenfree-png-pvivu.png"),
         },
         {
           title: this.$t("whyDrawIT.whyHeader2"),
           text: this.$t("whyDrawIT.whyText2"),
-          link: require("../../assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
+          link: require("@/assets/nochaos_www.pngwing.comdefree-png-neyfo.png"),
         },
         {
           title: this.$t("whyDrawIT.whyHeader3"),
           text: this.$t("whyDrawIT.whyText3"),
-          link: require("../../assets/play-button-svgrepo-com (1).svg"),
+          link: require("@/assets/play-button-svgrepo-com (1).svg"),
         },
       ]
     }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img id="mouse-cursor" src="../assets/mouse-cursor.png" />
+    <img id="mouse-cursor" :src="require(`@/assets/mouse-cursor.png`)" />
     <v-card
       elevation="24"
       outlined

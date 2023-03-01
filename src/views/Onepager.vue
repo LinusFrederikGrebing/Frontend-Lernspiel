@@ -18,7 +18,7 @@
       </div>
       <div id="tutorial" class="pt-16 mt-16 mb-16">
         <div id="popupContainer" class="blur">
-          <img id="mouse-cursor-op" src="../assets/mouse-cursor.png" />
+          <img id="mouse-cursor-op" :src="require(`@/assets/mouse-cursor.png`)" />
           <OnePagerTutorialSection />
         </div>
         <img id="alert-for-op-tutorial" :src="require(`@/assets/${tutorialAlertSrc}`)" />
