@@ -53,7 +53,7 @@ export default {
       successText: 'Du hast das Level gemeistert! Nun kannst du dich an an dem nächsten Level versuchen!',
       successConfirm: 'Nächstes Level!',
       successCancel: 'Zur Levelauswahl!',
-      successAlertTutorial: 'successpopup.png',
+      successAlertTutorial: 'successpopup.jpg',
     },
     failure: {
       failureTitle: 'Beim nächsten Mal...!',

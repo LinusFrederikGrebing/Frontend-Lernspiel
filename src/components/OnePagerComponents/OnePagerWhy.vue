@@ -87,7 +87,7 @@ export default {
         {
           title: this.$t("whyDrawIT.whyHeader3"),
           text: this.$t("whyDrawIT.whyText3"),
-          link: require("@/assets/play-button-svgrepo-com (1).svg"),
+          link: require("@/assets/play-button.png"),
         },
       ]
     }

@@ -9,9 +9,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import de from '../data/locals/de';
 import en from '../data/locals/en';
-import FlagIcon from 'vue-flag-icon'
 
-Vue.use(FlagIcon);
 Vue.use(VueSweetalert2);
 Vue.use(VueI18n);
 Vue.directive("scrollanimation", scrollanimation);
