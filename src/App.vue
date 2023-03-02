@@ -24,6 +24,6 @@ export default {
 </script>
 <style scoped>
 .bg-color {
-  /*background-image: url("../src/assets/Hexagon3.svg"); */
+  background-image: url("../src/assets/Hexagon3.svg"); 
 }
 </style>
