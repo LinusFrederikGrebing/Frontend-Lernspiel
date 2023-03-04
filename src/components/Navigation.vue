@@ -35,7 +35,8 @@
             <small class="mt-8 mb-4">Menu</small>
             <hr class="divider" />
             <div class="d-flex mx-4">
-              <flag class="mb-1 mr-4 lang-icon" :iso="selectedLanguage" />
+              <img v-if="selectedLanguage === 'en'" class="mb-1 mr-4 lang-icon" :src="require(`@/assets/eng.jpg`)" />
+              <img v-if="selectedLanguage === 'de'" class="mb-1 mr-4 lang-icon" :src="require(`@/assets/ger.jpg`)" />
               <v-select
                 v-model="selectedLanguage"
                 :items="languages"
@@ -85,7 +86,7 @@ export default {
       selectedLanguage: "de",
       languages: [
         { value: "de", text: "Deutsch" },
-        { value: "us", text: "English" },
+        { value: "en", text: "English" },
       ],
       menuLinks: this.getMenuLinksContent()
     };
@@ -106,8 +107,6 @@ export default {
   mounted() {
     if (localStorage.getItem("language") !== null) {
       this.selectedLanguage = localStorage.getItem("language");
-      // if it is en, set the selectedLanguage to us because the icon requires us for en
-      if (this.selectedLanguage == "en") this.selectedLanguage = "us";
     }
   },
   methods: {
@@ -194,7 +193,9 @@ export default {
 <style scoped>
 /* CSS only for Navigation */
 .lang-icon {
-  scale: 2;
+margin-top: 1.4em;
+ width: 30px;
+ height: 20px;
 }
 .header {
   height: 4em !important;

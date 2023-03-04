@@ -2,7 +2,7 @@
   <v-parallax
     class="no-padding"
     :height="height"
-    :src="`${require(`@/assets/Hexagon3.svg`)}`"
+    src="https://drive.google.com/uc?export=view&id=1-zdC5_WqH7EPHukO5FGyP0Q2CaLlq0MU"
   >
     <header id="start" class="pt-12">
       <OnePagerWhy />
